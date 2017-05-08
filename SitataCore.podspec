@@ -21,12 +21,12 @@ Pod::Spec.new do |s|
 An iOS library to embed Sitata services into your own mobile application. API access and UI elements provided.
                        DESC
 
-  s.homepage         = 'https://gitlab.com/sitata/sdk-ios'
+  s.homepage         = 'https://github.com/sitata/sdk-ios'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Adam St. John' => 'astjohn@sitata.com' }
-  s.source           = { :git => 'https://github.com/sitata/sdk-ios', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/sitata/sdk-ios.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/_sitata_'
 
   s.ios.deployment_target = '9.0'
 
@@ -37,7 +37,7 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                      'SitataCore/Assets/Media.xcassets/*']
   }
 
-  s.public_header_files = 'Pod/Classes/**/*.h'
+  s.public_header_files = 'SitataCore/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
 
   s.dependency 'Realm', '~>2.6'
