@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Advisory" representedClassName="STASDKDBModelAdvisory" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryDivisionIds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryDivisions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryRegionIds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryRegions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="headline" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="advisories" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="Alert" representedClassName="STASDKDBModelAlert" syncable="YES">
+        <attribute name="alertLocations" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="alertSources" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bodyAdvice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryDivisionIds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryDivisions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryIds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryRegionIds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryRegions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="diseaseIds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="headline" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="riskLevel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="safetyIds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="alerts" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="Country" representedClassName="STASDKDBModelCountry" syncable="YES">
+        <attribute name="capital" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryCode3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryDatum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="currencyCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="currencyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deletedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="divisionName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emergNumbers" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="facts" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flagListURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flagMainURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flagURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="regionName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secAreas" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secEmerNum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secExtViol" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secPersonal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secPolUnr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topoJson" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="travelStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="hospitals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Hospital" inverseName="country" inverseEntity="Hospital" syncable="YES"/>
+    </entity>
+    <entity name="Destination" representedClassName="STASDKDBModelDestination" syncable="YES">
+        <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="departureDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="returnDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="destinations" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="Disease" representedClassName="STASDKDBModelDisease" syncable="YES">
+        <attribute name="commonName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="deletedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="diseaseDatum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="occursWhere" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="scientificName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="Hospital" representedClassName="STASDKDBModelHospital" syncable="YES">
+        <attribute name="accrJci" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="descriptionBody" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="emergency" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="starred" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="verified" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="verifiedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="hospitals" inverseEntity="Country" syncable="YES"/>
+    </entity>
+    <entity name="Medication" representedClassName="STASDKDBModelMedication" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicationDatum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="Trip" representedClassName="STASDKDBModelTrip" syncable="YES">
+        <attribute name="activities" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="deletedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="employeeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="employeeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="finish" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="muted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pastAlertCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="tripType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="advisories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Advisory" inverseName="trip" inverseEntity="Advisory" syncable="YES"/>
+        <relationship name="alerts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Alert" inverseName="trip" inverseEntity="Alert" syncable="YES"/>
+        <relationship name="destinations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Destination" inverseName="trip" inverseEntity="Destination" syncable="YES"/>
+        <relationship name="tripDiseaseComments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TripDiseaseComment" inverseName="trip" inverseEntity="TripDiseaseComment" syncable="YES"/>
+        <relationship name="tripMedicationComments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TripMedicationComment" inverseName="trip" inverseEntity="TripMedicationComment" syncable="YES"/>
+        <relationship name="tripVaccinationComments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TripVaccinationComment" inverseName="trip" inverseEntity="TripVaccinationComment" syncable="YES"/>
+    </entity>
+    <entity name="TripDiseaseComment" representedClassName="STASDKDBModelTripDiseaseComment" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diseaseId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diseaseName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="tripDiseaseComments" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="TripMedicationComment" representedClassName="STASDKDBModelTripMedicationComment" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicationId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicationName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="tripMedicationComments" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="TripVaccinationComment" representedClassName="STASDKDBModelTripVaccinationComment" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vaccinationId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vaccinationName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="tripVaccinationComments" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="Vaccination" representedClassName="STASDKDBModelVaccination" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="vaccinationDatum" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Advisory" positionX="27" positionY="180" width="128" height="225"/>
+        <element name="Alert" positionX="18" positionY="171" width="128" height="315"/>
+        <element name="Country" positionX="-9" positionY="144" width="128" height="450"/>
+        <element name="Destination" positionX="196" positionY="-9" width="128" height="120"/>
+        <element name="Disease" positionX="-9" positionY="144" width="128" height="195"/>
+        <element name="Medication" positionX="9" positionY="162" width="128" height="105"/>
+        <element name="Trip" positionX="-9" positionY="36" width="128" height="375"/>
+        <element name="TripDiseaseComment" positionX="9" positionY="171" width="128" height="120"/>
+        <element name="TripMedicationComment" positionX="-209" positionY="107" width="128" height="120"/>
+        <element name="TripVaccinationComment" positionX="-209" positionY="231" width="128" height="120"/>
+        <element name="Vaccination" positionX="0" positionY="153" width="128" height="105"/>
+        <element name="Hospital" positionX="-9" positionY="144" width="128" height="285"/>
+    </elements>
+</model>

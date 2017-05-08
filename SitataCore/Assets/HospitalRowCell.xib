@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="STASDKUIHospitalRowTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="This is a multiline name for a hospital." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zio-TT-mpy">
+                    <rect key="frame" x="8" y="13" width="221" height="40"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="2,289 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGB-gY-dZd">
+                    <rect key="frame" x="302" y="5" width="65" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EmergencyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="RUe-Ep-2jm">
+                    <rect key="frame" x="342" y="35" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="Lhz-oy-D2v"/>
+                        <constraint firstAttribute="width" constant="25" id="jrE-w7-3uf"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HospitalRibbonIcon" translatesAutoresizingMaskIntoConstraints="NO" id="WQj-Je-KWa">
+                    <rect key="frame" x="312" y="35" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="7hI-3w-9i5"/>
+                        <constraint firstAttribute="width" constant="25" id="Bx3-z5-7d9"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="hGB-gY-dZd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zio-TT-mpy" secondAttribute="trailing" constant="20" id="4af-kR-jqu"/>
+                <constraint firstAttribute="trailingMargin" secondItem="RUe-Ep-2jm" secondAttribute="trailing" id="5eF-c3-dVL"/>
+                <constraint firstItem="hGB-gY-dZd" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="DvX-R6-Vgo"/>
+                <constraint firstItem="WQj-Je-KWa" firstAttribute="top" secondItem="RUe-Ep-2jm" secondAttribute="top" id="Ecj-YP-oeC"/>
+                <constraint firstItem="RUe-Ep-2jm" firstAttribute="leading" secondItem="WQj-Je-KWa" secondAttribute="trailing" constant="5" id="GUx-ma-fKu"/>
+                <constraint firstItem="WQj-Je-KWa" firstAttribute="height" secondItem="RUe-Ep-2jm" secondAttribute="height" id="RYv-de-s7I"/>
+                <constraint firstItem="WQj-Je-KWa" firstAttribute="width" secondItem="RUe-Ep-2jm" secondAttribute="width" id="RcC-90-TfE"/>
+                <constraint firstItem="RUe-Ep-2jm" firstAttribute="top" secondItem="hGB-gY-dZd" secondAttribute="bottom" id="bfZ-Aw-b4n"/>
+                <constraint firstItem="zio-TT-mpy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eOY-gW-kLo"/>
+                <constraint firstAttribute="bottom" secondItem="WQj-Je-KWa" secondAttribute="bottom" constant="5" id="fCC-yS-M2N"/>
+                <constraint firstItem="hGB-gY-dZd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="fMH-hu-3iu"/>
+                <constraint firstItem="zio-TT-mpy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="oUt-7X-aAk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="accreditedIconImg" destination="WQj-Je-KWa" id="vYp-4C-MqV"/>
+                <outlet property="distanceLbl" destination="hGB-gY-dZd" id="L38-aw-CvC"/>
+                <outlet property="emergIconImg" destination="RUe-Ep-2jm" id="PAH-22-06Q"/>
+                <outlet property="hospitalNameLbl" destination="zio-TT-mpy" id="Hiq-sD-NGq"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="-185.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="EmergencyIcon" width="25" height="25"/>
+        <image name="HospitalRibbonIcon" width="25" height="25"/>
+    </resources>
+</document>

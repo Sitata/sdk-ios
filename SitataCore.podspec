@@ -1,0 +1,51 @@
+#
+# Be sure to run `pod lib lint SitataCore.podspec' to ensure this is a
+# valid spec before submitting.
+#
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
+#
+
+Pod::Spec.new do |s|
+  s.name             = 'SitataCore'
+  s.version          = '0.1.0.rc1'
+  s.summary          = 'An iOS library to embed Sitata services into your own mobile application.'
+
+# This description is used to generate tags and improve search results.
+#   * Think: What does it do? Why did you write it? What is the focus?
+#   * Try to keep it short, snappy and to the point.
+#   * Write the description between the DESC delimiters below.
+#   * Finally, don't worry about the indent, CocoaPods strips it!
+
+  s.description      = <<-DESC
+An iOS library to embed Sitata services into your own mobile application. API access and UI elements provided.
+                       DESC
+
+  s.homepage         = 'https://gitlab.com/sitata/sdk-ios'
+  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'Adam St. John' => 'astjohn@sitata.com' }
+  s.source           = { :git => 'https://gitlab.com/sitata/sdk-ios', :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+
+  s.ios.deployment_target = '9.0'
+
+  s.source_files = 'SitataCore/Classes/**/*'
+  
+  s.resource_bundles = {
+    'SitataCore' => ['SitataCore/Assets/*.{xib,storyboard,xcdatamodeld}', 'SitataCore/Assets/*.lproj/*.strings',
+                     'SitataCore/Assets/Media.xcassets/*']
+  }
+
+  s.public_header_files = 'Pod/Classes/**/*.h'
+  # s.frameworks = 'UIKit', 'MapKit'
+
+  s.dependency 'Realm', '~>2.6'
+  s.dependency 'AFNetworking', '~> 3.1'
+  s.dependency 'YYModel', '1.0.4'
+  s.dependency 'EDQueue', '0.7.1'
+  s.dependency 'CCHMapClusterController', '1.7.0'
+  s.dependency 'Haneke', '~> 1.0'
+
+
+end

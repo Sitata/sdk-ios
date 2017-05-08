@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Disease Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnG-ue-Zah">
+                    <rect key="frame" x="8" y="8" width="359" height="26.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the disease description and it can be multiple lines." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s77-rd-w1n">
+                    <rect key="frame" x="8" y="45" width="359" height="41"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNh-Fj-jkz">
+                    <rect key="frame" x="293" y="118" width="74" height="30"/>
+                    <state key="normal" title="Read More"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="wnG-ue-Zah" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="0TO-GQ-Qy3"/>
+                <constraint firstAttribute="trailingMargin" secondItem="wnG-ue-Zah" secondAttribute="trailing" id="G7l-NS-R11"/>
+                <constraint firstAttribute="trailingMargin" secondItem="s77-rd-w1n" secondAttribute="trailing" id="H7G-l7-bU4"/>
+                <constraint firstItem="s77-rd-w1n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="SxL-ni-787"/>
+                <constraint firstAttribute="trailingMargin" secondItem="MNh-Fj-jkz" secondAttribute="trailing" id="bzH-4H-4c2"/>
+                <constraint firstItem="s77-rd-w1n" firstAttribute="top" secondItem="wnG-ue-Zah" secondAttribute="bottom" constant="10" id="cgZ-tU-LOe"/>
+                <constraint firstItem="wnG-ue-Zah" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="qzn-pz-kzc"/>
+                <constraint firstItem="MNh-Fj-jkz" firstAttribute="top" secondItem="s77-rd-w1n" secondAttribute="bottom" constant="32" id="ybi-cu-8CT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="33.5" y="-130"/>
+        </view>
+    </objects>
+</document>

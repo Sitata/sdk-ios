@@ -1,0 +1,6 @@
+framework module EDQueue {
+  umbrella header "EDQueue-umbrella.h"
+
+  export *
+  module * { export * }
+}

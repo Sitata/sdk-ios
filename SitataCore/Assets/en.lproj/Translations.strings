@@ -1,0 +1,75 @@
+/* 
+  Translations.strings
+  Pods
+
+  Created by Adam St. John on 2017-03-05.
+
+*/
+
+
+/* COMMON */
+"CLOSE" = "Close";
+"CHANGE" = "Change";
+
+
+/* ALERTS */
+"ALERTS" = "Trip Alerts";
+"NO_ALERTS" = "There are no trip alerts for your travels at this time.";
+
+/* ADVISORIES */
+"ADVISORIES" = "Trip Advisories";
+"NO_ADVISORIES" = "There are no trip advisories for your travels at this time.";
+
+
+/* HEALTH COMMENTS */
+"NO_VACC_COM" = "There are no specific vaccinations to read about for your travels at this time.";
+"NO_MED_COM" = "There are no specific medications to read about for your travels at this time.";
+"NO_DIS_COM" = "There are no specific diseases to read about for your travels at this time.";
+"VAC_TITLE" = "Vaccinations";
+"MED_TITLE" = "Medications";
+"DIS_TITLE" = "Diseases";
+
+
+/* SAFETY */
+"SAFETY_TITLE" = "Safety";
+"SEC_PERSONAL" = "Personal Safety";
+"SEC_EXT_VIOL" = "Extreme Violence";
+"SEC_POL_UNR" = "Political Unrest";
+"SEC_AREAS" = "Areas To Avoid";
+"SEC_NONE_AVAIL" = "There are no safety recommendations for your current travels. Please check again in a moment.";
+
+/* HOSPITALS */
+"HOSPITALS" = "Hospitals";
+"HOSP_ACCRED" = "Has been accredited by third-party organizations";
+"HOSP_NOT_ACCRED" = "Might not be accredited by third-party organizations";
+"HOSP_EMERG" = "Should be capable of handling emergencies";
+"HOSP_NOT_EMERG" = "Emergency capability unknown";
+"NO_HOSPITALS" = "Hospitals for this country will be available soon.";
+"NO_HOSPITALS_NO_TRIP" = "There are no hospitals available for your current travels. Please check again in a moment.";
+
+
+/* EMERGENCY NUMBERS */
+"EMERG_NO_TRIP" = "Emergency numbers are not available";
+"PICK_COUNTRY" = "Pick a Country";
+
+/* CONTACT DETAILS */
+"CONTACT_OFFICE" = "Office";
+"CONTACT_FAX" = "Fax";
+"CONTACT_HOME" = "Home";
+"CONTACT_MOBILE" = "Mobile";
+"CONTACT_POLICE" = "Police";
+"CONTACT_FIRE" = "Fire";
+"CONTACT_AMBULANCE" = "Ambulance";
+"CONTACT_ALL_EMERG" = "General Emergencies";
+
+
+/* DISEASE DETAILS */
+"DISEASE_WHAT" = "What Is It?";
+"DISEASE_HOW" = "How Do You Get It?";
+"DISEASE_RES" = "Susceptibility and Resistance";
+"DISEASE_SYM" = "What are the Symptoms";
+"DISEASE_PRE" = "Preventative Measures";
+"DISEASE_TRT" = "Treatment";
+"DISEASE_WHR" = "Where Does It Occur";
+
+

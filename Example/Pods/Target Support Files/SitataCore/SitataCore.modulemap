@@ -1,0 +1,6 @@
+framework module SitataCore {
+  umbrella header "SitataCore-umbrella.h"
+
+  export *
+  module * { export * }
+}
