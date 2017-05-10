@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SitataCore'
-  s.version          = '0.1.0.rc1'
+  s.version          = '1.0.0.rc1'
   s.summary          = 'An iOS library to embed Sitata services into your own mobile application.'
 
 # This description is used to generate tags and improve search results.
