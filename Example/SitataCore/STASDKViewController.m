@@ -12,14 +12,23 @@
 
 @interface STASDKViewController ()
 
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+
 @end
 
 @implementation STASDKViewController
+
+NSArray *cellNames;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    cellNames = @[@"alerts", @"advisories", @"diseases", @"vaccinations", @"medications", @"hospitals", @"safety", @"emerg"];
+
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,33 +38,71 @@
 }
 
 
-- (IBAction)onAlertsTouch:(id)sender {
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
+    return 8;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                           cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellName = [cellNames objectAtIndex:[indexPath row]];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellName forIndexPath:indexPath];
+
+    return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellName = [cellNames objectAtIndex:[indexPath row]];
+
+    if ([cellName isEqualToString:@"alerts"]) {
+        [STASDKUI showAlerts];
+    } else if ([cellName isEqualToString:@"advisories"]) {
+        [STASDKUI showAdvisories];
+    } else if ([cellName isEqualToString:@"diseases"]) {
+        [STASDKUI showTripDiseases];
+    } else if ([cellName isEqualToString:@"vaccinations"]) {
+        [STASDKUI showTripVaccinations];
+    } else if ([cellName isEqualToString:@"medications"]) {
+        [STASDKUI showTripMedications];
+    } else if ([cellName isEqualToString:@"hospitals"]) {
+        [STASDKUI showTripHospitals];
+    } else if ([cellName isEqualToString:@"safety"]) {
+        [STASDKUI showTripSafety];
+    } else if ([cellName isEqualToString:@"emerg"]) {
+        [STASDKUI showEmergencyNumbers];
+    }
+}
+
+- (IBAction)onAlerts:(id)sender {
     [STASDKUI showAlerts];
 }
-
-- (IBAction)onAdvisoriesTouch:(id)sender {
+- (IBAction)onAdvisories:(id)sender {
     [STASDKUI showAdvisories];
 }
-
-- (IBAction)onVaccinationsTouch:(id)sender {
-    [STASDKUI showTripVaccinations];
-}
-
-- (IBAction)onMedicationsTouch:(id)sender {
-    [STASDKUI showTripMedications];
-}
-- (IBAction)onDiseasesTouch:(id)sender {
+- (IBAction)onDiseases:(id)sender {
     [STASDKUI showTripDiseases];
 }
-- (IBAction)onSafetyTouch:(id)sender {
-    [STASDKUI showTripSafety];
+- (IBAction)onVaccines:(id)sender {
+    [STASDKUI showTripVaccinations];
 }
-
-- (IBAction)onHospitalsTouch:(id)sender {
+- (IBAction)onMedications:(id)sender {
+    [STASDKUI showTripMedications];
+}
+- (IBAction)onHospitals:(id)sender {
     [STASDKUI showTripHospitals];
 }
-- (IBAction)onEmergTouch:(id)sender {
+- (IBAction)onSafety:(id)sender {
+    [STASDKUI showTripSafety];
+}
+- (IBAction)onEmerg:(id)sender {
     [STASDKUI showEmergencyNumbers];
 }
+
+
 
 @end

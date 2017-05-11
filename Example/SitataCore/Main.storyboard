@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,77 +22,292 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYe-V5-XA8">
-                                <rect key="frame" x="49" y="118" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Alerts"/>
-                                <connections>
-                                    <action selector="onAlertsTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="PyO-aL-UoR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hl8-qw-m6X">
-                                <rect key="frame" x="49" y="212" width="143" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Trip Vaccinations"/>
-                                <connections>
-                                    <action selector="onVaccinationsTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="3CO-sT-gOy"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62F-V8-j8Z">
-                                <rect key="frame" x="218" y="118" width="121" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Trip Medications"/>
-                                <connections>
-                                    <action selector="onMedicationsTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="X6j-lm-aDt"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvj-OO-zgZ">
-                                <rect key="frame" x="49" y="304" width="110" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Advisories"/>
-                                <connections>
-                                    <action selector="onAdvisoriesTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="i0i-M6-uGC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddj-CI-yDP">
-                                <rect key="frame" x="238" y="212" width="101" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Trip Diseases"/>
-                                <connections>
-                                    <action selector="onDiseasesTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="I72-2q-HF3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltq-a9-lZ1">
-                                <rect key="frame" x="255" y="304" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Safety"/>
-                                <connections>
-                                    <action selector="onSafetyTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="eAq-pN-vlk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTJ-aV-dlr">
-                                <rect key="frame" x="62" y="384" width="85" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Hospitals"/>
-                                <connections>
-                                    <action selector="onHospitalsTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="vno-2R-4Gu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOY-MH-wtl">
-                                <rect key="frame" x="155" y="384" width="170" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Emergency Numbers"/>
-                                <connections>
-                                    <action selector="onEmergTouch:" destination="whP-gf-Uak" eventType="touchUpInside" id="4Q5-SJ-FdI"/>
-                                </connections>
-                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="h9B-Aa-23N">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LxC-zK-KqC">
+                                    <size key="itemSize" width="150" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="alerts" id="Nc7-4y-UAB" userLabel="Alerts">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconAlert" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-dr-Ux2">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="92" id="E5V-p7-n9W"/>
+                                                        <constraint firstAttribute="width" secondItem="Yu7-dr-Ux2" secondAttribute="height" multiplier="1:1" id="S53-He-l6V"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYe-V5-XA8">
+                                                    <rect key="frame" x="54.5" y="95" width="41" height="30"/>
+                                                    <state key="normal" title="Alerts"/>
+                                                    <connections>
+                                                        <action selector="onAlerts:" destination="whP-gf-Uak" eventType="touchUpInside" id="ZqE-kZ-QEM"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="rYe-V5-XA8" firstAttribute="centerX" secondItem="Nc7-4y-UAB" secondAttribute="centerX" id="Kp0-fe-kyB"/>
+                                            <constraint firstItem="Yu7-dr-Ux2" firstAttribute="centerX" secondItem="Nc7-4y-UAB" secondAttribute="centerX" id="WsL-mR-MWO"/>
+                                            <constraint firstItem="Yu7-dr-Ux2" firstAttribute="top" secondItem="Nc7-4y-UAB" secondAttribute="topMargin" id="YD3-NU-jtR"/>
+                                            <constraint firstItem="rYe-V5-XA8" firstAttribute="top" secondItem="Yu7-dr-Ux2" secondAttribute="bottom" constant="-5" id="iN3-tK-mXW"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="advisories" id="bEY-zA-fgS" userLabel="Advisories">
+                                        <rect key="frame" x="225" y="0.0" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconAdvisory" translatesAutoresizingMaskIntoConstraints="NO" id="NSl-y4-xQj">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="92" id="CqN-Ih-mIu"/>
+                                                        <constraint firstAttribute="width" secondItem="NSl-y4-xQj" secondAttribute="height" multiplier="1:1" id="H8a-jb-7MU"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvj-OO-zgZ">
+                                                    <rect key="frame" x="39" y="95" width="72" height="30"/>
+                                                    <state key="normal" title="Advisories"/>
+                                                    <connections>
+                                                        <action selector="onAdvisories:" destination="whP-gf-Uak" eventType="touchUpInside" id="mHb-Xs-FBl"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="nvj-OO-zgZ" firstAttribute="centerX" secondItem="bEY-zA-fgS" secondAttribute="centerX" id="5hc-Gc-6Lg"/>
+                                            <constraint firstItem="nvj-OO-zgZ" firstAttribute="top" secondItem="NSl-y4-xQj" secondAttribute="bottom" constant="-5" id="H1e-ol-JIP"/>
+                                            <constraint firstItem="NSl-y4-xQj" firstAttribute="centerX" secondItem="bEY-zA-fgS" secondAttribute="centerX" id="d6t-oy-n77"/>
+                                            <constraint firstItem="NSl-y4-xQj" firstAttribute="top" secondItem="bEY-zA-fgS" secondAttribute="topMargin" id="tVY-zf-5K4"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="diseases" id="4w5-O6-gff" userLabel="Diseases">
+                                        <rect key="frame" x="0.0" y="160" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconDisease" translatesAutoresizingMaskIntoConstraints="NO" id="hBM-vx-0dl">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="hBM-vx-0dl" secondAttribute="height" multiplier="1:1" id="PRv-4d-VQK"/>
+                                                        <constraint firstAttribute="width" constant="92" id="hZx-pR-QwN"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddj-CI-yDP">
+                                                    <rect key="frame" x="44" y="95" width="62" height="30"/>
+                                                    <state key="normal" title="Diseases"/>
+                                                    <connections>
+                                                        <action selector="onDiseases:" destination="whP-gf-Uak" eventType="touchUpInside" id="qL4-RC-OUE"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Ddj-CI-yDP" firstAttribute="top" secondItem="hBM-vx-0dl" secondAttribute="bottom" constant="-5" id="0AK-M4-NX4"/>
+                                            <constraint firstItem="hBM-vx-0dl" firstAttribute="centerX" secondItem="4w5-O6-gff" secondAttribute="centerX" id="0QO-0Q-FRB"/>
+                                            <constraint firstItem="hBM-vx-0dl" firstAttribute="top" secondItem="4w5-O6-gff" secondAttribute="topMargin" id="AL2-vv-HF3"/>
+                                            <constraint firstItem="Ddj-CI-yDP" firstAttribute="centerX" secondItem="4w5-O6-gff" secondAttribute="centerX" id="MJx-by-mIo"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="vaccinations" id="rvb-T4-XNM" userLabel="Vaccinations">
+                                        <rect key="frame" x="225" y="160" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconVaccine" translatesAutoresizingMaskIntoConstraints="NO" id="GmS-Yk-c6i">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="GmS-Yk-c6i" secondAttribute="height" multiplier="1:1" id="Cio-eU-bAw"/>
+                                                        <constraint firstAttribute="width" constant="92" id="n50-w6-J0U"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hl8-qw-m6X">
+                                                    <rect key="frame" x="31.5" y="95" width="87" height="30"/>
+                                                    <state key="normal" title="Vaccinations"/>
+                                                    <connections>
+                                                        <action selector="onVaccines:" destination="whP-gf-Uak" eventType="touchUpInside" id="NIL-Aw-kSI"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="hl8-qw-m6X" firstAttribute="centerX" secondItem="rvb-T4-XNM" secondAttribute="centerX" id="9aO-K1-i5L"/>
+                                            <constraint firstItem="GmS-Yk-c6i" firstAttribute="top" secondItem="rvb-T4-XNM" secondAttribute="topMargin" id="GoK-Nj-AKr"/>
+                                            <constraint firstItem="hl8-qw-m6X" firstAttribute="top" secondItem="GmS-Yk-c6i" secondAttribute="bottom" constant="-5" id="nsZ-oI-2G5"/>
+                                            <constraint firstItem="GmS-Yk-c6i" firstAttribute="centerX" secondItem="rvb-T4-XNM" secondAttribute="centerX" id="yVE-9Z-VxH"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="medications" id="VZ4-6Q-ZIs" userLabel="Medications">
+                                        <rect key="frame" x="0.0" y="320" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconMedication" translatesAutoresizingMaskIntoConstraints="NO" id="Y7v-A8-2Po">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="92" id="bgG-9n-ZEi"/>
+                                                        <constraint firstAttribute="width" secondItem="Y7v-A8-2Po" secondAttribute="height" multiplier="1:1" id="ePJ-oP-TeO"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62F-V8-j8Z">
+                                                    <rect key="frame" x="33" y="95" width="84" height="30"/>
+                                                    <state key="normal" title="Medications"/>
+                                                    <connections>
+                                                        <action selector="onMedications:" destination="whP-gf-Uak" eventType="touchUpInside" id="88B-6y-Irx"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Y7v-A8-2Po" firstAttribute="centerX" secondItem="VZ4-6Q-ZIs" secondAttribute="centerX" id="68c-BB-nBW"/>
+                                            <constraint firstItem="62F-V8-j8Z" firstAttribute="centerX" secondItem="VZ4-6Q-ZIs" secondAttribute="centerX" id="Prm-cf-GoB"/>
+                                            <constraint firstItem="62F-V8-j8Z" firstAttribute="top" secondItem="Y7v-A8-2Po" secondAttribute="bottom" constant="-5" id="Q0P-11-Mix"/>
+                                            <constraint firstItem="Y7v-A8-2Po" firstAttribute="top" secondItem="VZ4-6Q-ZIs" secondAttribute="topMargin" id="ZA9-af-i8N"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="hospitals" id="N8C-De-qcM" userLabel="Hospitals">
+                                        <rect key="frame" x="225" y="320" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconHospital" translatesAutoresizingMaskIntoConstraints="NO" id="iqh-KH-lka">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="iqh-KH-lka" secondAttribute="height" multiplier="1:1" id="3Eh-Ey-r5V"/>
+                                                        <constraint firstAttribute="width" constant="92" id="P1R-4o-XUW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTJ-aV-dlr">
+                                                    <rect key="frame" x="43" y="95" width="64" height="30"/>
+                                                    <state key="normal" title="Hospitals"/>
+                                                    <connections>
+                                                        <action selector="onHospitals:" destination="whP-gf-Uak" eventType="touchUpInside" id="eJB-Xa-Um5"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="iqh-KH-lka" firstAttribute="centerX" secondItem="N8C-De-qcM" secondAttribute="centerX" id="9jN-6L-FE7"/>
+                                            <constraint firstItem="iqh-KH-lka" firstAttribute="top" secondItem="N8C-De-qcM" secondAttribute="topMargin" id="cjq-Jk-GdT"/>
+                                            <constraint firstItem="zTJ-aV-dlr" firstAttribute="centerX" secondItem="N8C-De-qcM" secondAttribute="centerX" id="mDH-3s-0Cs"/>
+                                            <constraint firstItem="zTJ-aV-dlr" firstAttribute="top" secondItem="iqh-KH-lka" secondAttribute="bottom" constant="-5" id="wiz-Od-f8w"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="safety" id="yyH-ko-h7z" userLabel="Safety">
+                                        <rect key="frame" x="0.0" y="480" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconSafety" translatesAutoresizingMaskIntoConstraints="NO" id="ilX-ZV-edG">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ilX-ZV-edG" secondAttribute="height" multiplier="1:1" id="cqa-zs-9lz"/>
+                                                        <constraint firstAttribute="width" constant="92" id="csd-NK-yA3"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltq-a9-lZ1">
+                                                    <rect key="frame" x="53" y="95" width="44" height="30"/>
+                                                    <state key="normal" title="Safety"/>
+                                                    <connections>
+                                                        <action selector="onSafety:" destination="whP-gf-Uak" eventType="touchUpInside" id="Fe4-sf-MJy"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="ilX-ZV-edG" firstAttribute="top" secondItem="yyH-ko-h7z" secondAttribute="topMargin" id="11l-o6-qeb"/>
+                                            <constraint firstItem="Ltq-a9-lZ1" firstAttribute="top" secondItem="ilX-ZV-edG" secondAttribute="bottom" constant="-5" id="1OP-D7-qBz"/>
+                                            <constraint firstItem="ilX-ZV-edG" firstAttribute="centerX" secondItem="yyH-ko-h7z" secondAttribute="centerX" id="8Dw-NY-AeG"/>
+                                            <constraint firstItem="Ltq-a9-lZ1" firstAttribute="centerX" secondItem="yyH-ko-h7z" secondAttribute="centerX" id="9Hr-MG-Msh"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="emerg" id="uvX-b0-65z" userLabel="Emerg Numbers">
+                                        <rect key="frame" x="225" y="480" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconPhone" translatesAutoresizingMaskIntoConstraints="NO" id="96d-tE-eFR">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="96d-tE-eFR" secondAttribute="height" multiplier="1:1" id="MzB-nT-gF4"/>
+                                                        <constraint firstAttribute="width" constant="92" id="ReR-Kw-OWQ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOY-MH-wtl">
+                                                    <rect key="frame" x="3" y="95" width="144" height="30"/>
+                                                    <state key="normal" title="Emergency Numbers"/>
+                                                    <connections>
+                                                        <action selector="onEmerg:" destination="whP-gf-Uak" eventType="touchUpInside" id="x2N-Z6-46Z"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="96d-tE-eFR" firstAttribute="top" secondItem="uvX-b0-65z" secondAttribute="topMargin" id="6yR-2h-eE2"/>
+                                            <constraint firstItem="VOY-MH-wtl" firstAttribute="top" secondItem="96d-tE-eFR" secondAttribute="bottom" constant="-5" id="BZp-Ca-2Pn"/>
+                                            <constraint firstItem="VOY-MH-wtl" firstAttribute="centerX" secondItem="uvX-b0-65z" secondAttribute="centerX" id="lPH-ll-sa3"/>
+                                            <constraint firstItem="96d-tE-eFR" firstAttribute="centerX" secondItem="uvX-b0-65z" secondAttribute="centerX" id="nvW-vk-xUn"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="h9B-Aa-23N" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" id="2n2-Iq-7lt"/>
+                            <constraint firstItem="Mvr-aV-6Um" firstAttribute="top" secondItem="h9B-Aa-23N" secondAttribute="bottom" id="3bW-WF-Amo"/>
+                            <constraint firstAttribute="trailing" secondItem="h9B-Aa-23N" secondAttribute="trailing" id="Nzd-cM-12D"/>
+                            <constraint firstItem="h9B-Aa-23N" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="ryY-fs-7Pl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="h9B-Aa-23N" id="rmC-pv-q68"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304.80000000000001" y="432.23388305847078"/>
+            <point key="canvasLocation" x="287" y="434"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="IconAdvisory" width="92" height="92"/>
+        <image name="IconAlert" width="92" height="92"/>
+        <image name="IconDisease" width="92" height="92"/>
+        <image name="IconHospital" width="92" height="92"/>
+        <image name="IconMedication" width="92" height="92"/>
+        <image name="IconPhone" width="92" height="92"/>
+        <image name="IconSafety" width="92" height="92"/>
+        <image name="IconVaccine" width="92" height="92"/>
+    </resources>
 </document>

@@ -11,6 +11,7 @@
 #import "STASDKJobs.h"
 #import "STASDKSync.h"
 #import <Realm/Realm.h>
+#import <EDQueue/EDQueue.h>
 
 @implementation STASDKController
 

@@ -12,11 +12,11 @@
 
 @interface STASDKMTripDiseaseComment : RLMObject
 
-@property NSString *identifier;
-@property NSString *comment;
-@property NSString *countryId;
-@property NSString *diseaseId;
-@property NSString *diseaseName;
+@property (assign) NSString *identifier;
+@property (assign) NSString *comment;
+@property (assign) NSString *countryId;
+@property (assign) NSString *diseaseId;
+@property (assign) NSString *diseaseName;
 
 +(RLMResults<STASDKMTripDiseaseComment*>*)commentsForDisease:(NSString*)diseaseId trip:(STASDKMTrip*)trip;
 
@@ -27,11 +27,11 @@
 
 @interface STASDKMTripMedicationComment : RLMObject
 
-@property NSString *identifier;
-@property NSString *comment;
-@property NSString *countryId;
-@property NSString *medicationId;
-@property NSString *medicationName;
+@property (assign) NSString *identifier;
+@property (assign) NSString *comment;
+@property (assign) NSString *countryId;
+@property (assign) NSString *medicationId;
+@property (assign) NSString *medicationName;
 
 +(RLMResults<STASDKMTripMedicationComment*>*)commentsForMedication:(NSString*)medicationId trip:(STASDKMTrip*)trip;
 
@@ -40,11 +40,11 @@
 
 @interface STASDKMTripVaccinationComment : RLMObject
 
-@property NSString *identifier;
-@property NSString *comment;
-@property NSString *countryId;
-@property NSString *vaccinationId;
-@property NSString *vaccinationName;
+@property (assign) NSString *identifier;
+@property (assign) NSString *comment;
+@property (assign) NSString *countryId;
+@property (assign) NSString *vaccinationId;
+@property (assign) NSString *vaccinationName;
 
 +(RLMResults<STASDKMTripVaccinationComment*>*)commentsForVaccination:(NSString*)vaccinationId trip:(STASDKMTrip*)trip;
 

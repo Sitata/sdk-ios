@@ -545,7 +545,7 @@ regulations.
 
 ## SitataCore
 
-Copyright (c) 2016 Adam St. John <astjohn@gmail.com>
+Copyright (c) 2016 Sitata, Inc. <support@sitata.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

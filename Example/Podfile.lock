@@ -34,7 +34,7 @@ PODS:
   - Realm (2.6.2):
     - Realm/Headers (= 2.6.2)
   - Realm/Headers (2.6.2)
-  - SitataCore (0.1.0.rc1):
+  - SitataCore (1.0.0.rc1):
     - AFNetworking (~> 3.1)
     - CCHMapClusterController (= 1.7.0)
     - EDQueue (= 0.7.1)
@@ -65,7 +65,7 @@ SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   Haneke: 01454a67322faa0dd9d81fc0f447885044e71521
   Realm: 29222766425b9f831228f81b63f0e38a97a4d700
-  SitataCore: 46917e88f0e603de146d0c784554b62f3170e43c
+  SitataCore: 0c4852aecf773b090627f218aaf3addbd2a9c707
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 

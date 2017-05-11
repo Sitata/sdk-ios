@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface STASDKViewController : UIViewController
+@interface STASDKViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end

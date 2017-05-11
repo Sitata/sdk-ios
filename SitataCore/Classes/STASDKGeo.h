@@ -18,7 +18,7 @@
 // Convert a given topoJSON dictionary and object to GeoJson
 + (NSDictionary*)feature:(NSDictionary*)topology obj:(NSDictionary*)obj;
 
-
+// Returns a MKMapRect object given a topojson dictionary
 + (MKMapRect)regionFromTopoBBox:(NSDictionary*)topology;
 
 // Given a topoJSON dictionary and mapView, will perform necessary
