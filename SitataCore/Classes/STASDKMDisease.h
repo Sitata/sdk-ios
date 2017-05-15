@@ -10,16 +10,16 @@
 
 @interface STASDKMDisease : RLMObject
 
-@property NSDate *createdAt;
-@property NSDate *updatedAt;
-@property NSDate *deletedAt;
-@property NSString *identifier;
-@property NSString *commonName;
-@property NSString *name;
-@property NSString *fullName;
-@property NSString *scientificName;
-@property NSString *occursWhere;
-@property NSString *diseaseDatum;
+@property (retain) NSDate *createdAt;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSDate *deletedAt;
+@property (retain) NSString *identifier;
+@property (retain) NSString *commonName;
+@property (retain) NSString *name;
+@property (retain) NSString *fullName;
+@property (retain) NSString *scientificName;
+@property (retain) NSString *occursWhere;
+@property (retain) NSString *diseaseDatum;
 
 
 

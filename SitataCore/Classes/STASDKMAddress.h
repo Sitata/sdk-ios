@@ -11,12 +11,12 @@
 @interface STASDKMAddress : NSObject
 
 
-@property NSString *address1;
-@property NSString *address2;
-@property NSString *city;
-@property NSString *postalCode;
-@property NSString *province;
-@property NSString *countryCode;
+@property (retain) NSString *address1;
+@property (retain) NSString *address2;
+@property (retain) NSString *city;
+@property (retain) NSString *postalCode;
+@property (retain) NSString *province;
+@property (retain) NSString *countryCode;
 
 
 

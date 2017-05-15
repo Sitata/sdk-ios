@@ -26,11 +26,14 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 
 
 // For traveller to access Sitata API
-@property NSString *apiToken;
+@property (retain) NSString *apiToken;
+
+// Specify an endpoint to use for the API
+@property (retain) NSString *apiEndpoint;
 
 
 // allows unit to be set for distance
-@property DistanceUnitsType distanceUnits;
+@property (assign) DistanceUnitsType distanceUnits;
 
 
 

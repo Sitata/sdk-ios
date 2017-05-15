@@ -20,9 +20,9 @@ FOUNDATION_EXPORT NSString *const NotifyKeyCountriesIndex;
 @interface STASDKUICountrySwitcherViewController : UIViewController
 
 
-@property int pageIndex;
-@property int pageCount;
-@property NSArray *countries;
+@property (assign) int pageIndex;
+@property (assign) int pageCount;
+@property (retain) NSArray *countries;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *countryNameLbl;

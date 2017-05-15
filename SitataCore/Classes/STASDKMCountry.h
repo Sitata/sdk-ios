@@ -12,32 +12,32 @@
 
 @interface STASDKMCountry : RLMObject
 
-@property NSString *identifier;
-@property NSDate *createdAt;
-@property NSDate *updatedAt;
-@property NSDate *deletedAt;
-@property NSString *name;
-@property NSString *countryCode;
-@property NSString *countryCode3;
-@property NSString *capital;
-@property NSString *facts;
-@property NSString *language;
-@property NSString *currencyName;
-@property NSString *currencyCode;
-@property NSString *divisionName;
-@property NSString *regionName;
+@property (retain) NSString *identifier;
+@property (retain) NSDate *createdAt;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSDate *deletedAt;
+@property (retain) NSString *name;
+@property (retain) NSString *countryCode;
+@property (retain) NSString *countryCode3;
+@property (retain) NSString *capital;
+@property (retain) NSString *facts;
+@property (retain) NSString *language;
+@property (retain) NSString *currencyName;
+@property (retain) NSString *currencyCode;
+@property (retain) NSString *divisionName;
+@property (retain) NSString *regionName;
 @property int travelStatus;
-@property NSString *secEmerNum;
-@property NSString *secPersonal;
-@property NSString *secExtViol;
-@property NSString *secPolUnr;
-@property NSString *secAreas;
-@property NSString *flagMainURL;
-@property NSString *flagListURL;
-@property NSString *flagURL;
-@property NSString *countryDatum;
-@property NSString *emergNumbers;
-@property NSString *topoJson;
+@property (retain) NSString *secEmerNum;
+@property (retain) NSString *secPersonal;
+@property (retain) NSString *secExtViol;
+@property (retain) NSString *secPolUnr;
+@property (retain) NSString *secAreas;
+@property (retain) NSString *flagMainURL;
+@property (retain) NSString *flagListURL;
+@property (retain) NSString *flagURL;
+@property (retain) NSString *countryDatum;
+@property (retain) NSString *emergNumbers;
+@property (retain) NSString *topoJson;
 
 // relationships
 @property RLMArray<STASDKMHospital *><STASDKMHospital> *hospitals;

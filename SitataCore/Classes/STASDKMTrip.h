@@ -21,32 +21,32 @@
 @interface STASDKMTrip : RLMObject
 
 
-@property NSDate *createdAt;
-@property NSDate *updatedAt;
-@property NSDate *deletedAt;
-@property NSString *identifier;
-@property NSString *name;
-@property NSDate *start;
-@property NSDate *finish;
+@property (retain) NSDate *createdAt;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSDate *deletedAt;
+@property (retain) NSString *identifier;
+@property (retain) NSString *name;
+@property (retain) NSDate *start;
+@property (retain) NSDate *finish;
 @property BOOL muted;
 @property BOOL read;
 @property int tripType;
-@property NSData *activities;
-@property NSString *companyName;
-@property NSString *companyId;
-@property NSString *employeeName;
-@property NSString *employeeId;
+@property (retain) NSData *activities;
+@property (retain) NSString *companyName;
+@property (retain) NSString *companyId;
+@property (retain) NSString *employeeName;
+@property (retain) NSString *employeeId;
 @property int pastAlertCount;
 
 
 // related models
-@property RLMArray<STASDKMDestination *><STASDKMDestination> *destinations;
-@property RLMArray<STASDKMAlert *><STASDKMAlert> *alerts;
-@property RLMArray<STASDKMAdvisory *><STASDKMAdvisory> *advisories;
+@property (retain) RLMArray<STASDKMDestination *><STASDKMDestination> *destinations;
+@property (retain) RLMArray<STASDKMAlert *><STASDKMAlert> *alerts;
+@property (retain) RLMArray<STASDKMAdvisory *><STASDKMAdvisory> *advisories;
 
-@property RLMArray<STASDKMTripDiseaseComment *><STASDKMTripDiseaseComment> *tripDiseaseComments;
-@property RLMArray<STASDKMTripVaccinationComment *><STASDKMTripVaccinationComment> *tripVaccinationComments;
-@property RLMArray<STASDKMTripMedicationComment *><STASDKMTripMedicationComment> *tripMedicationComments;
+@property (retain) RLMArray<STASDKMTripDiseaseComment *><STASDKMTripDiseaseComment> *tripDiseaseComments;
+@property (retain) RLMArray<STASDKMTripVaccinationComment *><STASDKMTripVaccinationComment> *tripVaccinationComments;
+@property (retain) RLMArray<STASDKMTripMedicationComment *><STASDKMTripMedicationComment> *tripMedicationComments;
 
 
 // Return the current trip or next upcoming trip from the database.

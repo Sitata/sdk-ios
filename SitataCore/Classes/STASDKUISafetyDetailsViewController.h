@@ -12,6 +12,6 @@
 
 @interface STASDKUISafetyDetailsViewController : UIViewController
 
-@property STASDKMCountry *country;
+@property (retain) STASDKMCountry *country;
 
 @end

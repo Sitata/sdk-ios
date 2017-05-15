@@ -10,8 +10,8 @@
 
 
 
-@property NSString *url;
-@property NSString *host;
+@property (retain) NSString *url;
+@property (retain) NSString *host;
 
 
 // Creates a new alert source model from the given nsdictionary representation

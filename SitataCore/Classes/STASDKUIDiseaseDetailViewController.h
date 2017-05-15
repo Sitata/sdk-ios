@@ -12,6 +12,6 @@
 
 @interface STASDKUIDiseaseDetailViewController : UIViewController
 
-@property STASDKMDisease *disease;
+@property (retain) STASDKMDisease *disease;
 
 @end

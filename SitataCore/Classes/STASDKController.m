@@ -16,6 +16,7 @@
 @implementation STASDKController
 
 @synthesize distanceUnits = _distanceUnits;
+@synthesize apiEndpoint = _apiEndpoint;
 BOOL didFirstSync;
 
 
@@ -37,6 +38,8 @@ BOOL didFirstSync;
 
         // default values
         _distanceUnits = Metric;
+
+        _apiEndpoint = @"https://www.sitata.com";
 
         // Setup iOS built in caching
         NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024

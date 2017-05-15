@@ -17,8 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *noteLbl;
 @property (weak, nonatomic) IBOutlet UIButton *actionBtn;
 
-@property STASDKMContactDetail *contactDetail;
-@property STASDKMHospital *hospital;
+@property (nonatomic, strong) STASDKMContactDetail *contactDetail;
+@property (nonatomic, strong) STASDKMHospital *hospital;
 
 @property BOOL forcePhone;
 

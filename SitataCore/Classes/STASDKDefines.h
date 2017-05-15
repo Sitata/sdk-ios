@@ -21,11 +21,4 @@
 
 
 
-#ifdef DEBUG
-#define API_ENDPOINT_HOST @"https://127.0.0.1:3000/api/v1"
-#else
-#define API_ENDPOINT_HOST @"https://www.sitata.com/api/v1"
-#endif
-
-
 #endif /* STASDKDefines_h */

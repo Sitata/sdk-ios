@@ -11,7 +11,7 @@
 
 @interface STASDKUIAlertsTableViewController : UITableViewController 
 
-@property InfoType mode;
+@property (assign) InfoType mode;
 
 
 @end

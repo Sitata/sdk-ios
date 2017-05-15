@@ -12,23 +12,23 @@
 
 @interface STASDKMAlert : RLMObject
 
-@property NSDate *createdAt;
-@property NSDate *updatedAt;
-@property NSString *identifier;
-@property NSString *headline;
-@property NSString *body;
-@property NSString *bodyAdvice;
-@property NSString *category;
-@property NSString *riskLevel;
-@property NSString *alertLocations;
-@property NSString *alertSources;
-@property NSString *countryIds;
-@property NSString *diseaseIds;
-@property NSString *safetyIds;
-@property NSString *countryDivisions;
-@property NSString *countryRegions;
-@property NSString *countryDivisionIds;
-@property NSString *countryRegionIds;
+@property (retain) NSDate *createdAt;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSString *identifier;
+@property (retain) NSString *headline;
+@property (retain) NSString *body;
+@property (retain) NSString *bodyAdvice;
+@property (retain) NSString *category;
+@property (retain) NSString *riskLevel;
+@property (retain) NSString *alertLocations;
+@property (retain) NSString *alertSources;
+@property (retain) NSString *countryIds;
+@property (retain) NSString *diseaseIds;
+@property (retain) NSString *safetyIds;
+@property (retain) NSString *countryDivisions;
+@property (retain) NSString *countryRegions;
+@property (retain) NSString *countryDivisionIds;
+@property (retain) NSString *countryRegionIds;
 
 @property BOOL _read;
 

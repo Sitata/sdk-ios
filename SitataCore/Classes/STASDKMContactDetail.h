@@ -42,8 +42,8 @@ typedef NS_ENUM(int, ContactDetailType) {
 
 @property int typ;
 @property int order;
-@property NSString *val;
-@property NSString *note;
+@property (retain) NSString *val;
+@property (retain) NSString *note;
 
 
 

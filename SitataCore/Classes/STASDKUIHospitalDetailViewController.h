@@ -12,6 +12,6 @@
 
 @interface STASDKUIHospitalDetailViewController : UIViewController
 
-@property STASDKMHospital *hospital;
+@property (retain) STASDKMHospital *hospital;
 
 @end

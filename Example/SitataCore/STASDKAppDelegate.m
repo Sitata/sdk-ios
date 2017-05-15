@@ -18,12 +18,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // STAGING
-//    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTVkOTBhZGVlOGQ5MDE3ODQzYTNmfHNjYXlpUWJURE1WekFWVFY4dlhi";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkxOTAzNDNiODdkOTEyYzg3NTBlNTQ2fHRDeS00WXNfLW94ZFZ5S3VNNjE4";
 
     // LOCAL
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTA4ZDI0NjEyNDAxOTkwODBhOWMzfDJERmJOdVhvaHF4bTE1NHNTTkg5";
+    //NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTA4ZDI0NjEyNDAxOTkwODBhOWMzfDJERmJOdVhvaHF4bTE1NHNTTkg5";
+    STASDKController *ctrl = [STASDKController sharedInstance];
+    [ctrl setConfig:token];
+    [ctrl setApiEndpoint:@"https://staging.sitata.com"];
 
-    [[STASDKController sharedInstance] setConfig:token];
+
 //    [[STASDKController sharedInstance] setDistanceUnitsToImperial];
 
 

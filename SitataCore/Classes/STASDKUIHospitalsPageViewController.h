@@ -10,6 +10,6 @@
 
 @interface STASDKUIHospitalsPageViewController : UIPageViewController
 
-@property NSArray *countries;
+@property (retain) NSArray *countries;
 
 @end

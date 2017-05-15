@@ -13,22 +13,22 @@
 @interface STASDKMHospital : RLMObject
 
 
-@property NSDate *createdAt;
-@property NSDate *updatedAt;
-@property NSDate *verifiedAt;
-@property NSString *identifier;
+@property (retain) NSDate *createdAt;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSDate *verifiedAt;
+@property (retain) NSString *identifier;
 
-@property NSString *name;
-@property NSString *description;
-@property NSString *countryId;
+@property (retain) NSString *name;
+@property (retain) NSString *description;
+@property (retain) NSString *countryId;
 @property BOOL starred;
 @property BOOL emergency;
 @property BOOL accrJci;
 @property BOOL verified;
 
-@property NSData *location; // array type stored as NSData
-@property NSString *address;
-@property NSString *contactDetails;
+@property (retain) NSData *location; // array type stored as NSData
+@property (retain) NSString *address;
+@property (retain) NSString *contactDetails;
 
 
 

@@ -12,18 +12,18 @@
 
 @interface STASDKMAdvisory : RLMObject
 
-@property NSDate *createdAt;
-@property NSDate *updatedAt;
-@property NSString *identifier;
+@property (retain) NSDate *createdAt;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSString *identifier;
 
-@property NSString *headline;
-@property NSString *body;
+@property (retain) NSString *headline;
+@property (retain) NSString *body;
 @property int status;
-@property NSString *countryId;
-@property NSString *countryDivisions;
-@property NSString *countryRegions;
-@property NSString *countryDivisionIds;
-@property NSString *countryRegionIds;
+@property (retain) NSString *countryId;
+@property (retain) NSString *countryDivisions;
+@property (retain) NSString *countryRegions;
+@property (retain) NSString *countryDivisionIds;
+@property (retain) NSString *countryRegionIds;
 
 
 

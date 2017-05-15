@@ -12,6 +12,6 @@
 
 @interface STASDKUIHealthTableViewController : UITableViewController
 
-@property HealthType healthMode;
+@property (assign) HealthType healthMode;
 
 @end

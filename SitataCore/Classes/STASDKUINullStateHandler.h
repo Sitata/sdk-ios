@@ -12,8 +12,8 @@
 // used for when data doesn't exist
 @interface STASDKUINullStateHandler : NSObject
 
-@property UIViewController *parent;
-@property NSString *message;
+@property (retain) UIViewController *parent;
+@property (retain) NSString *message;
 
 - (instancetype)initWith:(NSString*)message parent:(UIViewController*)parent;
 

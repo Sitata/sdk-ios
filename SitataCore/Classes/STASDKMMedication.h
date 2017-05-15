@@ -10,10 +10,10 @@
 
 @interface STASDKMMedication : RLMObject
 
-@property NSDate *updatedAt;
-@property NSString *identifier;
-@property NSString *name;
-@property NSString *medicationDatum;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSString *identifier;
+@property (retain) NSString *name;
+@property (retain) NSString *medicationDatum;
 
 // Find stored medication by identifier
 +(STASDKMMedication*)findBy:(NSString *)medicationId;

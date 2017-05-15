@@ -10,17 +10,23 @@
 
 #import "STASDKApiRoutes.h"
 #import "STASDKDefines.h"
+#import "STASDKController.h"
 
-NSString *const APIEndpoint = API_ENDPOINT_HOST;
+NSString *const APIPath = @"/api/v1";
 
 @implementation STASDKApiRoutes
 
+
++(NSString*)apiEndpoint {
+    STASDKController *ctrl = [STASDKController sharedInstance];
+    return [NSString stringWithFormat:@"%@/%@", ctrl.apiEndpoint, APIPath];
+}
 
 
 // MARK: == TRIPS ==
 
 +(NSString*)trips {
-    return [NSString stringWithFormat:@"%@/trips", APIEndpoint];
+    return [NSString stringWithFormat:@"%@/trips", [self apiEndpoint]];
 }
 
 +(NSString*)currentTrip {
@@ -34,7 +40,7 @@ NSString *const APIEndpoint = API_ENDPOINT_HOST;
 
 // MARK: == COUNTRIES ==
 +(NSString*)countries {
-    return [NSString stringWithFormat:@"%@/countries", APIEndpoint];
+    return [NSString stringWithFormat:@"%@/countries", [self apiEndpoint]];
 }
 
 // /countries/short_list
@@ -50,7 +56,7 @@ NSString *const APIEndpoint = API_ENDPOINT_HOST;
 
 // MARK: == DISEASES ==
 +(NSString*)diseases {
-    return [NSString stringWithFormat:@"%@/diseases", APIEndpoint];
+    return [NSString stringWithFormat:@"%@/diseases", [self apiEndpoint]];
 }
 
 // /diseases/:disease_id
@@ -61,7 +67,7 @@ NSString *const APIEndpoint = API_ENDPOINT_HOST;
 
 // MARK: == VACCINATIONS ==
 +(NSString*)vaccinations {
-    return [NSString stringWithFormat:@"%@/vaccinations", APIEndpoint];
+    return [NSString stringWithFormat:@"%@/vaccinations", [self apiEndpoint]];
 }
 
 // /vaccinations/:vaccination_id
@@ -72,7 +78,7 @@ NSString *const APIEndpoint = API_ENDPOINT_HOST;
 
 // MARK: == MEDICATIONS ==
 +(NSString*)medications {
-    return [NSString stringWithFormat:@"%@/medications", APIEndpoint];
+    return [NSString stringWithFormat:@"%@/medications", [self apiEndpoint]];
 }
 
 // /medications/:medication_id
@@ -90,7 +96,7 @@ NSString *const APIEndpoint = API_ENDPOINT_HOST;
 
 // /api/v1/alerts/:alert_id/mark_read
 +(NSString*)alertMarkRead:(NSString*)alertId {
-    return [NSString stringWithFormat:@"%@/alerts/%@/mark_read", APIEndpoint, alertId];
+    return [NSString stringWithFormat:@"%@/alerts/%@/mark_read", [self apiEndpoint], alertId];
 }
 
 
@@ -106,7 +112,7 @@ NSString *const APIEndpoint = API_ENDPOINT_HOST;
 
 // /api/v1/hospitals
 +(NSString*)hospitals {
-    return [NSString stringWithFormat:@"%@/hospitals", APIEndpoint];
+    return [NSString stringWithFormat:@"%@/hospitals", [self apiEndpoint]];
 }
 
 // /api/v1/trips/:trip_id/hospitals
@@ -124,7 +130,7 @@ NSString *const APIEndpoint = API_ENDPOINT_HOST;
 
 // /api/v1/users/device_push
 +(NSString*)devicePush {
-    return [NSString stringWithFormat:@"%@/users/device_push", APIEndpoint];
+    return [NSString stringWithFormat:@"%@/users/device_push", [self apiEndpoint]];
 }
 
 

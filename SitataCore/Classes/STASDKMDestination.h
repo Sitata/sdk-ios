@@ -10,11 +10,11 @@
 
 @interface STASDKMDestination : RLMObject
 
-@property NSString *identifier;
-@property NSDate *departureDate;
-@property NSDate *returnDate;
-@property NSString *countryId;
-@property NSString *countryCode;
+@property (retain) NSString *identifier;
+@property (retain) NSDate *departureDate;
+@property (retain) NSDate *returnDate;
+@property (retain) NSString *countryId;
+@property (retain) NSString *countryCode;
 
 
 

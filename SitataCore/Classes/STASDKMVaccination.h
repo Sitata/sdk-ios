@@ -10,10 +10,10 @@
 
 @interface STASDKMVaccination : RLMObject
 
-@property NSDate *updatedAt;
-@property NSString *identifier;
-@property NSString *name;
-@property NSString *vaccinationDatum;
+@property (retain) NSDate *updatedAt;
+@property (retain) NSString *identifier;
+@property (retain) NSString *name;
+@property (retain) NSString *vaccinationDatum;
 
 
 // Find stored vaccination by identifier

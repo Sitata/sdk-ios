@@ -13,6 +13,6 @@
 
 @interface STASDKUIHospitalsTableViewController : UIViewController
 
-@property STASDKMCountry *country;
+@property (retain) STASDKMCountry *country;
 
 @end
