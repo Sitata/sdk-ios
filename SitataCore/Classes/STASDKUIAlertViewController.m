@@ -11,6 +11,7 @@
 #import "STASDKMAdvisory.h"
 #import "STASDKMAlertSource.h"
 #import "STASDKMAlertLocation.h"
+#import "STASDKMCountry.h"
 #import "STASDKUIAlertPin.h"
 #import "STASDKUI.h"
 #import "STASDKMDisease.h"
@@ -20,6 +21,8 @@
 
 #import "STASDKUIStylesheet.h"
 #import "STASDKDataController.h"
+
+#import <Contacts/Contacts.h>
 
 
 
@@ -226,12 +229,40 @@
     // set map to bounds
     [self.mapView setVisibleMapRect:bounds edgePadding:UIEdgeInsetsMake(50, 50, 50, 50) animated:YES];
     if (self.alert != NULL && alertLocations.count <= 1 && !hasPolygons) {
-        // if there's one map pin or less and no polygons, then zoom out to country-wide
-        MKCoordinateSpan span = MKCoordinateSpanMake(5.0, 5.0);
-        MKCoordinateRegion region = MKCoordinateRegionMake([self.mapView centerCoordinate], span);
-        [self.mapView setRegion:region];
+        [self zoomWayOut];
     }
 
+    if (self.advisory != NULL && !hasPolygons) {
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+
+        STASDKMCountry *country = [STASDKMCountry findBy:self.advisory.countryId];
+        if (country != NULL) {
+            NSDictionary *addDict = @{CNPostalAddressISOCountryCodeKey : country.countryCode};
+            [geocoder geocodeAddressDictionary:addDict completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
+                if (placemarks.count >= 1) {
+                    CLPlacemark *place = [placemarks objectAtIndex:0];
+                    CLLocation *loc = place.location;
+                    MKCoordinateSpan span = MKCoordinateSpanMake(20.0, 20.0);
+                    MKCoordinateRegion region = MKCoordinateRegionMake(loc.coordinate, span);
+                    [self.mapView setRegion:region animated:YES];
+                } else {
+                    [self zoomWayOut];
+                }
+            }];
+        } else {
+            [self zoomWayOut];
+        }
+
+
+    }
+
+}
+
+- (void)zoomWayOut {
+    // if there's one map pin or less and no polygons, then zoom out to country-wide
+    MKCoordinateSpan span = MKCoordinateSpanMake(20.0, 20.0);
+    MKCoordinateRegion region = MKCoordinateRegionMake([self.mapView centerCoordinate], span);
+    [self.mapView setRegion:region];
 }
 
 

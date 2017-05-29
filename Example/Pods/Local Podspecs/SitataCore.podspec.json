@@ -1,6 +1,6 @@
 {
   "name": "SitataCore",
-  "version": "1.0.0.rc1",
+  "version": "1.0.0",
   "summary": "An iOS library to embed Sitata services into your own mobile application.",
   "description": "An iOS library to embed Sitata services into your own mobile application. API access and UI elements provided.",
   "homepage": "https://github.com/sitata/sdk-ios",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/sitata/sdk-ios.git",
-    "tag": "1.0.0.rc1"
+    "tag": "1.0.0"
   },
   "social_media_url": "https://twitter.com/_sitata_",
   "platforms": {
