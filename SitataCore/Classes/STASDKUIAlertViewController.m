@@ -19,6 +19,7 @@
 #import "STASDKGeo.h"
 
 #import "STASDKUIStylesheet.h"
+#import "STASDKDataController.h"
 
 
 
@@ -244,19 +245,18 @@
     NSString *identifier = @"mapPin";
 
     if ([annotation isKindOfClass:[STASDKUIAlertPin class]]) {
-        MKPinAnnotationView *pin = (MKPinAnnotationView*) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        STASDKUIAlertPin *alertPin = (STASDKUIAlertPin*) annotation;
+        MKAnnotationView *pinAnnotation = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
 
-        if (pin == nil) {
-            pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            pin.pinTintColor = [UIColor redColor];
-            pin.animatesDrop = NO;
-            pin.enabled = YES;
-            pin.canShowCallout = NO;
-//            pin.image = [UIImage imageNamed:@"whatever"];
+        if (pinAnnotation) {
+            pinAnnotation.annotation = alertPin;
         } else {
-            pin.annotation = annotation;
+            pinAnnotation = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
         }
-        return pin;
+        NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
+        pinAnnotation.image = [UIImage imageNamed:@"MapPinAlert" inBundle:bundle compatibleWithTraitCollection:NULL];
+
+        return pinAnnotation;
     }
 
     return nil;
