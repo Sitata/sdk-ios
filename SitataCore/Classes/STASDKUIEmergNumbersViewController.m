@@ -107,7 +107,7 @@ static CGFloat kContactDetailRowHeight;
         self.country = [STASDKMCountry findByCountryCode:self.geoCodedCountryCode];
     } else {
         // Try to select country from trip
-        if (self.trip != NULL) {
+        if (self.country == NULL && self.trip != NULL) {
             self.country = [self.trip currentCountry];
         }
     }
