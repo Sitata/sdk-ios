@@ -132,6 +132,7 @@
     [btn setTitle:source.url forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(openAlertSource:) forControlEvents:UIControlEventTouchUpInside];
     [[btn titleLabel] setTextAlignment:NSTextAlignmentLeft];
+    btn.titleLabel.font = [UIFont systemFontOfSize:12.0];
     [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [btn sizeToFit];
     btn.translatesAutoresizingMaskIntoConstraints = NO;

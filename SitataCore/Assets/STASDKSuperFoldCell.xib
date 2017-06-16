@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="172"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="171.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="172"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBX-IC-6hX" userLabel="ShadowView">
@@ -61,7 +61,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="Xr4-1J-CEe" secondAttribute="trailing" id="5A6-YY-BaX"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="Xr4-1J-CEe" secondAttribute="bottom" priority="998" id="L0e-Lj-34d"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Xr4-1J-CEe" secondAttribute="bottom" id="L0e-Lj-34d"/>
                                     <constraint firstItem="Xr4-1J-CEe" firstAttribute="leading" secondItem="E6C-4e-5lN" secondAttribute="leadingMargin" id="O5o-uu-gkB"/>
                                     <constraint firstAttribute="height" priority="750" constant="50" id="su7-Zv-PN7"/>
                                     <constraint firstItem="Xr4-1J-CEe" firstAttribute="top" secondItem="E6C-4e-5lN" secondAttribute="topMargin" priority="998" id="tQY-ra-CPy"/>
