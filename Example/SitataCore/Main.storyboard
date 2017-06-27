@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="whP-gf-Uak">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -280,6 +280,37 @@
                                             <constraint firstItem="96d-tE-eFR" firstAttribute="centerX" secondItem="uvX-b0-65z" secondAttribute="centerX" id="nvW-vk-xUn"/>
                                         </constraints>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="test" id="xIv-K8-CJD" userLabel="Emerg Numbers">
+                                        <rect key="frame" x="0.0" y="640" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconPhone" translatesAutoresizingMaskIntoConstraints="NO" id="CpP-Lw-cEW">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="92" id="SYN-Ta-cK1"/>
+                                                        <constraint firstAttribute="width" secondItem="CpP-Lw-cEW" secondAttribute="height" multiplier="1:1" id="kYf-c2-VgZ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLq-CW-8jJ">
+                                                    <rect key="frame" x="56.5" y="95" width="37" height="30"/>
+                                                    <state key="normal" title="TEST"/>
+                                                    <connections>
+                                                        <action selector="onEmerg:" destination="whP-gf-Uak" eventType="touchUpInside" id="zys-MH-1oT"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="CpP-Lw-cEW" firstAttribute="top" secondItem="xIv-K8-CJD" secondAttribute="topMargin" id="GBj-dl-HwC"/>
+                                            <constraint firstItem="gLq-CW-8jJ" firstAttribute="top" secondItem="CpP-Lw-cEW" secondAttribute="bottom" constant="-5" id="MTv-qQ-TUo"/>
+                                            <constraint firstItem="CpP-Lw-cEW" firstAttribute="centerX" secondItem="xIv-K8-CJD" secondAttribute="centerX" id="e0d-Uq-DHh"/>
+                                            <constraint firstItem="gLq-CW-8jJ" firstAttribute="centerX" secondItem="xIv-K8-CJD" secondAttribute="centerX" id="y1k-or-d5r"/>
+                                        </constraints>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
@@ -291,6 +322,8 @@
                             <constraint firstItem="h9B-Aa-23N" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="ryY-fs-7Pl"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="collectionView" destination="h9B-Aa-23N" id="rmC-pv-q68"/>
                     </connections>

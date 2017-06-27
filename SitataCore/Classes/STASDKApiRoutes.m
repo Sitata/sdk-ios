@@ -12,7 +12,7 @@
 #import "STASDKDefines.h"
 #import "STASDKController.h"
 
-NSString *const APIPath = @"/api/v1";
+NSString *const APIPath = @"api/v1";
 
 @implementation STASDKApiRoutes
 
@@ -99,6 +99,11 @@ NSString *const APIPath = @"/api/v1";
     return [NSString stringWithFormat:@"%@/alerts/%@/mark_read", [self apiEndpoint], alertId];
 }
 
+// /api/v1/alerts/:alert_id/from_push
++(NSString*)alertFromPush:(NSString*)alertId {
+    return [NSString stringWithFormat:@"%@/alerts/%@/from_push", [self apiEndpoint], alertId];
+}
+
 
 // Mark: == ADVISORIES ==
 
@@ -129,8 +134,8 @@ NSString *const APIPath = @"/api/v1";
 // Mark: == MOBILE DEVICE / PUSH TOKEN ==
 
 // /api/v1/users/device_push
-+(NSString*)devicePush {
-    return [NSString stringWithFormat:@"%@/users/device_push", [self apiEndpoint]];
++(NSString*)addDevice {
+    return [NSString stringWithFormat:@"%@/users/add_device", [self apiEndpoint]];
 }
 
 

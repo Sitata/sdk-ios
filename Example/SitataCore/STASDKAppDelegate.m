@@ -11,14 +11,18 @@
 
 #import <SitataCore/STASDKGeo.h>
 
-//#import <SitataCore/STASDKApiCountry.h>
+
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 
 @implementation STASDKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // STAGING
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkxOTAzNDNiODdkOTEyYzg3NTBlNTQ2fHRDeS00WXNfLW94ZFZ5S3VNNjE4";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTVkOTBhZGVlOGQ5MDE3ODQzYTNmfHNjYXlpUWJURE1WekFWVFY4dlhi";
 
     // LOCAL
     //NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTA4ZDI0NjEyNDAxOTkwODBhOWMzfDJERmJOdVhvaHF4bTE1NHNTTkg5";
@@ -28,6 +32,41 @@
 
 
 //    [[STASDKController sharedInstance] setDistanceUnitsToImperial];
+
+
+    // app launched from a notification
+    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [self application:application didReceiveRemoteNotification:launchOptions fetchCompletionHandler:^(UIBackgroundFetchResult result) {
+            // do nothing after handled
+        }];
+    }
+
+
+    application.applicationIconBadgeNumber = 0;
+    // Register for push notifications - ideally, you would want to do this after explaining to the
+    // user why you're requesting them.
+    if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) ){
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound |    UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error)
+         {
+             if( !error )
+             {
+                 [[UIApplication sharedApplication] registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
+                 NSLog( @"Push registration success." );
+             }
+             else
+             {
+                 NSLog( @"Push registration FAILED" );
+                 NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
+                 NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );  
+             }  
+         }];  
+    }
+
 
 
     // Override point for customization after application launch.
@@ -62,5 +101,56 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+
+#pragma mark - PUSH NOTIFICATIONS
+
+- (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+
+    // Extract token from data object
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"Registered for remote notifications: %@", token);
+
+    // Pass token to Sitata SDK Controller
+    STASDKController *ctrl = [STASDKController sharedInstance];
+    [ctrl setPushNotificationToken:token];
+}
+
+- (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Failed to register for remote notifications.");
+}
+
+
+// Called when push notification is received in foreground or background
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+
+
+
+    // In all three states, pass notification to Sitata to download additional data.
+    STASDKController *ctrl = [STASDKController sharedInstance];
+    [ctrl receivePushNotification:userInfo];
+
+
+    if (application.applicationState == UIApplicationStateActive) {
+        // app is currently active, can update badges or visuals here
+
+    } else if (application.applicationState == UIApplicationStateBackground) {
+        // app is in background, can download additional info here if need be
+
+    } else if (application.applicationState == UIApplicationStateInactive) {
+        // app is transitioning from background to foreground (user taps notification)
+
+        // launch the screen for a particular push notification (when applicable)
+        [ctrl launchPushNotificationScreen:userInfo];
+
+    }
+
+    completionHandler(UIBackgroundFetchResultNewData);
+
+}
+
 
 @end

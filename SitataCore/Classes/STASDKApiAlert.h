@@ -23,6 +23,9 @@
 // Mark a trip alert as having been read by the user.
 +(void)markRead:(NSString*)alertId onFinished:(void(^)(NSURLSessionDataTask*, NSError*))callback;
 
+// Fetch an alert along with any trip ids that are assocaited with it.
++(void)fromPush:(NSString*)alertId onFinished:(void(^)(STASDKMAlert*, NSArray*, NSURLSessionDataTask*, NSError*))callback;
+
 @end
 
 

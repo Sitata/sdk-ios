@@ -12,12 +12,14 @@
 #import "STASDKSync.h"
 #import <Realm/Realm.h>
 #import <EDQueue/EDQueue.h>
+#import "STASDKPushHandler.h"
 
 @implementation STASDKController
 
 @synthesize distanceUnits = _distanceUnits;
 @synthesize apiEndpoint = _apiEndpoint;
 BOOL didFirstSync;
+
 
 
 #pragma mark Singleton
@@ -111,6 +113,14 @@ BOOL didFirstSync;
     [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_PTOKEN: token} forTask:JOB_SYNC_PUSH_TOKEN];
 }
 
+
+- (void)receivePushNotification:(NSDictionary *)userInfo {
+    [STASDKPushHandler handlePushData:userInfo];
+}
+
+- (void)launchPushNotificationScreen:(NSDictionary*)userInfo {
+    [STASDKPushHandler launchPushScreen:userInfo];
+}
 
 
 
@@ -249,6 +259,7 @@ BOOL didFirstSync;
                 }
             }];
 
+        // MARK ALERT AS READ
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_ALERT_MARK_READ]) {
             NSDictionary *data = [job objectForKey:@"data"];
             if (data == nil) {return;}
@@ -262,7 +273,7 @@ BOOL didFirstSync;
                 }
             }];
 
-
+        // SYNC PUSH TOKEN
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SYNC_PUSH_TOKEN]) {
             NSDictionary *data = [job objectForKey:@"data"];
             if (data == nil) {return;}
@@ -276,6 +287,19 @@ BOOL didFirstSync;
                 }
             }];
 
+        // SYNC SINGULAR ALERT (PUSH NOTIFICATION)
+        } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SYNC_ALERT]) {
+            NSDictionary *data = [job objectForKey:@"data"];
+            if (data == nil) {return;}
+            NSString *alertId = [data objectForKey:JOB_PARAM_AID];
+            if (alertId == nil) {return;}
+            [STASDKSync syncAlert:alertId callback:^(NSError *err) {
+                if (err != nil) {
+                    block(EDQueueResultFail);
+                } else {
+                    block(EDQueueResultSuccess);
+                }
+            }];
         } else if ([[job objectForKey:@"task"] isEqualToString:@"fail"]) {
             block(EDQueueResultFail);
         } else {

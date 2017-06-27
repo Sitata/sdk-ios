@@ -534,11 +534,46 @@
     }];
 }
 
++ (void) syncAlert:(NSString*)alertId callback:(void (^)(NSError*))callback {
+    [STASDKApiAlert fromPush:alertId onFinished:^(STASDKMAlert *alert, NSArray *tripIds, NSURLSessionDataTask *task, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Failed to fetch alert - error: %@", [error localizedDescription]);
+            [self catchCommonHttp:task error:error callback:callback];
+            return;
+        }
+
+        // otherwise save alert and save it to all the trips
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+
+        [realm addOrUpdateObject:alert];
+
+        // Find the trip(s) for alert associations
+        for (NSString *tripId in tripIds) {
+            STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+            if (trip != NULL) {
+                [trip.alerts addObject:alert];
+            }
+        }
+
+        NSError *writeError;
+        [realm commitWriteTransaction:&writeError];
+
+        if (writeError != nil) {
+            NSLog(@"Failed to save alert - error: %@", [writeError localizedDescription]);
+            callback(writeError);
+        } else {
+            NSLog(@"Finshed saving alert.");
+            callback(NULL);
+        }
+    }];
+}
+
 
 
 
 + (void) syncPushToken:(NSString*)token callback:(void (^)(NSError*))callback {
-    // we need to have the push token and the user's JWT, otherwise the request is not
+    // we need to have the push token and the user's TKN, otherwise the request is not
     // worth sending.
     if (token == NULL || [[STASDKController sharedInstance] apiToken] == NULL) {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"Missing api token or missing push notification token."};
@@ -569,6 +604,11 @@
     ostype = @"32bit";
 #endif
 
+
+    NSUInteger count = [[NSProcessInfo processInfo] activeProcessorCount];
+    NSString *countStr = [NSString stringWithFormat:@"%lu",  (unsigned long)count];
+
+
     NSDictionary *deviceInfo = [[NSDictionary alloc] initWithObjectsAndKeys:@"Apple", @"manufacturer",
                                 device.model, @"model",
                                 @"ios", @"platform",
@@ -576,7 +616,7 @@
                                 device.systemVersion, @"osversion",
                                 language, @"locale",
                                 UUID, @"uuid",
-                                [NSProcessInfo processInfo].activeProcessorCount, @"processorCount",
+                                countStr, @"processorCount",
                                 device.name, @"username",
                                 ostype, @"ostype",
                                 token, @"token", nil];
@@ -590,6 +630,7 @@
         }
 
         // nothing else to do here for success case
+        callback(NULL);
     }];
 
 

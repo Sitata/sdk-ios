@@ -25,7 +25,7 @@ NSArray *cellNames;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    cellNames = @[@"alerts", @"advisories", @"diseases", @"vaccinations", @"medications", @"hospitals", @"safety", @"emerg"];
+    cellNames = @[@"alerts", @"advisories", @"diseases", @"vaccinations", @"medications", @"hospitals", @"safety", @"emerg", @"test"];
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -41,7 +41,7 @@ NSArray *cellNames;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return 8;
+    return 9;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -75,6 +75,11 @@ NSArray *cellNames;
         [STASDKUI showTripSafety];
     } else if ([cellName isEqualToString:@"emerg"]) {
         [STASDKUI showEmergencyNumbers];
+    } else if ([cellName isEqualToString:@"test"]) {
+
+        // TODO: DO TEST STUFF HERE AND THEN REMOVE
+        [STASDKUI showAlert:@"abc123"];
+
     }
 }
 
@@ -102,6 +107,7 @@ NSArray *cellNames;
 - (IBAction)onEmerg:(id)sender {
     [STASDKUI showEmergencyNumbers];
 }
+
 
 
 

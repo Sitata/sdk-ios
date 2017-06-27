@@ -90,6 +90,27 @@
 }
 
 
++(void)fromPush:(NSString*)alertId onFinished:(void(^)(STASDKMAlert*, NSArray*, NSURLSessionDataTask*, NSError*))callback {
+
+    NSString *url = [STASDKApiRoutes alertFromPush:alertId];
+    AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        // do success
+        NSDictionary *alertsResponse = (NSDictionary *)responseObject;
+        NSDictionary *alertJson = [alertsResponse objectForKey:@"alert"];
+        NSMutableArray *tripIds = [alertsResponse objectForKey:@"trip_ids"];
+        STASDKMAlert *alert = [STASDKMAlert yy_modelWithJSON:alertJson];
+
+        callback(alert, tripIds, task, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        // do failure
+        NSLog(@"Error: %@", error);
+        callback(nil, nil, task, error);
+    }];
+}
+
+
 
 @end
 

@@ -77,6 +77,8 @@
 // /api/v1/alerts/:alert_id/mark_read
 +(NSString*)alertMarkRead:(NSString*)alertId;
 
+// /api/v1/alerts/:alert_id/from_push
++(NSString*)alertFromPush:(NSString*)alertId;
 
 // Mark: == ADVISORIES ==
 
@@ -99,7 +101,7 @@
 
 // Mark: == MOBILE DEVICE / PUSH TOKEN ==
 
-// /api/v1/users/device_push
-+(NSString*)devicePush;
+// /api/v1/users/add_device
++(NSString*)addDevice;
 
 @end

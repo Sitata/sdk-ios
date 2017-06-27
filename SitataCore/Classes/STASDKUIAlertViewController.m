@@ -21,6 +21,7 @@
 
 #import "STASDKUIStylesheet.h"
 #import "STASDKDataController.h"
+#import "STASDKUIModalLoadingWindow.h"
 
 #import <Contacts/Contacts.h>
 
@@ -36,8 +37,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // setup view for alert or advisory
-    if (self.alert != NULL) {
+    // setup view for alert or advisory or syncing
+    if (self.alert == NULL && self.advisory == NULL) {
+        // must still be syncing the alert and/or advisory
+        STASDKUIModalLoadingWindow *loading = [[STASDKUIModalLoadingWindow alloc] initWithFrame:self.view.bounds];
+        [loading setSubTitleText:[STASDKDataController.sharedInstance localizedStringForKey:@"STILL_DOWNLOADING"]];
+        
+        [self.view addSubview:loading];
+
+    } else if (self.alert != NULL) {
         [self setupForAlert];
     } else {
         [self setupForAdvisory];
@@ -46,8 +54,6 @@
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.alertPageBackgroundColor;
-    
-
 }
 
 - (void)didReceiveMemoryWarning {

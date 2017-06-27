@@ -61,6 +61,12 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 // Sets push notification token for Sitata services.
 - (void)setPushNotificationToken:(NSString*)token;
 
+// Receive push notifications from client and react accordingly.
+- (void)receivePushNotification:(NSDictionary *)userInfo;
+
+// Launches the correct user interface screen for the incoming push notification.
+- (void)launchPushNotificationScreen:(NSDictionary*)userInfo;
+
 
 // Change the distance units displayed to Imperial
 - (void)setDistanceUnitsToImperial;

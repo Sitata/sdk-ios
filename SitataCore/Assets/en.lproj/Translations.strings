@@ -10,6 +10,9 @@
 /* COMMON */
 "CLOSE" = "Close";
 "CHANGE" = "Change";
+"LOADING" = "Loading...";
+"PLEASE_STAND_BY" = "Please stand by...";
+"STILL_DOWNLOADING" = "We're still downloading information, please stand by.";
 
 
 /* ALERTS */

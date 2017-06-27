@@ -17,7 +17,7 @@
 
 // POST /users/device_push
 +(void)sendDeviceToken:(NSDictionary*)deviceInfo onFinished:(void(^)(NSURLSessionDataTask*, NSError*)) callback {
-    NSString *url = [STASDKApiRoutes devicePush];
+    NSString *url = [STASDKApiRoutes addDevice];
     AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
 
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:deviceInfo, @"device", nil];

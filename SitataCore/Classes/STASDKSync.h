@@ -53,6 +53,9 @@
 // Sync push notification token
 + (void) syncPushToken:(NSString*)token callback:(void (^)(NSError*))callback;
 
+// Sync singular alert (usually from push notification)
++ (void) syncAlert:(NSString*)alertId callback:(void (^)(NSError*))callback;
+
 
 
 @end

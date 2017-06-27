@@ -15,7 +15,9 @@
 #import "STASDKController.h"
 #import "STASDKUIHealthTableViewController.h"
 #import "STASDKUIAlertsTableViewController.h"
+#import "STASDKUIAlertViewController.h"
 
+#import "STASDKMAlert.h"
 
 
 @implementation STASDKUI
@@ -103,8 +105,21 @@
     UINavigationController *nc = [mainStoryboard instantiateViewControllerWithIdentifier:@"EmergNumNavCtrl"];
     UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
     [parentCtrl presentViewController:nc animated:YES completion:NULL];
+}
 
++ (void)showAlert:(NSString*)alertId {
+    NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SitataMain" bundle:bundle];
 
+    UINavigationController *nc = [mainStoryboard instantiateViewControllerWithIdentifier:@"AlertsNavCtrl"];
+    STASDKUIAlertViewController *vc = (STASDKUIAlertViewController*) [mainStoryboard instantiateViewControllerWithIdentifier:@"showAlert"];
+    STASDKMAlert *alert = [STASDKMAlert findBy:alertId];
+    vc.alert = alert;
+
+    UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
+    [parentCtrl presentViewController:nc animated:YES completion:NULL];
+//    [parentCtrl presentViewController:vc animated:YES completion:NULL];
+    [nc pushViewController:vc animated:YES];
 }
 
 

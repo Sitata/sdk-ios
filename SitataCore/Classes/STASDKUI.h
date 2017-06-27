@@ -47,6 +47,9 @@ typedef NS_ENUM(int, InfoType) {
 // Peresent the Emergency Numbers user interface
 + (void)showEmergencyNumbers;
 
+// Show the Alert user interface for the given Alert identifier
++ (void)showAlert:(NSString*)alertId;
+
 // Returns a date string in format YYYY-MM-DD
 + (NSString *)dateDisplayString:(NSDate*)date;
 

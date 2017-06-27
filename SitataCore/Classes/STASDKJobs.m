@@ -19,6 +19,7 @@ NSString *JOB_SYNC_TRIP_ADVISORIES = @"sync-trip-advisories";
 NSString *JOB_SYNC_TRIP_HOSPITALS = @"sync-trip-hospitals";
 NSString *JOB_SYNC_PUSH_TOKEN = @"sync-push-token";
 NSString *JOB_ALERT_MARK_READ = @"alert-mark-read";
+NSString *JOB_SYNC_ALERT = @"sync-alert";
 
 
 

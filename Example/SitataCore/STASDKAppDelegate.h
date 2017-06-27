@@ -8,7 +8,9 @@
 
 @import UIKit;
 
-@interface STASDKAppDelegate : UIResponder <UIApplicationDelegate>
+#import <UserNotifications/UserNotifications.h>
+
+@interface STASDKAppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
