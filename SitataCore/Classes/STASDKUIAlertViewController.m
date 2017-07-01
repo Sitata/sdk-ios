@@ -22,6 +22,7 @@
 #import "STASDKUIStylesheet.h"
 #import "STASDKDataController.h"
 #import "STASDKUIModalLoadingWindow.h"
+#import "STASDKSync.h"
 
 #import <Contacts/Contacts.h>
 
@@ -29,6 +30,8 @@
 
 
 @interface STASDKUIAlertViewController ()
+
+@property STASDKUIModalLoadingWindow *loadingWin;
 
 @end
 
@@ -39,11 +42,14 @@
 
     // setup view for alert or advisory or syncing
     if (self.alert == NULL && self.advisory == NULL) {
+
+        // No alert or advisory so we display a loading window
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDismissLoadingWindow:) name:NotifyAlertSynced object:NULL];
+
         // must still be syncing the alert and/or advisory
-        STASDKUIModalLoadingWindow *loading = [[STASDKUIModalLoadingWindow alloc] initWithFrame:self.view.bounds];
-        [loading setSubTitleText:[STASDKDataController.sharedInstance localizedStringForKey:@"STILL_DOWNLOADING"]];
-        
-        [self.view addSubview:loading];
+        self.loadingWin = [[STASDKUIModalLoadingWindow alloc] initWithFrame:self.view.bounds];
+        [self.loadingWin setSubTitleText:[STASDKDataController.sharedInstance localizedStringForKey:@"STILL_DOWNLOADING"]];
+        [self.view addSubview:self.loadingWin];
 
     } else if (self.alert != NULL) {
         [self setupForAlert];
@@ -55,6 +61,27 @@
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.alertPageBackgroundColor;
 }
+
+- (void)handleDismissLoadingWindow:(NSNotification*)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *alertId = [userInfo valueForKey:NotifyKeyAlertId];
+    if (self.loadingWin != NULL && [self.alertId isEqualToString:alertId]) {
+        // match so we can dismiss loading window
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // must do in main thread
+
+            // Currently, we only do this for alerts and so we
+            // simply setup for the alert.
+            STASDKMAlert *alert = [STASDKMAlert findBy:alertId];
+            if (alert != NULL) {
+                self.alert = alert;
+                [self setupForAlert];
+                [self.loadingWin hide];
+            }
+        });
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

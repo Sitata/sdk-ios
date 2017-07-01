@@ -30,4 +30,7 @@
 @property (nonatomic, strong) STASDKMAlert *alert;
 @property (nonatomic, strong) STASDKMAdvisory *advisory;
 
+// for when the alert is not available yet
+@property (nonatomic, strong) NSString *alertId;
+
 @end

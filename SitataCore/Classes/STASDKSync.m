@@ -35,8 +35,12 @@
 
 
 
-@implementation STASDKSync
+NSNotificationName const NotifyAlertSynced = @"Sitata:AlertSynced";
+NSString *const NotifyKeyAlertId = @"alertId";
 
+
+
+@implementation STASDKSync
 
 
 
@@ -564,10 +568,16 @@
             callback(writeError);
         } else {
             NSLog(@"Finshed saving alert.");
+
+            // Inform listeners about this sync.
+            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:alertId, NotifyKeyAlertId, nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotifyAlertSynced object:self userInfo:userInfo];
+
             callback(NULL);
         }
     }];
 }
+
 
 
 

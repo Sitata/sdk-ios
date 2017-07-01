@@ -27,8 +27,8 @@
     // LOCAL
     //NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTA4ZDI0NjEyNDAxOTkwODBhOWMzfDJERmJOdVhvaHF4bTE1NHNTTkg5";
     STASDKController *ctrl = [STASDKController sharedInstance];
-    [ctrl setConfig:token];
-    [ctrl setApiEndpoint:@"https://staging.sitata.com"];
+    [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
+
 
 
 //    [[STASDKController sharedInstance] setDistanceUnitsToImperial];

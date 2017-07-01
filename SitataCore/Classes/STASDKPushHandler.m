@@ -118,7 +118,6 @@ const int PUSH_TYPE_ALERT_LATENT = 2;
     if (sitataData != NULL) {
         NSString *alertId = [sitataData objectForKey:@"alert_id"];
         if (alertId != NULL) {
-            // TODO: LAUNCH ALERT SCREEN
             [STASDKUI showAlert:alertId];
         }
     }

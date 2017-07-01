@@ -115,6 +115,7 @@
     STASDKUIAlertViewController *vc = (STASDKUIAlertViewController*) [mainStoryboard instantiateViewControllerWithIdentifier:@"showAlert"];
     STASDKMAlert *alert = [STASDKMAlert findBy:alertId];
     vc.alert = alert;
+    vc.alertId = alertId;
 
     UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
     [parentCtrl presentViewController:nc animated:YES completion:NULL];

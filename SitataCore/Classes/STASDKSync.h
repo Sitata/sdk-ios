@@ -10,6 +10,14 @@
 
 #import <Foundation/Foundation.h>
 
+
+
+FOUNDATION_EXPORT NSNotificationName const NotifyAlertSynced;
+FOUNDATION_EXPORT NSString *const NotifyKeyAlertId;
+
+
+
+
 @interface STASDKSync : NSObject
 
 
