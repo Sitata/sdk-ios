@@ -114,6 +114,11 @@
     }
 }
 
+// Returns true if the trip does not have any destination data.
+-(bool)isEmpty {
+    return [[self destinations] count] <= 0;
+}
+
 
 
 -(RLMResults<STASDKMDestination*>*)sortedDestinations {

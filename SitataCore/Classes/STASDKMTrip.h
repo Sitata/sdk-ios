@@ -59,6 +59,9 @@
 -(void)resave:(NSError **)error;
 
 
+// Returns true if the trip does not have any destination data.
+-(bool)isEmpty;
+
 
 // Returns a list of STASDKMDestination objects sorted by departure date
 -(RLMResults<STASDKMDestination*>*)sortedDestinations;
