@@ -52,8 +52,11 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 // Performs startup process for the SDK. This must be called from the Application Delegate in 'applicationDidBecomeActive'.
 - (void)start;
 
-// Configure the SDK. This must be called from the Application Delegate in 'didFinishLaunchingWithOptions'.
+// Configure the SDK with the end user's token. This must be called from the Application Delegate in 'didFinishLaunchingWithOptions'.
 - (void)setConfig:(NSString*)token;
+
+// Configure the SDK with the end user's token and the api endpoint to use. This must be called from the Application Delegate in 'didFinishLaunchingWithOptions'.
+- (void)setConfig:(NSString*)token apiEndpoint:(NSString*)apiEndpoint;
 
 // Perform shutdown actions for the SDK. This must be called from the Application Delegate in 'applicationWillResignActive'.
 - (void)stop;

@@ -100,8 +100,11 @@ BOOL didFirstSync;
 
 - (void)setConfig:(NSString*)token {
     self.apiToken = token;
+}
 
-
+- (void)setConfig:(NSString*)token apiEndpoint:(NSString*)apiEndpoint {
+    self.apiToken = token;
+    self.apiEndpoint = apiEndpoint;
 }
 
 - (void)setDistanceUnitsToImperial {
