@@ -95,11 +95,14 @@
 		26B0E13B9642C397EB94CA3D4432F883 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6CD12E47C369BEF109E665B5BF775E /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		26BBC63406C6863BE6DD27C64A70CB42 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2C85339D39FD895148D1E8857B36BF /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		26D1534722824028388359CB5D1EEC48 /* Pods-SitataCore_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BB1595AC2F0F7DED4BA360FA6503E /* Pods-SitataCore_Tests-dummy.m */; };
-		279238EE1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */; };
+		2749B2ED1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		2749B2EE1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */; };
+		2749B2F01F0C10BC002ECA79 /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */; };
+		279238EE1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279238EF1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238ED1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m */; };
-		27FAC7111EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC70F1EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h */; };
+		27FAC7111EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC70F1EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		27FAC7121EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FAC7101EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m */; };
-		27FAC7151EF86D0200DB5557 /* STASDKPushHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */; };
+		27FAC7151EF86D0200DB5557 /* STASDKPushHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		27FAC7161EF86D0200DB5557 /* STASDKPushHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FAC7141EF86D0200DB5557 /* STASDKPushHandler.m */; };
 		285C6F6BE59E632CB219CD98B4EDC1AA /* EXPMatchers+endWith.m in Sources */ = {isa = PBXBuildFile; fileRef = AE43197232E566B9673E56D1EC7661A1 /* EXPMatchers+endWith.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		286F97B90C6F10AFE4BFEB0516E13991 /* RLMSyncManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A22C73F66D539D1FC34A87205C6234B8 /* RLMSyncManager.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"2.6.2\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
@@ -209,7 +212,6 @@
 		5F894F4CD2163F6A51594653050B0308 /* RLMPlatform.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 89346E3499BAC1D3AE700749C02C0F14 /* RLMPlatform.h */; };
 		5FF11B31627599EABE5EE1CE5E8955EB /* RLMSyncPermissionOffer_Private.h in Copy . Private Headers */ = {isa = PBXBuildFile; fileRef = 4A748681C15DFAD73B93861B260A4D46 /* RLMSyncPermissionOffer_Private.h */; };
 		60CD83FA1B2BF6E93B59834C1E0CBEF0 /* EXPUnsupportedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 857DF44886FD7EBD85AB6B2AFE740F72 /* EXPUnsupportedObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		60F9CA0F5E405BD3E34914D1B24C892A /* STASDKSuperFold.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DF7234FF54A8F1A71B694C7D6ACBFF /* STASDKSuperFold.m */; };
 		61347BB8C77ABF493A7C95076C9A1108 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9798BE2F9CE8C9776B5F254AC7682AFE /* MapKit.framework */; };
 		62C2556458A85952A808D02E3FC387CA /* STASDKMTripHealthComment.h in Headers */ = {isa = PBXBuildFile; fileRef = 1240EDA36F05A2150CD12A4E0F7E6088 /* STASDKMTripHealthComment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		635779F796364D51C65E325316059846 /* RLMArray.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2831FE8B3CFE04835BC0671AD667358E /* RLMArray.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"2.6.2\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
@@ -271,7 +273,6 @@
 		7A5B5755B114206988EC1ECFF8D930A8 /* RLMMigration.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = B50C573FABFEEC3A1F171F2516FB596D /* RLMMigration.h */; };
 		7BB46A631618BA9A55FA6FFE72220E23 /* STASDKApiTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD0B0E8DF73B140AE716F590A257EC /* STASDKApiTrip.m */; };
 		7C30BE3E79D004540701B5144351A0F9 /* RLMMigration.h in Headers */ = {isa = PBXBuildFile; fileRef = B50C573FABFEEC3A1F171F2516FB596D /* RLMMigration.h */; };
-		7C35CF57F07479099DA9FC94CAF68FA5 /* STASDKSuperFoldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 289223A8D96926ACD90FE88B08FE00C5 /* STASDKSuperFoldCell.m */; };
 		7CE16B1BF75DF396768A0A3CFD968DB1 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5BDE595047BB8CEF1ABA055CEFAD6A /* UIWebView+AFNetworking.m */; };
 		7DC490D35DA6CE9B26B3B1F3DB2ABFBD /* RLMRealmConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1072A44704BA671C7CB7502B7730433B /* RLMRealmConfiguration.h */; };
 		7E81176499F06E523CE3039B08AB5051 /* EXPMatchers+beGreaterThan.h in Headers */ = {isa = PBXBuildFile; fileRef = 5147F5EC2A04411A9B8B2A1FFF30A678 /* EXPMatchers+beGreaterThan.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -336,7 +337,6 @@
 		99A4094515EEE109A0D3005356D10AEF /* STASDKApiAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = E981AD9A2D257CF317B6BC6C6EDDBE5A /* STASDKApiAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		99E6D51A8A4E3FFB7601D182D995A3BA /* ExpectaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 361511BC69165874F02F08A5020012CB /* ExpectaObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9A0ADF06F5B6BC3A70EDE1285BAF9346 /* EXPMatchers+beCloseTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E56C89E9514089AAD4AA6A9382D764D /* EXPMatchers+beCloseTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9A91F463B06D5580C7F5AFB31D27A55A /* STASDKSuperFoldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81B5E5AADE11CFB2F533A714BB043256 /* STASDKSuperFoldCell.xib */; };
 		9B3FB879C3CB64BFE0A31C734CA1A7AD /* RLMSyncPermissionChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 859B360F4F78D90E67194D67375F50B0 /* RLMSyncPermissionChange.h */; };
 		9BDE021DFA1EBF7E4FFC999C332DF797 /* HNKDiskFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 269016F0C0981EDE577628C2286C2E49 /* HNKDiskFetcher.m */; };
 		9C761DF9778EC1F352ECAD2F4D5C1DEA /* STASDKUICountrySwitcherViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B1D34FB9AAB32F7D824C1D75BCFE80 /* STASDKUICountrySwitcherViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -458,7 +458,6 @@
 		C516B672FFC9DB635E0E53DA8FC9CF88 /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C61903FA177E87C8EACB805FE69AEA3 /* FBSnapshotTestCase.m */; };
 		C54FE8613132009A02FEB3182CE881F7 /* STASDKUIHospitalsPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BEDE88FF1B9A8177FECC37C31E1ADE6 /* STASDKUIHospitalsPageViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C5EB12E3C2381C6496EBB77ADEC7A199 /* RLMObjectBase_Dynamic.h in Headers */ = {isa = PBXBuildFile; fileRef = D1D6ED1EF53F385C380F3BAAD5607774 /* RLMObjectBase_Dynamic.h */; };
-		C66156E2574C52CD04DEC6EA3EAABE0C /* STASDKSuperFold.h in Headers */ = {isa = PBXBuildFile; fileRef = 89DDCE6F662B49B23F8B811B9E98FFAD /* STASDKSuperFold.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C676818DADAC76EE2FDC5533CBF3648A /* EXPMatchers+haveCountOf.m in Sources */ = {isa = PBXBuildFile; fileRef = D3455339DC6209E2BA83A4732A534ED3 /* EXPMatchers+haveCountOf.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C6C48FF944A8187C49EFEC9D193505C1 /* STASDKUIHealthTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 444707D4BABDA9F6EB27B5514B6E37C7 /* STASDKUIHealthTableViewController.m */; };
 		C6E4C19EB893EC3B2BC156F4273B0EA8 /* STASDKUIContactDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8498C2277E76D32BDB33270A070221ED /* STASDKUIContactDetailTableViewCell.m */; };
@@ -586,7 +585,6 @@
 		F86AF68726710C1FEE9843625C4ECFBF /* STASDKApiRoutes.m in Sources */ = {isa = PBXBuildFile; fileRef = B716C511EB09E9D6B5D8F4331E14329F /* STASDKApiRoutes.m */; };
 		F928F9EB9A0FCF15B76E6FE6F6D96CC8 /* RLMSyncErrorResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F784E72627CA622A17E674FFF529B42 /* RLMSyncErrorResponseModel.m */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"2.6.2\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		F94FEDC3FA5F4F45F98CACCBE260B389 /* STASDKUIHospitalClusterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E62DD8F81C719FCD9E5BFE6BE83E131C /* STASDKUIHospitalClusterView.m */; };
-		FA2D37CCFF4EF4FD9A6F7759336326B6 /* STASDKSuperFoldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4056E8715A1CEF6746F04E4FDF2F2CF7 /* STASDKSuperFoldCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		FAE25E8B3829B123B8F58E3776CE6288 /* RLMSchema_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A87C39EE7B2BFF5D8CA0CAD559C11D /* RLMSchema_Private.h */; };
 		FC223395BCEE46EB920CECD38AFD4402 /* EXPMatchers+beInTheRangeOf.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A88B97E81A34D94D52BBBD587985F3 /* EXPMatchers+beInTheRangeOf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC507E9D384494C3BB4A500F216FA817 /* RLMSyncPermission.h in Headers */ = {isa = PBXBuildFile; fileRef = 60910AAAD5B70DF91BB588BC389B10D9 /* RLMSyncPermission.h */; };
@@ -930,6 +928,9 @@
 		25BAE51CE275A3E5845E4159BC4CF4A3 /* STASDKApiUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = STASDKApiUtils.h; sourceTree = "<group>"; };
 		2685C7C0E3C2900165E92570A07B1EF0 /* SitataCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SitataCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		269016F0C0981EDE577628C2286C2E49 /* HNKDiskFetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HNKDiskFetcher.m; path = Haneke/HNKDiskFetcher.m; sourceTree = "<group>"; };
+		2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUICardTableViewCell.h; sourceTree = "<group>"; };
+		2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUICardTableViewCell.m; sourceTree = "<group>"; };
+		2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTableViewCell.xib; path = ../Classes/CardTableViewCell.xib; sourceTree = "<group>"; };
 		277F9638E3CF3613BB8F03AE22C9BE30 /* index_set.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = index_set.cpp; path = Realm/ObjectStore/src/index_set.cpp; sourceTree = "<group>"; };
 		279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUIModalLoadingWindow.h; sourceTree = "<group>"; };
 		279238ED1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUIModalLoadingWindow.m; sourceTree = "<group>"; };
@@ -940,7 +941,6 @@
 		281611876881E64F1AE856A1A1FE851C /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2831FE8B3CFE04835BC0671AD667358E /* RLMArray.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = RLMArray.mm; path = Realm/RLMArray.mm; sourceTree = "<group>"; };
 		285EEB44E52FC19BD4043EF49B52587A /* RLMRealmUtil.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = RLMRealmUtil.mm; path = Realm/RLMRealmUtil.mm; sourceTree = "<group>"; };
-		289223A8D96926ACD90FE88B08FE00C5 /* STASDKSuperFoldCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = STASDKSuperFoldCell.m; sourceTree = "<group>"; };
 		28C4D10308651DCC28C4F9E91CDB02E6 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
 		2A1A7072662967D288E618B12FD823A1 /* CCHMapClusterController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CCHMapClusterController.m; path = CCHMapClusterController/CCHMapClusterController.m; sourceTree = "<group>"; };
 		2A9D8F1A79C37CE11DDAF8F4BBFDF1A1 /* RLMThreadSafeReference.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMThreadSafeReference.h; path = include/RLMThreadSafeReference.h; sourceTree = "<group>"; };
@@ -996,7 +996,6 @@
 		3F57BE0289A44A3DC2EEF2D36C27564B /* object.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = object.cpp; path = Realm/ObjectStore/src/object.cpp; sourceTree = "<group>"; };
 		3F647FC7AF043124B06546B59D6B391F /* RLMListBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMListBase.h; path = include/RLMListBase.h; sourceTree = "<group>"; };
 		3FEFD6FE75E3206BD0142E476DD1142A /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCasePlatform.m; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
-		4056E8715A1CEF6746F04E4FDF2F2CF7 /* STASDKSuperFoldCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = STASDKSuperFoldCell.h; sourceTree = "<group>"; };
 		40E190202CDA79143C8426874383162D /* CCHNearCenterMapClusterer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CCHNearCenterMapClusterer.h; path = CCHMapClusterController/CCHNearCenterMapClusterer.h; sourceTree = "<group>"; };
 		40F687B8B7EF8E8F885173E2335DC4D2 /* EXPDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPDefines.h; path = Expecta/EXPDefines.h; sourceTree = "<group>"; };
 		41AD354F742C981F919CB7DE7023D0E7 /* EXPMatchers+raiseWithReason.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+raiseWithReason.h"; path = "Expecta/Matchers/EXPMatchers+raiseWithReason.h"; sourceTree = "<group>"; };
@@ -1125,7 +1124,6 @@
 		73DC160CCF5E0B111A987F4601A40F71 /* RLMRealm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMRealm.h; path = include/RLMRealm.h; sourceTree = "<group>"; };
 		744D7213DE8D875CE645AE16E8560682 /* YYModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = YYModel.xcconfig; sourceTree = "<group>"; };
 		74AC1AA263B84DC32252231CABE85D8F /* AlertCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = AlertCell.xib; sourceTree = "<group>"; };
-		74DF7234FF54A8F1A71B694C7D6ACBFF /* STASDKSuperFold.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = STASDKSuperFold.m; sourceTree = "<group>"; };
 		755D0BA577CA2AFAF8BF2031239C9E7F /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
 		757DC6124CA87FE0739AF17E08ABB0BE /* EXPMatchers+conformTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+conformTo.h"; path = "Expecta/Matchers/EXPMatchers+conformTo.h"; sourceTree = "<group>"; };
 		76477BC0680E48EC7A5DCAF2C232FBE5 /* EXPMatchers+beIdenticalTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beIdenticalTo.h"; path = "Expecta/Matchers/EXPMatchers+beIdenticalTo.h"; sourceTree = "<group>"; };
@@ -1153,7 +1151,6 @@
 		7E789529D7E3113E383870A77A3741DA /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
 		7EEFB64307F516322C8F29C260BC1A17 /* EDQueueStorageEngine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EDQueueStorageEngine.m; path = EDQueue/EDQueueStorageEngine.m; sourceTree = "<group>"; };
 		80DAB125290F415A954081173A453C82 /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
-		81B5E5AADE11CFB2F533A714BB043256 /* STASDKSuperFoldCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = STASDKSuperFoldCell.xib; sourceTree = "<group>"; };
 		82CD52AD11DC4A394193E9035A86F51F /* RLMListBase.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = RLMListBase.mm; path = Realm/RLMListBase.mm; sourceTree = "<group>"; };
 		8375A5F139644E4BB7785BA628280D05 /* Pods-SitataCore_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SitataCore_Tests.modulemap"; sourceTree = "<group>"; };
 		83781E2B7807E0ABDE90FB045191FAC6 /* YYClassInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YYClassInfo.h; path = YYModel/YYClassInfo.h; sourceTree = "<group>"; };
@@ -1180,7 +1177,6 @@
 		89228A6370F8A9AADBBED3AB6D19389B /* STASDKUIAlertPin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = STASDKUIAlertPin.m; sourceTree = "<group>"; };
 		89346E3499BAC1D3AE700749C02C0F14 /* RLMPlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMPlatform.h; path = include/RLMPlatform.h; sourceTree = "<group>"; };
 		899E4B35AF04E4DCAF03265BC34F7074 /* NSError+RLMSync.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSError+RLMSync.m"; path = "Realm/NSError+RLMSync.m"; sourceTree = "<group>"; };
-		89DDCE6F662B49B23F8B811B9E98FFAD /* STASDKSuperFold.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = STASDKSuperFold.h; sourceTree = "<group>"; };
 		89DF0CAF2C4E60105A1E6790E77DE46A /* YYModel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = YYModel.modulemap; sourceTree = "<group>"; };
 		8A8CCB4E0931AABDFCFA26EF03F32A93 /* AFNetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-umbrella.h"; sourceTree = "<group>"; };
 		8ABE79FD9836FB4C7660F7B87EA51889 /* Haneke-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Haneke-prefix.pch"; sourceTree = "<group>"; };
@@ -1711,7 +1707,7 @@
 				EEF267D7ECA7D0842B9D8260F6BA6BA7 /* Media.xcassets */,
 				E07B36601FBDB0E15F9D1AECCB9E16E9 /* SitataMain.storyboard */,
 				3A64BA030811A5B28737A9C5B3276DB8 /* STASDKDataModels.xcdatamodeld */,
-				81B5E5AADE11CFB2F533A714BB043256 /* STASDKSuperFoldCell.xib */,
+				2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */,
 				4BA42F698C8CF529977B8C0C76F1AC4F /* Translations.strings */,
 			);
 			path = Assets;
@@ -1957,10 +1953,6 @@
 				861D3569678FE2D607C69AA22EDE2C51 /* STASDKMTripHealthComment.m */,
 				CBA22EB18D5ECC701A34866AC3FA145A /* STASDKMVaccination.h */,
 				F801A2F6C56BE33C17DE961D1E02799B /* STASDKMVaccination.m */,
-				89DDCE6F662B49B23F8B811B9E98FFAD /* STASDKSuperFold.h */,
-				74DF7234FF54A8F1A71B694C7D6ACBFF /* STASDKSuperFold.m */,
-				4056E8715A1CEF6746F04E4FDF2F2CF7 /* STASDKSuperFoldCell.h */,
-				289223A8D96926ACD90FE88B08FE00C5 /* STASDKSuperFoldCell.m */,
 				D0E9BCB030FE1E6DA212B284B788BFBB /* STASDKSync.h */,
 				77872E4D85CD4DF0AB31D814C5CC8FE0 /* STASDKSync.m */,
 				720D4795C34E7E768970C629863FB3CD /* STASDKUI.h */,
@@ -2025,6 +2017,8 @@
 				27FAC7141EF86D0200DB5557 /* STASDKPushHandler.m */,
 				279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */,
 				279238ED1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m */,
+				2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */,
+				2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2906,13 +2900,12 @@
 				D8DA12AD791B7F43E9BB59003B8424FD /* STASDKMTrip.h in Headers */,
 				62C2556458A85952A808D02E3FC387CA /* STASDKMTripHealthComment.h in Headers */,
 				3656061A74A75F50F11B4E7B2D055F78 /* STASDKMVaccination.h in Headers */,
-				C66156E2574C52CD04DEC6EA3EAABE0C /* STASDKSuperFold.h in Headers */,
-				FA2D37CCFF4EF4FD9A6F7759336326B6 /* STASDKSuperFoldCell.h in Headers */,
 				7750E02A8D1E2497391BB94285718D88 /* STASDKSync.h in Headers */,
 				11C489B66C50EA413B126F617D3986CD /* STASDKUI.h in Headers */,
 				DAB268323E6451B9AD6FD563AD49FCAD /* STASDKUIAlertPin.h in Headers */,
 				D0C428AC5F159A5F1396CA365BA556DC /* STASDKUIAlertsTableViewController.h in Headers */,
 				306C4A10D965AB94D96462DF44D55DF7 /* STASDKUIAlertTableViewCell.h in Headers */,
+				2749B2ED1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h in Headers */,
 				CACBF02810C5C1DA04A34FE0123879F9 /* STASDKUIAlertViewController.h in Headers */,
 				279238EE1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h in Headers */,
 				1014978B2E30D3CC8B56D7278D6BC7C8 /* STASDKUIContactDetailTableViewCell.h in Headers */,
@@ -3280,6 +3273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34F753C9D2AEEE67339336D579E8C192 /* AlertCell.xib in Resources */,
+				2749B2F01F0C10BC002ECA79 /* CardTableViewCell.xib in Resources */,
 				8693A5C321F747E17E514ECE8BCD1B15 /* ContactDetailRowCell.xib in Resources */,
 				B469B9E474333CF60C64FADB9939193E /* CountryFlagLabelSmall.xib in Resources */,
 				C44E2F87FF10979A56396C880CFAD75B /* DiseaseCell.xib in Resources */,
@@ -3290,7 +3284,6 @@
 				09DB0AACF1CCA9D4285453A09CBE9A40 /* Media.xcassets in Resources */,
 				D3FC619635C500AF2D4606C79F9FF876 /* SitataMain.storyboard in Resources */,
 				788C4DAF01D701B051B93D07335689CF /* STASDKDataModels.xcdatamodeld in Resources */,
-				9A91F463B06D5580C7F5AFB31D27A55A /* STASDKSuperFoldCell.xib in Resources */,
 				804569290E4349742368967CE8EF095C /* Translations.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3613,8 +3606,6 @@
 				693F58CE8DABFC6FC727D42717D0F42E /* STASDKMTrip.m in Sources */,
 				6E41BEFD13AA122E8BF587BD37339921 /* STASDKMTripHealthComment.m in Sources */,
 				1F636FA392E1F3FA50672D646B677075 /* STASDKMVaccination.m in Sources */,
-				60F9CA0F5E405BD3E34914D1B24C892A /* STASDKSuperFold.m in Sources */,
-				7C35CF57F07479099DA9FC94CAF68FA5 /* STASDKSuperFoldCell.m in Sources */,
 				F272FB79FF9D98756B8966EE1371D946 /* STASDKSync.m in Sources */,
 				F0A76B637036CD4B4BDC5BB330C851A7 /* STASDKUI.m in Sources */,
 				63D153421E03BFE786BEC8C30E849810 /* STASDKUIAlertPin.m in Sources */,
@@ -3641,6 +3632,7 @@
 				0C3A5B3803728DF37B38DAB9139D7171 /* STASDKUIHospitalsViewController.m in Sources */,
 				DD36D1D38C95410420629311D5CC8FF1 /* STASDKUINullStateHandler.m in Sources */,
 				DF193B97AAB56AFE155E0A3FA37664ED /* STASDKUISafetyDetailsViewController.m in Sources */,
+				2749B2EE1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m in Sources */,
 				0B615FDD3BC2AE12F9D4B562CD4E1F6E /* STASDKUISafetyPageViewController.m in Sources */,
 				27FAC7121EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m in Sources */,
 				2BA5EBDD2C2C0A84D5FC0EAB774E79C1 /* STASDKUISafetyViewController.m in Sources */,
