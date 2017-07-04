@@ -78,7 +78,8 @@ NSArray *cellNames;
     } else if ([cellName isEqualToString:@"test"]) {
 
         // TODO: DO TEST STUFF HERE AND THEN REMOVE
-        [STASDKUI showAlert:@"abc123"];
+        //[STASDKUI showTrip];
+        [STASDKUI showTripBuilder:NULL];
 
     }
 }

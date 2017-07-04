@@ -16,6 +16,7 @@
 #import "STASDKUIHealthTableViewController.h"
 #import "STASDKUIAlertsTableViewController.h"
 #import "STASDKUIAlertViewController.h"
+#import "STASDKUITripBuilderBaseViewController.h"
 
 #import "STASDKMAlert.h"
 
@@ -119,11 +120,40 @@
 
     UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
     [parentCtrl presentViewController:nc animated:YES completion:NULL];
-//    [parentCtrl presentViewController:vc animated:YES completion:NULL];
     [nc pushViewController:vc animated:YES];
 }
 
++ (void)showTripBuilder:(NSString*_Nullable)tripId {
 
+    UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
+
+    if (![[STASDKDataController sharedInstance] isConnected]) {
+        // alert and close window
+
+        UIAlertController *alertCtrl = [UIAlertController
+                                        alertControllerWithTitle:[[STASDKDataController sharedInstance] localizedStringForKey:@"DISCONNECTED"]
+                                        message:[[STASDKDataController sharedInstance] localizedStringForKey:@"CONNECTION_REQ"]
+                                        preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:[[STASDKDataController sharedInstance] localizedStringForKey:@"OK"]
+                                   style:UIAlertActionStyleDefault
+                                   handler:NULL];
+        [alertCtrl addAction:okAction];
+
+        [parentCtrl presentViewController:alertCtrl animated:YES completion:nil];
+        return;
+    }
+
+    NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SitataMain" bundle:bundle];
+    UINavigationController *nc = [mainStoryboard instantiateViewControllerWithIdentifier:@"TripBuilderNavCtrl"];
+
+    NSArray *viewControllers = [nc viewControllers];
+    STASDKUITripBuilderBaseViewController *vc = (STASDKUITripBuilderBaseViewController*) [viewControllers objectAtIndex:0];
+    vc.tripId = tripId;
+    [parentCtrl presentViewController:nc animated:YES completion:NULL];
+}
 
 
 

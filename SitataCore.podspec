@@ -95,6 +95,10 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKUITripBuilderPageViewController.h',
                             'SitataCore/**/STASDKPushHandler.h',
                             'SitataCore/**/STASDKUIModalLoadingWindow.h',
+                            'SitataCore/**/STASDKReachability.h',
+                            'SitataCore/**/STASDKUITripBuildItinViewController.h',
+                            'SitataCore/**/STASDKUITripBuilderBaseViewController.h',
+                            'SitataCore/**/STASDKUIItineraryCountryHeaderView.h'
 
   s.source_files          = 'SitataCore/**/*.{m,h}'
 
@@ -107,7 +111,7 @@ An iOS library to embed Sitata services into your own mobile application. API ac
   }
 
 
-  s.frameworks = 'Foundation', 'CoreGraphics', 'UIKit', 'MapKit'
+  s.frameworks = 'Foundation', 'CoreGraphics', 'UIKit', 'MapKit', 'SystemConfiguration'
 
   s.dependency 'Realm', '~>2.6'
   s.dependency 'AFNetworking', '~> 3.1'

@@ -32,7 +32,7 @@
 // Returns a translated string for a given key
 - (NSString*)localizedStringForKey:(NSString*)key;
 
-
+- (bool)isConnected;
 
 
 @end

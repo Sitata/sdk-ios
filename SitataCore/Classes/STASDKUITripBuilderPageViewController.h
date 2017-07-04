@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STASDKUITripBuilderPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@class STASDKMTrip;
+
+@interface STASDKUITripBuilderPageViewController : UIPageViewController
+
+@property (nonatomic) STASDKMTrip *trip;
 
 @end

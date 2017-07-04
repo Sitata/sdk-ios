@@ -29,6 +29,7 @@
 #import "STASDKMAlert.h"
 #import "STASDKMAdvisory.h"
 
+
 #import <Realm/Realm.h>
 #import <EDQueue/EDQueue.h>
 
@@ -45,6 +46,22 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
 
 + (void)fullSync:(void (^)(NSError*))syncCompleted {
+
+
+    // if not connected, reject with error
+    if (![[STASDKDataController sharedInstance] isConnected]) {
+        NSDictionary *userInfo = @{
+                                   NSLocalizedDescriptionKey: NSLocalizedString(@"Sync was unsuccessful.", nil),
+                                   NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Sync requires an internet conncetion.", nil),
+                                   NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Establish connection.", nil)
+                                   };
+        NSError *error = [NSError errorWithDomain:@"com.sitata"
+                                             code:-57
+                                         userInfo:userInfo];
+        syncCompleted(error);
+        return;
+    }
+
 
     // Using a dispatch group here to be notified when all tasks have completed.
     // Basically a latch.
@@ -663,6 +680,10 @@ NSString *const NotifyKeyAlertId = @"alertId";
             callback(error);
             break;
     }
+}
+
++(bool)rejectIfNotConnected:(void (^)(NSError*))callback {
+    
 }
 
 

@@ -48,14 +48,18 @@ typedef NS_ENUM(int, InfoType) {
 + (void)showEmergencyNumbers;
 
 // Show the Alert user interface for the given Alert identifier
-+ (void)showAlert:(NSString*)alertId;
++ (void)showAlert:(NSString*_Nonnull)alertId;
+
+// Show trip builder UI for a given trip id. Pass null as tripId to allow for
+// a new trip to be created.
++ (void)showTripBuilder:(NSString*_Nullable)tripId;
 
 // Returns a date string in format YYYY-MM-DD
-+ (NSString *)dateDisplayString:(NSDate*)date;
++ (NSString *_Nonnull)dateDisplayString:(NSDate*_Nonnull)date;
 
 // Returns a formatted distance string (using unit settings) for display. Will
 // convert given distance value (meters required) when necessary.
-+ (NSString *)formattedDistance:(double)distanceMeters;
++ (NSString *_Nonnull)formattedDistance:(double)distanceMeters;
 
 
 

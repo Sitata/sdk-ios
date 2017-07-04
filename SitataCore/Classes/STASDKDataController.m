@@ -9,6 +9,8 @@
 
 #import "STASDKDataController.h"
 
+#import "STASDKReachability.h"
+
 
 @implementation STASDKDataController
 
@@ -62,6 +64,16 @@ NSString * const localizedTablename = @"Translations";
 }
 
 
+- (bool)isConnected {
+    STASDKReachability *reach = [STASDKReachability reachabilityForInternetConnection];
+    bool reachable = [reach currentReachabilityStatus] != NotReachable;
+    if (reachable) {
+        NSLog(@"Device is connected to the internet");
+    } else {
+        NSLog(@"Device is not connected to the internet");
+    }
+    return reachable;
+}
 
 
 
