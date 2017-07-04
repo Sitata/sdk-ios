@@ -930,7 +930,7 @@
 		269016F0C0981EDE577628C2286C2E49 /* HNKDiskFetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HNKDiskFetcher.m; path = Haneke/HNKDiskFetcher.m; sourceTree = "<group>"; };
 		2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUICardTableViewCell.h; sourceTree = "<group>"; };
 		2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUICardTableViewCell.m; sourceTree = "<group>"; };
-		2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardTableViewCell.xib; path = ../Classes/CardTableViewCell.xib; sourceTree = "<group>"; };
+		2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardTableViewCell.xib; sourceTree = "<group>"; };
 		277F9638E3CF3613BB8F03AE22C9BE30 /* index_set.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = index_set.cpp; path = Realm/ObjectStore/src/index_set.cpp; sourceTree = "<group>"; };
 		279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUIModalLoadingWindow.h; sourceTree = "<group>"; };
 		279238ED1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUIModalLoadingWindow.m; sourceTree = "<group>"; };
