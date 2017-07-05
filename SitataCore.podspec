@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SitataCore'
-  s.version          = '1.0.0'
+  s.version          = '1.1.1'
   s.summary          = 'An iOS library to embed Sitata services into your own mobile application.'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ An iOS library to embed Sitata services into your own mobile application. API ac
   s.ios.deployment_target = '9.0'
 
 
-  public_header_files     = 'SitataCore/**/STASDKApiAlert.h',
+  public_header_files     = ['SitataCore/**/STASDKApiAlert.h',
                             'SitataCore/**/STASDKApiCountry.h',
                             'SitataCore/**/STASDKApiHealth.h',
                             'SitataCore/**/STASDKApiMisc.h',
@@ -57,15 +57,13 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKMVaccination.h',
                             'SitataCore/**/STASDKSync.h',
                             'SitataCore/**/STASDKUI.h',
-                            'SitataCore/**/STASDKUIStylesheet.h'
+                            'SitataCore/**/STASDKUIStylesheet.h']
 
-  private_header_files    = 'SitataCore/**/STASDKApiRoutes.h',
+  private_header_files    = ['SitataCore/**/STASDKApiRoutes.h',
                             'SitataCore/**/STASDKApiUtils.h',
                             'SitataCore/**/STASDKDefines.h',
                             'SitataCore/**/STASDKJobs.h',
                             'SitataCore/**/STASDKLocationHandler.h',
-                            'SitataCore/**/STASDKSuperFold.h',
-                            'SitataCore/**/STASDKSuperFoldCell.h',
                             'SitataCore/**/STASDKUIAlertPin.h',
                             'SitataCore/**/STASDKUIAlertsTableViewController.h',
                             'SitataCore/**/STASDKUIAlertTableViewCell.h',
@@ -99,6 +97,7 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKUITripBuildItinViewController.h',
                             'SitataCore/**/STASDKUITripBuilderBaseViewController.h',
                             'SitataCore/**/STASDKUIItineraryCountryHeaderView.h'
+                            'SitataCore/**/STASDKUICardTableViewCell.h']
 
   s.source_files          = 'SitataCore/**/*.{m,h}'
 

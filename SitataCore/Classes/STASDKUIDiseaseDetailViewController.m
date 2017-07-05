@@ -10,7 +10,7 @@
 
 #import "STASDKDataController.h"
 #import "STASDKMDisease.h"
-#import "STASDKSuperFoldCell.h"
+#import "STASDKUICardTableViewCell.h"
 #import "STASDKUIStylesheet.h"
 
 
@@ -34,7 +34,7 @@
 
 @implementation STASDKUIDiseaseDetailViewController
 
-static NSString* const kDiseaseCellIdentifier = @"AccordionCell";
+static NSString* const kDiseaseCellIdentifier = @"DiseaseCell";
 
 static CGFloat const kDiseaseDefaultRowHeight = 50.f;
 static CGFloat const kSectionSeparatorDistance = 20.f;
@@ -83,13 +83,12 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
-    self.tableView.backgroundColor = styles.diseaseAboutPageBackgroundColor;
     self.view.backgroundColor = styles.diseaseAboutPageBackgroundColor;
 
 
     // This is necessary because our xib files are in a separate bundle for the sdk
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
-    [self.tableView registerNib:[UINib nibWithNibName:@"STASDKSuperFoldCell" bundle:bundle] forCellReuseIdentifier:kDiseaseCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CardTableViewCell" bundle:bundle] forCellReuseIdentifier:kDiseaseCellIdentifier];
 
 
 }
@@ -135,24 +134,28 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
     return 1;
 }
 
-// The header and footer in each section are necessary so we can have a space between
-// content cells to allow the shadow to be properly displayed.
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc] init];
-    return view;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return kSectionSeparatorDistance;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return kSectionSeparatorDistance;
+}
+
+// The header and footer in each section are necessary so we can have a space between
+// content cells to allow the shadow to be properly displayed & to control colors.
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] init];
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+    view.backgroundColor = styles.diseaseAboutPageBackgroundColor;
     return view;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kSectionSeparatorDistance;
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc] init];
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+    view.backgroundColor = styles.diseaseAboutPageBackgroundColor;
+    return view;
 }
 
 
@@ -172,26 +175,9 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
 
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-
-    if ([self.expandedIndexPaths containsObject:indexPath]) {
-        STASDKSuperFoldCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
-        [cell animateClosed];
-        [self.expandedIndexPaths removeObject:indexPath];
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    } else {
-        [self.expandedIndexPaths addObject:indexPath];
-        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-
-        STASDKSuperFoldCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
-        [cell animateOpen];
-    }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    STASDKSuperFoldCell *cell = [tableView dequeueReusableCellWithIdentifier:kDiseaseCellIdentifier forIndexPath:indexPath];
+    STASDKUICardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kDiseaseCellIdentifier forIndexPath:indexPath];
 
     NSInteger sectionIndex = [indexPath section]; // only one row per section so this works fine
 
@@ -203,18 +189,14 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
     NSString* (*func)(id, SEL) = (void *)imp;
     NSString *content = func(self.disease, selector);
 
-    cell.withDetails = [self.expandedIndexPaths containsObject:indexPath];
-    cell.sectionLbl.text = title;
-    cell.contentLbl.text = content;
-    [cell setShadow];
+    cell.titleLbl.text = title;
+    cell.bodyLbl.text = content;
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     cell.backgroundColor = styles.diseaseAboutPageBackgroundColor;
-    cell.sectionLbl.textColor = styles.diseaseAboutPageSectionHeaderLblColor;
-    cell.contentLbl.textColor = styles.diseaseAboutPageSectionContentLblColor;
-    cell.titleContainer.backgroundColor = styles.diseaseAboutPageSectionHeaderBackgroundColor;
-    cell.detailContainerView.backgroundColor = styles.diseaseAboutPageSectionBackgroundColor;
-
+    cell.titleLbl.textColor = styles.diseaseAboutPageSectionHeaderLblColor;
+    cell.bodyLbl.textColor = styles.diseaseAboutPageSectionContentLblColor;
+    cell.containerView.backgroundColor = styles.diseaseAboutPageSectionCardBackgroundColor;
 
     return cell;
 }

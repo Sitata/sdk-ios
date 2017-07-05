@@ -82,16 +82,14 @@
 
     // Disease
     self.diseaseAboutPageBackgroundColor = lightestGrayColor;
-    self.diseaseAboutPageSectionHeaderBackgroundColor = deepBlueColor;
-    self.diseaseAboutPageSectionBackgroundColor = self.oddCellBackgroundColor;
-    self.diseaseAboutPageSectionHeaderLblColor = [UIColor whiteColor];
+    self.diseaseAboutPageSectionCardBackgroundColor = [UIColor whiteColor];
+    self.diseaseAboutPageSectionHeaderLblColor = [UIColor darkGrayColor];
     self.diseaseAboutPageSectionContentLblColor = [UIColor darkGrayColor];
 
     // Country Safety Page
     self.countrySafetyPageBackgroundColor = lightestGrayColor;
-    self.countrySafetyPageSectionHeaderBackgroundColor = deepBlueColor;
-    self.countrySafetyPageSectionBackgroundColor = self.oddCellBackgroundColor;
-    self.countrySafetyPageSectionHeaderLblColor = [UIColor whiteColor];
+    self.countrySafetyPageSectionCardBackgroundColor = [UIColor whiteColor];
+    self.countrySafetyPageSectionHeaderLblColor = [UIColor darkGrayColor];
     self.countrySafetyPageSectionContentLblColor = [UIColor darkGrayColor];
 
     // Emergency Numbers

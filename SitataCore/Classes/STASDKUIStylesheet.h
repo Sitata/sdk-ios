@@ -48,9 +48,8 @@
 @property (nonatomic, retain) UIColor *diseasePageBackgroundColor;
 @property (nonatomic, retain) UIColor *diseaseAboutPageBackgroundColor;
 @property (nonatomic, retain) UIColor *diseaseAboutPageSectionHeaderLblColor;
-@property (nonatomic, retain) UIColor *diseaseAboutPageSectionHeaderBackgroundColor;
+@property (nonatomic, retain) UIColor *diseaseAboutPageSectionCardBackgroundColor;
 @property (nonatomic, retain) UIColor *diseaseAboutPageSectionContentLblColor;
-@property (nonatomic, retain) UIColor *diseaseAboutPageSectionBackgroundColor;
 
 
 
@@ -80,9 +79,8 @@
 #pragma mark - Country Safety
 @property (nonatomic, retain) UIColor *countrySafetyPageBackgroundColor;
 @property (nonatomic, retain) UIColor *countrySafetyPageSectionHeaderLblColor;
-@property (nonatomic, retain) UIColor *countrySafetyPageSectionHeaderBackgroundColor;
+@property (nonatomic, retain) UIColor *countrySafetyPageSectionCardBackgroundColor;
 @property (nonatomic, retain) UIColor *countrySafetyPageSectionContentLblColor;
-@property (nonatomic, retain) UIColor *countrySafetyPageSectionBackgroundColor;
 
 #pragma mark - Emergency Numbers
 @property (nonatomic, retain) UIColor *emergNumbersPageBackgroundColor;
