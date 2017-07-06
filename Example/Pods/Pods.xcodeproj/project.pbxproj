@@ -95,19 +95,23 @@
 		26B0E13B9642C397EB94CA3D4432F883 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6CD12E47C369BEF109E665B5BF775E /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		26BBC63406C6863BE6DD27C64A70CB42 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D2C85339D39FD895148D1E8857B36BF /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		26D1534722824028388359CB5D1EEC48 /* Pods-SitataCore_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BB1595AC2F0F7DED4BA360FA6503E /* Pods-SitataCore_Tests-dummy.m */; };
+		273AD8841F0D71A400BDA9CD /* TBItineraryCountryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 279238FC1F0AD8240016F0C5 /* TBItineraryCountryHeader.xib */; };
+		273AD8871F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD8851F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		273AD8881F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD8861F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m */; };
+		273AD88B1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD8891F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		273AD88C1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD88A1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m */; };
 		2749B2ED1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2749B2EE1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */; };
 		2749B2F01F0C10BC002ECA79 /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */; };
 		279238EE1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279238EF1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238ED1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m */; };
-		279238F11F0A82930016F0C5 /* STASDKReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238F01F0A82930016F0C5 /* STASDKReachability.h */; };
+		279238F11F0A82930016F0C5 /* STASDKReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238F01F0A82930016F0C5 /* STASDKReachability.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279238F31F0A82C70016F0C5 /* STASDKReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238F21F0A82C70016F0C5 /* STASDKReachability.m */; };
-		279238F61F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238F41F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.h */; };
+		279238F61F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238F41F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279238F71F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238F51F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.m */; };
-		279238FA1F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238F81F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.h */; };
+		279238FA1F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238F81F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279238FB1F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238F91F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.m */; };
-		279238FD1F0AD8240016F0C5 /* TBItineraryCountryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 279238FC1F0AD8240016F0C5 /* TBItineraryCountryHeader.xib */; };
-		279239001F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238FE1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h */; };
+		279239001F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238FE1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279239011F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238FF1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m */; };
 		27FAC7111EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC70F1EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		27FAC7121EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FAC7101EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m */; };
@@ -937,6 +941,10 @@
 		25BAE51CE275A3E5845E4159BC4CF4A3 /* STASDKApiUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = STASDKApiUtils.h; sourceTree = "<group>"; };
 		2685C7C0E3C2900165E92570A07B1EF0 /* SitataCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SitataCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		269016F0C0981EDE577628C2286C2E49 /* HNKDiskFetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HNKDiskFetcher.m; path = Haneke/HNKDiskFetcher.m; sourceTree = "<group>"; };
+		273AD8851F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITBDestPickerPageViewController.h; sourceTree = "<group>"; };
+		273AD8861F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITBDestPickerPageViewController.m; sourceTree = "<group>"; };
+		273AD8891F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITBDatePickerViewController.h; sourceTree = "<group>"; };
+		273AD88A1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITBDatePickerViewController.m; sourceTree = "<group>"; };
 		2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUICardTableViewCell.h; sourceTree = "<group>"; };
 		2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUICardTableViewCell.m; sourceTree = "<group>"; };
 		2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardTableViewCell.xib; sourceTree = "<group>"; };
@@ -2036,6 +2044,10 @@
 				27FAC7101EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m */,
 				279238F41F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.h */,
 				279238F51F0A9BD70016F0C5 /* STASDKUITripBuildItinViewController.m */,
+				273AD8851F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h */,
+				273AD8861F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m */,
+				273AD8891F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h */,
+				273AD88A1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m */,
 				27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */,
 				27FAC7141EF86D0200DB5557 /* STASDKPushHandler.m */,
 				279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */,
@@ -2930,6 +2942,7 @@
 				E6A8E0217DB528CD0D9BC33ADCC60AAF /* STASDKMMedication.h in Headers */,
 				D8DA12AD791B7F43E9BB59003B8424FD /* STASDKMTrip.h in Headers */,
 				62C2556458A85952A808D02E3FC387CA /* STASDKMTripHealthComment.h in Headers */,
+				273AD8871F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h in Headers */,
 				3656061A74A75F50F11B4E7B2D055F78 /* STASDKMVaccination.h in Headers */,
 				7750E02A8D1E2497391BB94285718D88 /* STASDKSync.h in Headers */,
 				11C489B66C50EA413B126F617D3986CD /* STASDKUI.h in Headers */,
@@ -2942,6 +2955,7 @@
 				1014978B2E30D3CC8B56D7278D6BC7C8 /* STASDKUIContactDetailTableViewCell.h in Headers */,
 				E3F9EF5E19461BCEC669348C21B55308 /* STASDKUICopyLabel.h in Headers */,
 				74532E83B155E923D348AB600C1E7AF8 /* STASDKUICountryPickerPopoverViewController.h in Headers */,
+				273AD88B1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h in Headers */,
 				9C761DF9778EC1F352ECAD2F4D5C1DEA /* STASDKUICountrySwitcherViewController.h in Headers */,
 				F719F380EFBF288722BFBA18D46B60A3 /* STASDKUIDiseaseDetailViewController.h in Headers */,
 				4C4F38ECA1DEE1DBC5E94A153ACEB12B /* STASDKUIEmergNumbersViewController.h in Headers */,
@@ -3296,7 +3310,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B925ABFADA1D16A34DFC81803E686F13 /* SitataCore.bundle in Resources */,
-				279238FD1F0AD8240016F0C5 /* TBItineraryCountryHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3307,6 +3320,7 @@
 				34F753C9D2AEEE67339336D579E8C192 /* AlertCell.xib in Resources */,
 				2749B2F01F0C10BC002ECA79 /* CardTableViewCell.xib in Resources */,
 				8693A5C321F747E17E514ECE8BCD1B15 /* ContactDetailRowCell.xib in Resources */,
+				273AD8841F0D71A400BDA9CD /* TBItineraryCountryHeader.xib in Resources */,
 				B469B9E474333CF60C64FADB9939193E /* CountryFlagLabelSmall.xib in Resources */,
 				C44E2F87FF10979A56396C880CFAD75B /* DiseaseCell.xib in Resources */,
 				E8989A143CB967EF451BD702B403136A /* HealthCommentCell.xib in Resources */,
@@ -3628,6 +3642,7 @@
 				EF8EFBDCA3E7C02583DBFD1423EB53DF /* STASDKJobs.m in Sources */,
 				1386E8D71EFB4813A3945FB754DDD542 /* STASDKLocationHandler.m in Sources */,
 				BFDF72E4D72B91DCC9237CF4604789C7 /* STASDKMAddress.m in Sources */,
+				273AD8881F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m in Sources */,
 				7A09D9BBB879EF35449A34249437B9DA /* STASDKMAdvisory.m in Sources */,
 				4FF9174A0695EC9CE0EEF6800635E47A /* STASDKMAlert.m in Sources */,
 				4BA855E03AD244EAAAC6C4C937ABC8E3 /* STASDKMAlertLocation.m in Sources */,
@@ -3674,6 +3689,7 @@
 				2BA5EBDD2C2C0A84D5FC0EAB774E79C1 /* STASDKUISafetyViewController.m in Sources */,
 				C4BD0358E0E84A65F68ACB0BAC167C32 /* STASDKUIStylesheet.m in Sources */,
 				10D10C95B4A5F8DA516619D039BE1F84 /* STASDKUIUtility.m in Sources */,
+				273AD88C1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

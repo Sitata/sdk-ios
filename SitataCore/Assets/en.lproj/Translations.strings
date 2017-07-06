@@ -16,6 +16,8 @@
 "STILL_DOWNLOADING" = "We're still downloading information, please stand by.";
 "DISCONNECTED" = "Disconnected";
 "CONNECTION_REQ" = "A data connection is required.";
+"DONE" = "Done";
+"NEXT" = "Next";
 
 
 /* ALERTS */
@@ -78,4 +80,9 @@
 "DISEASE_TRT" = "Treatment";
 "DISEASE_WHR" = "Where Does It Occur";
 
+/* TRIP BUILDER */
+"TB_ITINERARY" = "Itinerary";
+"TB_ADD_COUNTRY" = "Add Country";
+"TB_ARRIVAL_TITLE" = "Arriving On";
+"TB_LEAVE_TITLE" = "Leaving On";
 

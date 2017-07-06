@@ -22,7 +22,7 @@
 #import <MapKit/MapKit.h>
 
 
-@interface STASDKUIEmergNumbersViewController () <UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate>
+@interface STASDKUIEmergNumbersViewController () <UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate, CLLocationManagerDelegate, STASDKUICountryPickerPopoverDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *countryNameLbl;
 @property (weak, nonatomic) IBOutlet UIButton *changeBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -242,7 +242,7 @@ static CGFloat kContactDetailRowHeight;
             // set size of window
             vc.preferredContentSize = CGSizeMake(300.0, 300.0);
         }
-        vc.parentVC = self;
+        vc.delegate = self;
     }
 }
 

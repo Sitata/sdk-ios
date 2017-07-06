@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s6Z-Vm-V7Q" id="Vvw-Tx-bG3">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTH-mA-yk4" id="2DG-vx-2Ml">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -108,7 +108,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VgG-ie-cc4" id="F8v-1h-dtX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </tableViewCellContentView>
@@ -166,7 +166,7 @@
                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="spm-Y1-WoY" id="83F-WR-1S0">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -594,7 +594,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jk5-12-hea" id="NeW-aO-nhw">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -670,7 +670,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m1A-lO-65X" id="c7V-t4-Vpz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -678,7 +678,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GGc-tj-Nzm" id="bca-RP-ktz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -770,7 +770,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PWi-cb-DNk" id="LEh-u0-sN6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -841,7 +841,7 @@
         <!--Trip Builder Page View Controller-->
         <scene sceneID="a8l-Vq-aux">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="SFn-BW-0cD" customClass="STASDKUITripBuilderPageViewController" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="SFn-BW-0cD" customClass="STASDKUITripBuilderPageViewController" sceneMemberID="viewController">
                     <connections>
                         <segue destination="nkA-On-SLB" kind="show" id="skH-Ou-mSm"/>
                         <segue destination="vld-7w-vPm" kind="show" id="anS-Nd-cql"/>
@@ -943,16 +943,19 @@
                     <connections>
                         <outlet property="mapView" destination="SGr-Ma-a2W" id="Uaa-xr-HnL"/>
                         <outlet property="tableView" destination="idN-rF-rTl" id="jzF-A4-8s8"/>
+                        <segue destination="Ka3-jP-UAb" kind="popoverPresentation" identifier="destinationPicker" popoverAnchorView="idN-rF-rTl" id="zyv-QZ-BrA">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lbW-2Y-shP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1672.8" y="3349.4752623688159"/>
+            <point key="canvasLocation" x="1673" y="3348"/>
         </scene>
         <!--Country Picker Popover View Controller-->
         <scene sceneID="Q7n-PY-JyG">
             <objects>
-                <viewController id="rUc-7S-Yol" customClass="STASDKUICountryPickerPopoverViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="countryPickerPopup" id="rUc-7S-Yol" customClass="STASDKUICountryPickerPopoverViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eZb-NI-BNt"/>
                         <viewControllerLayoutGuide type="bottom" id="Vof-Ob-B4X"/>
@@ -990,6 +993,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="240"/>
                     <connections>
+                        <outlet property="actionBtn" destination="HtC-fE-w6f" id="WYK-3F-oKG"/>
                         <outlet property="countryPicker" destination="WFA-XV-2pM" id="6M2-le-A2E"/>
                     </connections>
                 </viewController>
@@ -1050,6 +1054,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NdQ-5C-75s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-601" y="3441"/>
+        </scene>
+        <!--Dest Picker Page View Controller-->
+        <scene sceneID="mp8-AK-mD8">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Ka3-jP-UAb" customClass="STASDKUITBDestPickerPageViewController" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="240"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qSE-ig-HwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2442" y="3185"/>
+        </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="17H-CG-Cpz">
+            <objects>
+                <viewController storyboardIdentifier="tbDatePicker" id="Gxs-Nn-T5E" customClass="STASDKUITBDatePickerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FCG-Nc-6Xr"/>
+                        <viewControllerLayoutGuide type="bottom" id="v4x-4r-2AK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JMJ-jJ-MkM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="w3L-Nc-eRz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Set Entry Date" id="wXs-UD-7lR">
+                                        <barButtonItem key="rightBarButtonItem" title="Next" id="NqT-7u-Pad">
+                                            <connections>
+                                                <action selector="onAction:" destination="Gxs-Nn-T5E" id="Chm-ES-C41"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="8kS-bf-2Bf">
+                                <rect key="frame" x="0.0" y="44" width="375" height="196"/>
+                                <date key="date" timeIntervalSinceReferenceDate="521060373.712394">
+                                    <!--2017-07-06 18:59:33 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="onPickedRow:" destination="Gxs-Nn-T5E" eventType="valueChanged" id="IgX-II-Gfy"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="w3L-Nc-eRz" firstAttribute="top" secondItem="FCG-Nc-6Xr" secondAttribute="bottom" id="404-3l-yB4"/>
+                            <constraint firstAttribute="bottom" secondItem="8kS-bf-2Bf" secondAttribute="bottom" id="7ya-nt-UVa"/>
+                            <constraint firstItem="w3L-Nc-eRz" firstAttribute="leading" secondItem="JMJ-jJ-MkM" secondAttribute="leading" id="Ovi-7p-uGY"/>
+                            <constraint firstAttribute="trailing" secondItem="w3L-Nc-eRz" secondAttribute="trailing" id="adS-Kr-yLW"/>
+                            <constraint firstAttribute="trailing" secondItem="8kS-bf-2Bf" secondAttribute="trailing" id="ceI-oH-VGc"/>
+                            <constraint firstItem="8kS-bf-2Bf" firstAttribute="leading" secondItem="JMJ-jJ-MkM" secondAttribute="leading" id="puB-HR-WeR"/>
+                            <constraint firstItem="8kS-bf-2Bf" firstAttribute="top" secondItem="w3L-Nc-eRz" secondAttribute="bottom" id="rsd-pj-aKt"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="240"/>
+                    <connections>
+                        <outlet property="actionBtn" destination="NqT-7u-Pad" id="VtS-Wc-EM8"/>
+                        <outlet property="datePicker" destination="8kS-bf-2Bf" id="92w-Bc-o6F"/>
+                        <outlet property="navBar" destination="w3L-Nc-eRz" id="NcB-f0-2fT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KTb-YM-wfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3134" y="3186"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

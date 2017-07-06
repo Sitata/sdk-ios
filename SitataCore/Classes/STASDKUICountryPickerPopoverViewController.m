@@ -10,12 +10,15 @@
 
 #import "STASDKUIEmergNumbersViewController.h"
 #import "STASDKMCountry.h"
+#import "STASDKDataController.h"
 
 @interface STASDKUICountryPickerPopoverViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIPickerView *countryPicker;
 
 @property RLMArray<STASDKMCountry*> *countries;
+
+@property bool multiStage;
 
 @end
 
@@ -26,6 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    if (self.multiStage) {
+        [self.actionBtn setTitle:[[STASDKDataController sharedInstance] localizedStringForKey:@"NEXT"]];
+    }
     self.countryPicker.dataSource = self;
     self.countryPicker.delegate = self;
 
@@ -35,12 +41,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     // Send back country to parent
-    NSInteger row = [self.countryPicker selectedRowInComponent:0];
-    if (self.countries.count > 0) {
-        STASDKMCountry *country = [self.countries objectAtIndex:row];
-        [self.parentVC onChangeCountry:country];
-    } else {
-        [self.parentVC onChangeCountry:NULL];
+    if (!self.multiStage) {
+        [self.delegate onChangeCountry:[self chosenCountry]];
     }
 }
 
@@ -49,6 +51,18 @@
     self.countries = [STASDKMCountry allCountries];
 }
 
+- (void)setForMultiStage {
+    self.multiStage = YES;
+}
+
+- (STASDKMCountry*)chosenCountry {
+    if (self.countries.count > 0) {
+        NSInteger row = [self.countryPicker selectedRowInComponent:0];
+        return [self.countries objectAtIndex:row];
+    } else {
+        return NULL;
+    }
+}
 
 
 
@@ -78,9 +92,18 @@
 
 #pragma mark - View Actions
 
+// close
 - (IBAction)onFinished:(id)sender {
-    // close
-    [self dismissViewControllerAnimated:TRUE completion:NULL];
+
+    if (self.multiStage) {
+        // if multistage, then we don't dismiss this controller and assume delegate/parent will handle it
+        // in this scenario,
+        [self.delegate onChangeCountry:[self chosenCountry]];
+    } else {
+        // dismiss view controller and viewWillDisappear will be called
+        [self dismissViewControllerAnimated:TRUE completion:NULL];
+    }
+
 }
 
 @end

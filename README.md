@@ -17,3 +17,4 @@ A number of icons in this project have been used with permission from the follow
 * [Maxim Kulikov](https://thenounproject.com/maxim221)
 * [Gregor Cresnar](https://thenounproject.com/grega.cresnar)
 * [Arosh Khan](https://thenounproject.com/aroshkhan05)
+* [Minh Hoang](http://www.flaticon.com/authors/minh-hoang)
