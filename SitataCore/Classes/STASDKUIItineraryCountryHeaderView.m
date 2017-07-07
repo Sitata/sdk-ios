@@ -54,7 +54,7 @@
 }
 
 
-- (id) init:(STASDKMDestination*)destination {
+- (id) initWithDestination:(STASDKMDestination*)destination {
     self = [super init];
     if (self) {
         // grab destination country

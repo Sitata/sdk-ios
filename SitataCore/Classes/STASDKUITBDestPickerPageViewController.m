@@ -14,6 +14,7 @@
 #import "STASDKMCountry.h"
 #import "STASDKUITBDatePickerViewController.h"
 #import "STASDKDataController.h"
+#import "STASDKMDestination.h"
 
 
 @interface STASDKUITBDestPickerPageViewController () <UIPageViewControllerDelegate, STASDKUICountryPickerPopoverDelegate, STASDKUITBDatePickerDelegate>
@@ -29,6 +30,7 @@
 
 
 @implementation STASDKUITBDestPickerPageViewController
+
 
 const int destPageCount = 3;
 
@@ -51,16 +53,6 @@ const int destPageCount = 3;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)nextPage {
     self.currentIndex++;
@@ -106,9 +98,7 @@ const int destPageCount = 3;
         }
         case 1:
         {
-            // date picking
-
-            // TODO: What happens to dates if navigate backwards? Can they go backwards?
+            // entry date picking
             STASDKUITBDatePickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tbDatePicker"];
 
             // TODO: If trip is present, min date could be anything, otherwise, min date is today
@@ -120,16 +110,13 @@ const int destPageCount = 3;
         }
         case 2:
         {
-            // date picking
+            // exit date picking
             STASDKUITBDatePickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tbDatePicker"];
-
-            // TODO: min date must be previously selected date from prior page or today
 
             vc.minDate = self.entryDate;
             vc.titleBarLblText = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_LEAVE_TITLE"];
             vc.delegate = self;
             page = vc;
-
             break;
         }
     }
@@ -162,10 +149,19 @@ const int destPageCount = 3;
     } else {
         // picking exit date
         self.exitDate = date;
-        // TODO: Callback result to parent view controller
+
+        // Callback result to parent view controller
+        STASDKMDestination *dest = [[STASDKMDestination alloc] init];
+        dest.departureDate = self.entryDate;
+        dest.returnDate = self.exitDate;
+        dest.countryId = self.country.identifier;
+        dest.countryCode = self.country.countryCode;
+        [self.destPickerDelegate onPickedDestination:dest];
+
         [self dismissViewControllerAnimated:YES completion:NULL];
     }
 }
+
 
 
 

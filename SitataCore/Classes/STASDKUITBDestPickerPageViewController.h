@@ -10,8 +10,18 @@
 
 @class STASDKUITripBuildItinViewController;
 
+@class STASDKMDestination;
+
+@protocol STASDKUITBDestinationPickerDelegate <NSObject>
+
+- (void)onPickedDestination:(STASDKMDestination*)destination;
+
+@end
+
+
+
 @interface STASDKUITBDestPickerPageViewController : UIPageViewController
 
-@property STASDKUITripBuildItinViewController *parentVC;
+@property (weak, nonatomic) id <STASDKUITBDestinationPickerDelegate> destPickerDelegate;
 
 @end

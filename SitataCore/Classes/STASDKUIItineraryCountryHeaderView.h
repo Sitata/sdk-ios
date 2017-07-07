@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class STASDKMDestination;
 
 @protocol UIItineraryCountryHeaderViewDelegate <NSObject>
 
@@ -25,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *addCountryImg;
 
 @property (weak, nonatomic) id <UIItineraryCountryHeaderViewDelegate> delegate;
+
+
+- (id) initWithDestination:(STASDKMDestination*)destination;
 
 @end
 

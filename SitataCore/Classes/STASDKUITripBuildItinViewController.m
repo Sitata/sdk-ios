@@ -11,11 +11,12 @@
 #import <MapKit/MapKit.h>
 #import "STASDKDataController.h"
 #import "STASDKMTrip.h"
+#import "STASDKMCountry.h"
 #import "STASDKUIItineraryCountryHeaderView.h"
 #import "STASDKUITBDestPickerPageViewController.h"
 
 
-@interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, UIItineraryCountryHeaderViewDelegate, UIPopoverPresentationControllerDelegate>
+@interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, UIItineraryCountryHeaderViewDelegate, UIPopoverPresentationControllerDelegate, STASDKUITBDestinationPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -38,6 +39,8 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    // This will remove extra separators from tableview
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
 
     // register xibs for table
@@ -94,20 +97,23 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 // in the destinations list
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([self hasDestinations]) {
-        return [[self destinations] count];
+        return [[self destinations] count] + 2; // +1 for itinerary header and +1 for add country header
     } else {
-        return 1;
+        return 2;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) { return 0;} // only fancy header in first section
 
     if ([self hasDestinations]) {
-        // TODO: RETURN NUMBER OF CITIES WITHIN EACH DESTINATION
-        return 1;
+        if (section == 0 || section == [self numberOfSectionsInTableView:self.tableView]-1) {
+            return 0; // fancy itinerary header or add country header at end of all destination sections
+        } else {
+            // TODO: RETURN NUMBER OF CITIES WITHIN EACH DESTINATION
+            return 1;
+        }
     } else {
-        return 1;
+        return 0; // fancy itinerary header only
     }
 
 }
@@ -115,14 +121,14 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: TEMP
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-
+    cell.backgroundColor = [UIColor yellowColor];
 
     NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
 
     if (section == 0) { return cell; } // TODO
 
-
+    // needs to have cities listed
     if (self.hasDestinations) {
 
     } else {
@@ -134,7 +140,13 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return kHeaderFooterHeight;
+    if (section == 0 || section == [self numberOfSectionsInTableView:self.tableView]-1) {
+        // when there are destinations, and we have fancy itinerary header as first section,
+        // then a footer is not necessary and we need to hide it by setting height to zero
+        return 0;
+    }
+    return kHeaderFooterHeight; // otherwise footer is used for add city
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -142,36 +154,30 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *emptyView = [[UIView alloc] init];
-    emptyView.backgroundColor = [UIColor blueColor];
 
     if (section == 0) {
         return [self itineraryTitleHeaderView]; // fancy itinerary header
+    } else if (section == [self numberOfSectionsInTableView:self.tableView]-1) {
+        return [self addCountryRow]; // this is is the last section which should contain the add country header
     } else {
-        // based on country destination of trip
-        if (self.hasDestinations) {
-            return emptyView; // TODO
-        } else {
-            // TODO: BACKGROUND COLOR?
-            return emptyView;
-        }
+        STASDKMDestination *dest = [[self destinations] objectAtIndex:section-1];
+        STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] initWithDestination:dest];
+        return view;
     }
+
+
 }
 
 - (nullable UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *emptyView = [[UIView alloc] init];
     emptyView.backgroundColor = [UIColor redColor];
 
-    if ([self hasDestinations]) {
-        if (section == [[self destinations] count] - 1) {
-            // last one so we display add country row
-            return [self addCountryRow];
-        } else {
-            return emptyView; // TODO
-        }
-    } else {
-        return [self addCountryRow]; // TODO: return add country view
+
+    if (section == 0 || section == [self numberOfSectionsInTableView:self.tableView]-1) {
+        return NULL;
     }
+
+    return emptyView; // TODO: return add city footer
 }
 
 - (UIView*)addCountryRow {
@@ -243,6 +249,21 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 }
 
 
+#pragma - mark STASDKUITBDestinationPickerDelegate
+
+- (void) onPickedDestination:(STASDKMDestination *)destination {
+    NSLog(@"PICKED DESTINATION %@", destination);
+    [self.memoryRealm transactionWithBlock:^{
+
+        // new destinations need a unique id to save in temporary memory
+        NSString *uuid = [[NSUUID UUID] UUIDString];
+        destination.identifier = uuid;
+
+        [[self.trip destinations] addObject:destination];
+    }];
+    [self.tableView reloadData];
+}
+
 
 
 
@@ -266,6 +287,7 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
             // set size of window
             vc.preferredContentSize = CGSizeMake(300.0, 300.0);
         }
+        vc.destPickerDelegate = self;
     }
     
     
@@ -274,11 +296,7 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
     return UIModalPresentationNone; // necessary so it won't be full screen on phones
 }
-//
-//- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
-//    // TODO: how to allow this?
-//    return NO;
-//}
+
 
 
 @end
