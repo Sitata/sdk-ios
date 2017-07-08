@@ -61,8 +61,18 @@
         STASDKMCountry *country = [STASDKMCountry findBy:destination.countryId];
         if (country) {
             self.titleLbl.alpha = 1.0;
-            self.timelineImg.alpha = 1.0;
-            self.timelineImg.tintColor = [UIColor darkGrayColor];
+
+            // Draw circular node
+            CAShapeLayer *circleLayer = [CAShapeLayer layer];
+            [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(23, 15, 20, 20)] CGPath]];
+            [circleLayer setStrokeColor:[[UIColor darkGrayColor] CGColor]];
+            [circleLayer setFillColor:[[UIColor darkGrayColor] CGColor]];
+            [[self layer] addSublayer:circleLayer];
+
+            // Draw timeline
+            UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, 50.0)];
+            bar.backgroundColor = [UIColor darkGrayColor];
+            [self addSubview:bar];
 
             self.addCountryBtn.alpha = 0.0;
             self.addCountryImg.alpha = 0.0;
@@ -75,22 +85,18 @@
 
 - (void) commonInit {
     self.titleLbl.alpha = 0.0; // hide country title label
-    self.timelineImg.alpha = 0.0;
     self.addCountryBtn.alpha = 1.0;
     self.addCountryImg.alpha = 1.0;
 
     // draw timeline bar
-    CGFloat imageTop = self.timelineImg.frame.origin.y;
-    CGFloat imageSpace = 10.0;
+    CGFloat imageTop = self.addCountryBtn.frame.origin.y;
+    CGFloat imageSpace = 7.0;
 
     UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, imageTop+imageSpace)];
     bar.backgroundColor = [UIColor darkGrayColor];
     [self addSubview:bar];
 
-
     self.addCountryImg.tintColor = [UIColor darkGrayColor];
-
-//    self.backgroundColor = [UIColor purpleColor];
     self.titleLbl.textColor = [UIColor darkGrayColor];
 }
 

@@ -21,7 +21,6 @@
 @interface STASDKUIItineraryCountryHeaderView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLbl;
-@property (weak, nonatomic) IBOutlet UIImageView *timelineImg;
 @property (weak, nonatomic) IBOutlet UIButton *addCountryBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addCountryImg;
 

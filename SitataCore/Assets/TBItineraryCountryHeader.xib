@@ -20,14 +20,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WebIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gOd-Gn-tlq">
-                    <rect key="frame" x="10" y="2.5" width="45" height="45"/>
-                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="L8J-bE-rhQ"/>
-                        <constraint firstAttribute="width" constant="45" id="X3k-dM-YWN"/>
-                    </constraints>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CI8-ca-TyJ">
                     <rect key="frame" x="65" y="5.5" width="124" height="39"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
@@ -50,20 +42,17 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="CI8-ca-TyJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="65" id="9JR-0r-tK0"/>
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G7N-it-LhU"/>
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="NSi-iF-paT"/>
-                <constraint firstItem="gOd-Gn-tlq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="f0M-8q-wJt"/>
                 <constraint firstItem="NgR-r5-ioz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="iym-IV-1b6"/>
-                <constraint firstItem="NgR-r5-ioz" firstAttribute="leading" secondItem="gOd-Gn-tlq" secondAttribute="trailing" constant="10" id="kue-B4-qJW"/>
-                <constraint firstItem="CI8-ca-TyJ" firstAttribute="leading" secondItem="gOd-Gn-tlq" secondAttribute="trailing" constant="10" id="pik-tr-Rot"/>
-                <constraint firstItem="gOd-Gn-tlq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="rJL-8y-E5D"/>
                 <constraint firstItem="CI8-ca-TyJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v04-X8-lbQ"/>
+                <constraint firstItem="NgR-r5-ioz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="65" id="vGn-tY-p1W"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="addCountryBtn" destination="CI8-ca-TyJ" id="Nu3-N9-DRw"/>
                 <outlet property="addCountryImg" destination="4PI-lz-Jh8" id="34p-6u-NCQ"/>
-                <outlet property="timelineImg" destination="gOd-Gn-tlq" id="W6c-Cf-Yg6"/>
                 <outlet property="titleLbl" destination="NgR-r5-ioz" id="vOE-8n-ZZA"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="-239"/>
@@ -71,6 +60,5 @@
     </objects>
     <resources>
         <image name="PlusBtn" width="126" height="126"/>
-        <image name="WebIcon" width="36" height="36"/>
     </resources>
 </document>
