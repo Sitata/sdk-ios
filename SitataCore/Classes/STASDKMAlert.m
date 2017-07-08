@@ -99,6 +99,18 @@
     }
 }
 
+// Returns an array of NSDictionary objects representing the associated countries.
+-(NSArray*)countriesArr {
+    NSError *error;
+    NSData* data = [self.countries dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *jsonArr = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    if (error == nil) {
+        return jsonArr;
+    } else {
+        return @[]; // return empty array if error
+    }
+}
+
 // country divisision boundaries are stringified json
 -(NSArray*)countryDivisionsArr {
     NSError *error;
@@ -177,6 +189,7 @@
              @"countryIds": @"country_ids",
              @"diseaseIds": @"disease_ids",
              @"safetyIds": @"safety_ids",
+             @"countries": @"countries",
              @"countryDivisions": @"country_divisions",
              @"countryRegions": @"country_regions",
              @"countryDivisionIds": @"country_division_ids",
@@ -246,6 +259,16 @@
         if (data != nil) {
             NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             _safetyIds = jsonStr;
+        }
+    }
+
+    NSDictionary *countries = [dic objectForKey:@"countries"];
+    if (countries != nil) {
+        NSError *error;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:countries options:0 error:&error];
+        if (data != nil) {
+            NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            _countries = jsonStr;
         }
     }
 
