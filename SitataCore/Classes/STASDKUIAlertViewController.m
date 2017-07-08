@@ -214,7 +214,33 @@
         }
     }
 
+
     BOOL hasPolygons = NO;
+
+    // full country polygons
+    NSArray *countriesArr;
+    if (self.alert != NULL) {
+        countriesArr = [self.alert countriesArr];
+    } // ADVISORIES currently do not have full country polygons
+    for (NSDictionary *country in countriesArr) {
+        NSDictionary *topoJSON = [country objectForKey:@"topo_json"];
+        if (![topoJSON  isEqual:[NSNull null]]) {
+            // countries object will always be there, but topo_json may be null
+            // in the case that the alert is not a full country alert.
+
+            [STASDKGeo handleTopoJSON:topoJSON mapView:self.mapView];
+            hasPolygons = YES;
+
+            // expanding total bounds by polygon bounds
+            MKMapRect countryBounds = [STASDKGeo regionFromTopoBBox:topoJSON];
+            if (MKMapRectIsNull(bounds)) {
+                bounds = countryBounds;
+            } else {
+                bounds = MKMapRectUnion(bounds, countryBounds);
+            }
+        }
+    }
+
     // country division polygons
     NSArray *divisionsArr;
     if (self.alert != NULL) {

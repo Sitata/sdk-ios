@@ -25,6 +25,7 @@
 @property (retain) NSString *countryIds;
 @property (retain) NSString *diseaseIds;
 @property (retain) NSString *safetyIds;
+@property (retain) NSString *countries;
 @property (retain) NSString *countryDivisions;
 @property (retain) NSString *countryRegions;
 @property (retain) NSString *countryDivisionIds;
@@ -42,6 +43,9 @@
 
 // Returns an array of STASDKModelAlertLocation objects.
 -(NSArray*)alertLocationsArr;
+
+// Returns an array of NSDictionary objects representing the associated countries.
+-(NSArray*)countriesArr;
 
 // Returns an array of NSDictionary objects representing the associated provincial/state boundaries.
 -(NSArray*)countryDivisionsArr;
