@@ -83,6 +83,8 @@
 /* TRIP BUILDER */
 "TB_ITINERARY" = "Itinerary";
 "TB_ADD_COUNTRY" = "Add Country";
+"TB_ADD_CITY" = "Add City";
 "TB_ARRIVAL_TITLE" = "Arriving On";
 "TB_LEAVE_TITLE" = "Leaving On";
+"TB_NO_CITIES" = "No results. Try searching for a city name.";
 

@@ -18,6 +18,7 @@
 
 @synthesize distanceUnits = _distanceUnits;
 @synthesize apiEndpoint = _apiEndpoint;
+@synthesize googleApiKeyPListKey = _googleApiKeyPListKey;
 BOOL didFirstSync;
 
 
@@ -42,6 +43,10 @@ BOOL didFirstSync;
         _distanceUnits = Metric;
 
         _apiEndpoint = @"https://www.sitata.com";
+
+        if (!_googleApiKeyPListKey) {
+            _googleApiKeyPListKey = @"GoogleApiKey";
+        }
 
         // Setup iOS built in caching
         NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024

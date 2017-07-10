@@ -8,6 +8,9 @@
 
 #import <Realm/Realm.h>
 
+#import "STASDKMDestinationLocation.h"
+
+
 @interface STASDKMDestination : RLMObject
 
 @property (retain) NSString *identifier;
@@ -17,6 +20,9 @@
 @property (retain) NSString *countryCode;
 
 
+
+//related models
+@property (retain) RLMArray<STASDKMDestinationLocation *><STASDKMDestinationLocation> *destinationLocations;
 
 
 @end

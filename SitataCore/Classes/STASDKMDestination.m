@@ -10,6 +10,10 @@
 
 #import "STASDKApiUtils.h"
 
+#import <YYModel/YYModel.h>
+
+#import "STASDKMDestinationLocation.h"
+
 @implementation STASDKMDestination
 
 + (NSString *)primaryKey {
@@ -56,6 +60,14 @@
     }
     if (![returnStr isEqual:(id)[NSNull null]]) {
         _returnDate = [dfmt dateFromString:returnStr];
+    }
+
+    // We have to do the following for destination locations
+    // explicitly because Realm doesn't play nice 100% with yyModel.
+    NSArray *destinationLocations = dic[@"locations"];
+    for (NSDictionary *d in destinationLocations) {
+        STASDKMDestinationLocation *dest = [STASDKMDestinationLocation yy_modelWithDictionary:d];
+        [self.destinationLocations addObject:dest];
     }
 
 

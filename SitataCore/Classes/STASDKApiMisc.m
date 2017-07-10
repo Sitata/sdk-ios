@@ -11,6 +11,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "STASDKApiUtils.h"
 #import "STASDKApiRoutes.h"
+#import "STASDKMDestinationLocation.h"
 
 @implementation STASDKApiMisc
 
@@ -31,5 +32,48 @@
         callback(task, error);
     }];
 }
+
+
+
+
+
+
+
+
+
+
+
++(void)googleFetchCitySuggestions:(NSString*)query inCountry:(NSString*)countryCode onFinished:(void(^)(NSMutableArray*, NSURLSessionDataTask*, NSError*)) callback  {
+
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    NSString *url = [STASDKApiRoutes googleSearchForCityNamed:query inCountry:countryCode];
+    AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
+
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        NSDictionary *jsonResults = (NSDictionary*) responseObject;
+        NSArray *predictions = [jsonResults objectForKey:@"predictions"];
+        NSString *status = [jsonResults objectForKey:@"status"];
+
+        if ([status isEqualToString:@"OK"] || [status isEqualToString:@"ZERO_RESULTS"] ) {
+            for (NSDictionary *pred in predictions) {
+                STASDKMDestinationLocation *loc = [STASDKMDestinationLocation initFromGoogleResult:pred];
+                [results addObject:loc];
+            }
+            callback(results, task, nil);
+        } else {
+            NSString *errorMessage = [jsonResults objectForKey:@"error_message"];
+            NSString *fullMessage = [NSString stringWithFormat:@"Error querying google: '%@'", errorMessage];
+            NSDictionary *details = [[NSDictionary alloc] initWithObjectsAndKeys:fullMessage, NSLocalizedDescriptionKey, nil];
+            NSError *error = [NSError errorWithDomain:@"sitata.com" code:99 userInfo:details];
+            callback(nil, task, error);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        // do failure
+        NSLog(@"Error: %@", error);
+        callback(nil, task, error);
+    }];
+}
+
 
 @end

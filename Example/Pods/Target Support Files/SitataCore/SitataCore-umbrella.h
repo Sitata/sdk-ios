@@ -18,6 +18,7 @@
 #import "STASDKMAlertSource.h"
 #import "STASDKMContactDetail.h"
 #import "STASDKMCountry.h"
+#import "STASDKMDestinationLocation.h"
 #import "STASDKMDestination.h"
 #import "STASDKMDisease.h"
 #import "STASDKMHospital.h"

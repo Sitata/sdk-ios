@@ -31,6 +31,8 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 // Specify an endpoint to use for the API
 @property (retain) NSString *apiEndpoint;
 
+// The key name stored in your Info.plist that references the Google API Key value
+@property (retain) NSString *googleApiKeyPListKey;
 
 // allows unit to be set for distance
 @property (assign) DistanceUnitsType distanceUnits;

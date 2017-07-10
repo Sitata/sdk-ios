@@ -104,4 +104,9 @@
 // /api/v1/users/add_device
 +(NSString*)addDevice;
 
+
+
+// MARK: == GOOGLE ==
++(NSString*)googleSearchForCityNamed:(NSString*)query inCountry:(NSString*)countryCode;
+
 @end

@@ -100,6 +100,11 @@
 		273AD8881F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD8861F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m */; };
 		273AD88B1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD8891F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		273AD88C1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD88A1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m */; };
+		273AD88E1F13023C00BDA9CD /* TBItineraryCityHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 273AD88D1F13023C00BDA9CD /* TBItineraryCityHeader.xib */; };
+		273AD8901F13030000BDA9CD /* STASDKUIItineraryCityHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD88F1F13030000BDA9CD /* STASDKUIItineraryCityHeaderView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		273AD8921F13034700BDA9CD /* STASDKUIItineraryCityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD8911F13034700BDA9CD /* STASDKUIItineraryCityHeaderView.m */; };
+		273AD8951F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD8931F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		273AD8961F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD8941F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.m */; };
 		2749B2ED1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2749B2EE1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */; };
 		2749B2F01F0C10BC002ECA79 /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */; };
@@ -113,6 +118,8 @@
 		279238FB1F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238F91F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.m */; };
 		279239001F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238FE1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279239011F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238FF1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m */; };
+		27CDAAED1F1402F00022591D /* STASDKMDestinationLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD89E1F13FF8600BDA9CD /* STASDKMDestinationLocation.m */; };
+		27CDAAEE1F1402F30022591D /* STASDKMDestinationLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD89D1F13FF8600BDA9CD /* STASDKMDestinationLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27FAC7111EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC70F1EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		27FAC7121EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FAC7101EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m */; };
 		27FAC7151EF86D0200DB5557 /* STASDKPushHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -945,6 +952,13 @@
 		273AD8861F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITBDestPickerPageViewController.m; sourceTree = "<group>"; };
 		273AD8891F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITBDatePickerViewController.h; sourceTree = "<group>"; };
 		273AD88A1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITBDatePickerViewController.m; sourceTree = "<group>"; };
+		273AD88D1F13023C00BDA9CD /* TBItineraryCityHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBItineraryCityHeader.xib; sourceTree = "<group>"; };
+		273AD88F1F13030000BDA9CD /* STASDKUIItineraryCityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUIItineraryCityHeaderView.h; sourceTree = "<group>"; };
+		273AD8911F13034700BDA9CD /* STASDKUIItineraryCityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUIItineraryCityHeaderView.m; sourceTree = "<group>"; };
+		273AD8931F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUILocationSearchTableViewController.h; sourceTree = "<group>"; };
+		273AD8941F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUILocationSearchTableViewController.m; sourceTree = "<group>"; };
+		273AD89D1F13FF8600BDA9CD /* STASDKMDestinationLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKMDestinationLocation.h; sourceTree = "<group>"; };
+		273AD89E1F13FF8600BDA9CD /* STASDKMDestinationLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKMDestinationLocation.m; sourceTree = "<group>"; };
 		2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUICardTableViewCell.h; sourceTree = "<group>"; };
 		2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUICardTableViewCell.m; sourceTree = "<group>"; };
 		2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardTableViewCell.xib; sourceTree = "<group>"; };
@@ -1736,6 +1750,7 @@
 				2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */,
 				4BA42F698C8CF529977B8C0C76F1AC4F /* Translations.strings */,
 				279238FC1F0AD8240016F0C5 /* TBItineraryCountryHeader.xib */,
+				273AD88D1F13023C00BDA9CD /* TBItineraryCityHeader.xib */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1968,6 +1983,8 @@
 				07B9215BB1A5ADD98A0CBE309A94CF55 /* STASDKMCountry.m */,
 				A16813B9B13694A41FCEA7886756B99E /* STASDKMDestination.h */,
 				2C79265E1FF35BC65487D8558D144373 /* STASDKMDestination.m */,
+				273AD89D1F13FF8600BDA9CD /* STASDKMDestinationLocation.h */,
+				273AD89E1F13FF8600BDA9CD /* STASDKMDestinationLocation.m */,
 				63D15AB1F91CCA30E334375391D4687C /* STASDKMDisease.h */,
 				7B1CE53FF7DE67FD8587D0921ABF5E33 /* STASDKMDisease.m */,
 				B2EA85C275235AA2205B4635EF59C20E /* STASDKMHospital.h */,
@@ -2056,6 +2073,10 @@
 				279238F21F0A82C70016F0C5 /* STASDKReachability.m */,
 				279238FE1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h */,
 				279238FF1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m */,
+				273AD88F1F13030000BDA9CD /* STASDKUIItineraryCityHeaderView.h */,
+				273AD8911F13034700BDA9CD /* STASDKUIItineraryCityHeaderView.m */,
+				273AD8931F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.h */,
+				273AD8941F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.m */,
 				2749B2EA1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h */,
 				2749B2EB1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.m */,
 			);
@@ -2941,6 +2962,7 @@
 				D59DAC14BC60CB633920706F0B82BE36 /* STASDKMHospital.h in Headers */,
 				E6A8E0217DB528CD0D9BC33ADCC60AAF /* STASDKMMedication.h in Headers */,
 				D8DA12AD791B7F43E9BB59003B8424FD /* STASDKMTrip.h in Headers */,
+				273AD8951F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.h in Headers */,
 				62C2556458A85952A808D02E3FC387CA /* STASDKMTripHealthComment.h in Headers */,
 				273AD8871F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h in Headers */,
 				3656061A74A75F50F11B4E7B2D055F78 /* STASDKMVaccination.h in Headers */,
@@ -2948,6 +2970,7 @@
 				11C489B66C50EA413B126F617D3986CD /* STASDKUI.h in Headers */,
 				DAB268323E6451B9AD6FD563AD49FCAD /* STASDKUIAlertPin.h in Headers */,
 				D0C428AC5F159A5F1396CA365BA556DC /* STASDKUIAlertsTableViewController.h in Headers */,
+				27CDAAEE1F1402F30022591D /* STASDKMDestinationLocation.h in Headers */,
 				306C4A10D965AB94D96462DF44D55DF7 /* STASDKUIAlertTableViewCell.h in Headers */,
 				2749B2ED1F0C0C9E002ECA79 /* STASDKUICardTableViewCell.h in Headers */,
 				CACBF02810C5C1DA04A34FE0123879F9 /* STASDKUIAlertViewController.h in Headers */,
@@ -2957,6 +2980,7 @@
 				74532E83B155E923D348AB600C1E7AF8 /* STASDKUICountryPickerPopoverViewController.h in Headers */,
 				273AD88B1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h in Headers */,
 				9C761DF9778EC1F352ECAD2F4D5C1DEA /* STASDKUICountrySwitcherViewController.h in Headers */,
+				273AD8901F13030000BDA9CD /* STASDKUIItineraryCityHeaderView.h in Headers */,
 				F719F380EFBF288722BFBA18D46B60A3 /* STASDKUIDiseaseDetailViewController.h in Headers */,
 				4C4F38ECA1DEE1DBC5E94A153ACEB12B /* STASDKUIEmergNumbersViewController.h in Headers */,
 				01DCE4BB60893D5BF0C6BCABE80B564E /* STASDKUIHealthCommentTableViewCell.h in Headers */,
@@ -3328,6 +3352,7 @@
 				4188B3F1390552C005A83B64BB4F0CE3 /* HospitalExtrasRowCell.xib in Resources */,
 				CCFA6184105368508C40CA1A04C8CB68 /* HospitalRowCell.xib in Resources */,
 				09DB0AACF1CCA9D4285453A09CBE9A40 /* Media.xcassets in Resources */,
+				273AD88E1F13023C00BDA9CD /* TBItineraryCityHeader.xib in Resources */,
 				D3FC619635C500AF2D4606C79F9FF876 /* SitataMain.storyboard in Resources */,
 				788C4DAF01D701B051B93D07335689CF /* STASDKDataModels.xcdatamodeld in Resources */,
 				804569290E4349742368967CE8EF095C /* Translations.strings in Resources */,
@@ -3662,6 +3687,7 @@
 				63D153421E03BFE786BEC8C30E849810 /* STASDKUIAlertPin.m in Sources */,
 				140544C3C8985591C9213F6E97178BF4 /* STASDKUIAlertsTableViewController.m in Sources */,
 				A2743A685EF0CEEB7D6E59916B284F55 /* STASDKUIAlertTableViewCell.m in Sources */,
+				273AD8961F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.m in Sources */,
 				0E29F7EA9B5E0F728348CD4E303837D9 /* STASDKUIAlertViewController.m in Sources */,
 				C6E4C19EB893EC3B2BC156F4273B0EA8 /* STASDKUIContactDetailTableViewCell.m in Sources */,
 				C27BA1839D61B072657D189AADB6849B /* STASDKUICopyLabel.m in Sources */,
@@ -3669,8 +3695,10 @@
 				919B94AE5AD17029875E66CD776C3FDD /* STASDKUICountrySwitcherViewController.m in Sources */,
 				899B4141DA36626ADE3A1BE67835D3C6 /* STASDKUIDiseaseDetailViewController.m in Sources */,
 				A87921993A06160733FE7B00A1482990 /* STASDKUIEmergNumbersViewController.m in Sources */,
+				27CDAAED1F1402F00022591D /* STASDKMDestinationLocation.m in Sources */,
 				7792141D747389BEA0DDFAE8F15DE455 /* STASDKUIHealthCommentTableViewCell.m in Sources */,
 				30283AA173368A5C7CCFE8EEE1971A2C /* STASDKUIHealthObjViewController.m in Sources */,
+				273AD8921F13034700BDA9CD /* STASDKUIItineraryCityHeaderView.m in Sources */,
 				C6C48FF944A8187C49EFEC9D193505C1 /* STASDKUIHealthTableViewController.m in Sources */,
 				F94FEDC3FA5F4F45F98CACCBE260B389 /* STASDKUIHospitalClusterView.m in Sources */,
 				175C313C582FBFF2EC03BAD8027EF9CB /* STASDKUIHospitalDetailViewController.m in Sources */,

@@ -14,6 +14,12 @@
 
 
 
+@interface STASDKUIItineraryCountryHeaderView()
+
+@property STASDKMDestination *destination;
+
+@end
+
 @implementation STASDKUIItineraryCountryHeaderView
 
 @synthesize delegate;
@@ -58,6 +64,7 @@
     self = [super init];
     if (self) {
         // grab destination country
+        self.destination = destination;
         STASDKMCountry *country = [STASDKMCountry findBy:destination.countryId];
         if (country) {
             self.titleLbl.alpha = 1.0;

@@ -10,7 +10,7 @@
 
 @class STASDKMDestination;
 
-@protocol UIItineraryCountryHeaderViewDelegate <NSObject>
+@protocol STASDKUIItineraryCountryHeaderViewDelegate <NSObject>
 
 - (void)onAddCountry:(id)sender;
 
@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addCountryBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addCountryImg;
 
-@property (weak, nonatomic) id <UIItineraryCountryHeaderViewDelegate> delegate;
+@property (weak, nonatomic) id <STASDKUIItineraryCountryHeaderViewDelegate> delegate;
 
 
 - (id) initWithDestination:(STASDKMDestination*)destination;

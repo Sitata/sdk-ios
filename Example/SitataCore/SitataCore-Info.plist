@@ -22,6 +22,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>GoogleApiKey</key>
+	<string>AIzaSyAPNpgXzspHmLDR8IJSR7l9RUWPUct8qfA</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

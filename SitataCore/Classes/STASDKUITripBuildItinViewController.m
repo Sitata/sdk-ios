@@ -13,13 +13,18 @@
 #import "STASDKMTrip.h"
 #import "STASDKMCountry.h"
 #import "STASDKUIItineraryCountryHeaderView.h"
+#import "STASDKUIItineraryCityHeaderView.h"
 #import "STASDKUITBDestPickerPageViewController.h"
+#import "STASDKUILocationSearchTableViewController.h"
 
 
-@interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, UIItineraryCountryHeaderViewDelegate, UIPopoverPresentationControllerDelegate, STASDKUITBDestinationPickerDelegate>
+@interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, STASDKUIItineraryCountryHeaderViewDelegate, STASDKUIItineraryCityHeaderViewDelegate,
+    UIPopoverPresentationControllerDelegate, STASDKUITBDestinationPickerDelegate, UISearchControllerDelegate, STASDKUILocationSearchDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property UISearchController *searchController;
+
 
 @property (nonatomic) RLMRealm *memoryRealm;
 
@@ -30,11 +35,13 @@
 static NSString* const kHeaderIdentifier = @"countryHeader";
 static NSString* const kCellIdentifier = @"cityCell";
 static CGFloat const kHeaderFooterHeight = 50.0f;
+static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    [self loadSearchController];
     [self loadTrip];
 
     self.tableView.dataSource = self;
@@ -46,8 +53,6 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
     // register xibs for table
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     [self.tableView registerNib:[UINib nibWithNibName:@"TBItineraryCountryHeader" bundle:bundle] forHeaderFooterViewReuseIdentifier:kHeaderIdentifier];
-
-//    [self.tableView registerNib:[UINib nibWithNibName:@"HospitalRowCell" bundle:bundle] forCellReuseIdentifier:kCellIdentifier];
     self.tableView.rowHeight = 65.0;
 
 }
@@ -86,7 +91,36 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 
 
 
+# pragma mark - Search Controller
 
+- (void) loadSearchController {
+    STASDKUILocationSearchTableViewController *searchTable = [self.storyboard instantiateViewControllerWithIdentifier:@"locationSearchTable"];
+    searchTable.delegate = self;
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController: searchTable];
+    self.searchController.searchResultsUpdater = searchTable;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    self.searchController.dimsBackgroundDuringPresentation = YES;
+    self.searchController.delegate = self;
+    // ensure that search bar does not remain on screen if user navigates to another view controller
+    self.definesPresentationContext = YES;
+}
+
+
+- (void)didDismissSearchController:(UISearchController *)searchController {
+    [self.searchController.searchBar removeFromSuperview];
+}
+
+- (void)onSelectedLocation:(STASDKMDestinationLocation *)location {
+    NSLog(@"SELECTED!  %@", location.friendlyName);
+
+    // TODO: NEED TO QUERY FOR LAT/LNG
+    //       NEED TO ADD CITY TO ROWS / RELOAD TABLE
+
+    [self.searchController dismissViewControllerAnimated:YES completion:^{
+        [self.searchController setActive:NO];
+        [self.searchController.searchBar removeFromSuperview];
+    }];
+}
 
 
 
@@ -160,7 +194,7 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
     } else if (section == [self numberOfSectionsInTableView:self.tableView]-1) {
         return [self addCountryRow]; // this is is the last section which should contain the add country header
     } else {
-        STASDKMDestination *dest = [[self destinations] objectAtIndex:section-1];
+        STASDKMDestination *dest = [self destinationForSection:section];
         STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] initWithDestination:dest];
         return view;
     }
@@ -169,15 +203,22 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
 }
 
 - (nullable UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *emptyView = [[UIView alloc] init];
-    emptyView.backgroundColor = [UIColor redColor];
-
 
     if (section == 0 || section == [self numberOfSectionsInTableView:self.tableView]-1) {
         return NULL;
+    } else {
+        STASDKMDestination *dest = [self destinationForSection:section];
+        STASDKUIItineraryCityHeaderView *view = [[STASDKUIItineraryCityHeaderView alloc] init];
+        view.delegate = self;
+        view.parentDestination = dest;
+        view.titleLbl.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ADD_CITY"];
+        return view;
     }
 
-    return emptyView; // TODO: return add city footer
+}
+
+- (STASDKMDestination*)destinationForSection:(NSInteger)section {
+    return [[self destinations] objectAtIndex:section-1];
 }
 
 - (UIView*)addCountryRow {
@@ -248,11 +289,21 @@ static CGFloat const kHeaderFooterHeight = 50.0f;
     [self performSegueWithIdentifier:@"destinationPicker" sender:sender];
 }
 
+#pragma - mark UIItineraryCityHeaderViewDelegate
+
+// launch the city picker
+- (void) onAddCity:(id)sender destination:(STASDKMDestination*)destination {
+
+    STASDKUILocationSearchTableViewController *searchTable = (STASDKUILocationSearchTableViewController*) self.searchController.searchResultsUpdater;
+    searchTable.currentDestination = destination;
+    [self.mapView addSubview:self.searchController.searchBar];
+    [self.searchController setActive:YES];
+}
+
 
 #pragma - mark STASDKUITBDestinationPickerDelegate
 
 - (void) onPickedDestination:(STASDKMDestination *)destination {
-    NSLog(@"PICKED DESTINATION %@", destination);
     [self.memoryRealm transactionWithBlock:^{
 
         // new destinations need a unique id to save in temporary memory
