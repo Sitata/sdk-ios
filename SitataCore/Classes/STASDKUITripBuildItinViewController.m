@@ -232,13 +232,15 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
         return [self addCountryRow]; // this is is the last section which should contain the add country header
     } else {
         STASDKMDestination *dest = [self destinationForSection:section];
-        STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] initWithDestination:dest];
+        bool isLastDest = section == [self numberOfSectionsInTableView:self.tableView]-2; // just before last section
+        STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] initWithDestination:dest isLast:isLastDest];
+        view.delegate = self;
         view.backgroundColor = [self tableViewColor];
         return view;
     }
-
-
 }
+
+
 
 - (nullable UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 
@@ -265,6 +267,8 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     view.delegate = self;
     view.titleLbl.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ADD_COUNTRY"];
     view.backgroundColor = [self tableViewColor];
+    [view removeRemoveBtn];
+    [view removeDateLbl];
     return view;
 }
 
@@ -330,6 +334,19 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 - (void) onAddCountry:(id)sender {
     [self performSegueWithIdentifier:@"destinationPicker" sender:sender];
 }
+
+// we only allow removal of the last destination at any given time
+- (void) onRemoveCountry:(id)sender {
+    STASDKMDestination *destination = [[self destinations] lastObject];
+
+    [self.memoryRealm transactionWithBlock:^{
+        // destination might not be last in order
+        int index = [self.trip.destinations indexOfObject:destination];
+        [self.trip.destinations removeObjectAtIndex:index];
+    }];
+    [self.tableView reloadData];
+}
+
 
 #pragma - mark UIItineraryCityHeaderViewDelegate
 

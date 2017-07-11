@@ -14,9 +14,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NgR-r5-ioz">
-                    <rect key="frame" x="65" y="8.5" width="305" height="33.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="NgR-r5-ioz">
+                    <rect key="frame" x="65" y="11" width="220" height="28"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -39,13 +39,34 @@
                         <action selector="onAddCountryImg:" destination="iN0-l3-epB" eventType="touchUpInside" id="2Xq-q3-SMh"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HB-Ms-G2i">
+                    <rect key="frame" x="345" y="10" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="9TO-jB-SZZ"/>
+                        <constraint firstAttribute="width" constant="30" id="aJf-OP-q0L"/>
+                    </constraints>
+                    <state key="normal" image="CloseBtn"/>
+                    <connections>
+                        <action selector="onRemoveCountryImg:" destination="iN0-l3-epB" eventType="touchUpInside" id="mrB-3c-o27"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Feb 09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzs-9C-vqC">
+                    <rect key="frame" x="305" y="18.5" width="40" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="CI8-ca-TyJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="65" id="9JR-0r-tK0"/>
+                <constraint firstAttribute="trailing" secondItem="8HB-Ms-G2i" secondAttribute="trailing" id="Ca7-7P-SHn"/>
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G7N-it-LhU"/>
-                <constraint firstAttribute="trailing" secondItem="NgR-r5-ioz" secondAttribute="trailing" constant="5" id="JyY-Km-UOS"/>
+                <constraint firstItem="8HB-Ms-G2i" firstAttribute="leading" secondItem="xzs-9C-vqC" secondAttribute="trailing" id="IIX-WK-kpA"/>
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="NSi-iF-paT"/>
+                <constraint firstItem="8HB-Ms-G2i" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OEI-Ib-Y62"/>
+                <constraint firstItem="xzs-9C-vqC" firstAttribute="leading" secondItem="NgR-r5-ioz" secondAttribute="trailing" constant="20" id="OKT-09-Xgm"/>
+                <constraint firstItem="xzs-9C-vqC" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z1X-p6-duS"/>
                 <constraint firstItem="NgR-r5-ioz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="iym-IV-1b6"/>
                 <constraint firstItem="CI8-ca-TyJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v04-X8-lbQ"/>
                 <constraint firstItem="NgR-r5-ioz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="65" id="vGn-tY-p1W"/>
@@ -54,12 +75,15 @@
             <connections>
                 <outlet property="addCountryBtn" destination="CI8-ca-TyJ" id="Nu3-N9-DRw"/>
                 <outlet property="addCountryImg" destination="4PI-lz-Jh8" id="34p-6u-NCQ"/>
+                <outlet property="dateLbl" destination="xzs-9C-vqC" id="eq7-7d-d08"/>
+                <outlet property="removeCountryImg" destination="8HB-Ms-G2i" id="mvg-si-Q3f"/>
                 <outlet property="titleLbl" destination="NgR-r5-ioz" id="vOE-8n-ZZA"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="-239"/>
         </view>
     </objects>
     <resources>
+        <image name="CloseBtn" width="126" height="126"/>
         <image name="PlusBtn" width="126" height="126"/>
     </resources>
 </document>

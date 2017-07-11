@@ -972,7 +972,7 @@
                         <outlet property="mapView" destination="SGr-Ma-a2W" id="Uaa-xr-HnL"/>
                         <outlet property="tableView" destination="idN-rF-rTl" id="jzF-A4-8s8"/>
                         <segue destination="Ka3-jP-UAb" kind="popoverPresentation" identifier="destinationPicker" popoverAnchorView="idN-rF-rTl" id="zyv-QZ-BrA">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES"/>
                         </segue>
                     </connections>
                 </viewController>

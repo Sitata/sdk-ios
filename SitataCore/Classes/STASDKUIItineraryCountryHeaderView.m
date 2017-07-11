@@ -11,7 +11,7 @@
 #import "STASDKDataController.h"
 #import "STASDKMDestination.h"
 #import "STASDKMCountry.h"
-
+#import "STASDKUI.h"
 
 
 @interface STASDKUIItineraryCountryHeaderView()
@@ -60,7 +60,7 @@
 }
 
 
-- (id) initWithDestination:(STASDKMDestination*)destination {
+- (id) initWithDestination:(STASDKMDestination*)destination isLast:(bool)isLast {
     self = [super init];
     if (self) {
         // grab destination country
@@ -71,7 +71,7 @@
 
             // Draw circular node
             CAShapeLayer *circleLayer = [CAShapeLayer layer];
-            [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(23, 15, 20, 20)] CGPath]];
+            [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(23, 17, 20, 20)] CGPath]];
             [circleLayer setStrokeColor:[[UIColor darkGrayColor] CGColor]];
             [circleLayer setFillColor:[[UIColor darkGrayColor] CGColor]];
             [[self layer] addSublayer:circleLayer];
@@ -81,9 +81,18 @@
             bar.backgroundColor = [UIColor darkGrayColor];
             [self addSubview:bar];
 
+            // date
+            self.dateLbl.textColor = [UIColor darkGrayColor];
+            self.dateLbl.text = [STASDKUI dateDisplayShort:[destination departureDate]];
+
             self.addCountryBtn.alpha = 0.0;
             self.addCountryImg.alpha = 0.0;
             self.titleLbl.text = country.name;
+        }
+
+        // only last country in list may be removed
+        if (!isLast) {
+            [self removeRemoveBtn];
         }
     }
     return self;
@@ -104,7 +113,20 @@
     [self addSubview:bar];
 
     self.addCountryImg.tintColor = [UIColor darkGrayColor];
+    self.removeCountryImg.tintColor = [UIColor darkGrayColor];
     self.titleLbl.textColor = [UIColor darkGrayColor];
+}
+
+
+- (void) removeRemoveBtn {
+    [self.removeCountryImg removeFromSuperview];
+
+    // adjust date label
+    [self.dateLbl.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-5.0].active = true;
+}
+
+- (void) removeDateLbl {
+    [self.dateLbl removeFromSuperview];
 }
 
 - (IBAction)onAddCountry:(id)sender {
@@ -116,6 +138,12 @@
 - (IBAction)onAddCountryImg:(id)sender {
     if (self.delegate) {
         [self.delegate onAddCountry:sender];
+    }
+}
+
+- (IBAction)onRemoveCountryImg:(id)sender {
+    if (self.delegate) {
+        [self.delegate onRemoveCountry:sender];
     }
 }
 

@@ -57,6 +57,9 @@ typedef NS_ENUM(int, InfoType) {
 // Returns a date string in format YYYY-MM-DD
 + (NSString *_Nonnull)dateDisplayString:(NSDate*_Nonnull)date;
 
+// Returns a date string in the format Jan 28
++ (NSString *_Nonnull)dateDisplayShort:(NSDate*_Nonnull)date;
+
 // Returns a formatted distance string (using unit settings) for display. Will
 // convert given distance value (meters required) when necessary.
 + (NSString *_Nonnull)formattedDistance:(double)distanceMeters;

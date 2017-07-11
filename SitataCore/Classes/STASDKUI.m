@@ -159,8 +159,15 @@
 
 + (NSString *)dateDisplayString:(NSDate*)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:[[NSLocale currentLocale] localeIdentifier]];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
+    return [dateFormatter stringFromDate:date];
+}
+
++ (NSString *_Nonnull)dateDisplayShort:(NSDate*_Nonnull)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:[[NSLocale currentLocale] localeIdentifier]];
+    dateFormatter.dateFormat = @"MMM dd";
     return [dateFormatter stringFromDate:date];
 }
 
