@@ -16,6 +16,7 @@
 #import "STASDKUIItineraryCityHeaderView.h"
 #import "STASDKUITBDestPickerPageViewController.h"
 #import "STASDKUILocationSearchTableViewController.h"
+#import "STASDKApiMisc.h"
 
 
 @interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, STASDKUIItineraryCountryHeaderViewDelegate, STASDKUIItineraryCityHeaderViewDelegate,
@@ -35,7 +36,8 @@
 static NSString* const kHeaderIdentifier = @"countryHeader";
 static NSString* const kCellIdentifier = @"cityCell";
 static CGFloat const kHeaderFooterHeight = 50.0f;
-static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
+static CGFloat const kCityRowHeight = 25.0f;
+static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +56,9 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     [self.tableView registerNib:[UINib nibWithNibName:@"TBItineraryCountryHeader" bundle:bundle] forHeaderFooterViewReuseIdentifier:kHeaderIdentifier];
     self.tableView.rowHeight = 65.0;
+
+
+    self.tableView.backgroundColor = [self tableViewColor];
 
 }
 
@@ -89,6 +94,9 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
     return [[self destinations] count] > 0;
 }
 
+- (UIColor*)tableViewColor {
+    return [UIColor groupTableViewBackgroundColor];
+}
 
 
 # pragma mark - Search Controller
@@ -110,15 +118,34 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
     [self.searchController.searchBar removeFromSuperview];
 }
 
-- (void)onSelectedLocation:(STASDKMDestinationLocation *)location {
-    NSLog(@"SELECTED!  %@", location.friendlyName);
+- (void)onSelectedLocation:(STASDKMDestinationLocation *)location forDestination:(STASDKMDestination *)destination {
+    [self fetchLatLngFor:location onFinished:^{
+        [self.memoryRealm transactionWithBlock:^{
+            location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
+            [destination.destinationLocations addObject:location];
+        }];
 
-    // TODO: NEED TO QUERY FOR LAT/LNG
-    //       NEED TO ADD CITY TO ROWS / RELOAD TABLE
+        [self.searchController dismissViewControllerAnimated:YES completion:^{
+            [self.searchController setActive:NO];
+            [self.searchController.searchBar removeFromSuperview];
+            [self.tableView reloadData];
+        }];
+    }];
+}
 
-    [self.searchController dismissViewControllerAnimated:YES completion:^{
-        [self.searchController setActive:NO];
-        [self.searchController.searchBar removeFromSuperview];
+- (void)fetchLatLngFor:(STASDKMDestinationLocation*)location onFinished:(void(^)()) callback {
+    [STASDKApiMisc googleFetchPlace:location._googlePlaceId onFinished:^(NSDictionary *result, NSURLSessionDataTask *task, NSError *error) {
+        if (result) {
+            NSDictionary *geo = [result objectForKey:@"geometry"];
+            if (geo) {
+                NSDictionary *resultLoc = [geo objectForKey:@"location"];
+                if (resultLoc) {
+                    location.latitude = [[resultLoc objectForKey:@"lat"] doubleValue];
+                    location.longitude  = [[resultLoc objectForKey:@"lng"] doubleValue];
+                }
+            }
+        }
+        callback();
     }];
 }
 
@@ -143,8 +170,12 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
         if (section == 0 || section == [self numberOfSectionsInTableView:self.tableView]-1) {
             return 0; // fancy itinerary header or add country header at end of all destination sections
         } else {
-            // TODO: RETURN NUMBER OF CITIES WITHIN EACH DESTINATION
-            return 1;
+            STASDKMDestination *dest = [self destinationForSection:section];
+            if (dest) {
+                return [[dest destinationLocations] count];
+            } else {
+                return 0;
+            }
         }
     } else {
         return 0; // fancy itinerary header only
@@ -153,25 +184,31 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: TEMP
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.backgroundColor = [UIColor yellowColor];
 
     NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
 
-    if (section == 0) { return cell; } // TODO
+    if (section == 0) { return NULL; }
 
     // needs to have cities listed
     if (self.hasDestinations) {
-
+        STASDKMDestination *dest = [self destinationForSection:section];
+        STASDKMDestinationLocation *loc = [[dest destinationLocations] objectAtIndex:row];
+        STASDKUIItineraryCityHeaderView *view = [[STASDKUIItineraryCityHeaderView alloc] initWithLocation:loc];
+        UITableViewCell *cell = [[UITableViewCell alloc] init];
+        [cell addSubview:view];
+        view.frame = cell.frame;
+        view.backgroundColor = [self tableViewColor];
+        return cell;
     } else {
-
+        return NULL;
     }
-
-
-    return cell;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kCityRowHeight;
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 0 || section == [self numberOfSectionsInTableView:self.tableView]-1) {
@@ -196,6 +233,7 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
     } else {
         STASDKMDestination *dest = [self destinationForSection:section];
         STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] initWithDestination:dest];
+        view.backgroundColor = [self tableViewColor];
         return view;
     }
 
@@ -212,6 +250,7 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
         view.delegate = self;
         view.parentDestination = dest;
         view.titleLbl.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ADD_CITY"];
+        view.backgroundColor = [self tableViewColor];
         return view;
     }
 
@@ -225,6 +264,7 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
     STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] init];
     view.delegate = self;
     view.titleLbl.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ADD_COUNTRY"];
+    view.backgroundColor = [self tableViewColor];
     return view;
 }
 
@@ -256,7 +296,7 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
     CGFloat imageBottom = ypos + imgSize;
     CGFloat imageSpace = 10.0;
     CGFloat barStart = imageBottom - imageSpace;
-    CGFloat barHeight = kHeaderFooterHeight - barStart;
+    CGFloat barHeight = 35.0; // kHeaderFooterHeight - barStart;
     UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, barStart, 3.0, barHeight)];
     bar.backgroundColor = [UIColor darkGrayColor];
     [base addSubview:bar];
@@ -275,6 +315,8 @@ static CGFloat const kTimelineSpacing = 31.0f; // TODO: Start using this
     title.translatesAutoresizingMaskIntoConstraints = NO;
     [title.leftAnchor constraintEqualToAnchor:imgView.rightAnchor constant:10].active = true;
     [title.centerYAnchor constraintEqualToAnchor:base.centerYAnchor].active = true;
+
+    base.backgroundColor = [self tableViewColor];
 
     return base;
 

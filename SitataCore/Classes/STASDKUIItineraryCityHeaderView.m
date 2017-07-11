@@ -9,9 +9,8 @@
 #import "STASDKUIItineraryCityHeaderView.h"
 
 #import "STASDKDataController.h"
-//#import "STASDKMDestination.h"
-//#import "STASDKMCountry.h"
-//
+#import "STASDKMDestinationLocation.h"
+
 
 
 @implementation STASDKUIItineraryCityHeaderView
@@ -54,30 +53,28 @@
 }
 
 
-- (id) initWithDestination:(STASDKMDestination*)destination {
+- (id) initWithLocation:(STASDKMDestinationLocation*)location {
     self = [super init];
     if (self) {
-        // grab destination country
-//        STASDKMCountry *country = [STASDKMCountry findBy:destination.countryId];
-//        if (country) {
-//            self.titleLbl.alpha = 1.0;
-//
-//            // Draw circular node
-//            CAShapeLayer *circleLayer = [CAShapeLayer layer];
-//            [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(23, 15, 20, 20)] CGPath]];
-//            [circleLayer setStrokeColor:[[UIColor darkGrayColor] CGColor]];
-//            [circleLayer setFillColor:[[UIColor darkGrayColor] CGColor]];
-//            [[self layer] addSublayer:circleLayer];
-//
-//            // Draw timeline
-//            UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, 50.0)];
-//            bar.backgroundColor = [UIColor darkGrayColor];
-//            [self addSubview:bar];
-//
-//            self.addCountryBtn.alpha = 0.0;
-//            self.addCountryImg.alpha = 0.0;
-//            self.titleLbl.text = country.name;
-//        }
+
+        self.titleLbl.alpha = 1.0;
+
+        // Draw circular node
+        CAShapeLayer *circleLayer = [CAShapeLayer layer];
+        [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(66, 4, 17, 17)] CGPath]];
+        [circleLayer setStrokeColor:[[UIColor darkGrayColor] CGColor]];
+        [circleLayer setFillColor:[[UIColor darkGrayColor] CGColor]];
+        [[self layer] addSublayer:circleLayer];
+
+        // Draw timeline
+        UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, 50.0)];
+        bar.backgroundColor = [UIColor darkGrayColor];
+        [self addSubview:bar];
+
+        self.addCityBtn.alpha = 0.0;
+        self.addCityImg.alpha = 0.0;
+        self.titleLbl.text = location.friendlyName;
+
     }
     return self;
 }

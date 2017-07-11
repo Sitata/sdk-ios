@@ -108,5 +108,6 @@
 
 // MARK: == GOOGLE ==
 +(NSString*)googleSearchForCityNamed:(NSString*)query inCountry:(NSString*)countryCode;
++(NSString*)googlePlaceDetails:(NSString*)placeId;
 
 @end

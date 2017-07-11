@@ -76,4 +76,31 @@
 }
 
 
++(void)googleFetchPlace:(NSString*)placeId onFinished:(void(^)(NSDictionary*, NSURLSessionDataTask*, NSError*)) callback {
+    NSString *url = [STASDKApiRoutes googlePlaceDetails:placeId];
+
+    AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
+
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+
+        NSDictionary *jsonResult = (NSDictionary*) responseObject;
+        NSString *status = [jsonResult objectForKey:@"status"];
+
+        if ([status isEqualToString:@"OK"] || [status isEqualToString:@"ZERO_RESULTS"] ) {
+            callback([jsonResult objectForKey:@"result"], task, nil);
+        } else {
+            NSString *errorMessage = [jsonResult objectForKey:@"error_message"];
+            NSString *fullMessage = [NSString stringWithFormat:@"Error querying google: '%@'", errorMessage];
+            NSDictionary *details = [[NSDictionary alloc] initWithObjectsAndKeys:fullMessage, NSLocalizedDescriptionKey, nil];
+            NSError *error = [NSError errorWithDomain:@"sitata.com" code:99 userInfo:details];
+            callback(nil, task, error);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        // do failure
+        NSLog(@"Error: %@", error);
+        callback(nil, task, error);
+    }];
+
+}
+
 @end

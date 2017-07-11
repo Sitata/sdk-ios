@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class STASDKMDestination;
+@class STASDKMDestinationLocation;
+
 
 @protocol STASDKUIItineraryCityHeaderViewDelegate <NSObject>
 
@@ -29,7 +31,7 @@
 @property (weak, nonatomic) id <STASDKUIItineraryCityHeaderViewDelegate> delegate;
 
 
-- (id) initWithDestination:(STASDKMDestination*)destination;
+- (id) initWithLocation:(STASDKMDestinationLocation*)location;
 
 @end
 

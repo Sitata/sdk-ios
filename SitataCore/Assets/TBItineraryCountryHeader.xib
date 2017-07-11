@@ -14,8 +14,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgR-r5-ioz">
-                    <rect key="frame" x="65" y="8.5" width="176" height="33.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NgR-r5-ioz">
+                    <rect key="frame" x="65" y="8.5" width="305" height="33.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -44,6 +44,7 @@
             <constraints>
                 <constraint firstItem="CI8-ca-TyJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="65" id="9JR-0r-tK0"/>
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G7N-it-LhU"/>
+                <constraint firstAttribute="trailing" secondItem="NgR-r5-ioz" secondAttribute="trailing" constant="5" id="JyY-Km-UOS"/>
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="NSi-iF-paT"/>
                 <constraint firstItem="NgR-r5-ioz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="iym-IV-1b6"/>
                 <constraint firstItem="CI8-ca-TyJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v04-X8-lbQ"/>

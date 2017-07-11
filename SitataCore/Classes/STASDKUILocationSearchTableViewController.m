@@ -96,7 +96,11 @@
     if (self.matchingItems.count > 0) {
         // sending back to delegate
         STASDKMDestinationLocation *loc = [self.matchingItems objectAtIndex:[indexPath row]];
-        [self.delegate onSelectedLocation:loc];
+        [self.delegate onSelectedLocation:loc forDestination:self.currentDestination];
+
+        // reset results
+        [self.matchingItems removeAllObjects];
+        [self.tableView reloadData];
     } else {
         // can't select 'no results' row
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];

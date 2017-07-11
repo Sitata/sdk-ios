@@ -14,9 +14,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgR-r5-ioz">
-                    <rect key="frame" x="100" y="8.5" width="126.5" height="33.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="NgR-r5-ioz">
+                    <rect key="frame" x="100" y="15.5" width="270" height="20.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -46,6 +46,7 @@
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G7N-it-LhU"/>
                 <constraint firstItem="4PI-lz-Jh8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="NSi-iF-paT"/>
                 <constraint firstItem="NgR-r5-ioz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="iym-IV-1b6"/>
+                <constraint firstAttribute="trailing" secondItem="NgR-r5-ioz" secondAttribute="trailing" constant="5" id="uZq-oK-8ae"/>
                 <constraint firstItem="CI8-ca-TyJ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v04-X8-lbQ"/>
                 <constraint firstItem="NgR-r5-ioz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="vGn-tY-p1W"/>
             </constraints>

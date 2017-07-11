@@ -13,7 +13,7 @@
 
 @protocol STASDKUILocationSearchDelegate <NSObject>
 
-- (void)onSelectedLocation:(STASDKMDestinationLocation*)location;
+- (void)onSelectedLocation:(STASDKMDestinationLocation*)location forDestination:(STASDKMDestination*)destination;
 
 @end
 
