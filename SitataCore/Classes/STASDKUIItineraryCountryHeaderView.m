@@ -137,7 +137,7 @@
 
 - (IBAction)onRemoveCountryImg:(id)sender {
     if (self.delegate) {
-        [self.delegate onRemoveCountry:sender];
+        [self.delegate onRemoveCountry:sender removed:self.destination];
     }
 }
 

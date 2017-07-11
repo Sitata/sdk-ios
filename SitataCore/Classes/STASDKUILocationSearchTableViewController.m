@@ -114,7 +114,7 @@
 #pragma mark - UISearchResultsUpdating
 - (void) updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *text = searchController.searchBar.text;
-    if (text && text.length > 1) {
+    if (text && text.length > 0) {
 
         NSTimeInterval interval = 0.3;
 

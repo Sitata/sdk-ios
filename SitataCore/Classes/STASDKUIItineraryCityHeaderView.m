@@ -12,6 +12,12 @@
 #import "STASDKMDestinationLocation.h"
 
 
+@interface STASDKUIItineraryCityHeaderView()
+
+@property STASDKMDestinationLocation *location;
+
+@end
+
 
 @implementation STASDKUIItineraryCityHeaderView
 
@@ -56,7 +62,7 @@
 - (id) initWithLocation:(STASDKMDestinationLocation*)location {
     self = [super init];
     if (self) {
-
+        self.location = location;
         self.titleLbl.alpha = 1.0;
 
         // Draw circular node
@@ -114,7 +120,7 @@
 
 - (IBAction)onRemoveCityImg:(id)sender {
     if (self.delegate) {
-        [self.delegate onRemoveCity:sender];
+        [self.delegate onRemoveCity:sender removed:self.location];
     }
 }
 

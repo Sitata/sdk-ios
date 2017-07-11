@@ -13,7 +13,7 @@
 @protocol STASDKUIItineraryCountryHeaderViewDelegate <NSObject>
 
 - (void)onAddCountry:(id)sender;
-- (void)onRemoveCountry:(id)sender;
+- (void)onRemoveCountry:(id)sender removed:(STASDKMDestination*)destination;
 
 @end
 

@@ -15,7 +15,7 @@
 @protocol STASDKUIItineraryCityHeaderViewDelegate <NSObject>
 
 - (void)onAddCity:(id)sender destination:(STASDKMDestination*)destination;
-- (void)onRemoveCity:(id)sender;
+- (void)onRemoveCity:(id)sender removed:(STASDKMDestinationLocation*)location;
 
 @end
 

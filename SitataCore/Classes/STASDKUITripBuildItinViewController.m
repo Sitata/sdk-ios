@@ -336,10 +336,9 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     [self performSegueWithIdentifier:@"destinationPicker" sender:sender];
 }
 
-// we only allow removal of the last destination at any given time
-- (void) onRemoveCountry:(id)sender {
-    STASDKMDestination *destination = [[self destinations] lastObject];
 
+- (void) onRemoveCountry:(id)sender removed:(STASDKMDestination *)destination {
+    
     [self.memoryRealm transactionWithBlock:^{
         // destination might not be last in order
         int index = (int) [self.trip.destinations indexOfObject:destination];
@@ -360,8 +359,18 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     [self.searchController setActive:YES];
 }
 
-- (void) onRemoveCity:(id)sender {
-    NSLog(@"remove city!!!!!");
+- (void) onRemoveCity:(id)sender removed:(STASDKMDestinationLocation *)location {
+    int index;
+    for (STASDKMDestination *dest in [self destinations]) {
+        index = (int) [dest.destinationLocations indexOfObject:location];
+        if (index != -1) {
+            [self.memoryRealm transactionWithBlock:^{
+                [dest.destinationLocations removeObjectAtIndex:index];
+            }];
+            [self.tableView reloadData];
+            break;
+        }
+    }
 }
 
 
