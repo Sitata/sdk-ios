@@ -102,7 +102,7 @@ const int destPageCount = 3;
             STASDKUITBDatePickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tbDatePicker"];
 
             // TODO: If trip is present, min date could be anything, otherwise, min date is today
-            vc.minDate = [[NSDate alloc] init];
+            vc.minDate = self.entryDate;
             vc.titleBarLblText = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ARRIVAL_TITLE"];
             vc.delegate = self;
             page = vc;
@@ -132,7 +132,6 @@ const int destPageCount = 3;
 // This is called from the popover VC when a country is picked.
 - (void)onChangeCountry:(STASDKMCountry*)country {
     if (country != NULL) {
-        NSLog(@"Picked - %@", country.name);
         self.country = country;
         // proceed to next page for date picking
         [self nextPage];
@@ -141,7 +140,6 @@ const int destPageCount = 3;
 
 #pragma - mark STASDKUITBDatePickerDelegate
 - (void)onPickedDate:(NSDate *)date {
-    NSLog(@"Picked - %@", date);
     if (self.currentIndex == 1) {
         // picking entry date
         self.entryDate = date;

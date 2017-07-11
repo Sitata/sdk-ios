@@ -61,7 +61,7 @@
 
         // Draw circular node
         CAShapeLayer *circleLayer = [CAShapeLayer layer];
-        [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(66, 4, 17, 17)] CGPath]];
+        [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(66, 9, 17, 17)] CGPath]];
         [circleLayer setStrokeColor:[[UIColor darkGrayColor] CGColor]];
         [circleLayer setFillColor:[[UIColor darkGrayColor] CGColor]];
         [[self layer] addSublayer:circleLayer];
@@ -73,7 +73,9 @@
 
         self.addCityBtn.alpha = 0.0;
         self.addCityImg.alpha = 0.0;
+        self.titleLbl.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
         self.titleLbl.text = location.friendlyName;
+        self.removeCityImg.tintColor = [UIColor darkGrayColor];
 
     }
     return self;
@@ -94,6 +96,10 @@
     self.titleLbl.textColor = [UIColor darkGrayColor];
 }
 
+- (void) removeRemoveBtn {
+    [self.removeCityImg removeFromSuperview];
+}
+
 - (IBAction)onAddCity:(id)sender {
     if (self.delegate) {
         [self.delegate onAddCity:sender destination:self.parentDestination];
@@ -106,6 +112,11 @@
     }
 }
 
+- (IBAction)onRemoveCityImg:(id)sender {
+    if (self.delegate) {
+        [self.delegate onRemoveCity:sender];
+    }
+}
 
 
 

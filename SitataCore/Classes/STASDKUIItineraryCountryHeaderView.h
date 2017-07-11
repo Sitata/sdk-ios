@@ -30,7 +30,7 @@
 @property (weak, nonatomic) id <STASDKUIItineraryCountryHeaderViewDelegate> delegate;
 
 
-- (id) initWithDestination:(STASDKMDestination*)destination isLast:(bool)isLast;
+- (id) initWithDestination:(STASDKMDestination*)destination;
 
 - (void) removeRemoveBtn;
 - (void) removeDateLbl;

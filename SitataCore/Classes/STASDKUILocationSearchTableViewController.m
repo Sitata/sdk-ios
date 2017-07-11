@@ -79,7 +79,7 @@
 
     if (self.matchingItems.count > 0) {
         STASDKMDestinationLocation *loc = [self.matchingItems objectAtIndex:[indexPath row]];
-        cell.textLabel.text = loc.friendlyName;
+        cell.textLabel.text = loc._longName;
         cell.textLabel.font = [UIFont systemFontOfSize:14.0];
         cell.textLabel.textColor = [UIColor blackColor];
     } else {

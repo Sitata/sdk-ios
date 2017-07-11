@@ -36,7 +36,7 @@
 static NSString* const kHeaderIdentifier = @"countryHeader";
 static NSString* const kCellIdentifier = @"cityCell";
 static CGFloat const kHeaderFooterHeight = 50.0f;
-static CGFloat const kCityRowHeight = 25.0f;
+static CGFloat const kCityRowHeight = 35.0f;
 static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 - (void)viewDidLoad {
@@ -198,6 +198,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
         UITableViewCell *cell = [[UITableViewCell alloc] init];
         [cell addSubview:view];
         view.frame = cell.frame;
+        view.delegate = self;
         view.backgroundColor = [self tableViewColor];
         return cell;
     } else {
@@ -232,8 +233,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
         return [self addCountryRow]; // this is is the last section which should contain the add country header
     } else {
         STASDKMDestination *dest = [self destinationForSection:section];
-        bool isLastDest = section == [self numberOfSectionsInTableView:self.tableView]-2; // just before last section
-        STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] initWithDestination:dest isLast:isLastDest];
+        STASDKUIItineraryCountryHeaderView *view = [[STASDKUIItineraryCountryHeaderView alloc] initWithDestination:dest];
         view.delegate = self;
         view.backgroundColor = [self tableViewColor];
         return view;
@@ -253,6 +253,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
         view.parentDestination = dest;
         view.titleLbl.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ADD_CITY"];
         view.backgroundColor = [self tableViewColor];
+        [view removeRemoveBtn];
         return view;
     }
 
@@ -341,7 +342,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
     [self.memoryRealm transactionWithBlock:^{
         // destination might not be last in order
-        int index = [self.trip.destinations indexOfObject:destination];
+        int index = (int) [self.trip.destinations indexOfObject:destination];
         [self.trip.destinations removeObjectAtIndex:index];
     }];
     [self.tableView reloadData];
@@ -357,6 +358,10 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     searchTable.currentDestination = destination;
     [self.mapView addSubview:self.searchController.searchBar];
     [self.searchController setActive:YES];
+}
+
+- (void) onRemoveCity:(id)sender {
+    NSLog(@"remove city!!!!!");
 }
 
 

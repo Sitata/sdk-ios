@@ -177,7 +177,15 @@
 +(STASDKMDestinationLocation*)initFromGoogleResult:(NSDictionary*)result {
     STASDKMDestinationLocation *loc = [[STASDKMDestinationLocation alloc] init];
 
-    loc.friendlyName = [result objectForKey:@"description"];
+    NSString *preferredName;
+    NSDictionary *structured = [result objectForKey:@"structured_formatting"];
+    if (structured) {
+        preferredName = [structured objectForKey:@"main_text"];
+    }
+    if (!preferredName) {preferredName = [result objectForKey:@"description"];}
+
+    loc.friendlyName = preferredName;
+    loc._longName = [result objectForKey:@"description"];
     loc._googlePlaceId = [result objectForKey:@"place_id"];
     return loc;
 }

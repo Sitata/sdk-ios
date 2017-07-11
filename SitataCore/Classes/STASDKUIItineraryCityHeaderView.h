@@ -15,6 +15,7 @@
 @protocol STASDKUIItineraryCityHeaderViewDelegate <NSObject>
 
 - (void)onAddCity:(id)sender destination:(STASDKMDestination*)destination;
+- (void)onRemoveCity:(id)sender;
 
 @end
 
@@ -25,13 +26,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLbl;
 @property (weak, nonatomic) IBOutlet UIButton *addCityBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addCityImg;
+@property (weak, nonatomic) IBOutlet UIButton *removeCityImg;
 
 @property STASDKMDestination *parentDestination;
 
 @property (weak, nonatomic) id <STASDKUIItineraryCityHeaderViewDelegate> delegate;
 
 
+
 - (id) initWithLocation:(STASDKMDestinationLocation*)location;
+
+- (void) removeRemoveBtn;
 
 @end
 

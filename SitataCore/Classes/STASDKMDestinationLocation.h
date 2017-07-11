@@ -16,6 +16,7 @@
 @property double longitude;
 
 @property NSString *_googlePlaceId;
+@property NSString *_longName;
 
 
 
