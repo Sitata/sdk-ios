@@ -17,11 +17,13 @@
 #import "STASDKUITBDestPickerPageViewController.h"
 #import "STASDKUILocationSearchTableViewController.h"
 #import "STASDKApiMisc.h"
+#import "STASDKUITripLocationAnnotation.h"
 
 #import <Realm/Realm.h>
+#import <Contacts/Contacts.h>
 
 
-@interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, STASDKUIItineraryCountryHeaderViewDelegate, STASDKUIItineraryCityHeaderViewDelegate,
+@interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, STASDKUIItineraryCountryHeaderViewDelegate, STASDKUIItineraryCityHeaderViewDelegate, MKMapViewDelegate,
     UIPopoverPresentationControllerDelegate, STASDKUITBDestinationPickerDelegate, UISearchControllerDelegate, STASDKUILocationSearchDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -47,6 +49,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
     [self loadSearchController];
 
+    self.mapView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     // This will remove extra separators from tableview
@@ -101,36 +104,8 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     [self.searchController.searchBar removeFromSuperview];
 }
 
-- (void)onSelectedLocation:(STASDKMDestinationLocation *)location forDestination:(STASDKMDestination *)destination {
-    [self fetchLatLngFor:location onFinished:^{
-        [self.theRealm transactionWithBlock:^{
-            location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
-            [destination.destinationLocations addObject:location];
-        }];
 
-        [self.searchController dismissViewControllerAnimated:YES completion:^{
-            [self.searchController setActive:NO];
-            [self.searchController.searchBar removeFromSuperview];
-            [self.tableView reloadData];
-        }];
-    }];
-}
 
-- (void)fetchLatLngFor:(STASDKMDestinationLocation*)location onFinished:(void(^)()) callback {
-    [STASDKApiMisc googleFetchPlace:location._googlePlaceId onFinished:^(NSDictionary *result, NSURLSessionDataTask *task, NSError *error) {
-        if (result) {
-            NSDictionary *geo = [result objectForKey:@"geometry"];
-            if (geo) {
-                NSDictionary *resultLoc = [geo objectForKey:@"location"];
-                if (resultLoc) {
-                    location.latitude = [[resultLoc objectForKey:@"lat"] doubleValue];
-                    location.longitude  = [[resultLoc objectForKey:@"lng"] doubleValue];
-                }
-            }
-        }
-        callback();
-    }];
-}
 
 
 
@@ -312,7 +287,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 
 
-#pragma - mark UIItineraryCountryHeaderViewDelegate
+#pragma mark - UIItineraryCountryHeaderViewDelegate
 
 // launch the destination picker
 - (void) onAddCountry:(id)sender {
@@ -331,7 +306,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 }
 
 
-#pragma - mark UIItineraryCityHeaderViewDelegate
+#pragma mark - UIItineraryCityHeaderViewDelegate
 
 // launch the city picker
 - (void) onAddCity:(id)sender destination:(STASDKMDestination*)destination {
@@ -357,7 +332,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 }
 
 
-#pragma - mark STASDKUITBDestinationPickerDelegate
+#pragma mark - STASDKUITBDestinationPickerDelegate
 
 - (void) onPickedDestination:(STASDKMDestination *)destination {
     [self.theRealm transactionWithBlock:^{
@@ -367,11 +342,66 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
         destination.identifier = uuid;
 
         [[self.trip destinations] addObject:destination];
+
     }];
+    [self zoomToCountry:destination.countryCode];
     [self.tableView reloadData];
 }
 
 
+- (void)zoomToCountry:(NSString*)countryCode {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    NSDictionary *addDict = @{CNPostalAddressISOCountryCodeKey : countryCode};
+    [geocoder geocodeAddressDictionary:addDict completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
+        if (placemarks.count >= 1) {
+            CLPlacemark *place = [placemarks objectAtIndex:0];
+            CLLocation *loc = place.location;
+            MKCoordinateSpan span = MKCoordinateSpanMake(20.0, 20.0);
+            MKCoordinateRegion region = MKCoordinateRegionMake(loc.coordinate, span);
+            [self.mapView setRegion:region animated:YES];
+        }
+    }];
+}
+
+
+#pragma mark - STASDKUILocationSearchDelegate
+
+- (void)onSelectedLocation:(STASDKMDestinationLocation *)location forDestination:(STASDKMDestination *)destination {
+    [self fetchLatLngFor:location onFinished:^{
+        [self.theRealm transactionWithBlock:^{
+            location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
+            [destination.destinationLocations addObject:location];
+            [self dropMapPinFor:location];
+        }];
+
+        [self.searchController dismissViewControllerAnimated:YES completion:^{
+            [self.searchController setActive:NO];
+            [self.searchController.searchBar removeFromSuperview];
+            [self.tableView reloadData];
+        }];
+    }];
+}
+
+- (void)fetchLatLngFor:(STASDKMDestinationLocation*)location onFinished:(void(^)()) callback {
+    [STASDKApiMisc googleFetchPlace:location._googlePlaceId onFinished:^(NSDictionary *result, NSURLSessionDataTask *task, NSError *error) {
+        if (result) {
+            NSDictionary *geo = [result objectForKey:@"geometry"];
+            if (geo) {
+                NSDictionary *resultLoc = [geo objectForKey:@"location"];
+                if (resultLoc) {
+                    location.latitude = [[resultLoc objectForKey:@"lat"] doubleValue];
+                    location.longitude  = [[resultLoc objectForKey:@"lng"] doubleValue];
+                }
+            }
+        }
+        callback();
+    }];
+}
+
+- (void)dropMapPinFor:(STASDKMDestinationLocation*)location {
+    STASDKUITripLocationAnnotation *ann = [[STASDKUITripLocationAnnotation alloc] initWith:location];
+    [self.mapView addAnnotation:ann];
+}
 
 
 #pragma mark - Navigation
@@ -402,6 +432,33 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
     return UIModalPresentationNone; // necessary so it won't be full screen on phones
+}
+
+
+
+
+#pragma mark - MapView
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    NSString *identifier = @"pinAnnotation";
+
+    if ([annotation isKindOfClass:[STASDKUITripLocationAnnotation class]]) {
+        STASDKUITripLocationAnnotation *cityPin = (STASDKUITripLocationAnnotation*)annotation;
+
+        MKPinAnnotationView *pinAnnotation = (MKPinAnnotationView*) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (pinAnnotation) {
+            pinAnnotation.annotation = cityPin;
+        } else {
+            pinAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        }
+        pinAnnotation.animatesDrop = YES;
+        pinAnnotation.canShowCallout = YES;
+        [pinAnnotation setSelected:YES];
+
+        return pinAnnotation;
+    }
+
+    return nil;
 }
 
 
