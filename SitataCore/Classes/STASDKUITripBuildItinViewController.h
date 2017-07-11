@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class STASDKMTrip;
+@class RLMRealm;
 
 @interface STASDKUITripBuildItinViewController : UIViewController
 
 @property (nonatomic) STASDKMTrip *trip;
+
+@property RLMRealm *theRealm;
 
 @end

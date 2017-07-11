@@ -26,19 +26,15 @@
     // Do any additional setup after loading the view.
 
 
-    // Back button in nav
-    NSString *close = [[STASDKDataController sharedInstance] localizedStringForKey:@"CLOSE"];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:close
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(close:)];
+    // next and close buttons are set in child page view controller
 
     // Colors
     [STASDKUIUtility applyStylesheetToNavigationController:self.navigationController];
 
-    self.trip = [STASDKMTrip findBy:self.tripId];
+    
 
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -46,10 +42,6 @@
 }
 
 
--(void)close:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
 
 
 
@@ -62,7 +54,8 @@
     if ([segue.identifier isEqualToString:@"embedTripBuilder"]) {
 
         STASDKUITripBuilderPageViewController *vc = [segue destinationViewController];
-        vc.trip = self.trip;
+        vc.manualParentViewController = self;
+        vc.tripId = self.tripId;
     }
 }
 

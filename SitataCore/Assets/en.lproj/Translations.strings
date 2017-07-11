@@ -18,7 +18,8 @@
 "CONNECTION_REQ" = "A data connection is required.";
 "DONE" = "Done";
 "NEXT" = "Next";
-
+"PREVIOUS" = "Previous";
+"SAVE" = "Save";
 
 /* ALERTS */
 "ALERTS" = "Trip Alerts";
@@ -87,4 +88,6 @@
 "TB_ARRIVAL_TITLE" = "Arriving On";
 "TB_LEAVE_TITLE" = "Leaving On";
 "TB_NO_CITIES" = "No results. Try searching for a city name.";
+"TB_MUST_HAVE_DEST_TTL" = "Where Are You Going?";
+"TB_MUST_HAVE_DEST_MSG" = "In order to continue, you must add at least one country to your itinerary.";
 

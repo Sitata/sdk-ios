@@ -12,6 +12,7 @@
 
 @interface STASDKUITripBuilderPageViewController : UIPageViewController
 
-@property (nonatomic) STASDKMTrip *trip;
+@property (nonatomic) NSString *tripId;
+@property (weak, nonatomic) UIViewController *manualParentViewController;
 
 @end

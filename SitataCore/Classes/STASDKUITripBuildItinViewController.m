@@ -18,6 +18,8 @@
 #import "STASDKUILocationSearchTableViewController.h"
 #import "STASDKApiMisc.h"
 
+#import <Realm/Realm.h>
+
 
 @interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, STASDKUIItineraryCountryHeaderViewDelegate, STASDKUIItineraryCityHeaderViewDelegate,
     UIPopoverPresentationControllerDelegate, STASDKUITBDestinationPickerDelegate, UISearchControllerDelegate, STASDKUILocationSearchDelegate>
@@ -27,7 +29,7 @@
 @property UISearchController *searchController;
 
 
-@property (nonatomic) RLMRealm *memoryRealm;
+
 
 @end
 
@@ -44,7 +46,6 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     // Do any additional setup after loading the view.
 
     [self loadSearchController];
-    [self loadTrip];
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -67,24 +68,6 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     // Dispose of any resources that can be recreated.
 }
 
-
-// if we don't already have a trip, create a new one for the purposes of sending to the server
-- (void) loadTrip {
-    if (self.trip == NULL) {
-
-        // querying on destinations and such won't work unless the trip is persisted into
-        // a realm, but we don't want to put it into our default disk based realm... so
-        // we create a temporary in-memory store instead.
-        RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];
-        config.inMemoryIdentifier = @"TBMemoryRealm";
-        self.memoryRealm = [RLMRealm realmWithConfiguration:config error:NULL];
-
-        self.trip = [[STASDKMTrip alloc] init];
-        [self.memoryRealm transactionWithBlock:^{
-            [self.memoryRealm addObject:self.trip];
-        }];
-    }
-}
 
 - (RLMResults*)destinations {
     return [self.trip sortedDestinations];
@@ -120,7 +103,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 - (void)onSelectedLocation:(STASDKMDestinationLocation *)location forDestination:(STASDKMDestination *)destination {
     [self fetchLatLngFor:location onFinished:^{
-        [self.memoryRealm transactionWithBlock:^{
+        [self.theRealm transactionWithBlock:^{
             location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
             [destination.destinationLocations addObject:location];
         }];
@@ -339,7 +322,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 - (void) onRemoveCountry:(id)sender removed:(STASDKMDestination *)destination {
     
-    [self.memoryRealm transactionWithBlock:^{
+    [self.theRealm transactionWithBlock:^{
         // destination might not be last in order
         int index = (int) [self.trip.destinations indexOfObject:destination];
         [self.trip.destinations removeObjectAtIndex:index];
@@ -364,7 +347,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
     for (STASDKMDestination *dest in [self destinations]) {
         index = (int) [dest.destinationLocations indexOfObject:location];
         if (index != -1) {
-            [self.memoryRealm transactionWithBlock:^{
+            [self.theRealm transactionWithBlock:^{
                 [dest.destinationLocations removeObjectAtIndex:index];
             }];
             [self.tableView reloadData];
@@ -377,7 +360,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 #pragma - mark STASDKUITBDestinationPickerDelegate
 
 - (void) onPickedDestination:(STASDKMDestination *)destination {
-    [self.memoryRealm transactionWithBlock:^{
+    [self.theRealm transactionWithBlock:^{
 
         // new destinations need a unique id to save in temporary memory
         NSString *uuid = [[NSUUID UUID] UUIDString];
