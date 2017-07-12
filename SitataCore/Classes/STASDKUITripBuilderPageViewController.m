@@ -11,6 +11,8 @@
 #import "STASDKDataController.h"
 #import "STASDKMTrip.h"
 #import "STASDKUITripBuildItinViewController.h"
+#import "STASDKUITripMetaCollectionViewController.h"
+#import "STASDKDefines.h"
 
 #import <Realm/Realm.h>
 
@@ -230,13 +232,25 @@ const int pageCount = 3;
             break;
         }
         case 1:
+        {
             // tripBuilderType
-            page = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderType"];
+            STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
+            enum TripMetaType mode = TripPurpose;
+            vc.trip = self.trip;
+            vc.mode = mode;
+            page = vc;
             break;
+        }
         case 2:
             // tripBuilderAct
-            page = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderAct"];
+        {
+            STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
+            enum TripMetaType mode = TripActivities;
+            vc.trip = self.trip;
+            vc.mode = mode;
+            page = vc;
             break;
+        }
     }
 
     return page;

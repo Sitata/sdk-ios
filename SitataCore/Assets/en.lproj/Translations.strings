@@ -90,4 +90,12 @@
 "TB_NO_CITIES" = "No results. Try searching for a city name.";
 "TB_MUST_HAVE_DEST_TTL" = "Where Are You Going?";
 "TB_MUST_HAVE_DEST_MSG" = "In order to continue, you must add at least one country to your itinerary.";
+"TB_TRIP_TYPE_HEADER" = "What Type Of Trip Is It?";
+"TB_TRIP_ACTIVITIES_HEADER" = "What Will You Be Doing?";
+"TB_TRIP_ACTIVITIES_SUBHEAD" = "(You Can Select More Than One)";
+
+/* TRIP TYPE */
+"TRIP_TYPE_0" = "Holiday";
+"TRIP_TYPE_1" = "Business";
+"TRIP_TYPE_2" = "Other";
 

@@ -92,7 +92,9 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKUISafetyViewController.h',
                             'SitataCore/**/STASDKUIUtility.h',
                             'SitataCore/**/STASDKUITripBuilderPageViewController.h',
-                            'SitataCore/**/STASDKUITripLocationAnnotation.h','
+                            'SitataCore/**/STASDKUITripLocationAnnotation.h',
+                            'SitataCore/**/STASDKUITripMetaCollectionViewController.h',
+                            'SitataCore/**/STASDKUITripMetaCollectionViewCell.h',
                             'SitataCore/**/STASDKPushHandler.h',
                             'SitataCore/**/STASDKUIModalLoadingWindow.h',
                             'SitataCore/**/STASDKReachability.h',

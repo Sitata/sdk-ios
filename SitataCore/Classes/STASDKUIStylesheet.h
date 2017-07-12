@@ -95,4 +95,8 @@
 @property (nonatomic, retain) UIColor *countrySwitcherTitleColor;
 @property (nonatomic, retain) UIColor *countrySwitcherButtonColor;
 
+#pragma mark - Trip Builder
+@property (nonatomic, retain) UIColor *tripTypeIconColor;
+@property (nonatomic, retain) UIColor *tripMetaCardActiveColor;
+
 @end

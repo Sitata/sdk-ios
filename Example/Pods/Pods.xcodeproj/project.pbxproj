@@ -122,6 +122,11 @@
 		27CDAAEE1F1402F30022591D /* STASDKMDestinationLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD89D1F13FF8600BDA9CD /* STASDKMDestinationLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27CDAAF11F1560900022591D /* STASDKUITripLocationAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 27CDAAEF1F1560900022591D /* STASDKUITripLocationAnnotation.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		27CDAAF21F1560900022591D /* STASDKUITripLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CDAAF01F1560900022591D /* STASDKUITripLocationAnnotation.m */; };
+		27CDAAF51F1579990022591D /* STASDKUITripMetaCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 27CDAAF31F1579990022591D /* STASDKUITripMetaCollectionViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		27CDAAF61F1579990022591D /* STASDKUITripMetaCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CDAAF41F1579990022591D /* STASDKUITripMetaCollectionViewController.m */; };
+		27CDAAFC1F157F100022591D /* STASDKUITripMetaCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 27CDAAF91F157F100022591D /* STASDKUITripMetaCollectionViewCell.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		27CDAAFD1F157F100022591D /* STASDKUITripMetaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CDAAFA1F157F100022591D /* STASDKUITripMetaCollectionViewCell.m */; };
+		27CDAAFF1F157F5D0022591D /* STASDKUITripMetaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CDAAFB1F157F100022591D /* STASDKUITripMetaCollectionViewCell.xib */; };
 		27FAC7111EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC70F1EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		27FAC7121EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FAC7101EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m */; };
 		27FAC7151EF86D0200DB5557 /* STASDKPushHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -978,6 +983,11 @@
 		279238FF1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUIItineraryCountryHeaderView.m; sourceTree = "<group>"; };
 		27CDAAEF1F1560900022591D /* STASDKUITripLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITripLocationAnnotation.h; sourceTree = "<group>"; };
 		27CDAAF01F1560900022591D /* STASDKUITripLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITripLocationAnnotation.m; sourceTree = "<group>"; };
+		27CDAAF31F1579990022591D /* STASDKUITripMetaCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITripMetaCollectionViewController.h; sourceTree = "<group>"; };
+		27CDAAF41F1579990022591D /* STASDKUITripMetaCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITripMetaCollectionViewController.m; sourceTree = "<group>"; };
+		27CDAAF91F157F100022591D /* STASDKUITripMetaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITripMetaCollectionViewCell.h; sourceTree = "<group>"; };
+		27CDAAFA1F157F100022591D /* STASDKUITripMetaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITripMetaCollectionViewCell.m; sourceTree = "<group>"; };
+		27CDAAFB1F157F100022591D /* STASDKUITripMetaCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STASDKUITripMetaCollectionViewCell.xib; sourceTree = "<group>"; };
 		27FAC70F1EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITripBuilderPageViewController.h; sourceTree = "<group>"; };
 		27FAC7101EF82A7100DB5557 /* STASDKUITripBuilderPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITripBuilderPageViewController.m; sourceTree = "<group>"; };
 		27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKPushHandler.h; sourceTree = "<group>"; };
@@ -1754,6 +1764,7 @@
 				2749B2EC1F0C0C9E002ECA79 /* CardTableViewCell.xib */,
 				4BA42F698C8CF529977B8C0C76F1AC4F /* Translations.strings */,
 				279238FC1F0AD8240016F0C5 /* TBItineraryCountryHeader.xib */,
+				27CDAAFB1F157F100022591D /* STASDKUITripMetaCollectionViewCell.xib */,
 				273AD88D1F13023C00BDA9CD /* TBItineraryCityHeader.xib */,
 			);
 			path = Assets;
@@ -2071,6 +2082,10 @@
 				273AD8861F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m */,
 				273AD8891F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.h */,
 				273AD88A1F0ED2F700BDA9CD /* STASDKUITBDatePickerViewController.m */,
+				27CDAAF31F1579990022591D /* STASDKUITripMetaCollectionViewController.h */,
+				27CDAAF41F1579990022591D /* STASDKUITripMetaCollectionViewController.m */,
+				27CDAAF91F157F100022591D /* STASDKUITripMetaCollectionViewCell.h */,
+				27CDAAFA1F157F100022591D /* STASDKUITripMetaCollectionViewCell.m */,
 				27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */,
 				27FAC7141EF86D0200DB5557 /* STASDKPushHandler.m */,
 				279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */,
@@ -2967,6 +2982,7 @@
 				38F1D25910EA229A907B4971F915F555 /* STASDKMDestination.h in Headers */,
 				DC519992F2E64CC4162E560BC77D062B /* STASDKMDisease.h in Headers */,
 				D59DAC14BC60CB633920706F0B82BE36 /* STASDKMHospital.h in Headers */,
+				27CDAAF51F1579990022591D /* STASDKUITripMetaCollectionViewController.h in Headers */,
 				E6A8E0217DB528CD0D9BC33ADCC60AAF /* STASDKMMedication.h in Headers */,
 				D8DA12AD791B7F43E9BB59003B8424FD /* STASDKMTrip.h in Headers */,
 				273AD8951F13E12A00BDA9CD /* STASDKUILocationSearchTableViewController.h in Headers */,
@@ -3007,6 +3023,7 @@
 				E57A2AE46347F74533415B373FA4DFE1 /* STASDKUISafetyViewController.h in Headers */,
 				A7CD2235766F4C5CB863D67A81835D5E /* STASDKUIStylesheet.h in Headers */,
 				290285CDC1CA8B88940E07CADF1D68B3 /* STASDKUIUtility.h in Headers */,
+				27CDAAFC1F157F100022591D /* STASDKUITripMetaCollectionViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3360,6 +3377,7 @@
 				CCFA6184105368508C40CA1A04C8CB68 /* HospitalRowCell.xib in Resources */,
 				09DB0AACF1CCA9D4285453A09CBE9A40 /* Media.xcassets in Resources */,
 				273AD88E1F13023C00BDA9CD /* TBItineraryCityHeader.xib in Resources */,
+				27CDAAFF1F157F5D0022591D /* STASDKUITripMetaCollectionViewCell.xib in Resources */,
 				D3FC619635C500AF2D4606C79F9FF876 /* SitataMain.storyboard in Resources */,
 				788C4DAF01D701B051B93D07335689CF /* STASDKDataModels.xcdatamodeld in Resources */,
 				804569290E4349742368967CE8EF095C /* Translations.strings in Resources */,
@@ -3661,6 +3679,7 @@
 				CA63BBE2ADCC57125B1CDC01449CA6E8 /* STASDKApiHealth.m in Sources */,
 				15A18BF7FFF5C262490CA5FB3D752B12 /* STASDKApiMisc.m in Sources */,
 				C2FC812B81220180534BE3B64BBDFAAC /* STASDKApiPlaces.m in Sources */,
+				27CDAAF61F1579990022591D /* STASDKUITripMetaCollectionViewController.m in Sources */,
 				F86AF68726710C1FEE9843625C4ECFBF /* STASDKApiRoutes.m in Sources */,
 				7BB46A631618BA9A55FA6FFE72220E23 /* STASDKApiTrip.m in Sources */,
 				279239011F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m in Sources */,
@@ -3678,6 +3697,7 @@
 				273AD8881F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.m in Sources */,
 				7A09D9BBB879EF35449A34249437B9DA /* STASDKMAdvisory.m in Sources */,
 				4FF9174A0695EC9CE0EEF6800635E47A /* STASDKMAlert.m in Sources */,
+				27CDAAFD1F157F100022591D /* STASDKUITripMetaCollectionViewCell.m in Sources */,
 				4BA855E03AD244EAAAC6C4C937ABC8E3 /* STASDKMAlertLocation.m in Sources */,
 				8DB1F0A11F5240F3C8B1186C9A4D39B3 /* STASDKMAlertSource.m in Sources */,
 				279238F31F0A82C70016F0C5 /* STASDKReachability.m in Sources */,
