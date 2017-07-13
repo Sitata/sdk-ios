@@ -99,3 +99,34 @@
 "TRIP_TYPE_1" = "Business";
 "TRIP_TYPE_2" = "Other";
 
+/* TRIP ACTIVITY */
+"TRIP_ACTIVITY_0" = "Beach & Sun";
+"TRIP_ACTIVITY_1" = "Scuba Diving";
+"TRIP_ACTIVITY_2" = "Snorkeling";
+"TRIP_ACTIVITY_3" = "Hiking";
+"TRIP_ACTIVITY_4" = "Camping";
+"TRIP_ACTIVITY_5" = "Kayaking";
+"TRIP_ACTIVITY_6" = "Canoeing";
+"TRIP_ACTIVITY_7" = "Shopping";
+"TRIP_ACTIVITY_8" = "Site Seeing";
+"TRIP_ACTIVITY_9" = "Museums";
+"TRIP_ACTIVITY_10" = "Food";
+"TRIP_ACTIVITY_11" = "Ecotourism";
+"TRIP_ACTIVITY_12" = "Bicycling";
+"TRIP_ACTIVITY_13" = "Backpacking";
+"TRIP_ACTIVITY_14" = "Golf";
+"TRIP_ACTIVITY_15" = "Rock Climbing";
+"TRIP_ACTIVITY_16" = "Ski";
+"TRIP_ACTIVITY_17" = "Snowboard";
+"TRIP_ACTIVITY_18" = "Photography";
+"TRIP_ACTIVITY_19" = "Safari";
+"TRIP_ACTIVITY_20" = "Around The World";
+"TRIP_ACTIVITY_21" = "Medical Tourism";
+"TRIP_ACTIVITY_22" = "Humanitarian Work";
+"TRIP_ACTIVITY_23" = "Gambling";
+"TRIP_ACTIVITY_24" = "Jungle Trekking";
+"TRIP_ACTIVITY_25" = "Cruise";
+"TRIP_ACTIVITY_26" = "Road Trip";
+"TRIP_ACTIVITY_27" = "Amusement Park";
+
+

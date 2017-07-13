@@ -21,17 +21,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFH-qK-dY9">
-                                <rect key="frame" x="19.5" y="39" width="111" height="72"/>
+                                <rect key="frame" x="14.5" y="39" width="121" height="72"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VV6-Nn-3Bq">
-                                        <rect key="frame" x="30.5" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="35.5" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="44x-Sg-MIE"/>
                                             <constraint firstAttribute="width" constant="50" id="Pk6-bF-dxw"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meta Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="OUo-cs-ArC">
-                                        <rect key="frame" x="0.0" y="55" width="111" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meta Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUo-cs-ArC">
+                                        <rect key="frame" x="5" y="55" width="111" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -40,11 +40,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="OUo-cs-ArC" firstAttribute="centerX" secondItem="pFH-qK-dY9" secondAttribute="centerX" id="6gO-Y8-i7o"/>
-                                    <constraint firstItem="OUo-cs-ArC" firstAttribute="leading" secondItem="pFH-qK-dY9" secondAttribute="leading" id="FCw-0M-Oud"/>
+                                    <constraint firstItem="OUo-cs-ArC" firstAttribute="leading" secondItem="pFH-qK-dY9" secondAttribute="leading" constant="5" id="FCw-0M-Oud"/>
                                     <constraint firstItem="OUo-cs-ArC" firstAttribute="top" secondItem="VV6-Nn-3Bq" secondAttribute="bottom" constant="5" id="Q1g-Xm-dGb"/>
                                     <constraint firstAttribute="bottom" secondItem="OUo-cs-ArC" secondAttribute="bottom" id="UXs-XD-Bn8"/>
                                     <constraint firstItem="VV6-Nn-3Bq" firstAttribute="top" secondItem="pFH-qK-dY9" secondAttribute="top" id="aad-zN-9m1"/>
-                                    <constraint firstAttribute="trailing" secondItem="OUo-cs-ArC" secondAttribute="trailing" id="e8O-tk-Zki"/>
+                                    <constraint firstAttribute="trailing" secondItem="OUo-cs-ArC" secondAttribute="trailing" constant="5" id="e8O-tk-Zki"/>
                                     <constraint firstItem="VV6-Nn-3Bq" firstAttribute="centerX" secondItem="pFH-qK-dY9" secondAttribute="centerX" id="l5E-xu-jEH"/>
                                 </constraints>
                             </view>
@@ -71,7 +71,7 @@
                 <outlet property="descriptionLbl" destination="OUo-cs-ArC" id="Hnp-xD-P03"/>
                 <outlet property="iconImg" destination="VV6-Nn-3Bq" id="9yU-Ul-HlC"/>
             </connections>
-            <point key="canvasLocation" x="-23.5" y="122.5"/>
+            <point key="canvasLocation" x="-24" y="122"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -11,12 +11,13 @@
 #import "STASDKDefines.h"
 
 @class STASDKMTrip;
-
+@class RLMRealm;
 
 
 @interface STASDKUITripMetaCollectionViewController : UIViewController
 
 @property (nonatomic) STASDKMTrip *trip;
 @property (nonatomic) TripMetaType mode;
+@property (nonatomic) RLMRealm *theRealm;
 
 @end

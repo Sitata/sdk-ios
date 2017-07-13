@@ -19,6 +19,7 @@
 
 - (void)setFor:(TripMetaType)tripType atIndex:(NSInteger)index;
 - (void)toggleActive;
-
+- (void)setActive;
+- (void)setInactive;
 
 @end

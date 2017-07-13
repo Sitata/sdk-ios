@@ -61,6 +61,7 @@ static float shadowOpacity = 0.5;
     } else {
         // trip activities
         [self setIcon:@"tripActivity"];
+        [self setLabel:@"TRIP_ACTIVITY_"];
     }
 }
 
@@ -85,34 +86,41 @@ static float shadowOpacity = 0.5;
 
 - (void)toggleActive {
     if (!self.isActive) {
-        self.isActive = YES;
-
-        STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
-
-        // Draw circular node
-        CGRect centerPointRect = CGRectMake(-12, -12, 32, 32);
-        self.activeCircle = [CAShapeLayer layer];
-        [self.activeCircle setPath:[[UIBezierPath bezierPathWithOvalInRect:centerPointRect] CGPath]];
-        [self.activeCircle setStrokeColor:styles.tripMetaCardActiveColor.CGColor];
-        [self.activeCircle setFillColor:styles.tripMetaCardActiveColor.CGColor];
-        [[self layer] addSublayer:self.activeCircle];
-
-        // TODO: Add checkmark
-        NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
-        UIImage *img = [UIImage imageNamed:@"smallCheckmark" inBundle:bundle compatibleWithTraitCollection:NULL];
-        self.isActiveImg = [[CALayer alloc] init];
-        self.isActiveImg.contents = (id) [img CGImage];
-        self.isActiveImg.frame = centerPointRect;
-        [self.layer addSublayer:self.isActiveImg];
-
+        [self setActive];
     } else {
-        self.isActive = NO;
-        if (self.activeCircle) {
-            [self.activeCircle removeFromSuperlayer];
-        }
-        if (self.isActiveImg) {
-            [self.isActiveImg removeFromSuperlayer];
-        }
+        [self setInactive];
+    }
+}
+
+- (void)setActive {
+    self.isActive = YES;
+
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
+    // Draw circular node
+    CGRect centerPointRect = CGRectMake(-12, -12, 32, 32);
+    self.activeCircle = [CAShapeLayer layer];
+    [self.activeCircle setPath:[[UIBezierPath bezierPathWithOvalInRect:centerPointRect] CGPath]];
+    [self.activeCircle setStrokeColor:styles.tripMetaCardActiveColor.CGColor];
+    [self.activeCircle setFillColor:styles.tripMetaCardActiveColor.CGColor];
+    [[self layer] addSublayer:self.activeCircle];
+
+    // Add checkmark
+    NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
+    UIImage *img = [UIImage imageNamed:@"smallCheckmark" inBundle:bundle compatibleWithTraitCollection:NULL];
+    self.isActiveImg = [[CALayer alloc] init];
+    self.isActiveImg.contents = (id) [img CGImage];
+    self.isActiveImg.frame = centerPointRect;
+    [self.layer addSublayer:self.isActiveImg];
+}
+
+- (void)setInactive {
+    self.isActive = NO;
+    if (self.activeCircle) {
+        [self.activeCircle removeFromSuperlayer];
+    }
+    if (self.isActiveImg) {
+        [self.isActiveImg removeFromSuperlayer];
     }
 }
 

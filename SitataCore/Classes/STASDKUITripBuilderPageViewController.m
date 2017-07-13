@@ -238,6 +238,7 @@ const int pageCount = 3;
             enum TripMetaType mode = TripPurpose;
             vc.trip = self.trip;
             vc.mode = mode;
+            vc.theRealm = self.theRealm;
             page = vc;
             break;
         }
@@ -248,6 +249,7 @@ const int pageCount = 3;
             enum TripMetaType mode = TripActivities;
             vc.trip = self.trip;
             vc.mode = mode;
+            vc.theRealm = self.theRealm;
             page = vc;
             break;
         }

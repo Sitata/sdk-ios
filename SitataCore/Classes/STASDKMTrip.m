@@ -167,9 +167,42 @@
 
 
 -(NSArray*)activitiesArr {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:self.activities];
+    NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:self.activities];
+    if (arr == NULL) {
+        arr = [[NSArray alloc] init]; // necessary for trips not yet persisted
+    }
+    return arr;
 }
 
+
+// Returns true if the given activity is included in the trip
+-(bool)hasActivity:(int)activity {
+    NSArray *activities = [self activitiesArr];
+    return [activities containsObject:[NSNumber numberWithInt:activity]];
+}
+
+// Adds an activity to the trip
+-(void)addActivity:(int)activity {
+    if ([self hasActivity:activity]) {
+        return;
+    }
+
+    NSMutableArray *activities = [[self activitiesArr] mutableCopy];
+    [activities addObject:[NSNumber numberWithInt:activity]];
+
+    self.activities = [NSKeyedArchiver archivedDataWithRootObject:activities];
+}
+
+-(void)removeActivity:(int)activity {
+    if (![self hasActivity:activity]) {
+        return;
+    }
+
+    NSMutableArray *activities = [[self activitiesArr] mutableCopy];
+    [activities removeObject:[NSNumber numberWithInt:activity]];
+
+    self.activities = [NSKeyedArchiver archivedDataWithRootObject:activities];
+}
 
 
 

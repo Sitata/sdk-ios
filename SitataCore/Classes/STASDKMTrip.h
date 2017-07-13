@@ -78,6 +78,15 @@
 -(NSArray*)activitiesArr;
 
 
+// Returns true if the given activity is included in the trip
+-(bool)hasActivity:(int)activity;
+
+// Adds an activity to the trip
+-(void)addActivity:(int)activity;
+
+// Removes an activity from the trip
+-(void)removeActivity:(int)activity;
+
 
 @end
 

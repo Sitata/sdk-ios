@@ -12,20 +12,18 @@
 #import "STASDKUITripMetaCollectionViewCell.h"
 #import "STASDKDefines.h"
 #import "STASDKDataController.h"
+#import <Realm/Realm.h>
 
 @interface STASDKUITripMetaCollectionViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLbl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property NSInteger itemsPerRow;
 
 @end
 
 @implementation STASDKUITripMetaCollectionViewController
 
 static NSString * const reuseIdentifier = @"metaCell";
-static NSInteger const kTripPurposeItemsPerRow = 3;
-static NSInteger const kTripActivitiesItemsPerRow = 3;
 static NSInteger const kCardSize = 100;
 
 - (void)viewDidLoad {
@@ -48,11 +46,9 @@ static NSInteger const kCardSize = 100;
     NSString *headerStr;
 
     if (self.mode == TripPurpose) {
-        self.itemsPerRow = kTripPurposeItemsPerRow;
         headerStr = [dataCtrl localizedStringForKey:@"TB_TRIP_TYPE_HEADER"];
     } else {
         // activities
-        self.itemsPerRow = kTripActivitiesItemsPerRow;
         headerStr = [dataCtrl localizedStringForKey:@"TB_TRIP_ACTIVITIES_HEADER"];
 //        "TB_TRIP_ACTIVITIES_HEADER" = "What Will You Be Doing?";
 //        "TB_TRIP_ACTIVITIES_SUBHEAD" = "(You Can Select More Than One)";
@@ -83,6 +79,8 @@ static NSInteger const kCardSize = 100;
 
 #pragma mark <UICollectionViewDataSource>
 
+
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -93,35 +91,67 @@ static NSInteger const kCardSize = 100;
         return 3; //TripTypeEnumSize();
     } else {
         // trip activities
-        return 20; //TripActivityEnumSize();
+        return 28; //TripActivityEnumSize();
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     STASDKUITripMetaCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 
+    NSInteger index = indexPath.row;
+    [cell setFor:self.mode atIndex:index];
 
-    NSInteger row = indexPath.item / self.itemsPerRow;
-    NSInteger column = indexPath.item % self.itemsPerRow;
-    NSInteger itemIndex = (row+1) * column;
-
-    [cell setFor:self.mode atIndex:itemIndex];
-
-    if (itemIndex == 1) {
-        [cell toggleActive];
+    if (self.mode == TripPurpose) {
+        if (self.trip.tripType == (int)index) {
+            [cell setActive];
+        } else {
+            [cell setInactive];
+        }
+    } else {
+        if ([self.trip hasActivity:(int)index]) {
+            [cell setActive];
+        } else {
+            [cell setInactive];
+        }
     }
-
-    // Configure the cell
     
     return cell;
 }
 
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                               duration:(NSTimeInterval)duration{
 
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Selected!");
+    if (self.mode == TripPurpose) {
+        [self.theRealm transactionWithBlock:^{
+            self.trip.tripType = (int)indexPath.row;
+        }];
+        [self.collectionView reloadData]; // we redraw all at once to effecively switch between them
+    } else {
+        // activities - toggle cell
+        STASDKUITripMetaCollectionViewCell *cell = (STASDKUITripMetaCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+        [cell toggleActive];
+        int index = (int)indexPath.row;
+
+        [self.theRealm transactionWithBlock:^{
+            if ([self.trip hasActivity:index]) {
+                [self.trip removeActivity:index];
+            } else {
+                [self.trip addActivity:index];
+            }
+        }];
+    }
+}
 
 
 #pragma mark <UICollectionViewDelegateFlowLayout>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+
     return CGSizeMake(kCardSize, kCardSize);
 }
 
@@ -133,13 +163,13 @@ static NSInteger const kCardSize = 100;
 
     if (self.mode == TripPurpose) {
         // centered items
-
         CGFloat spacing = 1.0f;
         NSInteger cellCount = [collectionView.dataSource collectionView:collectionView numberOfItemsInSection:section];
         CGFloat cellWidth = ((UICollectionViewFlowLayout*)collectionViewLayout).itemSize.width+((UICollectionViewFlowLayout*)collectionViewLayout).minimumInteritemSpacing;
         CGFloat totalCellWidth = cellWidth * cellCount + spacing * (cellCount - 1);
         CGFloat contentWidth = collectionView.frame.size.width-collectionView.contentInset.left-collectionView.contentInset.right;
-        if( totalCellWidth<contentWidth )
+
+        if( totalCellWidth < contentWidth )
         {
             CGFloat padding = (contentWidth - totalCellWidth) / 2.0;
             return UIEdgeInsetsMake(topBottomInset, padding, topBottomInset, padding);
@@ -150,10 +180,8 @@ static NSInteger const kCardSize = 100;
 
     } else {
         // activities
-
-        CGFloat leftRightInset = self.view.frame.size.width / 14.0f;
-        CGFloat topBottomInset = leftRightInset;
-        return UIEdgeInsetsMake(topBottomInset, leftRightInset, topBottomInset, leftRightInset);
+        CGFloat leftRightPadding = self.view.frame.size.width / 10.0f;
+        return UIEdgeInsetsMake(topBottomInset, leftRightPadding, topBottomInset, leftRightPadding);
     }
 }
 
