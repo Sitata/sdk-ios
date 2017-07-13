@@ -31,8 +31,6 @@
 @property UISearchController *searchController;
 
 
-
-
 @end
 
 @implementation STASDKUITripBuildItinViewController
@@ -63,6 +61,8 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 
     self.tableView.backgroundColor = [self tableViewColor];
+
+    [self loadMapData];
 
 }
 
@@ -301,6 +301,11 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
         // destination might not be last in order
         int index = (int) [self.trip.destinations indexOfObject:destination];
         [self.trip.destinations removeObjectAtIndex:index];
+
+        // remove map pin for cities
+        for (STASDKMDestinationLocation *loc in destination.destinationLocations) {
+            [self removeMapPinFor:loc];
+        }
     }];
     [self.tableView reloadData];
 }
@@ -326,6 +331,7 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
                 [dest.destinationLocations removeObjectAtIndex:index];
             }];
             [self.tableView reloadData];
+            [self removeMapPinFor:location];
             break;
         }
     }
@@ -401,6 +407,19 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 - (void)dropMapPinFor:(STASDKMDestinationLocation*)location {
     STASDKUITripLocationAnnotation *ann = [[STASDKUITripLocationAnnotation alloc] initWith:location];
     [self.mapView addAnnotation:ann];
+    [self zoomToBounds];
+}
+
+- (void)removeMapPinFor:(STASDKMDestinationLocation*)location {
+    for (id annotation in [self.mapView annotations]) {
+        if ([annotation isKindOfClass:STASDKUITripLocationAnnotation.class]) {
+            STASDKUITripLocationAnnotation *ann = (STASDKUITripLocationAnnotation*)annotation;
+            if ([ann.identifier isEqualToString:location.identifier]) {
+                [self.mapView removeAnnotation:ann];
+            }
+        }
+    }
+    [self zoomToBounds];
 }
 
 
@@ -438,6 +457,42 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 
 #pragma mark - MapView
+
+- (void)loadMapData {
+    // if there are cities, then add those as map pins and zoom to bounds of pins
+    for (STASDKMDestination *dest in [self destinations]) {
+        for (STASDKMDestinationLocation *loc in dest.destinationLocations) {
+            [self dropMapPinFor:loc];
+        }
+    }
+    [self zoomToBounds];
+}
+
+- (void)zoomToBounds {
+    MKMapRect bounds = [self fetchBounds];
+    if (!MKMapRectIsNull(bounds)) {
+        [self.mapView setVisibleMapRect:bounds edgePadding:UIEdgeInsetsMake(50, 50, 50, 50) animated:YES];
+    }
+}
+
+- (MKMapRect)fetchBounds {
+    MKMapRect bounds = MKMapRectNull;
+
+    for (STASDKMDestination *dest in [self destinations]) {
+        for (STASDKMDestinationLocation *loc in dest.destinationLocations) {
+            // add to bounds
+            CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(loc.latitude, loc.longitude);
+            MKMapPoint point = MKMapPointForCoordinate(coord);
+            MKMapRect pointRect = MKMapRectMake(point.x, point.y, 0.1, 0.1);
+            if (MKMapRectIsNull(bounds)) {
+                bounds = pointRect;
+            } else {
+                bounds = MKMapRectUnion(bounds, pointRect);
+            }
+        }
+    }
+    return bounds;
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     NSString *identifier = @"pinAnnotation";

@@ -17,11 +17,11 @@
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
-// Keeping a reference to the location is important so we can switch
+// Keeping a reference to the location is important so we can
 // easily remove annotations when needed
 @property (nonatomic, assign) STASDKMDestinationLocation *location;
-@property (nonatomic, assign) NSString *titleStr;
-@property (nonatomic, assign) NSString *identifier;
+@property (nonatomic, copy) NSString *titleStr;
+@property (nonatomic, copy) NSString *identifier; // necessary because location not referenced properly
 
 - (id)initWith:(STASDKMDestinationLocation*)location;
 

@@ -17,6 +17,7 @@
 @interface STASDKUITripMetaCollectionViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLbl;
+@property (weak, nonatomic) IBOutlet UILabel *subHeaderLbl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
@@ -47,11 +48,12 @@ static NSInteger const kCardSize = 100;
 
     if (self.mode == TripPurpose) {
         headerStr = [dataCtrl localizedStringForKey:@"TB_TRIP_TYPE_HEADER"];
+        [self.subHeaderLbl setAlpha:0];
     } else {
         // activities
         headerStr = [dataCtrl localizedStringForKey:@"TB_TRIP_ACTIVITIES_HEADER"];
-//        "TB_TRIP_ACTIVITIES_HEADER" = "What Will You Be Doing?";
-//        "TB_TRIP_ACTIVITIES_SUBHEAD" = "(You Can Select More Than One)";
+        self.subHeaderLbl.text = [dataCtrl localizedStringForKey:@"TB_TRIP_ACTIVITIES_SUBHEAD"];
+        [self.subHeaderLbl setAlpha:1];
     }
 
     self.headerLbl.text = headerStr;
@@ -125,17 +127,17 @@ static NSInteger const kCardSize = 100;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Selected!");
+    int index = (int)indexPath.row;
+
     if (self.mode == TripPurpose) {
         [self.theRealm transactionWithBlock:^{
-            self.trip.tripType = (int)indexPath.row;
+            self.trip.tripType = index;
         }];
         [self.collectionView reloadData]; // we redraw all at once to effecively switch between them
     } else {
         // activities - toggle cell
         STASDKUITripMetaCollectionViewCell *cell = (STASDKUITripMetaCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
         [cell toggleActive];
-        int index = (int)indexPath.row;
 
         [self.theRealm transactionWithBlock:^{
             if ([self.trip hasActivity:index]) {

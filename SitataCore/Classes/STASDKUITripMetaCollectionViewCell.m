@@ -46,6 +46,8 @@ static float shadowOpacity = 0.5;
     self.containerView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.containerView.layer.shadowOffset = CGSizeMake(shadowOffsetWidth, shadowOffsetHeight);
     self.containerView.layer.shadowOpacity = shadowOpacity;
+
+    [self setInactive];
 }
 
 
@@ -93,6 +95,8 @@ static float shadowOpacity = 0.5;
 }
 
 - (void)setActive {
+    if (self.isActive) {return;}
+
     self.isActive = YES;
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
@@ -115,6 +119,8 @@ static float shadowOpacity = 0.5;
 }
 
 - (void)setInactive {
+    if (!self.isActive) {return;}
+
     self.isActive = NO;
     if (self.activeCircle) {
         [self.activeCircle removeFromSuperlayer];
