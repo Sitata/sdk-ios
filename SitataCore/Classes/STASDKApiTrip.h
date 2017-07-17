@@ -22,6 +22,12 @@
 // Request single trip for a traveller by id.
 +(void)getById:(NSString*)tripId onFinished:(void(^)(STASDKMTrip*, NSURLSessionDataTask*, NSError*))callback;
 
+// Create a new trip
++(void)createTrip:(STASDKMTrip*)trip onFinished:(void(^)(STASDKMTrip*, NSURLSessionTask*, NSError*))callback;
+
+// Update an existing trip
++(void)updateTrip:(STASDKMTrip*)trip onFinished:(void(^)(STASDKMTrip*, NSURLSessionTask*, NSError*))callback;
+
 @end
 
 

@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+@class STASDKMTrip;
 
 FOUNDATION_EXPORT NSNotificationName const NotifyAlertSynced;
 FOUNDATION_EXPORT NSString *const NotifyKeyAlertId;
@@ -30,6 +30,9 @@ FOUNDATION_EXPORT NSString *const NotifyKeyAlertId;
 // Sync the current trip and all associated objects
 // and save them locally to the database.
 + (void)syncCurrentTrip:(void (^)(NSError*))callback;
+
+// Sync associated data for a newly created trip
++ (void) syncExtrasFor:(STASDKMTrip*)trip;
 
 // Sync a country for the given countryID and save locally.
 + (void) syncCountry:(NSString*)countryId callback:(void (^)(NSError*))callback;

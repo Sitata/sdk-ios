@@ -44,6 +44,9 @@
 
 
 
+
+
+
 //- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
 ////    NSString *departureStr = dic[@"departure_date"];
 ////    NSString *returnStr = dic[@"return_date"];
@@ -61,19 +64,19 @@
 //    return YES;
 //}
 //
-//- (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
-//
-//
-//    if (![_departureDate isEqual:(id)[NSNull null]]) {
-//        dic[@"departure_date"] = [NSNumber numberWithDouble:[_departureDate timeIntervalSince1970]];
-//    }
-//    if (![_returnDate isEqual:(id)[NSNull null]]) {
-//        dic[@"return_date"] = [NSNumber numberWithDouble:[_returnDate timeIntervalSince1970]];
-//    }
-//
-//
-//    return YES;
-//}
+
+
+- (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
+
+    // Removing id on json output is necessary because we want our rails server
+    // to blast away all destination locations and rebuild. If ids are present, then
+    // rails will try to match with existing ids - which will throw a NotFoundError
+    // for new destinations (because we set temporaray UUID to make realm work
+    [dic removeObjectForKey:@"id"];
+
+    return YES;
+}
+
 
 
 
@@ -189,6 +192,16 @@
     loc._googlePlaceId = [result objectForKey:@"place_id"];
     return loc;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 @end

@@ -64,10 +64,10 @@
 
     // We have to do the following for destination locations
     // explicitly because Realm doesn't play nice 100% with yyModel.
-    NSArray *destinationLocations = dic[@"locations"];
+    NSArray *destinationLocations = dic[@"destination_locations"];
     for (NSDictionary *d in destinationLocations) {
-        STASDKMDestinationLocation *dest = [STASDKMDestinationLocation yy_modelWithDictionary:d];
-        [self.destinationLocations addObject:dest];
+        STASDKMDestinationLocation *loc = [STASDKMDestinationLocation yy_modelWithDictionary:d];
+        [self.destinationLocations addObject:loc];
     }
 
 
@@ -78,16 +78,43 @@
 - (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
 
 
-    if (![_departureDate isEqual:(id)[NSNull null]]) {
-        dic[@"departure_date"] = [NSNumber numberWithDouble:[_departureDate timeIntervalSince1970]];
+    if (![self.departureDate isEqual:(id)[NSNull null]]) {
+        dic[@"departure_date"] = [NSNumber numberWithDouble:[self.departureDate timeIntervalSince1970]];
     }
-    if (![_returnDate isEqual:(id)[NSNull null]]) {
-        dic[@"return_date"] = [NSNumber numberWithDouble:[_returnDate timeIntervalSince1970]];
+    if (![self.returnDate isEqual:(id)[NSNull null]]) {
+        dic[@"return_date"] = [NSNumber numberWithDouble:[self.returnDate timeIntervalSince1970]];
     }
 
+    // Since 'container' properties are not working at the moment with Realm Collections
+    NSMutableArray *destLocArr = [[NSMutableArray alloc] init];
+    for (STASDKMDestinationLocation *loc in self.destinationLocations) {
+        NSDictionary *locDict = [loc yy_modelToJSONObject];
+        [destLocArr addObject:locDict];
+    }
+    dic[@"destination_locations"] = destLocArr;
+
+    // Removing id on json output is necessary because we want our rails server
+    // to blast away all destinations and rebuild. If ids are present, then
+    // rails will try to match with existing ids - which will throw a NotFoundError
+    // for new destinations (because we set temporaray UUID to make realm work
+    [dic removeObjectForKey:@"id"];
 
     return YES;
 }
+
+
+
+
+
+// Removes associated models from the database
+// THIS MUST BE CALLED WITHIN A REALM TRANSACTION
+-(void)removeAssociated:(RLMRealm*)realm {
+    for (STASDKMDestinationLocation* loc in self.destinationLocations) {
+        [realm deleteObject:loc];
+    }
+    [self.destinationLocations removeAllObjects];
+}
+
 
 
 @end

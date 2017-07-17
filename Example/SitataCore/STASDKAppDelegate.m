@@ -22,12 +22,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // STAGING
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTVkOTBhZGVlOGQ5MDE3ODQzYTNmfHNjYXlpUWJURE1WekFWVFY4dlhi";
+//    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTVkOTBhZGVlOGQ5MDE3ODQzYTNmfHNjYXlpUWJURE1WekFWVFY4dlhi";
 
     // LOCAL
-    //NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTA4ZDI0NjEyNDAxOTkwODBhOWMzfDJERmJOdVhvaHF4bTE1NHNTTkg5";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTk2N2Q5ODg4NWRiOWVlYjY3YmQ4ZGFifEc0SGZ6Y1dqeHZnelRzUVo4UHU0";
     STASDKController *ctrl = [STASDKController sharedInstance];
-    [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
+//    [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
+    [ctrl setConfig:token apiEndpoint:@"http://localhost:3000"];
 
 
 

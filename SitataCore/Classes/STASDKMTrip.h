@@ -59,6 +59,9 @@
 // Destroy all previous data and related models and resave to database. 
 -(void)resave:(NSError **)error;
 
+// Removes associated models from the database. THIS MUST BE CALLED WITHIN A REALM TRANSACTION.
+-(void)removeAssociated:(RLMRealm*)realm;
+
 
 // Returns true if the trip does not have any destination data.
 -(bool)isEmpty;

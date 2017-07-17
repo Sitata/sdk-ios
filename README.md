@@ -18,3 +18,4 @@ A number of icons in this project have been used with permission from the follow
 * [Gregor Cresnar](https://thenounproject.com/grega.cresnar)
 * [Arosh Khan](https://thenounproject.com/aroshkhan05)
 * [Minh Hoang](http://www.flaticon.com/authors/minh-hoang)
+* [Alfredo Hernandez](http://www.flaticon.com/authors/alfredo-hernandez)

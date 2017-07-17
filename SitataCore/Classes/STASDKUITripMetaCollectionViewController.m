@@ -30,9 +30,6 @@ static NSInteger const kCardSize = 100;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
     // Register cell classes
 
     STASDKDataController *dataCtrl = [STASDKDataController sharedInstance];

@@ -29,8 +29,11 @@
 
     UIColor *lightestGrayColor = [UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0]; // #F9F9F9
     UIColor *deepBlueColor = [UIColor colorWithRed:11/255.0 green:79/255.0 blue:188/255.0 alpha:1.0]; // #0b4fbc
-    UIColor *mediumGrey = [UIColor colorWithRed:142/255.0 green:142/255.0 blue:142/255.0 alpha:1.0]; // 8e8e8e
-    
+    UIColor *mediumGrey = [UIColor colorWithRed:142/255.0 green:142/255.0 blue:142/255.0 alpha:1.0]; // #8e8e8e
+    UIColor *successGreen = [UIColor colorWithRed:39/255.0 green:174/255.0 blue:96/255.0 alpha:1.0]; // #27ae60
+
+
+
     self.navigationBarBackgroundColor = deepBlueColor;
     self.navigationBarTextColor = [UIColor whiteColor];
     self.navigationBarTintColor = [UIColor whiteColor];
@@ -110,6 +113,7 @@
     // Trip Builder
     self.tripTypeIconColor = mediumGrey;
     self.tripMetaCardActiveColor = self.navigationBarBackgroundColor;
+    self.tripSuccessIconColor = successGreen;
 
     return self;
 }

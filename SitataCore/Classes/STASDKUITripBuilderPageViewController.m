@@ -12,7 +12,10 @@
 #import "STASDKMTrip.h"
 #import "STASDKUITripBuildItinViewController.h"
 #import "STASDKUITripMetaCollectionViewController.h"
+#import "STASDKUITBSuccessViewController.h"
 #import "STASDKDefines.h"
+#import "STASDKApiTrip.h"
+#import "STASDKSync.h"
 
 #import <Realm/Realm.h>
 
@@ -30,7 +33,7 @@
 
 @implementation STASDKUITripBuilderPageViewController
 
-const int pageCount = 3;
+const int pageCount = 4;
 
 
 - (void)viewDidLoad {
@@ -95,10 +98,13 @@ const int pageCount = 3;
         // first page
         [self setCloseButton];
         [self setNextButton];
-    } else if (self.currentIndex == pageCount-1) {
-        // last page
+    } else if (self.currentIndex == pageCount-2) {
+        // second last page
         [self setPreviousButton];
         [self setSaveButton];
+    } else if (self.currentIndex == pageCount-1) {
+        // last page - only close button
+        [self setFinishButton];
     } else {
         // in between pages
         [self setPreviousButton];
@@ -138,13 +144,36 @@ const int pageCount = 3;
                                                                                                         action:@selector(doSave)];
 }
 
+- (void)setActivityButton {
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+    self.manualParentViewController.navigationItem.rightBarButtonItem = barButton;
+    [activityIndicator startAnimating];
+}
+
+- (void)setFinishButton {
+    self.manualParentViewController.navigationItem.leftBarButtonItem = NULL;
+    NSString *finish = [[STASDKDataController sharedInstance] localizedStringForKey:@"FINISH"];
+    self.manualParentViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:finish
+                                                                                                         style:UIBarButtonItemStylePlain
+                                                                                                        target:self
+                                                                                                        action:@selector(close)];
+}
 
 
 - (void)doSave {
-    // TODO:
-    //  - swap button with activity indicator... ensure we can handle failed case and put button back
-    //  - do saving and sync process
-    NSLog(@"TODO: DO SAVE TRIP!");
+
+    [self setActivityButton];
+
+    if ([self isNewTrip]) {
+        [self sendTrip:YES];
+    } else {
+        [self sendTrip:NO];
+    }
+}
+
+- (bool) isNewTrip {
+    return self.theRealm.configuration.inMemoryIdentifier != NULL;
 }
 
 
@@ -175,18 +204,7 @@ const int pageCount = 3;
         if ([[self.trip destinations] count] > 0) {
             return YES;
         } else {
-            UIAlertController *alertCtrl = [UIAlertController
-                                            alertControllerWithTitle:[[STASDKDataController sharedInstance] localizedStringForKey:@"TB_MUST_HAVE_DEST_TTL"]
-                                            message:[[STASDKDataController sharedInstance] localizedStringForKey:@"TB_MUST_HAVE_DEST_MSG"]
-                                            preferredStyle:UIAlertControllerStyleAlert];
-
-            UIAlertAction *okAction = [UIAlertAction
-                                       actionWithTitle:[[STASDKDataController sharedInstance] localizedStringForKey:@"OK"]
-                                       style:UIAlertActionStyleDefault
-                                       handler:NULL];
-            [alertCtrl addAction:okAction];
-
-            [self presentViewController:alertCtrl animated:YES completion:nil];
+            [self presentAlert:[[STASDKDataController sharedInstance] localizedStringForKey:@"TB_MUST_HAVE_DEST_TTL"] msg:[[STASDKDataController sharedInstance] localizedStringForKey:@"TB_MUST_HAVE_DEST_MSG"]];
             return NO;
         }
     } else {
@@ -243,8 +261,8 @@ const int pageCount = 3;
             break;
         }
         case 2:
-            // tripBuilderAct
         {
+            // tripBuilderAct
             STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
             enum TripMetaType mode = TripActivities;
             vc.trip = self.trip;
@@ -253,10 +271,83 @@ const int pageCount = 3;
             page = vc;
             break;
         }
+        case 3:
+        {
+            // success page - can't navigate backwards, just close button
+            STASDKUITBSuccessViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderSuccess"];
+            page = vc;
+            break;
+        }
     }
 
     return page;
 }
+
+
+
+#pragma mark - Save Trip
+
+
+
+- (void)sendTrip:(bool)newTrip {
+    if (newTrip) {
+        [STASDKApiTrip createTrip:self.trip onFinished:^(STASDKMTrip *trip, NSURLSessionTask *task, NSError *error) {
+            [self handleTripResponse:trip error:error];
+        }];
+    } else {
+        [STASDKApiTrip updateTrip:self.trip onFinished:^(STASDKMTrip *trip, NSURLSessionTask *task, NSError *error) {
+            [self handleTripResponse:trip error:error];
+        }];
+    }
+}
+
+- (void)handleTripResponse:(STASDKMTrip*)trip error:(NSError*)error {
+    if (!error) {
+        NSError *writeError;
+        [trip resave:&writeError];
+
+        if (writeError != nil) {
+            NSLog(@"Failed to save new trip - error: %@", [writeError localizedDescription]);
+            [self handleSendTripError];
+        } else {
+            [STASDKSync syncExtrasFor:trip];
+            NSLog(@"Finshed saving trip.");
+            [self handleSendTripSuccess];
+        }
+
+    } else {
+        NSLog(@"Failed to post new trip - error: %@", [error localizedDescription]);
+        [self handleSendTripError];
+    }
+}
+
+- (void)handleSendTripError {
+    [self setSaveButton];
+    [self presentAlert:[[STASDKDataController sharedInstance] localizedStringForKey:@"TB_SAVE_ERROR_TTL"] msg:[[STASDKDataController sharedInstance] localizedStringForKey:@"TB_SAVE_ERROR_MSG"]];
+
+}
+
+- (void)handleSendTripSuccess {
+    NSLog(@"Trip save success!");
+    [self nextPage];
+}
+
+
+- (void)presentAlert:(NSString*)title msg:(NSString*)msg {
+    UIAlertController *alertCtrl = [UIAlertController
+                                    alertControllerWithTitle:title
+                                    message:msg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:[[STASDKDataController sharedInstance] localizedStringForKey:@"OK"]
+                               style:UIAlertActionStyleDefault
+                               handler:NULL];
+    [alertCtrl addAction:okAction];
+
+    [self presentViewController:alertCtrl animated:YES completion:nil];
+}
+
 
 
 

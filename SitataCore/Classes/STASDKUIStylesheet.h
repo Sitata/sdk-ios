@@ -98,5 +98,6 @@
 #pragma mark - Trip Builder
 @property (nonatomic, retain) UIColor *tripTypeIconColor;
 @property (nonatomic, retain) UIColor *tripMetaCardActiveColor;
+@property (nonatomic, retain) UIColor *tripSuccessIconColor;
 
 @end

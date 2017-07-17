@@ -594,7 +594,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jk5-12-hea" id="NeW-aO-nhw">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -670,7 +670,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m1A-lO-65X" id="c7V-t4-Vpz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -678,7 +678,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GGc-tj-Nzm" id="bca-RP-ktz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -770,7 +770,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PWi-cb-DNk" id="LEh-u0-sN6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -845,6 +845,7 @@
                     <connections>
                         <segue destination="nkA-On-SLB" kind="show" id="skH-Ou-mSm"/>
                         <segue destination="XKS-hJ-THc" kind="show" id="Rqo-Vc-FTK"/>
+                        <segue destination="bHJ-tt-F7G" kind="show" id="KtZ-cQ-F5G"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q8b-dE-dFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -864,7 +865,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dqi-EY-q2O" id="KSl-hT-vXB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -946,7 +947,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBJ-8W-QVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1672.8" y="4025.9370314842581"/>
+            <point key="canvasLocation" x="1673" y="3946"/>
+        </scene>
+        <!--Success View Controller-->
+        <scene sceneID="reG-4H-Qxt">
+            <objects>
+                <viewController storyboardIdentifier="tripBuilderSuccess" id="bHJ-tt-F7G" customClass="STASDKUITBSuccessViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UAJ-sB-jn7"/>
+                        <viewControllerLayoutGuide type="bottom" id="nBi-6i-21X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z8T-Ck-aQZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="za1-31-oNn">
+                                <rect key="frame" x="16" y="163" width="343" height="277.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbH-PC-Zwa">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="33.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckCircle" translatesAutoresizingMaskIntoConstraints="NO" id="xaQ-oL-0DI">
+                                        <rect key="frame" x="61" y="57.5" width="220" height="220"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="220" id="V6r-OV-QKs"/>
+                                            <constraint firstAttribute="height" constant="220" id="umT-Au-gFI"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="IbH-PC-Zwa" firstAttribute="top" secondItem="za1-31-oNn" secondAttribute="top" id="8Hh-Km-Icl"/>
+                                    <constraint firstItem="xaQ-oL-0DI" firstAttribute="centerX" secondItem="za1-31-oNn" secondAttribute="centerX" id="H9J-QV-e1w"/>
+                                    <constraint firstItem="IbH-PC-Zwa" firstAttribute="centerX" secondItem="za1-31-oNn" secondAttribute="centerX" id="Ke3-Y4-uXE"/>
+                                    <constraint firstAttribute="trailing" secondItem="IbH-PC-Zwa" secondAttribute="trailing" id="Khd-RG-tHh"/>
+                                    <constraint firstItem="xaQ-oL-0DI" firstAttribute="top" secondItem="IbH-PC-Zwa" secondAttribute="bottom" constant="24" id="Kr1-vF-sGe"/>
+                                    <constraint firstItem="IbH-PC-Zwa" firstAttribute="leading" secondItem="za1-31-oNn" secondAttribute="leading" id="WAW-Jf-57q"/>
+                                    <constraint firstAttribute="bottom" secondItem="xaQ-oL-0DI" secondAttribute="bottom" id="rMK-Jg-fFY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="za1-31-oNn" firstAttribute="centerX" secondItem="z8T-Ck-aQZ" secondAttribute="centerX" id="dgk-Nc-LsE"/>
+                            <constraint firstItem="za1-31-oNn" firstAttribute="leading" secondItem="z8T-Ck-aQZ" secondAttribute="leadingMargin" id="h8H-sv-j1I"/>
+                            <constraint firstItem="za1-31-oNn" firstAttribute="centerY" secondItem="z8T-Ck-aQZ" secondAttribute="centerY" id="sGh-E5-3Rj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="za1-31-oNn" secondAttribute="trailing" id="svx-At-Vtp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="headerLbl" destination="IbH-PC-Zwa" id="fpq-HM-RYL"/>
+                        <outlet property="successImg" destination="xaQ-oL-0DI" id="NKe-0O-IfI"/>
+                        <outlet property="wrapView" destination="za1-31-oNn" id="bpF-gj-fGU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jpD-Fr-0mY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1673" y="4564"/>
         </scene>
         <!--Trip Build Itin View Controller-->
         <scene sceneID="zrJ-bu-0YF">
@@ -1167,6 +1227,9 @@
             <point key="canvasLocation" x="3134" y="3186"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CheckCircle" width="220" height="220"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rfH-S9-Tjk"/>
         <segue reference="J2X-gq-rG8"/>

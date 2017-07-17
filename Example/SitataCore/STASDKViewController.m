@@ -8,6 +8,7 @@
 
 #import "STASDKViewController.h"
 #import <SitataCore/STASDKUI.h>
+#import <SitataCore/STASDKMTrip.h>
 
 
 @interface STASDKViewController ()
@@ -79,7 +80,12 @@ NSArray *cellNames;
 
         // TODO: DO TEST STUFF HERE AND THEN REMOVE
         //[STASDKUI showTrip];
-        [STASDKUI showTripBuilder:NULL];
+        STASDKMTrip *trip = [STASDKMTrip currentTrip];
+        [STASDKUI showTripBuilder:trip.identifier];
+
+
+
+        //[STASDKUI showTripBuilder:NULL];
 
     }
 }

@@ -11,6 +11,7 @@
 #import "STASDKApiUtils.h"
 #import "STASDKMCountry.h"
 #import "STASDKMDestination.h"
+#import "STASDKMDestinationLocation.h"
 #import "STASDKMTripHealthComment.h"
 
 #import <YYModel/YYModel.h>
@@ -90,10 +91,7 @@
     STASDKMTrip *oldTrip = [STASDKMTrip findBy:self.identifier];
     if (oldTrip != NULL) {
         [realm beginWriteTransaction];
-        [oldTrip.destinations removeAllObjects];
-        [oldTrip.tripDiseaseComments removeAllObjects];
-        [oldTrip.tripMedicationComments removeAllObjects];
-        [oldTrip.tripVaccinationComments removeAllObjects];
+        [oldTrip removeAssociated:realm];
         NSError *assocError;
         [realm commitWriteTransaction:&assocError];
         if (assocError) {
@@ -112,6 +110,31 @@
     if (selfError != NULL) {
         *error = selfError;
     }
+}
+
+// Removes associated models from the database
+// THIS MUST BE CALLED WITHIN A REALM TRANSACTION
+-(void)removeAssociated:(RLMRealm*)realm {
+    for (STASDKMDestination* dest in self.destinations) {
+        [dest removeAssociated:realm];
+        [realm deleteObject:dest];
+    }
+    [self.destinations removeAllObjects];
+
+    for (STASDKMTripDiseaseComment* com in self.tripDiseaseComments) {
+        [realm deleteObject:com];
+    }
+    [self.tripDiseaseComments removeAllObjects];
+
+    for (STASDKMTripMedicationComment* com in self.tripMedicationComments) {
+        [realm deleteObject:com];
+    }
+    [self.tripMedicationComments removeAllObjects];
+
+    for (STASDKMTripVaccinationComment* com in self.tripVaccinationComments) {
+        [realm deleteObject:com];
+    }
+    [self.tripVaccinationComments removeAllObjects];
 }
 
 // Returns true if the trip does not have any destination data.
@@ -311,23 +334,33 @@
 
 - (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
 
-    if (![_createdAt isEqual:(id)[NSNull null]]) {
-        dic[@"created_at"] = [NSNumber numberWithDouble:[_createdAt timeIntervalSince1970]];
+    if (![self.createdAt isEqual:(id)[NSNull null]]) {
+        dic[@"created_at"] = [NSNumber numberWithDouble:[self.createdAt timeIntervalSince1970]];
     }
-    if (![_updatedAt isEqual:(id)[NSNull null]]) {
-        dic[@"updated_at"] = [NSNumber numberWithDouble:[_updatedAt timeIntervalSince1970]];
+    if (![self.updatedAt isEqual:(id)[NSNull null]]) {
+        dic[@"updated_at"] = [NSNumber numberWithDouble:[self.updatedAt timeIntervalSince1970]];
     }
-    if (![_deletedAt isEqual:(id)[NSNull null]]) {
-        dic[@"deleted_at"] = [NSNumber numberWithDouble:[_deletedAt timeIntervalSince1970]];
-    }
-
-    if (![_start isEqual:(id)[NSNull null]]) {
-        dic[@"start"] = [NSNumber numberWithDouble:[_start timeIntervalSince1970]];
-    }
-    if (![_finish isEqual:(id)[NSNull null]]) {
-        dic[@"finish"] = [NSNumber numberWithDouble:[_finish timeIntervalSince1970]];
+    if (![self.deletedAt isEqual:(id)[NSNull null]]) {
+        dic[@"deleted_at"] = [NSNumber numberWithDouble:[self.deletedAt timeIntervalSince1970]];
     }
 
+    if (![self.start isEqual:(id)[NSNull null]]) {
+        dic[@"start"] = [NSNumber numberWithDouble:[self.start timeIntervalSince1970]];
+    }
+    if (![self.finish isEqual:(id)[NSNull null]]) {
+        dic[@"finish"] = [NSNumber numberWithDouble:[self.finish timeIntervalSince1970]];
+    }
+
+    // add activities and ensure they are posted as numbers
+    dic[@"activities"] = [self activitiesArr];
+
+    // Since 'container' properties are not working at the moment with Realm Collections
+    NSMutableArray *destArr = [[NSMutableArray alloc] init];
+    for (STASDKMDestination *dest in self.destinations) {
+        NSMutableDictionary *destDict = [[dest yy_modelToJSONObject] mutableCopy];
+        [destArr addObject:destDict];
+    }
+    dic[@"destinations"] = destArr;
 
     return YES;
 }

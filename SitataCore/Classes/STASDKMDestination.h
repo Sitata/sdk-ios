@@ -25,6 +25,10 @@
 @property (retain) RLMArray<STASDKMDestinationLocation *><STASDKMDestinationLocation> *destinationLocations;
 
 
+// Removes associated models from the database. THIS MUST BE CALLED WITHIN A REALM TRANSACTION.
+-(void)removeAssociated:(RLMRealm*)realm;
+
+
 @end
 
 // This protocol enables typed collections. i.e.:

@@ -20,6 +20,7 @@
 "NEXT" = "Next";
 "PREVIOUS" = "Previous";
 "SAVE" = "Save";
+"FINISH" = "Finish";
 
 /* ALERTS */
 "ALERTS" = "Trip Alerts";
@@ -93,6 +94,9 @@
 "TB_TRIP_TYPE_HEADER" = "What Type Of Trip Is It?";
 "TB_TRIP_ACTIVITIES_HEADER" = "What Will You Be Doing?";
 "TB_TRIP_ACTIVITIES_SUBHEAD" = "(You Can Select More Than One)";
+"TB_SAVE_ERROR_TTL" = "Uh oh!";
+"TB_SAVE_ERROR_MSG" = "Something went wrong when you tried to save your trip. Please try again.";
+"TB_SUCCESS" = "Congratulations!\rYour trip has been saved!";
 
 /* TRIP TYPE */
 "TRIP_TYPE_0" = "Holiday";

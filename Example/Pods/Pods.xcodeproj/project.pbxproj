@@ -118,6 +118,8 @@
 		279238FB1F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238F91F0AC3CD0016F0C5 /* STASDKUITripBuilderBaseViewController.m */; };
 		279239001F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 279238FE1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		279239011F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 279238FF1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m */; };
+		2799E7F01F1D115700F3C402 /* STASDKUITBSuccessViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2799E7EE1F1D115700F3C402 /* STASDKUITBSuccessViewController.h */; };
+		2799E7F11F1D115700F3C402 /* STASDKUITBSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2799E7EF1F1D115700F3C402 /* STASDKUITBSuccessViewController.m */; };
 		27CDAAED1F1402F00022591D /* STASDKMDestinationLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 273AD89E1F13FF8600BDA9CD /* STASDKMDestinationLocation.m */; };
 		27CDAAEE1F1402F30022591D /* STASDKMDestinationLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 273AD89D1F13FF8600BDA9CD /* STASDKMDestinationLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27CDAAF11F1560900022591D /* STASDKUITripLocationAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 27CDAAEF1F1560900022591D /* STASDKUITripLocationAnnotation.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -981,6 +983,8 @@
 		279238FC1F0AD8240016F0C5 /* TBItineraryCountryHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TBItineraryCountryHeader.xib; sourceTree = "<group>"; };
 		279238FE1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUIItineraryCountryHeaderView.h; sourceTree = "<group>"; };
 		279238FF1F0ADFD80016F0C5 /* STASDKUIItineraryCountryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUIItineraryCountryHeaderView.m; sourceTree = "<group>"; };
+		2799E7EE1F1D115700F3C402 /* STASDKUITBSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITBSuccessViewController.h; sourceTree = "<group>"; };
+		2799E7EF1F1D115700F3C402 /* STASDKUITBSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITBSuccessViewController.m; sourceTree = "<group>"; };
 		27CDAAEF1F1560900022591D /* STASDKUITripLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITripLocationAnnotation.h; sourceTree = "<group>"; };
 		27CDAAF01F1560900022591D /* STASDKUITripLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKUITripLocationAnnotation.m; sourceTree = "<group>"; };
 		27CDAAF31F1579990022591D /* STASDKUITripMetaCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITripMetaCollectionViewController.h; sourceTree = "<group>"; };
@@ -2086,6 +2090,8 @@
 				27CDAAF41F1579990022591D /* STASDKUITripMetaCollectionViewController.m */,
 				27CDAAF91F157F100022591D /* STASDKUITripMetaCollectionViewCell.h */,
 				27CDAAFA1F157F100022591D /* STASDKUITripMetaCollectionViewCell.m */,
+				2799E7EE1F1D115700F3C402 /* STASDKUITBSuccessViewController.h */,
+				2799E7EF1F1D115700F3C402 /* STASDKUITBSuccessViewController.m */,
 				27FAC7131EF86D0200DB5557 /* STASDKPushHandler.h */,
 				27FAC7141EF86D0200DB5557 /* STASDKPushHandler.m */,
 				279238EC1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.h */,
@@ -2989,6 +2995,7 @@
 				62C2556458A85952A808D02E3FC387CA /* STASDKMTripHealthComment.h in Headers */,
 				273AD8871F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h in Headers */,
 				3656061A74A75F50F11B4E7B2D055F78 /* STASDKMVaccination.h in Headers */,
+				2799E7F01F1D115700F3C402 /* STASDKUITBSuccessViewController.h in Headers */,
 				7750E02A8D1E2497391BB94285718D88 /* STASDKSync.h in Headers */,
 				11C489B66C50EA413B126F617D3986CD /* STASDKUI.h in Headers */,
 				DAB268323E6451B9AD6FD563AD49FCAD /* STASDKUIAlertPin.h in Headers */,
@@ -3733,6 +3740,7 @@
 				03BDFB27C0BB5BB60181CBE0516CFFA2 /* STASDKUIHospitalExtrasTableViewCell.m in Sources */,
 				57C9EE093A413C327BD16BBD0C0901DF /* STASDKUIHospitalPin.m in Sources */,
 				6DD06860C049BC19A41D62284893F1A2 /* STASDKUIHospitalRowTableViewCell.m in Sources */,
+				2799E7F11F1D115700F3C402 /* STASDKUITBSuccessViewController.m in Sources */,
 				34174004F70694B4B19C2AC7AE6E457D /* STASDKUIHospitalsPageViewController.m in Sources */,
 				279238EF1F0291AE0016F0C5 /* STASDKUIModalLoadingWindow.m in Sources */,
 				D56D7D38D0EB63DD697F5FB35351C3F1 /* STASDKUIHospitalsTableViewController.m in Sources */,
