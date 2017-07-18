@@ -21,6 +21,7 @@
 "PREVIOUS" = "Previous";
 "SAVE" = "Save";
 "FINISH" = "Finish";
+"POWERED_BY" = "Powered by Sitata";
 
 /* ALERTS */
 "ALERTS" = "Trip Alerts";

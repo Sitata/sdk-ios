@@ -277,8 +277,15 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attribution" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPV-xd-fg3">
+                                                <rect key="frame" x="289" y="582" width="81" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="iPV-xd-fg3" secondAttribute="trailing" constant="5" id="1EZ-OA-7S7"/>
                                             <constraint firstItem="x32-Fk-u7m" firstAttribute="leading" secondItem="TdO-ao-WiR" secondAttribute="leadingMargin" id="1H7-Gi-QEU"/>
                                             <constraint firstItem="SBE-RI-6Pu" firstAttribute="leading" secondItem="TdO-ao-WiR" secondAttribute="leadingMargin" id="3vZ-4c-c00"/>
                                             <constraint firstItem="Xnj-yx-Zlu" firstAttribute="top" secondItem="x32-Fk-u7m" secondAttribute="bottom" constant="24" id="6cn-JQ-tZR"/>
@@ -289,6 +296,7 @@
                                             <constraint firstItem="1tu-Jk-ruI" firstAttribute="top" secondItem="Xnj-yx-Zlu" secondAttribute="bottom" constant="10" id="PlG-56-qiy"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="awe-6e-HA1" secondAttribute="trailing" id="Qmm-a0-jyZ"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="x32-Fk-u7m" secondAttribute="trailing" id="Sl3-Hu-sCo"/>
+                                            <constraint firstAttribute="bottom" secondItem="iPV-xd-fg3" secondAttribute="bottom" constant="5" id="UYN-E4-Tua"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="PGr-5R-sdS" secondAttribute="trailing" id="WOP-zQ-xLL"/>
                                             <constraint firstAttribute="bottom" secondItem="hVO-uW-P0h" secondAttribute="bottom" constant="64" identifier="windowHeightStub" id="Was-N5-VJg"/>
                                             <constraint firstItem="awe-6e-HA1" firstAttribute="leading" secondItem="TdO-ao-WiR" secondAttribute="leadingMargin" id="YHg-7d-hE8"/>
@@ -325,6 +333,7 @@
                     <connections>
                         <outlet property="adviceBodyLbl" destination="1tu-Jk-ruI" id="B7z-r6-xGN"/>
                         <outlet property="adviceHeaderLbl" destination="Xnj-yx-Zlu" id="2JY-r6-f1I"/>
+                        <outlet property="attributionLbl" destination="iPV-xd-fg3" id="5Lv-8c-5Rc"/>
                         <outlet property="bodyLbl" destination="PGr-5R-sdS" id="6wX-C3-Ah4"/>
                         <outlet property="containerView" destination="TdO-ao-WiR" id="7Nq-3V-0Y3"/>
                         <outlet property="dateLbl" destination="SBE-RI-6Pu" id="XhI-LP-FMt"/>
@@ -865,7 +874,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dqi-EY-q2O" id="KSl-hT-vXB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1231,7 +1240,7 @@
         <image name="CheckCircle" width="220" height="220"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rfH-S9-Tjk"/>
         <segue reference="J2X-gq-rG8"/>
+        <segue reference="SIw-7a-UwN"/>
     </inferredMetricsTieBreakers>
 </document>

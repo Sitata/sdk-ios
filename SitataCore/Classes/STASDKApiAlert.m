@@ -39,8 +39,7 @@
 
         for (NSDictionary* tripAlert in tripAlerts) {
             NSDictionary *alertJson = [tripAlert objectForKey:@"alert"];
-            STASDKMAlert *alert = [STASDKMAlert yy_modelWithJSON:alertJson];
-            [allAlerts addObject:alert];
+            [allAlerts addObject:alertJson];
         }
 
         [allAlerts addObjectsFromArray:pastAlerts];

@@ -32,6 +32,7 @@
 @interface STASDKUIAlertViewController ()
 
 @property STASDKUIModalLoadingWindow *loadingWin;
+@property (weak, nonatomic) IBOutlet UILabel *attributionLbl;
 
 @end
 
@@ -56,10 +57,19 @@
     } else {
         [self setupForAdvisory];
     }
+    [self addAttribution];
 
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.alertPageBackgroundColor;
+}
+
+- (void)viewDidLayoutSubviews {
+
+    // adjust attribution label constraints to force label to bottom of view
+    if (self.containerView.frame.size.height < self.view.frame.size.height) {
+        [self.attributionLbl.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-5.0].active = YES;
+    }
 }
 
 - (void)handleDismissLoadingWindow:(NSNotification*)notification {
@@ -125,7 +135,12 @@
     NSArray *sources = [self.alert alertSourcesArr];
     if ([sources count] > 0) {
         UIView *lastView = self.referencesHeaderLbl;
-        for (STASDKMAlertSource *as in sources) {
+
+        // only display the first 5 sources
+        int count = (int)sources.count;
+        if (count > 5) { count = 5; }
+        for (int i=0; i < count; i++) {
+            STASDKMAlertSource *as = [sources objectAtIndex:i];
             // returning the previously made label view so that we can
             // evenly space them apart from each other
             lastView = [self addAlertSourceToView:as lastView:lastView];
@@ -143,6 +158,31 @@
 
     }
 }
+
+- (void)addAttribution {
+    NSString *attribution = [[STASDKDataController sharedInstance] localizedStringForKey:@"POWERED_BY"];
+    NSRange range = [attribution rangeOfString:@"Sitata"];
+
+
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:attribution];
+    [str addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:range];
+    UIColor *sitBlue = [UIColor colorWithRed:93/255.0 green:144/255.0 blue:192/255.0 alpha:1.0];
+    [str addAttribute:NSForegroundColorAttributeName value:sitBlue range:range];
+    self.attributionLbl.textColor = [UIColor lightGrayColor];
+    self.attributionLbl.font = [UIFont systemFontOfSize:12];
+    self.attributionLbl.attributedText = str;
+    self.attributionLbl.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(onSitata)];
+    [self.attributionLbl addGestureRecognizer:tapGesture];
+}
+
+- (void)onSitata {
+    NSURL *url = [NSURL URLWithString:@"https://www.sitata.com"];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
 
 // If alert is of disease type, then create button link
 // to navigate to that disease
