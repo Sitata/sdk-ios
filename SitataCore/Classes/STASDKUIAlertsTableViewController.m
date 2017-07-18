@@ -17,8 +17,10 @@
 #import "STASDKUINullStateHandler.h"
 #import "STASDKUIUtility.h"
 #import "STASDKUIStylesheet.h"
+#import "STASDKJobs.h"
 
 #import <Realm/Realm.h>
+#import <EDQueue/EDQueue.h>
 
 
 @interface STASDKUIAlertsTableViewController ()
@@ -28,7 +30,7 @@
 @property (nonatomic, strong) RLMNotificationToken *notification;
 @property (nonatomic) BOOL hasData;
 
-
+@property STASDKMTrip *trip;
 
 @end
 
@@ -70,6 +72,7 @@
     [STASDKUIUtility applyStylesheetToNavigationController:self.navigationController];
 
     [self loadData];
+    [self setNotificationIcon];
 }
 
 -(void)close:(id)sender
@@ -85,14 +88,14 @@
 
 - (void)loadData {
     NSError *error;
-    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    self.trip = [STASDKMTrip currentTrip];
 
-    if (trip != NULL && error == NULL) {
+    if (self.trip != NULL && error == NULL) {
 
         if (self.mode == Alerts) {
-            [self loadAlerts:trip];
+            [self loadAlerts];
         } else {
-            [self loadAdvisories:trip];
+            [self loadAdvisories];
         }
 
     }
@@ -109,14 +112,69 @@
     }
 }
 
-- (void)loadAlerts:(STASDKMTrip*)trip {
-    self.alerts = [trip alerts];
+- (void)setNotificationIcon {
+    NSString *imgName;
+    if (self.trip.muted) {
+        imgName = @"BellDisabled";
+    } else {
+        imgName = @"Bell";
+    }
+    NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
+    UIImage *img = [UIImage imageNamed:imgName inBundle:bundle compatibleWithTraitCollection:NULL];
+
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(toggleMute:)];
+    self.navigationItem.rightBarButtonItem = btn;
+}
+
+-(void)toggleMute:(id)sender {
+    if (self.trip.muted) {
+        [self doToggleMute];
+    } else {
+        // confirmation alert dialog
+        STASDKDataController *ctrl = [STASDKDataController sharedInstance];
+        UIAlertController *alertCtrl = [UIAlertController
+                                        alertControllerWithTitle:[ctrl localizedStringForKey:@"DISABLE_TTL"]
+                                        message:[ctrl localizedStringForKey:@"DISABLE_MSG"]
+                                        preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:[ctrl localizedStringForKey:@"YES"]
+                                   style:UIAlertActionStyleDestructive
+                                   handler:^(UIAlertAction * action) {
+                                       [self doToggleMute];
+                                   }];
+        [alertCtrl addAction:okAction];
+
+        UIAlertAction *noAction = [UIAlertAction
+                                   actionWithTitle:[ctrl localizedStringForKey:@"NO"]
+                                   style:UIAlertActionStyleDefault
+                                   handler:NULL];
+        [alertCtrl addAction:noAction];
+
+        [self presentViewController:alertCtrl animated:YES completion:nil];
+    }
+}
+
+// This performs an eager request via background jobs to ensure the UI is spiffy.
+-(void)doToggleMute {
+    // Make request using background job
+    NSMutableDictionary *settings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:!self.trip.muted], @"muted", nil];
+    [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [self.trip identifier], JOB_PARAM_SETTINGS: settings} forTask:JOB_CHANGE_TRIP_SETTINGS];
+
+    [[RLMRealm defaultRealm] transactionWithBlock:^{
+        self.trip.muted = !self.trip.muted;
+    }];
+    [self setNotificationIcon];
+}
+
+- (void)loadAlerts {
+    self.alerts = [self.trip alerts];
     self.hasData = self.alerts.count > 0;
     [self addRealmNotifications:self.alerts];
 }
 
-- (void)loadAdvisories:(STASDKMTrip*)trip {
-    self.advisories = [trip advisories];
+- (void)loadAdvisories {
+    self.advisories = [self.trip advisories];
     self.hasData = self.advisories.count > 0;
     [self addRealmNotifications:self.advisories];
 }

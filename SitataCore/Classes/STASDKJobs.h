@@ -16,6 +16,7 @@ extern NSString* const JOB_SYNC_TRIP_HOSPITALS;
 extern NSString* const JOB_SYNC_PUSH_TOKEN;
 extern NSString* const JOB_ALERT_MARK_READ;
 extern NSString* const JOB_SYNC_ALERT;
+extern NSString* const JOB_CHANGE_TRIP_SETTINGS;
 
 
 
@@ -24,3 +25,4 @@ extern NSString* const JOB_PARAM_DID;
 extern NSString* const JOB_PARAM_TRIPID;
 extern NSString* const JOB_PARAM_PTOKEN;
 extern NSString* const JOB_PARAM_AID;
+extern NSString* const JOB_PARAM_SETTINGS;

@@ -22,10 +22,16 @@
 "SAVE" = "Save";
 "FINISH" = "Finish";
 "POWERED_BY" = "Powered by Sitata";
+"YES" = "Yes";
+"NO" = "No";
 
 /* ALERTS */
 "ALERTS" = "Trip Alerts";
 "NO_ALERTS" = "There are no trip alerts for your travels at this time.";
+"DISABLE_TTL" = "Disable Trip Alerts";
+"DISABLE_MSG" = "You are about to disable trip alerts for your trip which means you will no longer receive any more trip alert notifications. Are you sure you want to do this?";
+
+
 
 /* ADVISORIES */
 "ADVISORIES" = "Trip Advisories";

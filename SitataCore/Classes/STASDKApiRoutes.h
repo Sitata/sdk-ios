@@ -24,6 +24,9 @@
 // /trips/:id
 +(NSString*)trip:(NSString*)tripId;
 
+// /trips/:id/change_trip_settings
++(NSString*)tripSettings:(NSString*)tripId;
+
 
 
 // MARK: == COUNTRIES ==

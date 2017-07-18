@@ -109,6 +109,23 @@
 }
 
 
++(void)changeTripSettings:(NSString*)tripId settings:(NSDictionary*)settings onFinished:(void(^)(NSURLSessionTask*, NSError*))callback {
+    NSString *url = [STASDKApiRoutes tripSettings:tripId];
+
+    AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:settings, @"trip", nil];
+    [manager PUT:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        // do success - server replies with full trip json, but it's not
+        // entirely since client should have the trip's state anyway
+        callback(task, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        // do failure
+        NSLog(@"Error: %@", error);
+        callback(task, error);
+    }];
+}
+
+
 
 @end
 

@@ -37,6 +37,10 @@ NSString *const APIPath = @"api/v1";
     return [NSString stringWithFormat:@"%@/%@", [self trips], tripId];
 }
 
++(NSString*)tripSettings:(NSString*)tripId {
+    return [NSString stringWithFormat:@"%@/change_trip_settings", [self trip:tripId]];
+}
+
 
 // MARK: == COUNTRIES ==
 +(NSString*)countries {

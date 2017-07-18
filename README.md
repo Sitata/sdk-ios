@@ -19,3 +19,4 @@ A number of icons in this project have been used with permission from the follow
 * [Arosh Khan](https://thenounproject.com/aroshkhan05)
 * [Minh Hoang](http://www.flaticon.com/authors/minh-hoang)
 * [Alfredo Hernandez](http://www.flaticon.com/authors/alfredo-hernandez)
+* [Those Icons](http://www.flaticon.com/authors/those-icons)

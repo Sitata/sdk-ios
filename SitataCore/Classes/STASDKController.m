@@ -13,6 +13,7 @@
 #import <Realm/Realm.h>
 #import <EDQueue/EDQueue.h>
 #import "STASDKPushHandler.h"
+#import "STASDKApiTrip.h"
 
 @implementation STASDKController
 
@@ -303,6 +304,21 @@ BOOL didFirstSync;
             if (alertId == nil) {return;}
             [STASDKSync syncAlert:alertId callback:^(NSError *err) {
                 if (err != nil) {
+                    block(EDQueueResultFail);
+                } else {
+                    block(EDQueueResultSuccess);
+                }
+            }];
+
+        // TRIP SETTINGS
+        } else if ([[job objectForKey:@"task"] isEqualToString:JOB_CHANGE_TRIP_SETTINGS]) {
+            NSDictionary *data = [job objectForKey:@"data"];
+            if (data == nil) {return;}
+            NSString *tripId = [data objectForKey:JOB_PARAM_TRIPID];
+            NSDictionary *settings = [data objectForKey:JOB_PARAM_SETTINGS];
+            if (tripId == nil) {return;}
+            [STASDKApiTrip changeTripSettings:tripId settings:settings onFinished:^(NSURLSessionTask *task, NSError *error) {
+                if (error != nil) {
                     block(EDQueueResultFail);
                 } else {
                     block(EDQueueResultSuccess);

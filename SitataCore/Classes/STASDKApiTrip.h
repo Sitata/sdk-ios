@@ -28,6 +28,9 @@
 // Update an existing trip
 +(void)updateTrip:(STASDKMTrip*)trip onFinished:(void(^)(STASDKMTrip*, NSURLSessionTask*, NSError*))callback;
 
+// Change trip setting
++(void)changeTripSettings:(NSString*)tripId settings:(NSDictionary*)settings onFinished:(void(^)(NSURLSessionTask*, NSError*))callback;
+
 @end
 
 
