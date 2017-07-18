@@ -37,6 +37,7 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKApiMisc.h',
                             'SitataCore/**/STASDKApiPlaces.h',
                             'SitataCore/**/STASDKApiTrip.h',
+                            'SitataCore/**/STASDKApiUser.h',
                             'SitataCore/**/STASDKController.h',
                             'SitataCore/**/STASDKDataController.h',
                             'SitataCore/**/STASDKGeo.h',
@@ -56,6 +57,8 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKMTrip.h',
                             'SitataCore/**/STASDKMTripHealthComment.h',
                             'SitataCore/**/STASDKMVaccination.h',
+                            'SitataCore/**/STASDKMUser.h',
+                            'SitataCore/**/STASDKMUserSettings.h',
                             'SitataCore/**/STASDKSync.h',
                             'SitataCore/**/STASDKUI.h',
                             'SitataCore/**/STASDKUIStylesheet.h']

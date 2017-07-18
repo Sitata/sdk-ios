@@ -15,6 +15,7 @@
 #import "STASDKApiHealth.h"
 #import "STASDKApiAlert.h"
 #import "STASDKApiPlaces.h"
+#import "STASDKApiUser.h"
 
 #import "STASDKController.h"
 #import "STASDKApiMisc.h"
@@ -28,6 +29,7 @@
 #import "STASDKMDestination.h"
 #import "STASDKMAlert.h"
 #import "STASDKMAdvisory.h"
+#import "STASDKMUser.h"
 
 
 #import <Realm/Realm.h>
@@ -69,6 +71,15 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
         __block NSError *error;
         dispatch_group_t taskGroup = dispatch_group_create();
+
+        // Sync uesr's profile
+        dispatch_group_enter(taskGroup);
+        [STASDKSync syncUserProfile:^(NSError *_error) {
+            if (_error) {
+                error = _error;
+            }
+            dispatch_group_leave(taskGroup);
+        }];
 
         // Sync short list of countries
         dispatch_group_enter(taskGroup);
@@ -129,6 +140,28 @@ NSString *const NotifyKeyAlertId = @"alertId";
 }
 
 
+// Sync the user's profile
++ (void)syncUserProfile:(void (^)(NSError*))callback {
+    [STASDKApiUser getUserProfile:^(STASDKMUser *user, NSURLSessionDataTask *task, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Failed to fetch profile for current user - error: %@", [error localizedDescription]);
+            [self catchCommonHttp:task error:error callback:callback];
+            return;
+        }
+
+        NSError *writeError;
+        [user resave:&writeError];
+
+        if (writeError != nil) {
+            NSLog(@"Failed to save profile of current user - error: %@", [writeError localizedDescription]);
+            callback(writeError);
+            return;
+        } else {
+            NSLog(@"Finshed saving profile of current user.");
+            callback(NULL);
+        }
+    }];
+}
 
 
 + (void)syncCurrentTrip:(void (^)(NSError*))callback {

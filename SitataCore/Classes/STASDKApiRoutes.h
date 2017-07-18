@@ -108,6 +108,11 @@
 +(NSString*)addDevice;
 
 
+// Mark: == USERS ==
++(NSString*)userProfile;
+
++(NSString*)user:(NSString*)userId;
+
 
 // MARK: == GOOGLE ==
 +(NSString*)googleSearchForCityNamed:(NSString*)query inCountry:(NSString*)countryCode;

@@ -143,6 +143,20 @@ NSString *const APIPath = @"api/v1";
 }
 
 
+// Mark: == USERS ==
+
+// /api/v1/users/profile
++(NSString*)userProfile {
+    return [NSString stringWithFormat:@"%@/users/profile", [self apiEndpoint]];
+}
+
+// /api/v1/users/:id
++(NSString*)user:(NSString*)userId {
+    return [NSString stringWithFormat:@"%@/users/%@", [self apiEndpoint], userId];
+}
+
+
+
 
 // MARK: == GOOGLE ==
 

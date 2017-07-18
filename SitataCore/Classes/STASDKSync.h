@@ -24,6 +24,9 @@ FOUNDATION_EXPORT NSString *const NotifyKeyAlertId;
 // Sync everything necessary and save things locally
 + (void)fullSync:(void (^)(NSError*))syncCompleted;
 
+// Sync the user's profile
++ (void)syncUserProfile:(void (^)(NSError*))callback;
+
 // Sync all trips for the local user.
 + (void)syncAllTrips:(void (^)(NSError*))callback;
 
