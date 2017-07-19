@@ -34,6 +34,13 @@ FOUNDATION_EXPORT NSString *const NotifyKeyAlertId;
 // and save them locally to the database.
 + (void)syncCurrentTrip:(void (^)(NSError*))callback;
 
+// Sync a trip for the given trip id and all associated objects. If
+// isAsync is false, then the onFinished callback will be triggered only after the trip and all
+// associated requests have finished.
+// If isAsync is true, then associated objects will be fetched via a background process
+// and the onFinished callback will be triggered after the trip has been fetched.
++ (void)syncTrip:(NSString*)tripId isAsync:(bool)isAsync onFinished:(void (^)(NSError*))callback;
+
 // Sync associated data for a newly created trip
 + (void) syncExtrasFor:(STASDKMTrip*)trip;
 

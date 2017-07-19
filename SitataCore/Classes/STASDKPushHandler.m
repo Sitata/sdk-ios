@@ -19,6 +19,7 @@ const NSString *PUSH_KEY_SIT_DATA = @"sitataData";
 
 const int PUSH_TYPE_ALERT = 0;
 const int PUSH_TYPE_ALERT_LATENT = 2;
+const int PUSH_TYPE_NEW_TRIP = 3;
 
 
 
@@ -60,6 +61,9 @@ const int PUSH_TYPE_ALERT_LATENT = 2;
             case PUSH_TYPE_ALERT:
                 [self handleAlertPush:sitataDataDict onFinished:callback];
                 break;
+            case PUSH_TYPE_NEW_TRIP:
+                [self handleNewTripPush:sitataDataDict onFinished:callback];
+                break;
             default:
                 // ignore
                 break;
@@ -96,6 +100,21 @@ const int PUSH_TYPE_ALERT_LATENT = 2;
                 // Inform listeners about this sync.
                 NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:alertId, NotifyKeyAlertId, nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:NotifyAlertSynced object:self userInfo:userInfo];
+                callback(UIBackgroundFetchResultNewData);
+            }
+        }];
+    }
+}
+
+// Handle incoming new trip push notifications
++ (void)handleNewTripPush:(NSDictionary*)sitataData onFinished:(void (^)(UIBackgroundFetchResult))callback {
+    if (sitataData != NULL) {
+        NSString *tripId = [sitataData objectForKey:@"trip_id"];
+
+        [STASDKSync syncTrip:tripId isAsync:NO onFinished:^(NSError *error) {
+            if (error) {
+                callback(UIBackgroundFetchResultFailed);
+            } else {
                 callback(UIBackgroundFetchResultNewData);
             }
         }];

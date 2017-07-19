@@ -191,6 +191,36 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
 }
 
++ (void)syncTrip:(NSString*)tripId isAsync:(bool)isAsync onFinished:(void (^)(NSError*))callback {
+    [STASDKApiTrip getById:tripId onFinished:^(STASDKMTrip *trip, NSURLSessionDataTask *task, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Failed to fetch trip (%@) - error: %@", tripId, [error localizedDescription]);
+            [self catchCommonHttp:task error:error callback:callback];
+            return;
+        }
+
+        NSError *writeError;
+        [trip resave:&writeError];
+
+        if (writeError != nil) {
+            NSLog(@"Failed to save trip (%@) - error: %@", tripId, [writeError localizedDescription]);
+            callback(writeError);
+            return;
+        } else {
+            if (isAsync) {
+                [self syncExtrasFor:trip];
+                NSLog(@"Finshed saving trip (%@).", tripId);
+                callback(NULL);
+            } else {
+                [self syncExtrasSynchronousFor:trip onFinished:^(NSError *err) {
+                    callback(err);
+                }];
+            }
+
+        }
+    }];
+}
+
 + (void)syncAllTrips:(void (^)(NSError*))callback {
 
     // do api call here
@@ -243,6 +273,73 @@ NSString *const NotifyKeyAlertId = @"alertId";
     [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [trip identifier]} forTask:JOB_SYNC_TRIP_ADVISORIES];
     [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [trip identifier]} forTask:JOB_SYNC_TRIP_HOSPITALS];
 
+}
+
++ (void) syncExtrasSynchronousFor:(STASDKMTrip *)trip onFinished:(void (^)(NSError*))callback {
+
+    // Here we pull everything out of the trip so we don't get Realm
+    // thread access errors below
+    NSString *tripId = trip.identifier;
+    NSMutableArray *countryIds = [[NSMutableArray alloc] init];
+    for (STASDKMDestination* dest in trip.destinations) {
+        [countryIds addObject:dest.countryId];
+    }
+
+
+
+    // Using a dispatch group here to be notified when all tasks have completed.
+    // Basically a latch.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+        __block NSError *error;
+        dispatch_group_t taskGroup = dispatch_group_create();
+
+        // for each destination, sync the country
+        for (NSString* countryId in countryIds) {
+            dispatch_group_enter(taskGroup);
+            [STASDKSync syncCountry:countryId callback:^(NSError *_err) {
+                if (_err) {
+                    error = _err;
+                }
+                dispatch_group_leave(taskGroup);
+            }];
+
+            // TODO: SYNC COUNTRY MAP DURING COUNTRY SYNC JOB
+        }
+
+        dispatch_group_enter(taskGroup);
+        [STASDKSync syncTripAlerts:tripId callback:^(NSError *_err) {
+            if (_err) {
+                error = _err;
+            }
+            dispatch_group_leave(taskGroup);
+        }];
+
+        dispatch_group_enter(taskGroup);
+        [STASDKSync syncTripAdvisories:tripId callback:^(NSError *_err) {
+            if (_err) {
+                error = _err;
+            }
+            dispatch_group_leave(taskGroup);
+        }];
+
+        dispatch_group_enter(taskGroup);
+        [STASDKSync syncTripHospitals:tripId callback:^(NSError *_err) {
+            if (_err) {
+                error = _err;
+            }
+            dispatch_group_leave(taskGroup);
+        }];
+
+        // wait for group of tasks to finish, max 20 seconds
+        dispatch_group_wait(taskGroup, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20.0 * NSEC_PER_SEC)));
+
+        // Callback on calling thread when finished
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callback(error);
+        });
+
+    });
 }
 
 
