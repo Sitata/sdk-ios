@@ -123,8 +123,8 @@ BOOL didFirstSync;
 }
 
 
-- (void)receivePushNotification:(NSDictionary *)userInfo {
-    [STASDKPushHandler handlePushData:userInfo];
+- (void)receivePushNotification:(NSDictionary *)userInfo onFinished:(void (^)(UIBackgroundFetchResult))callback {
+    [STASDKPushHandler handlePushData:userInfo onFinished:callback];
 }
 
 - (void)launchPushNotificationScreen:(NSDictionary*)userInfo {
@@ -134,7 +134,11 @@ BOOL didFirstSync;
 
 
 - (UIViewController*)parentRootViewController {
-    return [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    return topController;
 }
 
 

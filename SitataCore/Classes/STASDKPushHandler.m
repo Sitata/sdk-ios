@@ -9,8 +9,7 @@
 #import "STASDKPushHandler.h"
 #import "STASDKJobs.h"
 #import "STASDKUI.h"
-
-#import <EDQueue/EDQueue.h>
+#import "STASDKSync.h"
 
 
 @implementation STASDKPushHandler
@@ -50,7 +49,7 @@ const int PUSH_TYPE_ALERT_LATENT = 2;
  *       sitataPt = 0;
  *   }
  */
-+ (void) handlePushData:(NSDictionary*)userInfo {
++ (void) handlePushData:(NSDictionary*)userInfo onFinished:(void (^)(UIBackgroundFetchResult))callback {
 
     // If we have a Sitata push notification type, then let's process it. Otherwise, ignroe it.
     if (userInfo[PUSH_KEY_SIT_TYPE]) {
@@ -59,7 +58,7 @@ const int PUSH_TYPE_ALERT_LATENT = 2;
 
         switch(pushType) {
             case PUSH_TYPE_ALERT:
-                [self handleAlertPush:sitataDataDict];
+                [self handleAlertPush:sitataDataDict onFinished:callback];
                 break;
             default:
                 // ignore
@@ -86,12 +85,20 @@ const int PUSH_TYPE_ALERT_LATENT = 2;
 
 
 // Handle incoming trip alert push notification
-+ (void) handleAlertPush:(NSDictionary*)sitataData {
++ (void) handleAlertPush:(NSDictionary*)sitataData onFinished:(void (^)(UIBackgroundFetchResult))callback {
     if (sitataData != NULL) {
         NSString *alertId = [sitataData objectForKey:@"alert_id"];
 
-        // do sync to ensure we have the data
-        [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_AID: alertId} forTask:JOB_SYNC_ALERT];
+        [STASDKSync syncAlert:alertId callback:^(NSError *err) {
+            if (err) {
+                callback(UIBackgroundFetchResultFailed);
+            } else {
+                // Inform listeners about this sync.
+                NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:alertId, NotifyKeyAlertId, nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotifyAlertSynced object:self userInfo:userInfo];
+                callback(UIBackgroundFetchResultNewData);
+            }
+        }];
     }
 }
 

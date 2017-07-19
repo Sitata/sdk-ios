@@ -605,7 +605,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
         // Find the trip(s) for alert associations
         for (NSString *tripId in tripIds) {
             STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
-            if (trip != NULL) {
+            if (trip != NULL && [trip.alerts indexOfObject:alert] == NSNotFound) {
                 [trip.alerts addObject:alert];
             }
         }

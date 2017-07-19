@@ -22,13 +22,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // STAGING
-//    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTVkOTBhZGVlOGQ5MDE3ODQzYTNmfHNjYXlpUWJURE1WekFWVFY4dlhi";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkwMTVkOTBhZGVlOGQ5MDE3ODQzYTNmfHNjYXlpUWJURE1WekFWVFY4dlhi";
 
     // LOCAL
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTk2N2Q5ODg4NWRiOWVlYjY3YmQ4ZGFifEc0SGZ6Y1dqeHZnelRzUVo4UHU0";
+//    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTk2N2Q5ODg4NWRiOWVlYjY3YmQ4ZGFifEc0SGZ6Y1dqeHZnelRzUVo4UHU0";
     STASDKController *ctrl = [STASDKController sharedInstance];
-//    [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
-    [ctrl setConfig:token apiEndpoint:@"http://localhost:3000"];
+    [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
+//    [ctrl setConfig:token apiEndpoint:@"http://localhost:3000"];
 
 
 
@@ -132,14 +132,16 @@
 
     // In all three states, pass notification to Sitata to download additional data.
     STASDKController *ctrl = [STASDKController sharedInstance];
-    [ctrl receivePushNotification:userInfo];
+    [ctrl receivePushNotification:userInfo onFinished:^(UIBackgroundFetchResult result) {
+        completionHandler(result);
+    }];
 
 
     if (application.applicationState == UIApplicationStateActive) {
         // app is currently active, can update badges or visuals here
 
     } else if (application.applicationState == UIApplicationStateBackground) {
-        // app is in background, can download additional info here if need be
+        // app is in background
 
     } else if (application.applicationState == UIApplicationStateInactive) {
         // app is transitioning from background to foreground (user taps notification)
@@ -149,7 +151,7 @@
 
     }
 
-    completionHandler(UIBackgroundFetchResultNewData);
+
 
 }
 

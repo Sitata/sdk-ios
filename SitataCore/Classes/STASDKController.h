@@ -67,7 +67,7 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 - (void)setPushNotificationToken:(NSString*)token;
 
 // Receive push notifications from client and react accordingly.
-- (void)receivePushNotification:(NSDictionary *)userInfo;
+- (void)receivePushNotification:(NSDictionary *)userInfo onFinished:(void (^)(UIBackgroundFetchResult))callback;
 
 // Launches the correct user interface screen for the incoming push notification.
 - (void)launchPushNotificationScreen:(NSDictionary*)userInfo;
