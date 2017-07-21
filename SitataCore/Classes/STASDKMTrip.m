@@ -57,7 +57,17 @@
 
 
 +(STASDKMTrip*)currentTrip {
+    RLMResults<STASDKMTrip *> *results = [self currentAndFutureTrips];
+    if (results && results.count > 0) {
+        return results.firstObject;
+    } else {
+        return nil;
+    }
 
+}
+
+// Find trips with a finish date greater than or equal to today, sorted by start date ascending
++(RLMResults<STASDKMTrip *>*)currentAndFutureTrips {
     //gather current calendar
     NSCalendar *calendar = [NSCalendar currentCalendar];
     //gather date components from date
@@ -70,18 +80,9 @@
 
     NSDate *equalizedToday = [calendar dateFromComponents:dateComponents];
 
-    // SELECT DATES WITH FINISH DAY GREATER OR EQUAL TO TODAY SORTED BY START DATE ASCENDING AND CHOOSE FIRST
+    // SELECT DATES WITH FINISH DAY GREATER OR EQUAL TO TODAY SORTED BY START DATE ASCENDING
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"finish >= %@", equalizedToday];
-
-    RLMResults<STASDKMTrip *> *results = [[STASDKMTrip objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred]
-                                          sortedResultsUsingKeyPath:@"start" ascending:YES];
-
-    if (results && results.count > 0) {
-        return results.firstObject;
-    } else {
-        return nil;
-    }
-
+    return [STASDKMTrip objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
 }
 
 
@@ -144,6 +145,13 @@
     return [[self destinations] count] <= 0;
 }
 
+-(void)destroy {
+    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
+    [realm transactionWithBlock:^{
+        [self removeAssociated:realm];
+        [realm deleteObject:self];
+    }];
+}
 
 
 -(RLMResults<STASDKMDestination*>*)sortedDestinations {

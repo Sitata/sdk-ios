@@ -170,6 +170,21 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
         if (error != nil) {
             NSLog(@"Failed to fetch current trip - error: %@", [error localizedDescription]);
+
+            // If the current trip endpoint returns 404, it means we shouldn't have any current
+            // or future trips. Therefore, remove them all in this situation to stay in sync
+            // with the server.
+            NSHTTPURLResponse *httpresponse = (NSHTTPURLResponse*) task.response;
+            if ([httpresponse statusCode] == 404) {
+
+                RLMResults<STASDKMTrip *> *trips = [STASDKMTrip currentAndFutureTrips];
+                for (STASDKMTrip *trip in trips) {
+                    [trip destroy];
+                }
+
+                callback(NULL); // 404 is fine, no need to re-do this background job
+                return;
+            }
             [self catchCommonHttp:task error:error callback:callback];
             return;
         }
@@ -270,8 +285,9 @@ NSString *const NotifyKeyAlertId = @"alertId";
 // Find and remove the local trip based on the given id
 + (void)findAndRemoveTrip:(NSString*)tripId {
     STASDKMTrip *localTrip = [STASDKMTrip findBy:tripId];
-    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
-    [realm deleteObject:localTrip];
+    if (localTrip != NULL) {
+        [localTrip destroy];
+    }
 }
 
 
@@ -833,9 +849,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
     }
 }
 
-+(bool)rejectIfNotConnected:(void (^)(NSError*))callback {
-    
-}
+
 
 
 

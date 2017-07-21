@@ -53,6 +53,9 @@
 // Return the current trip or next upcoming trip from the database.
 +(STASDKMTrip*)currentTrip;
 
+// Find trips with a finish date greater than or equal to today, sorted by start date ascending
++(RLMResults<STASDKMTrip *>*)currentAndFutureTrips;
+
 // Find stored trip by identifier
 +(STASDKMTrip*)findBy:(NSString *)tripId;
 
@@ -66,6 +69,8 @@
 // Returns true if the trip does not have any destination data.
 -(bool)isEmpty;
 
+// Remove the trip and associated objects
+-(void)destroy;
 
 // Returns a list of STASDKMDestination objects sorted by departure date
 -(RLMResults<STASDKMDestination*>*)sortedDestinations;
@@ -89,6 +94,9 @@
 
 // Removes an activity from the trip
 -(void)removeActivity:(int)activity;
+
+
+
 
 
 @end
