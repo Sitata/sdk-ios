@@ -13,6 +13,7 @@
 #import "STASDKMDestination.h"
 #import "STASDKMDestinationLocation.h"
 #import "STASDKMTripHealthComment.h"
+#import "STASDKDataController.h"
 
 #import <YYModel/YYModel.h>
 
@@ -45,7 +46,7 @@
 +(STASDKMTrip*)findBy:(NSString *)tripId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", tripId];
 
-    RLMResults<STASDKMTrip *> *results = [STASDKMTrip objectsWithPredicate:pred];
+    RLMResults<STASDKMTrip *> *results = [STASDKMTrip objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {
@@ -72,7 +73,8 @@
     // SELECT DATES WITH FINISH DAY GREATER OR EQUAL TO TODAY SORTED BY START DATE ASCENDING AND CHOOSE FIRST
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"finish >= %@", equalizedToday];
 
-    RLMResults<STASDKMTrip *> *results = [[STASDKMTrip objectsWithPredicate:pred] sortedResultsUsingKeyPath:@"start" ascending:YES];
+    RLMResults<STASDKMTrip *> *results = [[STASDKMTrip objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred]
+                                          sortedResultsUsingKeyPath:@"start" ascending:YES];
 
     if (results && results.count > 0) {
         return results.firstObject;
@@ -85,7 +87,7 @@
 
 
 -(void)resave:(NSError **)error {
-    RLMRealm *realm = [RLMRealm defaultRealm];
+    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
     // destroy related models where applicable
     STASDKMTrip *oldTrip = [STASDKMTrip findBy:self.identifier];

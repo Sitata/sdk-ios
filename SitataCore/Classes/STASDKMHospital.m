@@ -10,6 +10,7 @@
 #import "STASDKApiUtils.h"
 #import "STASDKMAddress.h"
 #import "STASDKMContactDetail.h"
+#import "STASDKDataController.h"
 
 @implementation STASDKMHospital
 
@@ -41,7 +42,7 @@
 
 +(RLMResults<STASDKMHospital*>*)findForCountry:(NSString*)countryId {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"countryId == %@", countryId];
-    return [[STASDKMHospital objectsWithPredicate:predicate] sortedResultsUsingKeyPath:@"updatedAt" ascending:NO];
+    return [[STASDKMHospital objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:predicate] sortedResultsUsingKeyPath:@"updatedAt" ascending:NO];
 }
 
 

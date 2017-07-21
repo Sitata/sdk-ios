@@ -30,6 +30,9 @@
 // Find stored user by identifier
 +(STASDKMUser*)findBy:(NSString *)userId;
 
+// Find first user in database
++(STASDKMUser*)findFirst;
+
 
 // Destroy all previous data and related models and resave to database.
 -(void)resave:(NSError **)error;

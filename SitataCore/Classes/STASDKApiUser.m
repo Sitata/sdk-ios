@@ -41,7 +41,10 @@
     NSString *url = [STASDKApiRoutes user:user.identifier];
 
     AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
-    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:user, @"user", nil];
+
+    NSDictionary *userDict = [user yy_modelToJSONObject];
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:userDict, @"user", nil];
+
 
     [manager PUT:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         STASDKMUser *user = [STASDKMUser yy_modelWithJSON:responseObject];

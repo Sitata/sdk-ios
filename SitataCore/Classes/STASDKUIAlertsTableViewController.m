@@ -161,7 +161,8 @@
     NSMutableDictionary *settings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:!self.trip.muted], @"muted", nil];
     [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [self.trip identifier], JOB_PARAM_SETTINGS: settings} forTask:JOB_CHANGE_TRIP_SETTINGS];
 
-    [[RLMRealm defaultRealm] transactionWithBlock:^{
+    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
+    [realm transactionWithBlock:^{
         self.trip.muted = !self.trip.muted;
     }];
     [self setNotificationIcon];

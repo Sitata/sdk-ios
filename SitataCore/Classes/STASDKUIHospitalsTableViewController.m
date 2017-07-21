@@ -35,7 +35,7 @@
 
 
 // Because we want to show / order by closest hospitals first, AND we can't do
-// fetching with computed properties (in a query) in Realm, then we must store all hsopitals in
+// fetching with computed properties (in a query) in Realm, then we must store all hospitals in
 // an array in memory. Not ideal.
 // https://github.com/realm/realm-cocoa/issues/1265
 @property NSMutableArray *hospitals;

@@ -11,6 +11,11 @@
 #import <SitataCore/STASDKMTrip.h>
 
 
+#import <SitataCore/STASDKController.h>
+#import <SitataCore/STASDKMUser.h>
+#import <SitataCore/STASDKMUserSettings.h>
+
+
 @interface STASDKViewController ()
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -26,7 +31,7 @@ NSArray *cellNames;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    cellNames = @[@"alerts", @"advisories", @"diseases", @"vaccinations", @"medications", @"hospitals", @"safety", @"emerg", @"test"];
+    cellNames = @[@"alerts", @"advisories", @"diseases", @"vaccinations", @"medications", @"hospitals", @"safety", @"emerg", @"tripBuilder", @"test"];
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -42,7 +47,7 @@ NSArray *cellNames;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return 9;
+    return 10;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -76,17 +81,22 @@ NSArray *cellNames;
         [STASDKUI showTripSafety];
     } else if ([cellName isEqualToString:@"emerg"]) {
         [STASDKUI showEmergencyNumbers];
+    } else if ([cellName isEqualToString:@"tripBuilder"]) {
+        [self doTripBuilder];
     } else if ([cellName isEqualToString:@"test"]) {
 
         // TODO: DO TEST STUFF HERE AND THEN REMOVE
-        //[STASDKUI showTrip];
-        STASDKMTrip *trip = [STASDKMTrip currentTrip];
-        [STASDKUI showTripBuilder:trip.identifier];
 
-
-
-        //[STASDKUI showTripBuilder:NULL];
-
+        
+        STASDKMUser *user = [STASDKMUser findFirst];
+        STASDKMUserSettings *settings = user.settings;
+        RLMRealm *realm = [[STASDKController sharedInstance] theRealm];
+        [realm transactionWithBlock:^{
+            settings.sendAllGoodPush = YES;
+            settings.sendAllGoodEmail = true;
+        }];
+        NSError *error;
+        [settings backgroundUpdate:&error];
     }
 }
 
@@ -114,7 +124,15 @@ NSArray *cellNames;
 - (IBAction)onEmerg:(id)sender {
     [STASDKUI showEmergencyNumbers];
 }
+- (IBAction)onTripBuilder:(id)sender {
+    [self doTripBuilder];
+}
 
+
+- (void)doTripBuilder {
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [STASDKUI showTripBuilder:trip.identifier];
+}
 
 
 

@@ -280,14 +280,14 @@
                                             <constraint firstItem="96d-tE-eFR" firstAttribute="centerX" secondItem="uvX-b0-65z" secondAttribute="centerX" id="nvW-vk-xUn"/>
                                         </constraints>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="test" id="xIv-K8-CJD" userLabel="Emerg Numbers">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tripBuilder" id="xIv-K8-CJD" userLabel="Trip Builder">
                                         <rect key="frame" x="0.0" y="640" width="150" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconPhone" translatesAutoresizingMaskIntoConstraints="NO" id="CpP-Lw-cEW">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconMap" translatesAutoresizingMaskIntoConstraints="NO" id="CpP-Lw-cEW">
                                                     <rect key="frame" x="29" y="8" width="92" height="92"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="92" id="SYN-Ta-cK1"/>
@@ -295,10 +295,10 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLq-CW-8jJ">
-                                                    <rect key="frame" x="56.5" y="95" width="37" height="30"/>
-                                                    <state key="normal" title="TEST"/>
+                                                    <rect key="frame" x="35.5" y="95" width="79" height="30"/>
+                                                    <state key="normal" title="Trip Builder"/>
                                                     <connections>
-                                                        <action selector="onEmerg:" destination="whP-gf-Uak" eventType="touchUpInside" id="zys-MH-1oT"/>
+                                                        <action selector="onTripBuilder:" destination="whP-gf-Uak" eventType="touchUpInside" id="dMX-mW-I8s"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -309,6 +309,34 @@
                                             <constraint firstItem="gLq-CW-8jJ" firstAttribute="top" secondItem="CpP-Lw-cEW" secondAttribute="bottom" constant="-5" id="MTv-qQ-TUo"/>
                                             <constraint firstItem="CpP-Lw-cEW" firstAttribute="centerX" secondItem="xIv-K8-CJD" secondAttribute="centerX" id="e0d-Uq-DHh"/>
                                             <constraint firstItem="gLq-CW-8jJ" firstAttribute="centerX" secondItem="xIv-K8-CJD" secondAttribute="centerX" id="y1k-or-d5r"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="test" id="6sU-ap-Sl1" userLabel="Test">
+                                        <rect key="frame" x="225" y="640" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconPhone" translatesAutoresizingMaskIntoConstraints="NO" id="Z9p-pn-RBP">
+                                                    <rect key="frame" x="29" y="8" width="92" height="92"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Z9p-pn-RBP" secondAttribute="height" multiplier="1:1" id="ZKX-eM-3pz"/>
+                                                        <constraint firstAttribute="width" constant="92" id="uDa-DL-4bW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f56-sM-WV2">
+                                                    <rect key="frame" x="56.5" y="95" width="37" height="30"/>
+                                                    <state key="normal" title="TEST"/>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="f56-sM-WV2" firstAttribute="top" secondItem="Z9p-pn-RBP" secondAttribute="bottom" constant="-5" id="CC9-EG-BnK"/>
+                                            <constraint firstItem="f56-sM-WV2" firstAttribute="centerX" secondItem="6sU-ap-Sl1" secondAttribute="centerX" id="HlU-c6-zS8"/>
+                                            <constraint firstItem="Z9p-pn-RBP" firstAttribute="top" secondItem="6sU-ap-Sl1" secondAttribute="topMargin" id="Ocu-9y-vCS"/>
+                                            <constraint firstItem="Z9p-pn-RBP" firstAttribute="centerX" secondItem="6sU-ap-Sl1" secondAttribute="centerX" id="upI-6T-Haj"/>
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
@@ -338,6 +366,7 @@
         <image name="IconAlert" width="92" height="92"/>
         <image name="IconDisease" width="92" height="92"/>
         <image name="IconHospital" width="92" height="92"/>
+        <image name="IconMap" width="92" height="92"/>
         <image name="IconMedication" width="92" height="92"/>
         <image name="IconPhone" width="92" height="92"/>
         <image name="IconSafety" width="92" height="92"/>

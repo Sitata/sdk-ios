@@ -14,6 +14,8 @@
 #import <EDQueue/EDQueue.h>
 #import "STASDKPushHandler.h"
 #import "STASDKApiTrip.h"
+#import "STASDKMUserSettings.h"
+#import "STASDKApiUser.h"
 
 @implementation STASDKController
 
@@ -38,7 +40,7 @@ BOOL didFirstSync;
     if (self = [super init]) {
 //        someProperty = [[NSString alloc] initWithString:@"Default Property Value"];
 
-        [self setupRealm];
+        [[STASDKDataController sharedInstance] setupRealm];
 
         // default values
         _distanceUnits = Metric;
@@ -142,36 +144,22 @@ BOOL didFirstSync;
 }
 
 
-- (void)setupRealm {
-    RLMRealm *realm = [RLMRealm defaultRealm];
-
-    // Get our Realm file's parent directory
-    NSString *folderPath = realm.configuration.fileURL.URLByDeletingLastPathComponent.path;
-
-    // Disable file protection for this directory - otherwise, we will not be able to access
-    // the Realm database in the background on iOS 8 and above 
-    [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey: NSFileProtectionNone}
-                                     ofItemAtPath:folderPath error:nil];
-    
-
-}
-
 - (BOOL)destroyAllData {
-    RLMRealm *realm = [RLMRealm defaultRealm];
+    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
     [realm beginWriteTransaction];
     [realm deleteAllObjects];
 
     NSError *error;
     [realm commitWriteTransaction:&error];
-    if (error != NULL) {
-        return NO;
-    } else {
-        return YES;
-    }
+    return (error != NULL);
 }
 
 - (void)resync {
     [[EDQueue sharedInstance] enqueueWithData:nil forTask:JOB_FULL_SYNC];
+}
+
+- (RLMRealm*)theRealm {
+    return [[STASDKDataController sharedInstance] theRealm];
 }
 
 
@@ -197,9 +185,15 @@ BOOL didFirstSync;
 
 
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *countryId = [data objectForKey:JOB_PARAM_CID];
-            if (countryId == nil) {return;}
+            if (countryId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncCountry:countryId callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail);
@@ -214,9 +208,15 @@ BOOL didFirstSync;
 
 
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *diseaseId = [data objectForKey:JOB_PARAM_DID];
-            if (diseaseId == nil) {return;}
+            if (diseaseId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncDisease:diseaseId callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail);
@@ -230,9 +230,15 @@ BOOL didFirstSync;
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SYNC_TRIP_ALERTS]) {
 
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *tripId = [data objectForKey:JOB_PARAM_TRIPID];
-            if (tripId == nil) {return;}
+            if (tripId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncTripAlerts:tripId callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail);
@@ -246,9 +252,15 @@ BOOL didFirstSync;
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SYNC_TRIP_ADVISORIES]) {
 
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *tripId = [data objectForKey:JOB_PARAM_TRIPID];
-            if (tripId == nil) {return;}
+            if (tripId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncTripAdvisories:tripId callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail);
@@ -261,9 +273,15 @@ BOOL didFirstSync;
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SYNC_TRIP_HOSPITALS]) {
 
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *tripId = [data objectForKey:JOB_PARAM_TRIPID];
-            if (tripId == nil) {return;}
+            if (tripId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncTripHospitals:tripId callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail);
@@ -275,9 +293,15 @@ BOOL didFirstSync;
         // MARK ALERT AS READ
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_ALERT_MARK_READ]) {
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *alertId = [data objectForKey:JOB_PARAM_AID];
-            if (alertId == nil) {return;}
+            if (alertId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncAlertMarkRead:alertId callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail);
@@ -289,9 +313,15 @@ BOOL didFirstSync;
         // SYNC PUSH TOKEN
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SYNC_PUSH_TOKEN]) {
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *token = [data objectForKey:JOB_PARAM_PTOKEN];
-            if (token == nil) {return;}
+            if (token == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncPushToken:token callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail); // retry
@@ -303,9 +333,15 @@ BOOL didFirstSync;
         // SYNC SINGULAR ALERT (PUSH NOTIFICATION)
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SYNC_ALERT]) {
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *alertId = [data objectForKey:JOB_PARAM_AID];
-            if (alertId == nil) {return;}
+            if (alertId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKSync syncAlert:alertId callback:^(NSError *err) {
                 if (err != nil) {
                     block(EDQueueResultFail);
@@ -317,10 +353,16 @@ BOOL didFirstSync;
         // TRIP SETTINGS
         } else if ([[job objectForKey:@"task"] isEqualToString:JOB_CHANGE_TRIP_SETTINGS]) {
             NSDictionary *data = [job objectForKey:@"data"];
-            if (data == nil) {return;}
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             NSString *tripId = [data objectForKey:JOB_PARAM_TRIPID];
             NSDictionary *settings = [data objectForKey:JOB_PARAM_SETTINGS];
-            if (tripId == nil) {return;}
+            if (tripId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
             [STASDKApiTrip changeTripSettings:tripId settings:settings onFinished:^(NSURLSessionTask *task, NSError *error) {
                 if (error != nil) {
                     block(EDQueueResultFail);
@@ -328,6 +370,35 @@ BOOL didFirstSync;
                     block(EDQueueResultSuccess);
                 }
             }];
+        } else if ([[job objectForKey:@"task"] isEqualToString:JOB_UPDATE_USER_SETTINGS]) {
+            NSDictionary *data = [job objectForKey:@"data"];
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
+            NSString *settingsId = [data objectForKey:JOB_PARAM_SETTINGS];
+            if (settingsId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
+            STASDKMUserSettings *settings = [STASDKMUserSettings findBy:settingsId];
+            if (settings == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
+            STASDKMUser *user = (STASDKMUser*) settings.users.firstObject;
+            if (user == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
+            [STASDKApiUser updateUser:user onFinished:^(STASDKMUser *user, NSURLSessionDataTask *task, NSError *error) {
+                if (error != nil) {
+                    block(EDQueueResultFail);
+                } else {
+                    block(EDQueueResultSuccess);
+                }
+            }];
+
         } else if ([[job objectForKey:@"task"] isEqualToString:@"fail"]) {
             block(EDQueueResultFail);
         } else {

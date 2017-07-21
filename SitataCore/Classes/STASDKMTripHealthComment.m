@@ -32,6 +32,7 @@
 
 +(RLMResults<STASDKMTripDiseaseComment*>*)commentsForDisease:(NSString*)diseaseId trip:(STASDKMTrip*)trip {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"diseaseId = %@", diseaseId];
+    
     return [[[trip tripDiseaseComments] objectsWithPredicate:predicate] sortedResultsUsingKeyPath:@"diseaseName" ascending:YES];
 }
 

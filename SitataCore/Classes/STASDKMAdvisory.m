@@ -10,6 +10,7 @@
 
 #import "STASDKApiUtils.h"
 #import "STASDKMTrip.h"
+#import "STASDKDataController.h"
 
 @implementation STASDKMAdvisory
 
@@ -39,7 +40,7 @@
 +(STASDKMAdvisory*)findBy:(NSString *)advisoryId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", advisoryId];
 
-    RLMResults<STASDKMAdvisory *> *results = [STASDKMAdvisory objectsWithPredicate:pred];
+    RLMResults<STASDKMAdvisory *> *results = [STASDKMAdvisory objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {

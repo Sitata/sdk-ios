@@ -10,6 +10,7 @@
 
 #import "STASDKMContactDetail.h"
 #import "STASDKApiUtils.h"
+#import "STASDKDataController.h"
 
 
 @implementation STASDKMCountry
@@ -65,7 +66,7 @@
 +(STASDKMCountry*)findBy:(NSString *)countryId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", countryId];
 
-    RLMResults<STASDKMCountry *> *results = [STASDKMCountry objectsWithPredicate:pred];
+    RLMResults<STASDKMCountry *> *results = [STASDKMCountry objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {
@@ -76,7 +77,7 @@
 +(STASDKMCountry*)findByCountryCode:(NSString *)countryCode {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"countryCode == %@", countryCode];
 
-    RLMResults<STASDKMCountry *> *results = [STASDKMCountry objectsWithPredicate:pred];
+    RLMResults<STASDKMCountry *> *results = [STASDKMCountry objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {
@@ -85,7 +86,7 @@
 }
 
 +(RLMResults<STASDKMCountry *>*)allCountries {
-    return [[STASDKMCountry allObjects] sortedResultsUsingKeyPath:@"name" ascending:YES];
+    return [[STASDKMCountry allObjectsInRealm:[[STASDKDataController sharedInstance] theRealm]] sortedResultsUsingKeyPath:@"name" ascending:YES];
 }
 
 

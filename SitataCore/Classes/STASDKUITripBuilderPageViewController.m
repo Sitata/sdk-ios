@@ -77,7 +77,7 @@ const int pageCount = 4;
         }];
     } else {
         // trip is existing so we use the default realm
-        self.theRealm = [RLMRealm defaultRealm];
+        self.theRealm = [[STASDKDataController sharedInstance] theRealm];
     }
 }
 

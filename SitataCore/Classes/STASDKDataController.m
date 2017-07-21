@@ -10,6 +10,14 @@
 #import "STASDKDataController.h"
 
 #import "STASDKReachability.h"
+#import <Realm/Realm.h>
+
+
+@interface STASDKDataController()
+
+@property RLMRealmConfiguration *realmConfig;
+
+@end
 
 
 @implementation STASDKDataController
@@ -75,6 +83,23 @@ NSString * const localizedTablename = @"Translations";
     return reachable;
 }
 
+
+
+- (void)setupRealm {
+    self.realmConfig = [RLMRealmConfiguration defaultConfiguration];
+    NSURL *folderPathURL = [[[self.realmConfig.fileURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"sitata"] URLByAppendingPathExtension:@"realm"];
+    NSString *folderPath = folderPathURL.path;
+    self.realmConfig.fileURL = folderPathURL;
+
+    // Disable file protection for this directory - otherwise, we will not be able to access
+    // the Realm database in the background on iOS 8 and above
+    [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey: NSFileProtectionCompleteUntilFirstUserAuthentication}
+                                     ofItemAtPath:folderPath error:nil];
+}
+
+- (RLMRealm*)theRealm {
+    return [RLMRealm realmWithConfiguration:self.realmConfig error:NULL];
+}
 
 
 

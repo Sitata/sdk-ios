@@ -9,6 +9,7 @@
 #import "STASDKMDisease.h"
 
 #import "STASDKApiUtils.h"
+#import "STASDKDataController.h"
 
 @implementation STASDKMDisease
 
@@ -92,7 +93,7 @@
 +(STASDKMDisease*)findBy:(NSString *)diseaseId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", diseaseId];
 
-    RLMResults<STASDKMDisease *> *results = [STASDKMDisease objectsWithPredicate:pred];
+    RLMResults<STASDKMDisease *> *results = [STASDKMDisease objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {

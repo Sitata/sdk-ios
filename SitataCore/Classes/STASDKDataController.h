@@ -8,12 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
+@class RLMRealm;
 
 
 @interface STASDKDataController : NSObject
-
-
 
 
 
@@ -25,6 +23,8 @@
 + (STASDKDataController*)sharedInstance;
 
 
+// Setup the database. Called on sdk start.
+- (void)setupRealm;
 
 // Returns the bundle for this sdk
 - (NSBundle*)sdkBundle;
@@ -33,6 +33,8 @@
 - (NSString*)localizedStringForKey:(NSString*)key;
 
 - (bool)isConnected;
+
+- (RLMRealm*)theRealm;
 
 
 @end

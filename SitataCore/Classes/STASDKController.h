@@ -12,8 +12,9 @@
 
 
 
-@class NSManagedObjectContext;
 
+@class NSManagedObjectContext;
+@class RLMRealm;
 
 
 typedef NS_ENUM(int, DistanceUnitsType) {
@@ -81,6 +82,10 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 
 // Resync all data from server.
 - (void)resync;
+
+// Convenience method to access the SDK's Realm
+- (RLMRealm*)theRealm;
+
 
 
 // Returns the parent app's root view controller

@@ -12,6 +12,7 @@
 #import "STASDKMAlertSource.h"
 #import "STASDKMAlertLocation.h"
 #import "STASDKMTrip.h"
+#import "STASDKDataController.h"
 
 #import "STASDKJobs.h"
 #import <EDQueue/EDQueue.h>
@@ -47,7 +48,7 @@
 +(STASDKMAlert*)findBy:(NSString *)alertId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", alertId];
 
-    RLMResults<STASDKMAlert *> *results = [STASDKMAlert objectsWithPredicate:pred];
+    RLMResults<STASDKMAlert *> *results = [STASDKMAlert objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {
@@ -154,7 +155,7 @@
 
 -(void)setRead {
     if (!self._read) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
         [realm beginWriteTransaction];
         self._read = YES;
         [realm commitWriteTransaction];

@@ -199,24 +199,31 @@ NSString *const NotifyKeyAlertId = @"alertId";
             return;
         }
 
-        NSError *writeError;
-        [trip resave:&writeError];
+        if (trip.deletedAt == NULL) {
 
-        if (writeError != nil) {
-            NSLog(@"Failed to save trip (%@) - error: %@", tripId, [writeError localizedDescription]);
-            callback(writeError);
-            return;
-        } else {
-            if (isAsync) {
-                [self syncExtrasFor:trip];
-                NSLog(@"Finshed saving trip (%@).", tripId);
-                callback(NULL);
+            NSError *writeError;
+            [trip resave:&writeError];
+
+            if (writeError != nil) {
+                NSLog(@"Failed to save trip (%@) - error: %@", tripId, [writeError localizedDescription]);
+                callback(writeError);
+                return;
             } else {
-                [self syncExtrasSynchronousFor:trip onFinished:^(NSError *err) {
-                    callback(err);
-                }];
+                if (isAsync) {
+                    [self syncExtrasFor:trip];
+                    NSLog(@"Finshed saving trip (%@).", tripId);
+                    callback(NULL);
+                } else {
+                    [self syncExtrasSynchronousFor:trip onFinished:^(NSError *err) {
+                        callback(err);
+                    }];
+                }
+
             }
 
+        } else {
+            // trip has been deleted, therefore, try to find and remove the local one
+            [self findAndRemoveTrip:trip.identifier];
         }
     }];
 }
@@ -234,15 +241,22 @@ NSString *const NotifyKeyAlertId = @"alertId";
         NSError *writeError;
         // Sync extra associated models and other things for each trip
         for (STASDKMTrip *trip in trips) {
-            [trip resave:&writeError];
-            if (writeError != nil) {
-                // TODO: If there are errors, what happens to related object syncs?
-                NSLog(@"Failed to save trips - error: %@", [writeError localizedDescription]);
-                callback(writeError);
-                return;
-            }
 
-            [self syncExtrasFor:trip];
+            if (trip.deletedAt == NULL) {
+
+                [trip resave:&writeError];
+                if (writeError != nil) {
+                    // TODO: If there are errors, what happens to related object syncs?
+                    NSLog(@"Failed to save trips - error: %@", [writeError localizedDescription]);
+                    callback(writeError);
+                    return;
+                }
+
+                [self syncExtrasFor:trip];
+            } else {
+                // trip has been deleted, therefore, try to find and remove the local one
+                [self findAndRemoveTrip:trip.identifier];
+            }
         }
 
         NSLog(@"Finshed saving trips.");
@@ -251,6 +265,13 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
     }];
 
+}
+
+// Find and remove the local trip based on the given id
++ (void)findAndRemoveTrip:(NSString*)tripId {
+    STASDKMTrip *localTrip = [STASDKMTrip findBy:tripId];
+    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
+    [realm deleteObject:localTrip];
 }
 
 
@@ -346,7 +367,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 // Sync a short list of countries from the server
 + (void) syncCountries:(void (^)(NSError*))callback {
     [STASDKApiCountry getAllShortForm:^(NSArray<STASDKMCountry *> *countries, NSURLSessionDataTask *task, NSError *error) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
         
         if (error != nil) {
             NSLog(@"Failed to fetch countries short form - error: %@", [error localizedDescription]);
@@ -379,7 +400,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 // Sync a country from the server based on the given ID
 + (void) syncCountry:(NSString*)countryId callback:(void (^)(NSError*))callback {
     [STASDKApiCountry getById:countryId onFinished:^(STASDKMCountry *country, NSURLSessionDataTask *task, NSError *error) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch country - error: %@", [error localizedDescription]);
@@ -410,7 +431,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 + (void) syncDiseases:(void (^)(NSError*))callback {
 
     [STASDKApiDisease getAll:^(NSArray<STASDKMDisease*> *diseases, NSURLSessionDataTask *task, NSError *error) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch diseases - error: %@", [error localizedDescription]);
@@ -443,7 +464,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
     [STASDKApiDisease getById:diseaseId onFinished:^(STASDKMDisease *disease, NSURLSessionDataTask *task, NSError *error) {
 
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch disease - error: %@", [error localizedDescription]);
@@ -474,7 +495,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 + (void) syncMedications:(void (^)(NSError*))callback {
 
     [STASDKApiMedication getAll:^(NSArray<STASDKMMedication*> *medications, NSURLSessionDataTask *task, NSError *error) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch medications - error: %@", [error localizedDescription]);
@@ -506,7 +527,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 + (void) syncVaccinations:(void (^)(NSError*))callback {
 
     [STASDKApiVaccination getAll:^(NSArray<STASDKMVaccination*> *vaccinations, NSURLSessionDataTask *task, NSError *error) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch vaccinations - error: %@", [error localizedDescription]);
@@ -538,7 +559,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 + (void) syncTripAlerts:(NSString*)tripId callback:(void (^)(NSError*))callback {
 
     [STASDKApiAlert getTripAlerts:tripId onFinished:^(NSArray<STASDKMAlert*> *alerts, NSURLSessionDataTask *task, NSError *error) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch trip alerts - error: %@", [error localizedDescription]);
@@ -586,7 +607,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 + (void) syncTripAdvisories:(NSString*)tripId callback:(void (^)(NSError*))callback {
 
     [STASDKApiAlert getTripAdvisories:tripId onFinished:^(NSArray<STASDKMAdvisory*> *advisories, NSURLSessionDataTask *task, NSError *error) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch trip advisories - error: %@", [error localizedDescription]);
@@ -636,7 +657,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
     [STASDKApiPlaces getHospitalsForTrip:tripId onFinished:^(NSArray<STASDKMHospital*> *hospitals, NSURLSessionDataTask *task, NSError *error) {
 
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
         if (error != nil) {
             NSLog(@"Failed to fetch trip hospitals - error: %@", [error localizedDescription]);
@@ -694,7 +715,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
         }
 
         // otherwise save alert and save it to all the trips
-        RLMRealm *realm = [RLMRealm defaultRealm];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
         [realm beginWriteTransaction];
 
         [realm addOrUpdateObject:alert];

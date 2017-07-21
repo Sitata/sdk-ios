@@ -17,6 +17,7 @@ extern NSString* const JOB_SYNC_PUSH_TOKEN;
 extern NSString* const JOB_ALERT_MARK_READ;
 extern NSString* const JOB_SYNC_ALERT;
 extern NSString* const JOB_CHANGE_TRIP_SETTINGS;
+extern NSString* const JOB_UPDATE_USER_SETTINGS;
 
 
 

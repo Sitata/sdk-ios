@@ -9,7 +9,9 @@
 #import "STASDKMUser.h"
 
 #import "STASDKMUserSettings.h"
+#import "STASDKDataController.h"
 #import <YYModel/YYModel.h>
+#import <Realm/Realm.h>
 
 @implementation STASDKMUser
 
@@ -51,7 +53,16 @@
 +(STASDKMUser*)findBy:(NSString *)userId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", userId];
 
-    RLMResults<STASDKMUser *> *results = [STASDKMUser objectsWithPredicate:pred];
+    RLMResults<STASDKMUser *> *results = [STASDKMUser objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
+    if (results && results.count > 0) {
+        return results.firstObject;
+    } else {
+        return nil;
+    }
+}
+
++(STASDKMUser*)findFirst {
+    RLMResults<STASDKMUser *> *results = [STASDKMUser allObjectsInRealm:[[STASDKDataController sharedInstance] theRealm]];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {
@@ -63,8 +74,11 @@
 
 
 
+
+
+
 -(void)resave:(NSError **)error {
-    RLMRealm *realm = [RLMRealm defaultRealm];
+    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
     // destroy related models where applicable
     STASDKMUser *oldUser = [STASDKMUser findBy:self.identifier];

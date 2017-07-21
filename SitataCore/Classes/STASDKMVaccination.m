@@ -8,6 +8,7 @@
 
 #import "STASDKMVaccination.h"
 #import "STASDKApiUtils.h"
+#import "STASDKDataController.h"
 
 @implementation STASDKMVaccination
 
@@ -33,7 +34,7 @@
 +(STASDKMVaccination*)findBy:(NSString *)vaccinationId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", vaccinationId];
 
-    RLMResults<STASDKMVaccination *> *results = [STASDKMVaccination objectsWithPredicate:pred];
+    RLMResults<STASDKMVaccination *> *results = [STASDKMVaccination objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {

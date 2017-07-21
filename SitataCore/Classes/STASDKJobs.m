@@ -21,7 +21,7 @@ NSString *JOB_SYNC_PUSH_TOKEN = @"sync-push-token";
 NSString *JOB_ALERT_MARK_READ = @"alert-mark-read";
 NSString *JOB_SYNC_ALERT = @"sync-alert";
 NSString *JOB_CHANGE_TRIP_SETTINGS = @"change-trip-settings";
-
+NSString *JOB_UPDATE_USER_SETTINGS = @"update-user-settings";
 
 
 
