@@ -28,9 +28,9 @@
 @property (nonatomic, strong) RLMArray<STASDKMAlert*> *alerts;
 @property (nonatomic, strong) RLMArray<STASDKMAdvisory*> *advisories;
 @property (nonatomic, strong) RLMNotificationToken *notification;
-@property (nonatomic) BOOL hasData;
 
 @property STASDKMTrip *trip;
+@property STASDKUINullStateHandler *nullView;
 
 @end
 
@@ -87,20 +87,17 @@
 
 
 - (void)loadData {
-    NSError *error;
     self.trip = [STASDKMTrip currentTrip];
 
-    if (self.trip != NULL && error == NULL) {
-
+    if (self.trip != NULL) {
         if (self.mode == Alerts) {
             [self loadAlerts];
         } else {
             [self loadAdvisories];
         }
-
     }
 
-    if (!self.hasData) {
+    if (![self hasData]) {
         NSString *msgKey;
         if (self.mode == Alerts) {
             msgKey = @"NO_ALERTS";
@@ -108,7 +105,14 @@
             msgKey = @"NO_ADVISORIES";
         }
         NSString *msg = [[STASDKDataController sharedInstance] localizedStringForKey:msgKey];
-        [STASDKUINullStateHandler displayNullStateWith:msg parentView:self.view];
+        self.nullView = [[STASDKUINullStateHandler alloc] initWith:msg parent:self];
+        [self.nullView displayNullState];
+    }
+
+
+    // launch trip builder if trip is empty
+    if (self.trip != NULL && [self.trip isEmpty]) {
+        [STASDKUI showTripBuilder:self.trip.identifier];
     }
 }
 
@@ -170,13 +174,11 @@
 
 - (void)loadAlerts {
     self.alerts = [self.trip alerts];
-    self.hasData = self.alerts.count > 0;
     [self addRealmNotifications:self.alerts];
 }
 
 - (void)loadAdvisories {
     self.advisories = [self.trip advisories];
-    self.hasData = self.advisories.count > 0;
     [self addRealmNotifications:self.advisories];
 }
 
@@ -193,9 +195,14 @@
         if (!changes) {
             [tv reloadData];
             return;
+        } else {
+            if (self.nullView != NULL) {
+                [self.nullView dismiss];
+            }
         }
 
         // changes is non-nil, so we just need to update the tableview
+        
         [tv beginUpdates];
         [tv deleteRowsAtIndexPaths:[changes deletionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         [tv insertRowsAtIndexPaths:[changes insertionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -205,7 +212,13 @@
 }
 
 
-
+- (bool)hasData {
+    if (self.alerts != NULL) {
+        return [self.alerts count] > 0;
+    } else {
+        return [self.advisories count] > 0;
+    }
+}
 
 
 #pragma mark - Table view data source
@@ -215,7 +228,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.hasData) {
+    if ([self hasData]) {
         long counter;
         if (self.mode == Alerts) {
             counter = [self.alerts count];
@@ -225,7 +238,7 @@
 
         return counter;
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -238,7 +251,7 @@
 
 
 - (void)configureCell:(STASDKUIAlertTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if (self.hasData) {
+    if ([self hasData]) {
 
         switch (self.mode) {
             case Alerts:

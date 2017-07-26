@@ -15,6 +15,7 @@
 #import "STASDKUINullStateHandler.h"
 #import "STASDKDataController.h"
 #import "STASDKUIUtility.h"
+#import "STASDKUI.h"
 
 @interface STASDKUISafetyViewController ()
 
@@ -55,6 +56,10 @@ STASDKUINullStateHandler *nullStateView;
 
     if (self.currentTrip != NULL) {
         [self setupForTrip];
+
+        if ([self.currentTrip isEmpty]) {
+            [STASDKUI showTripBuilder:self.currentTrip.identifier];
+        }
     } else {
         // NO Trip, no safety info
         // The other views should load up blank without issues. We just

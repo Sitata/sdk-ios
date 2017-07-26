@@ -25,12 +25,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-
-    self.currentIndex = 0;
-
+    [self doSetup];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCountryChange:) name:NotifyCountrySwitcherChanged object:NULL];
 
+}
+
+- (void)doSetup {
+    self.currentIndex = 0;
     if (self.countries != NULL && [self.countries count] > 0) {
         [self setViewControllers:@[[self viewControllerAtIndex:self.currentIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     }

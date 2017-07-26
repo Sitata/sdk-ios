@@ -15,6 +15,7 @@
 #import "STASDKUIHospitalsPageViewController.h"
 #import "STASDKUINullStateHandler.h"
 #import "STASDKUIUtility.h"
+#import "STASDKUI.h"
 
 @interface STASDKUIHospitalsViewController ()
 
@@ -23,6 +24,7 @@
 @property NSMutableArray *countries;
 @property int pageIndex;
 @property int pageCount;
+@property STASDKUINullStateHandler *nullView;
 
 @end
 
@@ -52,13 +54,21 @@
     // setup for trip is called first by embed controllers
     if (self.currentTrip != NULL) {
         [self setupForTrip];
+
+        if ([self.currentTrip isEmpty]) {
+            [STASDKUI showTripBuilder:self.currentTrip.identifier];
+        }
+
     } else {
         // NO TRIP - NO HOSPITALS
         // The other views should load up blank without issues. We just
         // need to place a view on top to display a statement to the user.
         NSString *msg = [[STASDKDataController sharedInstance] localizedStringForKey:@"NO_HOSPITALS_NO_TRIP"];
-        [STASDKUINullStateHandler displayNullStateWith:msg parentView:self.view];
+        self.nullView = [[STASDKUINullStateHandler alloc] initWith:msg parent:self];
+        [self.nullView displayNullState];
     }
+
+
 
 }
 
@@ -84,6 +94,11 @@
         self.countries = [[NSMutableArray alloc] init]; // must stay here
     }
 
+    [self setCountries];
+}
+
+- (void)setCountries {
+    self.countries = [[NSMutableArray alloc] init]; // must stay here
     self.destinations = [self.currentTrip sortedDestinations];
     for (STASDKMDestination *dest in self.destinations) {
         STASDKMCountry *country = [STASDKMCountry findBy:[dest countryId]];

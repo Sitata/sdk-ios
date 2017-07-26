@@ -28,13 +28,7 @@ NSString *const NotifyKeyCountriesIndex = @"countriesIndex";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    if (self.countries.count > 0) {
-        [self setControls];
-    } else {
-        [self.previousPageBtn setAlpha:0.0];
-        [self.nextPageBtn setAlpha:0.0];
-        [self.countryNameLbl setAlpha:0.0];
-    }
+    [self doSetup];
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.countrySwitcherBackgroundColor;
@@ -47,6 +41,17 @@ NSString *const NotifyKeyCountriesIndex = @"countriesIndex";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)doSetup {
+    if (self.countries.count > 0) {
+        [self setControls];
+    } else {
+        [self.previousPageBtn setAlpha:0.0];
+        [self.nextPageBtn setAlpha:0.0];
+        [self.countryNameLbl setAlpha:0.0];
+    }
+}
+
 
 - (void)setControls {
     if (self.pageIndex == 0) {

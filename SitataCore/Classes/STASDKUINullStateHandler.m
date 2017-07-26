@@ -10,35 +10,15 @@
 
 #import "STASDKDataController.h"
 
+@interface STASDKUINullStateHandler()
+
+@property (retain) UIViewController *parent;
+@property (retain) NSString *message;
+@property (retain) UIView *containerView;
+
+@end
+
 @implementation STASDKUINullStateHandler
-
-+ (UIView*)displayNullStateWith:(NSString*)message parentView:(UIView*)parentView {
-    CGFloat width = CGRectGetWidth(parentView.bounds);
-    CGFloat height = CGRectGetHeight(parentView.bounds);
-
-    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-    containerView.backgroundColor = [UIColor whiteColor];
-    [containerView setAlpha:1.0];
-
-    [parentView addSubview:containerView];
-    [containerView.topAnchor constraintEqualToAnchor:parentView.topAnchor].active = YES;
-    [containerView.bottomAnchor constraintEqualToAnchor:parentView.bottomAnchor].active = YES;
-    [containerView.leftAnchor constraintEqualToAnchor:parentView.leftAnchor].active = YES;
-    [containerView.rightAnchor constraintEqualToAnchor:parentView.rightAnchor].active = YES;
-
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
-    lbl.numberOfLines = 0;
-    lbl.textAlignment = NSTextAlignmentCenter;
-    lbl.text = message;
-    lbl.textColor = [UIColor darkGrayColor];
-    lbl.translatesAutoresizingMaskIntoConstraints = NO;
-
-    [containerView addSubview:lbl];
-    [lbl.leftAnchor constraintEqualToAnchor:containerView.leftAnchor constant:15.0].active = YES;
-    [lbl.rightAnchor constraintEqualToAnchor:containerView.rightAnchor constant:-15.0].active = YES;
-    [lbl.centerYAnchor constraintEqualToAnchor:containerView.centerYAnchor].active = YES;
-    return containerView;
-}
 
 - (instancetype)initWith:(NSString*)message parent:(UIViewController*)parent {
     self = [super init];
@@ -49,16 +29,57 @@
     return self;
 }
 
-- (UIView*)displayNullStateWithNav {
-    UIView *containerView = [STASDKUINullStateHandler displayNullStateWith:self.message parentView:self.parent.view];
+- (void)displayNullState {
+    self.containerView = [self buildNullStateView];
+    [self bindToParent];
+}
+
+- (UIView*)buildNullStateView {
+    UIView *parentView = self.parent.view;
+
+    CGFloat width = CGRectGetWidth(parentView.bounds);
+    CGFloat height = CGRectGetHeight(parentView.bounds);
+
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    containerView.backgroundColor = [UIColor whiteColor];
+    [containerView setAlpha:1.0];
+
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    lbl.numberOfLines = 0;
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.text = self.message;
+    lbl.textColor = [UIColor darkGrayColor];
+    lbl.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [containerView addSubview:lbl];
+    [lbl.leftAnchor constraintEqualToAnchor:containerView.leftAnchor constant:15.0].active = YES;
+    [lbl.rightAnchor constraintEqualToAnchor:containerView.rightAnchor constant:-15.0].active = YES;
+    [lbl.centerYAnchor constraintEqualToAnchor:containerView.centerYAnchor].active = YES;
+
+    return containerView;
+}
+
+- (void)bindToParent {
+    UIView *parentView = self.parent.view;
+    [parentView addSubview:self.containerView];
+    [self.containerView.topAnchor constraintEqualToAnchor:parentView.topAnchor].active = YES;
+    [self.containerView.bottomAnchor constraintEqualToAnchor:parentView.bottomAnchor].active = YES;
+    [self.containerView.leftAnchor constraintEqualToAnchor:parentView.leftAnchor].active = YES;
+    [self.containerView.rightAnchor constraintEqualToAnchor:parentView.rightAnchor].active = YES;
+}
+
+
+
+- (void)displayNullStateWithNav {
+    self.containerView = [self buildNullStateView];
 
     UINavigationBar *bar = [[UINavigationBar alloc] init];
     bar.translatesAutoresizingMaskIntoConstraints = NO;
 
-    [containerView addSubview:bar];
-    [bar.topAnchor constraintEqualToAnchor:containerView.topAnchor].active = YES;
-    [bar.rightAnchor constraintEqualToAnchor:containerView.rightAnchor].active = YES;
-    [bar.leftAnchor constraintEqualToAnchor:containerView.leftAnchor].active = YES;
+    [self.containerView addSubview:bar];
+    [bar.topAnchor constraintEqualToAnchor:self.containerView.topAnchor].active = YES;
+    [bar.rightAnchor constraintEqualToAnchor:self.containerView.rightAnchor].active = YES;
+    [bar.leftAnchor constraintEqualToAnchor:self.containerView.leftAnchor].active = YES;
     [bar.heightAnchor constraintEqualToConstant:64.0].active = YES; // necessary to match navController elsewhere
 
     NSString *closeStr = [[STASDKDataController sharedInstance] localizedStringForKey:@"CLOSE"];
@@ -68,11 +89,15 @@
     navItem.leftBarButtonItem = closeBtn;
     [bar pushNavigationItem:navItem animated:NO];
 
-    return containerView;
+    [self bindToParent];
 }
 
 - (void)doClose:(id)sender {
     [self.parent dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)dismiss {
+    [self.containerView removeFromSuperview];
 }
 
 @end

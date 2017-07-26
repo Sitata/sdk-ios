@@ -12,16 +12,16 @@
 // used for when data doesn't exist
 @interface STASDKUINullStateHandler : NSObject
 
-@property (retain) UIViewController *parent;
-@property (retain) NSString *message;
-
 - (instancetype)initWith:(NSString*)message parent:(UIViewController*)parent;
 
-+ (UIView*)displayNullStateWith:(NSString*)message parentView:(UIView*)parentView;
+- (void)displayNullState;
 
-// Pass withNav true to ensure that a navigation bar with a close button is present
-- (UIView*)displayNullStateWithNav;
+- (void)displayNullStateWithNav;
 
+// close parent view controller
 - (void)doClose:(id)sender;
+
+// remove from superview
+- (void)dismiss;
 
 @end

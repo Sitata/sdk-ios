@@ -20,11 +20,15 @@
 
 @interface STASDKUIHealthTableViewController ()
 
-    // An array of all tripMedicationComments or tripVaccinationComments
-    @property RLMResults *allDataObjects;
+// An array of all tripMedicationComments or tripVaccinationComments
+@property RLMResults *allDataObjects;
 
-    // To store an array for display such as [ [medicationId, medicationName], etc... ]
-    @property NSArray *uniqueDataObjects;
+// To store an array for display such as [ [medicationId, medicationName], etc... ]
+@property NSArray *uniqueDataObjects;
+
+@property STASDKMTrip *trip;
+@property STASDKUINullStateHandler *nullView;
+@property (nonatomic, strong) RLMNotificationToken *notification;
 
 @end
 
@@ -55,10 +59,31 @@
     self.navigationItem.title = [self windowTitle];
 
     // Colors
-    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     [STASDKUIUtility applyStylesheetToNavigationController:self.navigationController];
 
+    self.trip = [STASDKMTrip currentTrip];
+    [self loadData];
 
+    if ([self.uniqueDataObjects count] <= 0) {
+        NSString *str = [self stringForNoData];
+        self.nullView = [[STASDKUINullStateHandler alloc] initWith:str parent:self];
+        [self.nullView displayNullState];
+    }
+
+    if (self.trip != NULL && [self.trip isEmpty]) {
+        [STASDKUI showTripBuilder:self.trip.identifier];
+    }
+
+}
+
+- (void)close:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (void)loadData {
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.uniqueDataObjects = @[]; // empty array to start
     switch (self.healthMode) {
         case Vaccinations:
@@ -78,17 +103,7 @@
             [self dismissViewControllerAnimated:YES completion:NULL];
             break;
     }
-
-    if ([self.uniqueDataObjects count] <= 0) {
-        NSString *str = [self stringForNoData];
-        [STASDKUINullStateHandler displayNullStateWith:str parentView:self.view];
-    }
-
-}
-
--(void)close:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self addRealmNotifications:self.allDataObjects];
 }
 
 - (NSString*)stringForNoData {
@@ -116,31 +131,57 @@
 
 
 - (void)loadVaccinations {
-    STASDKMTrip *trip = [STASDKMTrip currentTrip];
-
-    if (trip != NULL) {
-        self.allDataObjects = [[trip tripVaccinationComments] sortedResultsUsingKeyPath:@"vaccinationName" ascending:YES];
+    if (self.trip != NULL) {
+        self.allDataObjects = [[self.trip tripVaccinationComments] sortedResultsUsingKeyPath:@"vaccinationName" ascending:YES];
         self.uniqueDataObjects = [self uniqueObjectsArray:@"vaccinationId" nameMethodName:@"vaccinationName"];
     }
 }
 
 - (void)loadMedications {
-    STASDKMTrip *trip = [STASDKMTrip currentTrip];
-
-    if (trip != NULL) {
-        self.allDataObjects = [[trip tripMedicationComments] sortedResultsUsingKeyPath:@"medicationName" ascending:YES];
+    if (self.trip != NULL) {
+        self.allDataObjects = [[self.trip tripMedicationComments] sortedResultsUsingKeyPath:@"medicationName" ascending:YES];
         self.uniqueDataObjects = [self uniqueObjectsArray:@"medicationId" nameMethodName:@"medicationName"];
     }
 }
 
 - (void)loadDiseases {
-    STASDKMTrip *trip = [STASDKMTrip currentTrip];
-
-    if (trip != NULL) {
-        self.allDataObjects = [[trip tripDiseaseComments] sortedResultsUsingKeyPath:@"diseaseName" ascending:YES];
+    if (self.trip != NULL) {
+        self.allDataObjects = [[self.trip tripDiseaseComments] sortedResultsUsingKeyPath:@"diseaseName" ascending:YES];
         self.uniqueDataObjects = [self uniqueObjectsArray:@"diseaseId" nameMethodName:@"diseaseName"];
     }
 }
+
+
+// This is to update the table on changes to our result set
+- (void)addRealmNotifications:(RLMResults*)realmObjs {
+    __weak typeof(self) weakSelf = self;
+
+    self.notification = [realmObjs addNotificationBlock:^(RLMResults *data, RLMCollectionChange *changes, NSError *error) {
+        if (error) {
+            NSLog(@"Failed to open Realm on background worker: %@", error);
+            return;
+        }
+
+        UITableView *tv = weakSelf.tableView;
+        if (!changes) {
+            [tv reloadData];
+            return;
+        } else {
+            [self loadData];
+            if (self.nullView != NULL) {
+                [self.nullView dismiss];
+            }
+        }
+
+        // changes are non-nil, so we just need to update the tableview
+        [tv beginUpdates];
+        [tv deleteRowsAtIndexPaths:[changes deletionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tv insertRowsAtIndexPaths:[changes insertionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tv reloadRowsAtIndexPaths:[changes modificationsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tv endUpdates];
+    }];
+}
+
 
 // [{comment:"", vaccinationId: "", vaccinationName: "", countryId: ""}]
 // Need to simply create a sorted array with unique medication names and ids
@@ -197,8 +238,7 @@
     if ([self.uniqueDataObjects count] > 0) {
         return [self.uniqueDataObjects count];
     } else {
-        // "no items" row
-        return 1;
+        return 0;
     }
 
 }

@@ -30,6 +30,7 @@ FOUNDATION_EXPORT NSString *const NotifyKeyCountriesIndex;
 @property (weak, nonatomic) IBOutlet UIButton *previousPageBtn;
 
 
+- (void)doSetup;
 
 
 

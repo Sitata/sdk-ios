@@ -12,4 +12,7 @@
 
 @property (retain) NSArray *countries;
 
+
+- (void)doSetup;
+
 @end

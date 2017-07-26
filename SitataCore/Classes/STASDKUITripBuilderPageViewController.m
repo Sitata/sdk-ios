@@ -13,6 +13,7 @@
 #import "STASDKUITripBuildItinViewController.h"
 #import "STASDKUITripMetaCollectionViewController.h"
 #import "STASDKUITBSuccessViewController.h"
+#import "STASDKUITBIntroViewController.h"
 #import "STASDKDefines.h"
 #import "STASDKApiTrip.h"
 #import "STASDKSync.h"
@@ -33,7 +34,7 @@
 
 @implementation STASDKUITripBuilderPageViewController
 
-const int pageCount = 4;
+const int pageCount = 5;
 
 
 - (void)viewDidLoad {
@@ -199,7 +200,7 @@ const int pageCount = 4;
 }
 
 - (bool)checkAllowedNextPage {
-    if (self.currentIndex == 0) {
+    if (self.currentIndex == 1) {
         // trip building, trip must have destinations
         if ([[self.trip destinations] count] > 0) {
             return YES;
@@ -242,6 +243,13 @@ const int pageCount = 4;
     switch(index) {
         case 0:
         {
+            // intro screen
+            STASDKUITBIntroViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderIntro"];
+            page = vc;
+            break;
+        }
+        case 1:
+        {
             // tripBuilderMap
             STASDKUITripBuildItinViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMap"];
             vc.trip = self.trip;
@@ -249,7 +257,7 @@ const int pageCount = 4;
             page = vc;
             break;
         }
-        case 1:
+        case 2:
         {
             // tripBuilderType
             STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
@@ -260,7 +268,7 @@ const int pageCount = 4;
             page = vc;
             break;
         }
-        case 2:
+        case 3:
         {
             // tripBuilderAct
             STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
@@ -271,7 +279,7 @@ const int pageCount = 4;
             page = vc;
             break;
         }
-        case 3:
+        case 4:
         {
             // success page - can't navigate backwards, just close button
             STASDKUITBSuccessViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderSuccess"];
