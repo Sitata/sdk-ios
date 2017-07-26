@@ -76,6 +76,12 @@
 
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    if (self.notification != NULL) {
+        [self.notification stop];
+    }
+}
+
 - (void)close:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
