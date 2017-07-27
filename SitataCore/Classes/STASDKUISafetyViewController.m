@@ -66,7 +66,7 @@ STASDKUINullStateHandler *nullStateView;
         // need to place a view on top to display a statement to the user.
         NSString *msg = [[STASDKDataController sharedInstance] localizedStringForKey:@"SEC_NONE_AVAIL"];
         nullStateView = [[STASDKUINullStateHandler alloc] initWith:msg parent:self];
-        [nullStateView displayNullStateWithNav];
+        [nullStateView displayNullState];
     }
 
 }
