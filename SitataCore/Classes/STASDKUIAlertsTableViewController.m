@@ -167,15 +167,17 @@
 
 // This performs an eager request via background jobs to ensure the UI is spiffy.
 -(void)doToggleMute {
-    // Make request using background job
-    NSMutableDictionary *settings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:!self.trip.muted], @"muted", nil];
-    [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [self.trip identifier], JOB_PARAM_SETTINGS: settings} forTask:JOB_CHANGE_TRIP_SETTINGS];
+    if (self.trip != NULL) {
+        // Make request using background job
+        NSMutableDictionary *settings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:!self.trip.muted], @"muted", nil];
+        [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [self.trip identifier], JOB_PARAM_SETTINGS: settings} forTask:JOB_CHANGE_TRIP_SETTINGS];
 
-    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
-    [realm transactionWithBlock:^{
-        self.trip.muted = !self.trip.muted;
-    }];
-    [self setNotificationIcon];
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
+        [realm transactionWithBlock:^{
+            self.trip.muted = !self.trip.muted;
+        }];
+        [self setNotificationIcon];
+    }
 }
 
 - (void)loadAlerts {
