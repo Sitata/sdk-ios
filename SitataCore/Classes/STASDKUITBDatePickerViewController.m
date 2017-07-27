@@ -26,9 +26,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-
-    self.pickedDate = [self.datePicker date];
-
     if (self.minDate) {
         [self.datePicker setMinimumDate:self.minDate];
     }
@@ -36,6 +33,8 @@
     if (self.maxDate) {
         [self.datePicker setMaximumDate:self.maxDate];
     }
+
+    self.pickedDate = [self.datePicker date];
 
     if (self.titleBarLblText) {
         self.navBar.topItem.title = self.titleBarLblText;

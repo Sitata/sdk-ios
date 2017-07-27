@@ -101,7 +101,6 @@ const int destPageCount = 3;
             // entry date picking
             STASDKUITBDatePickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tbDatePicker"];
 
-            // TODO: If trip is present, min date could be anything, otherwise, min date is today
             vc.minDate = self.entryDate;
             vc.titleBarLblText = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ARRIVAL_TITLE"];
             vc.delegate = self;
@@ -143,6 +142,7 @@ const int destPageCount = 3;
     if (self.currentIndex == 1) {
         // picking entry date
         self.entryDate = date;
+        self.exitDate = date; // exit date must be at least entry date
         [self nextPage];
     } else {
         // picking exit date
