@@ -21,6 +21,29 @@
 #import "STASDKMAlert.h"
 
 
+
+// STASDKUIPortrait Navigation is a shell class which enables us
+// to force the UI screens to stay in portrait orientation.
+@interface STASDKUIPortraitNavigation : UINavigationController
+@end
+
+@implementation STASDKUIPortraitNavigation
+- (void)viewDidLoad  {
+    [super viewDidLoad];
+}
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+@end
+
+
+
 @implementation STASDKUI
 
 
@@ -41,7 +64,7 @@
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SitataMain" bundle:bundle];
 
     UINavigationController *nc = [mainStoryboard instantiateViewControllerWithIdentifier:@"AlertsNavCtrl"];
-
+    
     NSArray *viewControllers = [nc viewControllers];
     STASDKUIAlertsTableViewController *vc = (STASDKUIAlertsTableViewController*) [viewControllers objectAtIndex:0];
     vc.mode = mode;
@@ -213,13 +236,23 @@
     return [NSString stringWithFormat:format, distanceValue, suffix];
 }
 
-
-
-
-
-
-
-
-
-
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

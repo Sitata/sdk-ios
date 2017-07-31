@@ -25,7 +25,7 @@
     // LOCAL
     NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTk2N2Q5ODg4NWRiOWVlYjY3YmQ4ZGFifEc0SGZ6Y1dqeHZnelRzUVo4UHU0";
     STASDKController *ctrl = [STASDKController sharedInstance];
-    [ctrl setConfig:token apiEndpoint:@"http://localhost:3000"];
+    [ctrl setConfig:token apiEndpoint:@"http://adam-sitata.pagekite.me:3000"];
 
 
 //    [[STASDKController sharedInstance] setDistanceUnitsToImperial];

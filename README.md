@@ -20,3 +20,10 @@ A number of icons in this project have been used with permission from the follow
 * [Minh Hoang](http://www.flaticon.com/authors/minh-hoang)
 * [Alfredo Hernandez](http://www.flaticon.com/authors/alfredo-hernandez)
 * [Those Icons](http://www.flaticon.com/authors/those-icons)
+
+Notes
+-----
+
+If you are having a problem building in which the SitataCore header files can not be found in the Example, parent project then run `rm -rf ~/Library/Developer/Xcode/DerivedData/*`
+
+
