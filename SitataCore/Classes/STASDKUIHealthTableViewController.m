@@ -173,9 +173,9 @@
             [tv reloadData];
             return;
         } else {
-            [self loadData];
-            if (self.nullView != NULL) {
-                [self.nullView dismiss];
+            [weakSelf loadData];
+            if (weakSelf.nullView != NULL) {
+                [weakSelf.nullView dismiss];
             }
         }
 

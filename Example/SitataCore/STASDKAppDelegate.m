@@ -43,7 +43,7 @@
     // Register for push notifications - ideally, you would want to do this after explaining to the
     // user why you're requesting them.
     if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) ){
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound |    UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     } else {
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];

@@ -45,6 +45,7 @@ NSArray *cellNames;
 
 
 
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
     return 10;
@@ -88,15 +89,15 @@ NSArray *cellNames;
         // TODO: DO TEST STUFF HERE AND THEN REMOVE
 //
 //        
-//        STASDKMUser *user = [STASDKMUser findFirst];
-//        STASDKMUserSettings *settings = user.settings;
-//        RLMRealm *realm = [[STASDKController sharedInstance] theRealm];
-//        [realm transactionWithBlock:^{
-//            settings.sendAllGoodPush = YES;
-//            settings.sendAllGoodEmail = true;
-//        }];
-//        NSError *error;
-//        [settings backgroundUpdate:&error];
+        STASDKMUser *user = [STASDKMUser findFirst];
+        STASDKMUserSettings *settings = user.settings;
+        RLMRealm *realm = [[STASDKController sharedInstance] theRealm];
+        [realm transactionWithBlock:^{
+            settings.sendAllGoodPush = YES;
+            settings.sendAllGoodEmail = true;
+        }];
+        NSError *error;
+        [settings backgroundUpdate:&error];
     }
 }
 

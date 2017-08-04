@@ -72,7 +72,6 @@
     [STASDKUIUtility applyStylesheetToNavigationController:self.navigationController];
 
     [self loadData];
-    [self setNotificationIcon];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -117,8 +116,11 @@
 
 
     // launch trip builder if trip is empty
-    if (self.trip != NULL && [self.trip isEmpty]) {
-        [STASDKUI showTripBuilder:self.trip.identifier];
+    if (self.trip != NULL) {
+        [self setNotificationIcon];
+        if ([self.trip isEmpty]) {
+            [STASDKUI showTripBuilder:self.trip.identifier];
+        }
     }
 }
 
@@ -204,8 +206,9 @@
             [tv reloadData];
             return;
         } else {
-            if (self.nullView != NULL) {
-                [self.nullView dismiss];
+            [weakSelf setNotificationIcon];
+            if (weakSelf.nullView != NULL) {
+                [weakSelf.nullView dismiss];
             }
         }
 
