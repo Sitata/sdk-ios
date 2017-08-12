@@ -18,7 +18,7 @@ extern NSString* const JOB_ALERT_MARK_READ;
 extern NSString* const JOB_SYNC_ALERT;
 extern NSString* const JOB_CHANGE_TRIP_SETTINGS;
 extern NSString* const JOB_UPDATE_USER_SETTINGS;
-
+extern NSString* const JOB_SEND_EVENT;
 
 
 extern NSString* const JOB_PARAM_CID;
@@ -27,3 +27,4 @@ extern NSString* const JOB_PARAM_TRIPID;
 extern NSString* const JOB_PARAM_PTOKEN;
 extern NSString* const JOB_PARAM_AID;
 extern NSString* const JOB_PARAM_SETTINGS;
+extern NSString* const JOB_PARAM_EID;

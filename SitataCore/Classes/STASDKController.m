@@ -15,7 +15,11 @@
 #import "STASDKPushHandler.h"
 #import "STASDKApiTrip.h"
 #import "STASDKMUserSettings.h"
-#import "STASDKApiUser.h"
+#import "STASDKApiTraveller.h"
+#import "STASDKApiMisc.h"
+
+#import "STASDKMEvent.h"
+#import "STASDKDefines.h"
 
 @implementation STASDKController
 
@@ -100,9 +104,12 @@ BOOL didFirstSync;
 
 
     }
+
+    [STASDKMEvent trackEvent:TrackAppStart name:EventAppStart];
 }
 
 - (void)stop {
+    [STASDKMEvent trackEvent:TrackAppDestroyed name:EventAppDestroyed];
     [[EDQueue sharedInstance] stop];
 }
 
@@ -386,15 +393,38 @@ BOOL didFirstSync;
                 block(EDQueueResultCritical);
                 return;
             }
-            STASDKMUser *user = (STASDKMUser*) settings.users.firstObject;
+            STASDKMTraveller *user = (STASDKMTraveller*) settings.travellers.firstObject;
             if (user == nil) {
                 block(EDQueueResultCritical);
                 return;
             }
-            [STASDKApiUser updateUser:user onFinished:^(STASDKMUser *user, NSURLSessionDataTask *task, NSError *error) {
+            [STASDKApiTraveller update:user onFinished:^(STASDKMTraveller *user, NSURLSessionDataTask *task, NSError *error) {
                 if (error != nil) {
                     block(EDQueueResultFail);
                 } else {
+                    block(EDQueueResultSuccess);
+                }
+            }];
+        } else if ([[job objectForKey:@"task"] isEqualToString:JOB_SEND_EVENT]) {
+            // analytics event
+            NSDictionary *data = [job objectForKey:@"data"];
+            if (data == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
+            NSString *eventId = [data objectForKey:JOB_PARAM_EID];
+            if (eventId == nil) {
+                block(EDQueueResultCritical);
+                return;
+            }
+            STASDKMEvent *event = [STASDKMEvent findBy:eventId];
+            NSString *identifier = event.identifier;
+            [STASDKApiMisc sendEvent:event onFinished:^(NSURLSessionDataTask *task, NSError *error) {
+                if (error != nil) {
+                    block(EDQueueResultFail);
+                } else {
+                    // remove event from local database
+                    [STASDKMEvent destroy:identifier];
                     block(EDQueueResultSuccess);
                 }
             }];

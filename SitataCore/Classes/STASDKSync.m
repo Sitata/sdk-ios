@@ -15,7 +15,7 @@
 #import "STASDKApiHealth.h"
 #import "STASDKApiAlert.h"
 #import "STASDKApiPlaces.h"
-#import "STASDKApiUser.h"
+#import "STASDKApiTraveller.h"
 
 #import "STASDKController.h"
 #import "STASDKApiMisc.h"
@@ -29,7 +29,7 @@
 #import "STASDKMDestination.h"
 #import "STASDKMAlert.h"
 #import "STASDKMAdvisory.h"
-#import "STASDKMUser.h"
+#import "STASDKMTraveller.h"
 
 
 #import <Realm/Realm.h>
@@ -142,7 +142,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
 // Sync the user's profile
 + (void)syncUserProfile:(void (^)(NSError*))callback {
-    [STASDKApiUser getUserProfile:^(STASDKMUser *user, NSURLSessionDataTask *task, NSError *error) {
+    [STASDKApiTraveller getProfile:^(STASDKMTraveller *user, NSURLSessionDataTask *task, NSError *error) {
         if (error != nil) {
             NSLog(@"Failed to fetch profile for current user - error: %@", [error localizedDescription]);
             [self catchCommonHttp:task error:error callback:callback];
@@ -179,7 +179,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
                 RLMResults<STASDKMTrip *> *trips = [STASDKMTrip currentAndFutureTrips];
                 for (STASDKMTrip *trip in trips) {
-                    [trip destroy];
+                    [STASDKMTrip destroy:trip.identifier];
                 }
 
                 callback(NULL); // 404 is fine, no need to re-do this background job
@@ -238,7 +238,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
         } else {
             // trip has been deleted, therefore, try to find and remove the local one
-            [self findAndRemoveTrip:trip.identifier];
+            [self findAndRemoveTrip:tripId];
         }
     }];
 }
@@ -284,10 +284,7 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
 // Find and remove the local trip based on the given id
 + (void)findAndRemoveTrip:(NSString*)tripId {
-    STASDKMTrip *localTrip = [STASDKMTrip findBy:tripId];
-    if (localTrip != NULL) {
-        [localTrip destroy];
-    }
+    [STASDKMTrip destroy:tripId];
 }
 
 

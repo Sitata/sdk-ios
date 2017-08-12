@@ -19,6 +19,9 @@
 #import "STASDKApiMisc.h"
 #import "STASDKUITripLocationAnnotation.h"
 
+#import "STASDKDefines.h"
+#import "STASDKMEvent.h"
+
 #import <Realm/Realm.h>
 #import <Contacts/Contacts.h>
 
@@ -39,7 +42,7 @@ static NSString* const kHeaderIdentifier = @"countryHeader";
 static NSString* const kCellIdentifier = @"cityCell";
 static CGFloat const kHeaderFooterHeight = 50.0f;
 static CGFloat const kCityRowHeight = 35.0f;
-static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
+//static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,6 +67,13 @@ static CGFloat const kTimelineEdgeSpacing = 31.0f; // TODO: Start using this
 
     [self loadMapData];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:EventTripBuilderDest];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:EventTripBuilderDest];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -24,7 +24,7 @@
 
 
 // Relationships
-@property (readonly) RLMLinkingObjects *users;
+@property (readonly) RLMLinkingObjects *travellers;
 
 
 

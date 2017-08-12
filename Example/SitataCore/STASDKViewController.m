@@ -12,7 +12,7 @@
 
 
 #import <SitataCore/STASDKController.h>
-#import <SitataCore/STASDKMUser.h>
+#import <SitataCore/STASDKMTraveller.h>
 #import <SitataCore/STASDKMUserSettings.h>
 
 
@@ -89,8 +89,8 @@ NSArray *cellNames;
         // TODO: DO TEST STUFF HERE AND THEN REMOVE
 //
 //        
-        STASDKMUser *user = [STASDKMUser findFirst];
-        STASDKMUserSettings *settings = user.settings;
+        STASDKMTraveller *trav = [STASDKMTraveller findFirst];
+        STASDKMUserSettings *settings = trav.settings;
         RLMRealm *realm = [[STASDKController sharedInstance] theRealm];
         [realm transactionWithBlock:^{
             settings.sendAllGoodPush = YES;

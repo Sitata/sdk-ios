@@ -10,6 +10,9 @@
 #import "STASDKUIStylesheet.h"
 #import "STASDKDataController.h"
 
+#import "STASDKMEvent.h"
+#import "STASDKDefines.h"
+
 @interface STASDKUITBSuccessViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *headerLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *successImg;
@@ -32,6 +35,13 @@
 
     self.headerLbl.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_SUCCESS"];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:EventTripBuilderTripSuccess];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:EventTripBuilderTripSuccess];
 }
 
 - (void)didReceiveMemoryWarning {

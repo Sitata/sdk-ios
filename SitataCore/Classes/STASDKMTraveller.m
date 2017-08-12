@@ -1,19 +1,19 @@
 //
-//  STASDKMUser.m
+//  STASDKMTraveller.m
 //  Pods
 //
 //  Created by Adam St. John on 2017-07-18.
 //
 //
 
-#import "STASDKMUser.h"
+#import "STASDKMTraveller.h"
 
 #import "STASDKMUserSettings.h"
 #import "STASDKDataController.h"
 #import <YYModel/YYModel.h>
 #import <Realm/Realm.h>
 
-@implementation STASDKMUser
+@implementation STASDKMTraveller
 
 
 #pragma mark - Object Mapping
@@ -50,10 +50,10 @@
 
 #pragma mark - Queries
 
-+(STASDKMUser*)findBy:(NSString *)userId {
++(STASDKMTraveller*)findBy:(NSString *)userId {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"identifier == %@", userId];
 
-    RLMResults<STASDKMUser *> *results = [STASDKMUser objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
+    RLMResults<STASDKMTraveller *> *results = [STASDKMTraveller objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {
@@ -61,8 +61,8 @@
     }
 }
 
-+(STASDKMUser*)findFirst {
-    RLMResults<STASDKMUser *> *results = [STASDKMUser allObjectsInRealm:[[STASDKDataController sharedInstance] theRealm]];
++(STASDKMTraveller*)findFirst {
+    RLMResults<STASDKMTraveller *> *results = [STASDKMTraveller allObjectsInRealm:[[STASDKDataController sharedInstance] theRealm]];
     if (results && results.count > 0) {
         return results.firstObject;
     } else {
@@ -81,7 +81,7 @@
     RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
 
     // destroy related models where applicable
-    STASDKMUser *oldUser = [STASDKMUser findBy:self.identifier];
+    STASDKMTraveller *oldUser = [STASDKMTraveller findBy:self.identifier];
     if (oldUser != NULL) {
         [realm beginWriteTransaction];
         [oldUser removeAssociated:realm];

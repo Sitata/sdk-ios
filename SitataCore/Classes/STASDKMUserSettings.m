@@ -7,7 +7,7 @@
 //
 
 #import "STASDKMUserSettings.h"
-#import "STASDKMUser.h"
+#import "STASDKMTraveller.h"
 #import "STASDKDataController.h"
 #import "STASDKJobs.h"
 #import <EDQueue/EDQueue.h>
@@ -19,7 +19,7 @@
 // To establish inverse relationship
 + (NSDictionary*)linkingObjectsProperties {
     return @{
-             @"users": [RLMPropertyDescriptor descriptorWithClass:STASDKMUser.class propertyName:@"settings"],
+             @"travellers": [RLMPropertyDescriptor descriptorWithClass:STASDKMTraveller.class propertyName:@"settings"],
              };
 }
 

@@ -156,6 +156,13 @@ NSString *const APIPath = @"api/v1";
 }
 
 
+// Mark: == ANALYTICS ==
+
+// /api/v1/analytics/sdk_event
++(NSString*)sendEvent {
+    return [NSString stringWithFormat:@"%@/analytics/sdk_event", [self apiEndpoint]];
+}
+
 
 
 // MARK: == GOOGLE ==

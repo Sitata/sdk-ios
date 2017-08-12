@@ -11,6 +11,7 @@
 #import "STASDKMTrip.h"
 #import "STASDKUITripMetaCollectionViewCell.h"
 #import "STASDKDefines.h"
+#import "STASDKMEvent.h"
 #import "STASDKDataController.h"
 #import <Realm/Realm.h>
 
@@ -59,6 +60,20 @@ static NSInteger const kCardSize = 100;
 
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:[self eventPageType]];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:[self eventPageType]];
+}
+-(int)eventPageType {
+    if (self.mode == TripPurpose) {
+        return EventTripBuilderTripType;
+    } else {
+        return EventTripBuilderTripAct;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

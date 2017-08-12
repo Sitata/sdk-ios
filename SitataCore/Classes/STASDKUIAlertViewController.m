@@ -24,6 +24,9 @@
 #import "STASDKUIModalLoadingWindow.h"
 #import "STASDKSync.h"
 
+#import "STASDKDefines.h"
+#import "STASDKMEvent.h"
+
 #import <Contacts/Contacts.h>
 
 
@@ -62,6 +65,20 @@
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.alertPageBackgroundColor;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:[self eventPageType]];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:[self eventPageType]];
+}
+-(int)eventPageType {
+    if (self.alert != NULL) {
+        return EventAlertDetails;
+    } else {
+        return EventAdvisoryDetails;
+    }
 }
 
 - (void)viewDidLayoutSubviews {

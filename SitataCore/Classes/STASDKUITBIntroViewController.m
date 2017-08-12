@@ -8,6 +8,9 @@
 
 #import "STASDKUITBIntroViewController.h"
 
+#import "STASDKMEvent.h"
+#import "STASDKDefines.h"
+
 @interface STASDKUITBIntroViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *headerLbl;
 
@@ -21,6 +24,13 @@
 
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.headerLbl.textColor = [UIColor darkGrayColor];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:EventTripBuilderIntro];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:EventTripBuilderIntro];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -44,6 +44,15 @@ static CLLocationManager *locationManager;
     
 }
 
++ (CLLocation*)currentLocation {
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    if (status == kCLAuthorizationStatusAuthorizedAlways ||
+        status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        locationManager = [[CLLocationManager alloc] init];
+        return [locationManager location];
+    }
+    return nil;
+}
 
 
 

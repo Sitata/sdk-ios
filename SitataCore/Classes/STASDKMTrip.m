@@ -85,6 +85,18 @@
     return [STASDKMTrip objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
 }
 
++(void)destroy:(NSString*)identifier {
+    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
+    // we do this query so we can ensure we don't have realm/thread issues
+    STASDKMTrip *deleteMeTrip = [STASDKMTrip findBy:identifier];
+    if (deleteMeTrip != NULL) {
+        [realm transactionWithBlock:^{
+            [deleteMeTrip removeAssociated:realm];
+            [realm deleteObject:deleteMeTrip];
+        }];
+    }
+}
+
 
 
 -(void)resave:(NSError **)error {
@@ -145,13 +157,6 @@
     return [[self destinations] count] <= 0;
 }
 
--(void)destroy {
-    RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
-    [realm transactionWithBlock:^{
-        [self removeAssociated:realm];
-        [realm deleteObject:self];
-    }];
-}
 
 
 -(RLMResults<STASDKMDestination*>*)sortedDestinations {

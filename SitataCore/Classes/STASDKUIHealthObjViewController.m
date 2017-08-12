@@ -17,6 +17,9 @@
 #import "STASDKMDisease.h"
 #import "STASDKUIStylesheet.h"
 
+#import "STASDKDefines.h"
+#import "STASDKMEvent.h"
+
 @interface STASDKUIHealthObjViewController ()
 
 @property RLMResults *dataObjects;
@@ -67,6 +70,23 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.allowsSelection = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:[self eventPageType]];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:[self eventPageType]];
+}
+-(int)eventPageType {
+    switch(self.healthMode) {
+        case Vaccinations:
+            return EventVaccinationDetails;
+        case Medications:
+            return EventMedicationDetails;
+        case Diseases:
+            return EventDiseaseDetails;
+    }
 }
 
 -(void)loadVaccinations:(STASDKMTrip*)trip {

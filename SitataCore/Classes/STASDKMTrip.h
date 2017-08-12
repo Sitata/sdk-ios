@@ -70,7 +70,7 @@
 -(bool)isEmpty;
 
 // Remove the trip and associated objects
--(void)destroy;
++(void)destroy:(NSString*)identifier;
 
 // Returns a list of STASDKMDestination objects sorted by departure date
 -(RLMResults<STASDKMDestination*>*)sortedDestinations;

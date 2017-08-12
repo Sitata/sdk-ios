@@ -1,5 +1,5 @@
 //
-//  STASDKMUser.h
+//  STASDKMTraveller.h
 //  Pods
 //
 //  Created by Adam St. John on 2017-07-18.
@@ -11,7 +11,7 @@
 
 @class STASDKMUserSettings;
 
-@interface STASDKMUser : RLMObject
+@interface STASDKMTraveller : RLMObject
 
 @property (retain) NSString *identifier;
 @property (retain) NSString *firstName;
@@ -28,10 +28,10 @@
 
 
 // Find stored user by identifier
-+(STASDKMUser*)findBy:(NSString *)userId;
++(STASDKMTraveller*)findBy:(NSString *)userId;
 
 // Find first user in database
-+(STASDKMUser*)findFirst;
++(STASDKMTraveller*)findFirst;
 
 
 // Destroy all previous data and related models and resave to database.
@@ -46,5 +46,5 @@
 
 
 // This protocol enables typed collections. i.e.:
-// RLMArray<STASDKMUser *><STASDKMUser>
-RLM_ARRAY_TYPE(STASDKMUser)
+// RLMArray<STASDKMTraveller *><STASDKMTraveller>
+RLM_ARRAY_TYPE(STASDKMTraveller)

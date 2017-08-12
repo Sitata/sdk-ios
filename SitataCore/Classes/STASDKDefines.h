@@ -81,6 +81,41 @@ typedef NS_ENUM(int, TripMetaType) {
 
 
 
+// Used for Analytics
+typedef NS_ENUM(int, AnalyticsEventType) {
+    TrackPageOpen = 0,
+    TrackPageClose = 1,
+    TrackAppStart = 2,
+    TrackAppDestroyed = 3
+};
+
+
+
+typedef NS_ENUM(int, AnalyticsEventName) {
+    EventAppStart = 0,
+    EventAppDestroyed = 1,
+    EventAlertsIndex = 2,
+    EventAlertDetails = 3,
+    EventAdvisoriesIndex = 4,
+    EventAdvisoryDetails = 5,
+    EventVaccinationsIndex = 6,
+    EventVaccinationDetails = 7,
+    EventMedicationsIndex = 8,
+    EventMedicationDetails = 9,
+    EventDiseasesIndex = 10,
+    EventDiseaseDetails = 11,
+    EventSafety = 12,
+    EventHospitalsIndex = 13,
+    EventHospitalDetails = 14,
+    EventEmergNumbers = 15,
+    EventTripBuilderIntro = 16,
+    EventTripBuilderDest = 17,
+    EventTripBuilderTripType = 18,
+    EventTripBuilderTripAct = 19,
+    EventTripBuilderTripSuccess = 20
+};
+
+
 #endif /* STASDKDefines_h */
 
 

@@ -1,33 +1,33 @@
 //
-//  STASDKApiUser.m
+//  STASDKApiTraveller.m
 //  Pods
 //
 //  Created by Adam St. John on 2017-07-18.
 //
 //
 
-#import "STASDKApiUser.h"
+#import "STASDKApiTraveller.h"
 
 #import <AFNetworking/AFNetworking.h>
 #import <YYModel/YYModel.h>
 #import "STASDKApiRoutes.h"
 #import "STASDKApiUtils.h"
 
-#import "STASDKMUser.h"
+#import "STASDKMTraveller.h"
 
-@implementation STASDKApiUser
+@implementation STASDKApiTraveller
 
 
 
-// Request profile for current user
-+(void)getUserProfile:(void(^)(STASDKMUser*, NSURLSessionDataTask*, NSError*))callback {
+// Request profile for current user / traveller
++(void)getProfile:(void(^)(STASDKMTraveller*, NSURLSessionDataTask*, NSError*))callback {
     NSString *url = [STASDKApiRoutes userProfile];
     AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
 
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
 
         // do success
-        STASDKMUser *user = [STASDKMUser yy_modelWithJSON:responseObject];
+        STASDKMTraveller *user = [STASDKMTraveller yy_modelWithJSON:responseObject];
         callback(user, task, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         // do failure
@@ -36,8 +36,8 @@
     }];
 }
 
-// Update profile for current user
-+(void)updateUser:(STASDKMUser*)user onFinished:(void(^)(STASDKMUser*, NSURLSessionDataTask*, NSError*))callback {
+// Update profile for given traveller
++(void)update:(STASDKMTraveller*)user onFinished:(void(^)(STASDKMTraveller*, NSURLSessionDataTask*, NSError*))callback {
     NSString *url = [STASDKApiRoutes user:user.identifier];
 
     AFHTTPSessionManager *manager = [STASDKApiUtils defaultSessionManager];
@@ -47,7 +47,7 @@
 
 
     [manager PUT:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        STASDKMUser *user = [STASDKMUser yy_modelWithJSON:responseObject];
+        STASDKMTraveller *user = [STASDKMTraveller yy_modelWithJSON:responseObject];
         callback(user, task, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         // do failure

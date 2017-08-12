@@ -17,6 +17,9 @@
 #import "STASDKUIUtility.h"
 #import "STASDKUI.h"
 
+#import "STASDKMEvent.h"
+#import "STASDKDefines.h"
+
 @interface STASDKUIHospitalsViewController ()
 
 @property STASDKMTrip *currentTrip;
@@ -70,6 +73,13 @@
 
 
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:EventHospitalsIndex];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:EventHospitalsIndex];
 }
 
 

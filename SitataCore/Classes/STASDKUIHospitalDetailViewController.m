@@ -19,6 +19,9 @@
 #import "STASDKUIUtility.h"
 #import "STASDKUIStylesheet.h"
 
+#import "STASDKDefines.h"
+#import "STASDKMEvent.h"
+
 #import <MapKit/MapKit.h>
 
 @interface STASDKUIHospitalDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
@@ -72,6 +75,13 @@ static CGFloat kContactDetailRowHeight;
     self.nameLbl.textColor = styles.hospitalNameLblColor;
     self.distanceLbl.textColor = styles.hospitalDistanceLblColor;
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:EventHospitalDetails];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:EventHospitalDetails];
 }
 
 - (void)didReceiveMemoryWarning {

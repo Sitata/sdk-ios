@@ -10,6 +10,7 @@
 
 
 
+@class CLLocation;
 
 @interface STASDKLocationHandler : NSObject
 
@@ -18,6 +19,8 @@
 + (void)requestPermissionsWhenNecessary;
 
 + (void)currentCountry;
+
++ (CLLocation*)currentLocation;
 
 @end
 

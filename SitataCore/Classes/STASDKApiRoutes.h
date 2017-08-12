@@ -113,6 +113,11 @@
 
 +(NSString*)user:(NSString*)userId;
 
+// Mark: == ANALYTICS ==
+
+// /api/v1/analytics/sdk_event
++(NSString*)sendEvent;
+
 
 // MARK: == GOOGLE ==
 +(NSString*)googleSearchForCityNamed:(NSString*)query inCountry:(NSString*)countryCode;

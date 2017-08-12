@@ -19,6 +19,9 @@
 #import "Haneke.h"
 #import "STASDKLocationHandler.h"
 
+#import "STASDKMEvent.h"
+#import "STASDKDefines.h"
+
 #import <MapKit/MapKit.h>
 
 
@@ -86,6 +89,13 @@ static CGFloat kContactDetailRowHeight;
     [STASDKLocationHandler requestPermissionsWhenNecessary];
     [self setupLocationManager];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:EventEmergNumbers];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:EventEmergNumbers];
 }
 
 -(void)close:(id)sender

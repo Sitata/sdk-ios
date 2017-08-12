@@ -19,6 +19,9 @@
 #import "STASDKUIStylesheet.h"
 #import "STASDKJobs.h"
 
+#import "STASDKDefines.h"
+#import "STASDKMEvent.h"
+
 #import <Realm/Realm.h>
 #import <EDQueue/EDQueue.h>
 
@@ -77,6 +80,20 @@
 -(void)viewWillDisappear:(BOOL)animated {
     if (self.notification != NULL) {
         [self.notification stop];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:[self eventPageType]];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:[self eventPageType]];
+}
+-(int)eventPageType {
+    if (self.mode == Alerts) {
+        return EventAlertsIndex;
+    } else {
+        return EventAdvisoriesIndex;
     }
 }
 

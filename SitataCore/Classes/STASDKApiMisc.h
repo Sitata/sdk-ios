@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class STASDKMEvent;
+
 @interface STASDKApiMisc : NSObject
 
 
 // POST /users/device_push
 +(void)sendDeviceToken:(NSDictionary*)deviceInfo onFinished:(void(^)(NSURLSessionDataTask*, NSError*))callback;
+
+// POST /analytics/sdk_event
++(void)sendEvent:(STASDKMEvent*)event onFinished:(void(^)(NSURLSessionDataTask*, NSError*))callback;
 
 
 // Given a string query and country code, will ask google for city suggestions and return an array of dictionaries representing
@@ -22,5 +27,8 @@
 
 // Return a NSDictionary of google place id data
 +(void)googleFetchPlace:(NSString*)placeId onFinished:(void(^)(NSDictionary*, NSURLSessionDataTask*, NSError*)) callback;
+
+
+
 
 @end

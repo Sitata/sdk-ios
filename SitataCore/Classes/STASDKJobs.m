@@ -22,7 +22,7 @@ NSString *JOB_ALERT_MARK_READ = @"alert-mark-read";
 NSString *JOB_SYNC_ALERT = @"sync-alert";
 NSString *JOB_CHANGE_TRIP_SETTINGS = @"change-trip-settings";
 NSString *JOB_UPDATE_USER_SETTINGS = @"update-user-settings";
-
+NSString *JOB_SEND_EVENT = @"send-event";
 
 
 // Job Parameters
@@ -31,4 +31,5 @@ NSString *JOB_PARAM_DID = @"diseaseId";
 NSString *JOB_PARAM_TRIPID = @"tripId";
 NSString *JOB_PARAM_PTOKEN = @"ptoken";
 NSString *JOB_PARAM_AID = @"alertId";
+NSString *JOB_PARAM_EID = @"eventId";
 NSString *JOB_PARAM_SETTINGS = @"settings";

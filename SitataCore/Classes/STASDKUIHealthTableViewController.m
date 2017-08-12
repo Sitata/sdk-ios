@@ -15,6 +15,9 @@
 #import "STASDKUIUtility.h"
 #import "STASDKUIStylesheet.h"
 
+#import "STASDKDefines.h"
+#import "STASDKMEvent.h"
+
 #import <Realm/Realm.h>
 
 
@@ -132,6 +135,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:[self eventPageType]];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:[self eventPageType]];
+}
+-(int)eventPageType {
+    switch(self.healthMode) {
+        case Vaccinations:
+            return EventVaccinationsIndex;
+        case Medications:
+            return EventMedicationsIndex;
+        case Diseases:
+            return EventDiseasesIndex;
+    }
 }
 
 

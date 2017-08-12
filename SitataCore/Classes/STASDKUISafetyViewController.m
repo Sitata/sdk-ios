@@ -17,6 +17,9 @@
 #import "STASDKUIUtility.h"
 #import "STASDKUI.h"
 
+#import "STASDKDefines.h"
+#import "STASDKMEvent.h"
+
 @interface STASDKUISafetyViewController ()
 
 @property STASDKMCountry *country;
@@ -69,6 +72,13 @@ STASDKUINullStateHandler *nullStateView;
         [nullStateView displayNullState];
     }
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageOpen name:EventSafety];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [STASDKMEvent trackEvent:TrackPageClose name:EventSafety];
 }
 
 -(void)close:(id)sender
