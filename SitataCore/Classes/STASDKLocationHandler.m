@@ -11,6 +11,13 @@
 #import <CoreLocation/CoreLocation.h>
 
 
+@interface STASDKLocationHandler() <CLLocationManagerDelegate>
+
+@property CLLocationManager *locManager;
+@property bool deferringUpdates;
+
+@end
+
 
 @implementation STASDKLocationHandler
 
@@ -40,18 +47,85 @@ static CLLocationManager *locationManager;
     }
 }
 
-+ (void)currentCountry {
-    
+-(void)fetchCurrentLocation {
+    // only fetch location when granted by user
+    if (![STASDKLocationHandler grantedPermissions]) {
+        return;
+    }
+    [self setup];
+    [self.locManager requestLocation];
 }
 
-+ (CLLocation*)currentLocation {
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    if (status == kCLAuthorizationStatusAuthorizedAlways ||
-        status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        locationManager = [[CLLocationManager alloc] init];
-        return [locationManager location];
+
+-(void)start {
+    // only fetch location when granted by user
+    if (![STASDKLocationHandler grantedPermissions]) {
+        return;
     }
-    return nil;
+    self.deferringUpdates = NO;
+    [self setup];
+    [self.locManager startUpdatingLocation];
+}
+
+-(void)setup {
+    if (self.locManager == NULL) {
+        self.locManager = [[CLLocationManager alloc] init];
+        self.locManager.delegate = self;
+        self.locManager.desiredAccuracy = kCLLocationAccuracyBest;
+        self.locManager.distanceFilter = 100; // meters
+        self.locManager.pausesLocationUpdatesAutomatically = YES;
+        self.locManager.activityType = CLActivityTypeFitness;
+    }
+}
+
+-(void)stop {
+    [self.locManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+
+    CLLocation* location = [locations lastObject];
+    NSDate* eventDate = location.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+
+    // throws away any events that are more than fifteen seconds old under
+    // the assumption that events up to that age are likely to be good enough.
+    if (fabs(howRecent) < 15.0) {
+        // If the event is recent, do something with it.
+        self.currentLocation = location;
+    }
+
+    // Defer updates until the user moves a certain distance
+    // or when a certain amount of time has passed.
+    if (!self.deferringUpdates) {
+        CLLocationDistance distance = 100.0; // meters
+        NSTimeInterval time = 300.0; // seconds
+        [self.locManager allowDeferredLocationUpdatesUntilTraveled:distance
+                                                           timeout:time];
+        self.deferringUpdates = YES;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFinishDeferredUpdatesWithError:(NSError *)error {
+    self.deferringUpdates = NO;
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    self.deferringUpdates = NO;
+}
+
+
+
+
+
+
+
++(bool)grantedPermissions {
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    return [CLLocationManager locationServicesEnabled] &&
+    (status == kCLAuthorizationStatusAuthorizedAlways ||
+     status == kCLAuthorizationStatusAuthorizedWhenInUse);
 }
 
 

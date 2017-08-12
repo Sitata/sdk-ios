@@ -14,13 +14,17 @@
 
 @interface STASDKLocationHandler : NSObject
 
+@property CLLocation *currentLocation;
 
 
 + (void)requestPermissionsWhenNecessary;
 
-+ (void)currentCountry;
+- (void)fetchCurrentLocation;
 
-+ (CLLocation*)currentLocation;
+// fetch location continually
+- (void)start;
+// stop fetching location continually
+- (void)stop;
 
 @end
 

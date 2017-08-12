@@ -12,7 +12,7 @@
 #import <EDQueue/EDQueue.h>
 #import "STASDKJobs.h"
 
-#import "STASDKLocationHandler.h"
+#import "STASDKController.h"
 #import <CoreLocation/CoreLocation.h>
 
 @implementation STASDKMEvent
@@ -59,7 +59,7 @@
     event.name = name;
     event.identifier = [[NSUUID UUID] UUIDString];
 
-    CLLocation *loc = [STASDKLocationHandler currentLocation];
+    CLLocation *loc = [[STASDKController sharedInstance] currentLocation];
     if (loc != NULL) {
         CLLocationCoordinate2D coord = loc.coordinate;
         event.latitude = coord.latitude;

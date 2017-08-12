@@ -15,6 +15,7 @@
 
 @class NSManagedObjectContext;
 @class RLMRealm;
+@class CLLocation;
 
 
 typedef NS_ENUM(int, DistanceUnitsType) {
@@ -76,6 +77,9 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 
 // Change the distance units displayed to Imperial
 - (void)setDistanceUnitsToImperial;
+
+// User's current position if permissions granted
+- (CLLocation*)currentLocation;
 
 // Remove all data from the device.
 - (BOOL)destroyAllData;

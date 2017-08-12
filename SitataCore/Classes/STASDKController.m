@@ -17,9 +17,20 @@
 #import "STASDKMUserSettings.h"
 #import "STASDKApiTraveller.h"
 #import "STASDKApiMisc.h"
+#import "STASDKLocationHandler.h"
+
 
 #import "STASDKMEvent.h"
 #import "STASDKDefines.h"
+
+
+@interface STASDKController()
+
+@property STASDKLocationHandler *locHandler;
+
+@end
+
+
 
 @implementation STASDKController
 
@@ -55,6 +66,8 @@ BOOL didFirstSync;
             _googleApiKeyPListKey = @"GoogleApiKey";
         }
 
+        self.locHandler = [[STASDKLocationHandler alloc] init];
+
         // Setup iOS built in caching
         NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024
                                                              diskCapacity:100 * 1024 * 1024
@@ -77,6 +90,9 @@ BOOL didFirstSync;
 
 
 - (void)start {
+    // start location handling
+    [self.locHandler fetchCurrentLocation];
+    
     [[EDQueue sharedInstance] setDelegate:self];
     // One downside to EDQueue is that the retry limit is applied to ALL jobs and not
     // one specific job. We need to keep a high retry limit becasue the push notification token
@@ -109,6 +125,9 @@ BOOL didFirstSync;
 }
 
 - (void)stop {
+    // stop location handling - i.e. only when app is open and in foreground
+    [self.locHandler stop];
+
     [STASDKMEvent trackEvent:TrackAppDestroyed name:EventAppDestroyed];
     [[EDQueue sharedInstance] stop];
 }
@@ -124,6 +143,10 @@ BOOL didFirstSync;
 
 - (void)setDistanceUnitsToImperial {
     self.distanceUnits = Imperial;
+}
+
+- (CLLocation*)currentLocation {
+    return self.locHandler.currentLocation;
 }
 
 - (void)setPushNotificationToken:(NSString*)token {
