@@ -25,5 +25,8 @@
 
 - (void)setForEmpty:(InfoType)mode;
 
+- (void)setRead;
+
+- (void)setUnread;
 
 @end

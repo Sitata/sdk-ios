@@ -316,7 +316,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // alert view controller is used for both alerts and advisories
-    [self performSegueWithIdentifier:@"showAlert" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    STASDKUIAlertTableViewCell *cell = (STASDKUIAlertTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+    [cell setRead];
+    [self performSegueWithIdentifier:@"showAlert" sender:cell];
 }
 
 

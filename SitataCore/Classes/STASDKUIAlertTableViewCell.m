@@ -32,12 +32,24 @@
     [self.headlineLbl setText:alert.headline];
     [self.dateLbl setText:[STASDKUI dateDisplayString:alert.updatedAt]];
     [self applyColors];
+
+    if (alert._read) {
+        [self setRead];
+    } else {
+        [self setUnread];
+    }
 }
 
 - (void)setForAdvisory:(STASDKMAdvisory*)advisory {
     [self.headlineLbl setText:advisory.headline];
     [self.dateLbl setText:[STASDKUI dateDisplayString:advisory.updatedAt]];
     [self applyColors];
+
+    if (advisory._read) {
+        [self setRead];
+    } else {
+        [self setUnread];
+    }
 }
 
 - (void)setForEmpty:(InfoType)mode {
@@ -57,6 +69,24 @@
 
     self.dateLbl.textColor = styles.alertAdvisoryRowDateLblColor;
     self.headlineLbl.textColor = styles.alertAdvisoryRowHeadlineLblColor;
+}
+
+- (void)setUnread {
+    // make bold
+    UIFontDescriptor *headDesc = [[[self.headlineLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    [self.headlineLbl setFont:[UIFont fontWithDescriptor:headDesc size:0]];
+
+    UIFontDescriptor *dateDesc = [[[self.dateLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    [self.dateLbl setFont:[UIFont fontWithDescriptor:dateDesc size:0]];
+}
+
+- (void)setRead {
+    // make regular ( not bold )
+    UIFontDescriptor *headDesc = [[[self.headlineLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:0];
+    [self.headlineLbl setFont:[UIFont fontWithDescriptor:headDesc size:0]];
+
+    UIFontDescriptor *dateDesc = [[[self.dateLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:0];
+    [self.dateLbl setFont:[UIFont fontWithDescriptor:dateDesc size:0]];
 }
 
 

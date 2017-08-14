@@ -25,7 +25,7 @@
 @property (retain) NSString *countryDivisionIds;
 @property (retain) NSString *countryRegionIds;
 
-
+@property BOOL _read;
 
 // Find stored advisory by identifier
 +(STASDKMAdvisory*)findBy:(NSString *)advisoryId;
@@ -38,6 +38,8 @@
 
 // Returns an array of NSDictionary objects representing the associated municipal boundaries.
 -(NSArray*)countryRegionsArr;
+
+-(void)setRead;
 
 
 @end

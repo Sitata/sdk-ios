@@ -80,8 +80,23 @@
     }
 }
 
+-(void)setRead {
+    if (!self._read) {
+        RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
+        [realm beginWriteTransaction];
+        self._read = YES;
+        [realm commitWriteTransaction];
+    }
+}
 
 
+
+
+# pragma mark - Realm
+
++ (NSDictionary *)defaultPropertyValues {
+    return @{@"_read" : @false};
+}
 
 
 

@@ -165,11 +165,15 @@
 
 
 
+# pragma mark - Realm
+
++ (NSDictionary *)defaultPropertyValues {
+    return @{@"_read" : @false};
+}
+
 
 
 # pragma mark - Object Mapping
-
-
 
 
 + (NSDictionary *)modelCustomPropertyMapper {
