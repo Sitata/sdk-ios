@@ -59,16 +59,29 @@ NSString * const localizedTablename = @"Translations";
 
 
 - (NSString*)localizedStringForKey:(NSString*)key {
-    NSBundle *bundle = [self sdkBundle];
+    NSString *lString = NULL;
+    NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+    NSString *languageCode = [locale objectForKey:NSLocaleIdentifier];
 
-    NSString *str =  [bundle localizedStringForKey:key value:kLocalizedStringNotFound table:localizedTablename];
-    // Not found?
-    if ([str isEqualToString:kLocalizedStringNotFound])
+    // languageCode might be en_GB, but on disk is en-GB
+    languageCode = [languageCode stringByReplacingOccurrencesOfString:@"_" withString:@"-"];
+
+    NSBundle *bundle = [self sdkBundle];
+    NSString *path = [bundle pathForResource:languageCode ofType:@"lproj"];
+    if (path != NULL) {
+        lString = NSLocalizedStringWithDefaultValue(key, localizedTablename, [NSBundle bundleWithPath:path], kLocalizedStringNotFound, @"");
+    }
+
+    if (lString == NULL || [lString isEqualToString:kLocalizedStringNotFound]) {
+        // fallback to english
+        path = [bundle pathForResource:@"en" ofType:@"lproj"];
+        lString = NSLocalizedStringWithDefaultValue(key, localizedTablename, [NSBundle bundleWithPath:path], kLocalizedStringNotFound, @"");
+    }
+    if ([lString isEqualToString:kLocalizedStringNotFound])
     {
         NSLog(@"No localized string for '%@' in '%@'", key, localizedTablename);
     }
-
-    return str;
+    return lString;
 }
 
 

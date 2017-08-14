@@ -1,0 +1,11 @@
+/* 
+  Translations.strings
+  Pods
+
+  Created by Adam St. John on 2017-03-05.
+
+*/
+
+
+/* TRIP TYPE */
+"TRIP_TYPE_0" = "Holiday";

@@ -106,7 +106,7 @@
 "TB_SUCCESS" = "Congratulations!\rYour trip has been saved!";
 
 /* TRIP TYPE */
-"TRIP_TYPE_0" = "Holiday";
+"TRIP_TYPE_0" = "Vacation";
 "TRIP_TYPE_1" = "Business";
 "TRIP_TYPE_2" = "Other";
 

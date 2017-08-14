@@ -967,6 +967,7 @@
 		25BAE51CE275A3E5845E4159BC4CF4A3 /* STASDKApiUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = STASDKApiUtils.h; sourceTree = "<group>"; };
 		2685C7C0E3C2900165E92570A07B1EF0 /* SitataCore.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SitataCore.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		269016F0C0981EDE577628C2286C2E49 /* HNKDiskFetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HNKDiskFetcher.m; path = Haneke/HNKDiskFetcher.m; sourceTree = "<group>"; };
+		2709DC0A1F414D1F0015E94E /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Translations.strings"; sourceTree = "<group>"; };
 		271716661F3E530900C1EDC2 /* STASDKMEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKMEvent.h; sourceTree = "<group>"; };
 		271716671F3E530900C1EDC2 /* STASDKMEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STASDKMEvent.m; sourceTree = "<group>"; };
 		273AD8851F0EC15700BDA9CD /* STASDKUITBDestPickerPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STASDKUITBDestPickerPageViewController.h; sourceTree = "<group>"; };
@@ -3369,6 +3370,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"en-GB",
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			productRefGroup = E39F5EFA89FDAB280D8ED8D38AB78ACA /* Products */;
@@ -3951,6 +3953,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				515CB03EC89C3D7EAB6D08E800500FD7 /* Translations.strings */,
+				2709DC0A1F414D1F0015E94E /* en-GB */,
 			);
 			name = Translations.strings;
 			path = .;
@@ -4198,6 +4201,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4608,6 +4612,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
