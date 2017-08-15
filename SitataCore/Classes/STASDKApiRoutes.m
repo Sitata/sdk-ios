@@ -165,26 +165,6 @@ NSString *const APIPath = @"api/v1";
 
 
 
-// MARK: == GOOGLE ==
-
-// https://maps.googleapis.com/maps/api/place/autocomplete/json?parameters
-+(NSString*)googleSearchForCityNamed:(NSString*)query inCountry:(NSString*)countryCode {
-    // https://maps.googleapis.com/maps/api/place/autocomplete/json?parameters
-    // key - API key
-    // input - text string
-    // types=(cities)
-    // components=country:COUNTRY_CODE_HERE
-    NSString *plistKey = [[STASDKController sharedInstance] googleApiKeyPListKey];
-    NSString *key = [[NSBundle mainBundle] objectForInfoDictionaryKey:plistKey];
-    return [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?key=%@&input=%@&types=(cities)&components=country:%@", key, query, countryCode];
-}
-
-// https://maps.googleapis.com/maps/api/place/details/json?parameters
-+(NSString*)googlePlaceDetails:(NSString*)placeId; {
-    NSString *plistKey = [[STASDKController sharedInstance] googleApiKeyPListKey];
-    NSString *key = [[NSBundle mainBundle] objectForInfoDictionaryKey:plistKey];
-    return [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?key=%@&placeid=%@", key, placeId];
-}
 
 
 @end

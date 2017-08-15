@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SitataCore'
-  s.version          = '1.2.4'
+  s.version          = '1.3'
   s.summary          = 'An iOS library to embed Sitata services into your own mobile application.'
 
 # This description is used to generate tags and improve search results.
@@ -110,7 +110,6 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKUITBSuccessViewController.h',
                             'SitataCore/**/STASDKUIItineraryCountryHeaderView.h',
                             'SitataCore/**/STASDKUIItineraryCityHeaderView.h',
-                            'SitataCore/**/STASDKUILocationSearchTableViewController.h',
                             'SitataCore/**/STASDKUICardTableViewCell.h']
 
   s.source_files          = 'SitataCore/**/*.{m,h}'
@@ -123,15 +122,18 @@ An iOS library to embed Sitata services into your own mobile application. API ac
     'SitataCore' => ['SitataCore/Assets/**/*']
   }
 
-
-  s.frameworks = 'Foundation', 'CoreGraphics', 'UIKit', 'MapKit', 'SystemConfiguration'
-
   s.dependency 'Realm', '~>2.6'
   s.dependency 'AFNetworking', '~> 3.1'
   s.dependency 'YYModel', '1.0.4'
   s.dependency 'EDQueue', '0.7.1'
   s.dependency 'CCHMapClusterController', '1.7.0'
   s.dependency 'Haneke', '~> 1.0'
+
+# We have to do the setup below for our GooglePlaces dependency until Google publishes a framework version
+# of the library in Cocoapods instead of a static library
+  s.libraries      = "c++", "icucore", "z" # required for GoogleMaps.framework
+  s.frameworks     = 'Foundation', 'CoreGraphics', 'UIKit', 'MapKit', 'SystemConfiguration', "GoogleMapsBase", "GooglePlaces" # required for GooglePlaces.framework
+  s.vendored_frameworks  = "Frameworks/GoogleMapsBase.framework", "Frameworks/GooglePlaces.framework"
 
 
 end

@@ -15,14 +15,6 @@
 @property double latitude;
 @property double longitude;
 
-@property NSString *_googlePlaceId;
-@property NSString *_longName;
-
-
-
-// Create a new STASDKMDestinationLocation from a google result json object
-+(STASDKMDestinationLocation*)initFromGoogleResult:(NSDictionary*)result;
-
 
 @end
 

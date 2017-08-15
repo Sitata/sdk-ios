@@ -23,6 +23,8 @@
 #import "STASDKMEvent.h"
 #import "STASDKDefines.h"
 
+@import GooglePlaces;
+
 
 @interface STASDKController()
 
@@ -36,7 +38,6 @@
 
 @synthesize distanceUnits = _distanceUnits;
 @synthesize apiEndpoint = _apiEndpoint;
-@synthesize googleApiKeyPListKey = _googleApiKeyPListKey;
 BOOL didFirstSync;
 
 
@@ -62,8 +63,11 @@ BOOL didFirstSync;
 
         _apiEndpoint = @"https://www.sitata.com";
 
-        if (!_googleApiKeyPListKey) {
-            _googleApiKeyPListKey = @"GoogleApiKey";
+
+        // Google Places
+        NSString *key = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"GoogleApiKey"];
+        if (key.length) {
+            [GMSPlacesClient provideAPIKey:key];
         }
 
         self.locHandler = [[STASDKLocationHandler alloc] init];

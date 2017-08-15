@@ -15,7 +15,6 @@
 #import "STASDKUIItineraryCountryHeaderView.h"
 #import "STASDKUIItineraryCityHeaderView.h"
 #import "STASDKUITBDestPickerPageViewController.h"
-#import "STASDKUILocationSearchTableViewController.h"
 #import "STASDKApiMisc.h"
 #import "STASDKUITripLocationAnnotation.h"
 
@@ -24,14 +23,16 @@
 
 #import <Realm/Realm.h>
 #import <Contacts/Contacts.h>
+#import <GooglePlaces/GooglePlaces.h>
 
 
 @interface STASDKUITripBuildItinViewController () <UITableViewDelegate, UITableViewDataSource, STASDKUIItineraryCountryHeaderViewDelegate, STASDKUIItineraryCityHeaderViewDelegate, MKMapViewDelegate,
-    UIPopoverPresentationControllerDelegate, STASDKUITBDestinationPickerDelegate, UISearchControllerDelegate, STASDKUILocationSearchDelegate>
+    UIPopoverPresentationControllerDelegate, STASDKUITBDestinationPickerDelegate, GMSAutocompleteViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property UISearchController *searchController;
+@property STASDKMDestination *cityPickDestination; // keeps track of which country we're trying to add a city for
 
 
 @end
@@ -48,7 +49,7 @@ static CGFloat const kCityRowHeight = 35.0f;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self loadSearchController];
+    //[self loadSearchController];
 
     self.mapView.delegate = self;
     self.tableView.dataSource = self;
@@ -95,24 +96,24 @@ static CGFloat const kCityRowHeight = 35.0f;
 }
 
 
-# pragma mark - Search Controller
-
-- (void) loadSearchController {
-    STASDKUILocationSearchTableViewController *searchTable = [self.storyboard instantiateViewControllerWithIdentifier:@"locationSearchTable"];
-    searchTable.delegate = self;
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController: searchTable];
-    self.searchController.searchResultsUpdater = searchTable;
-    self.searchController.hidesNavigationBarDuringPresentation = NO;
-    self.searchController.dimsBackgroundDuringPresentation = YES;
-    self.searchController.delegate = self;
-    // ensure that search bar does not remain on screen if user navigates to another view controller
-    self.definesPresentationContext = YES;
-}
-
-
-- (void)didDismissSearchController:(UISearchController *)searchController {
-    [self.searchController.searchBar removeFromSuperview];
-}
+//# pragma mark - Search Controller
+//
+//- (void) loadSearchController {
+//    STASDKUILocationSearchTableViewController *searchTable = [self.storyboard instantiateViewControllerWithIdentifier:@"locationSearchTable"];
+//    searchTable.delegate = self;
+//    self.searchController = [[UISearchController alloc] initWithSearchResultsController: searchTable];
+//    self.searchController.searchResultsUpdater = searchTable;
+//    self.searchController.hidesNavigationBarDuringPresentation = NO;
+//    self.searchController.dimsBackgroundDuringPresentation = YES;
+//    self.searchController.delegate = self;
+//    // ensure that search bar does not remain on screen if user navigates to another view controller
+//    self.definesPresentationContext = YES;
+//}
+//
+//
+//- (void)didDismissSearchController:(UISearchController *)searchController {
+//    [self.searchController.searchBar removeFromSuperview];
+//}
 
 
 
@@ -325,11 +326,20 @@ static CGFloat const kCityRowHeight = 35.0f;
 
 // launch the city picker
 - (void) onAddCity:(id)sender destination:(STASDKMDestination*)destination {
+    self.cityPickDestination = destination; // keeps track of which country we're trying to add a city for
 
-    STASDKUILocationSearchTableViewController *searchTable = (STASDKUILocationSearchTableViewController*) self.searchController.searchResultsUpdater;
-    searchTable.currentDestination = destination;
-    [self.mapView addSubview:self.searchController.searchBar];
-    [self.searchController setActive:YES];
+    GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
+    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
+    [filter setCountry:destination.countryCode];
+    [filter setType:kGMSPlacesAutocompleteTypeFilterCity];
+    acController.delegate = self;
+    acController.autocompleteFilter = filter;
+    [self presentViewController:acController animated:YES completion:nil];
+
+//    STASDKUILocationSearchTableViewController *searchTable = (STASDKUILocationSearchTableViewController*) self.searchController.searchResultsUpdater;
+//    searchTable.currentDestination = destination;
+//    [self.mapView addSubview:self.searchController.searchBar];
+//    [self.searchController setActive:YES];
 }
 
 - (void) onRemoveCity:(id)sender removed:(STASDKMDestinationLocation *)location {
@@ -380,39 +390,78 @@ static CGFloat const kCityRowHeight = 35.0f;
 }
 
 
+#pragma mark - <GMSAutocompleteViewControllerDelegate>
+
+-(void)viewController:(GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(GMSPlace *)place {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // Do something with the selected place.
+
+    STASDKMDestinationLocation *location = [[STASDKMDestinationLocation alloc] init];
+    [self.theRealm transactionWithBlock:^{
+        location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
+        location.friendlyName = place.name;
+        location.latitude = place.coordinate.latitude;
+        location.longitude = place.coordinate.longitude;
+
+        [self.cityPickDestination.destinationLocations addObject:location];
+        [self dropMapPinFor:location];
+        [self.tableView reloadData];
+    }];
+
+}
+- (void)viewController:(GMSAutocompleteViewController *)viewController
+didFailAutocompleteWithError:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // TODO: handle the error.
+    NSLog(@"Error: %@", [error description]);
+}
+
+// User canceled the operation.
+- (void)wasCancelled:(GMSAutocompleteViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+// Turn the network activity indicator on and off again.
+- (void)didRequestAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+- (void)didUpdateAutocompletePredictions:(GMSAutocompleteViewController *)viewController {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+
 #pragma mark - STASDKUILocationSearchDelegate
 
-- (void)onSelectedLocation:(STASDKMDestinationLocation *)location forDestination:(STASDKMDestination *)destination {
-    [self fetchLatLngFor:location onFinished:^{
-        [self.theRealm transactionWithBlock:^{
-            location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
-            [destination.destinationLocations addObject:location];
-            [self dropMapPinFor:location];
-        }];
+//- (void)onSelectedLocation:(STASDKMDestinationLocation *)location forDestination:(STASDKMDestination *)destination {
+//    [self fetchLatLngFor:location onFinished:^{
+//        [self.theRealm transactionWithBlock:^{
+//            location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
+//            [destination.destinationLocations addObject:location];
+//            [self dropMapPinFor:location];
+//        }];
+//
+//        [self.searchController dismissViewControllerAnimated:YES completion:^{
+//            [self.searchController setActive:NO];
+//            [self.searchController.searchBar removeFromSuperview];
+//            [self.tableView reloadData];
+//        }];
+//    }];
+//}
 
-        [self.searchController dismissViewControllerAnimated:YES completion:^{
-            [self.searchController setActive:NO];
-            [self.searchController.searchBar removeFromSuperview];
-            [self.tableView reloadData];
-        }];
-    }];
-}
-
-- (void)fetchLatLngFor:(STASDKMDestinationLocation*)location onFinished:(void(^)()) callback {
-    [STASDKApiMisc googleFetchPlace:location._googlePlaceId onFinished:^(NSDictionary *result, NSURLSessionDataTask *task, NSError *error) {
-        if (result) {
-            NSDictionary *geo = [result objectForKey:@"geometry"];
-            if (geo) {
-                NSDictionary *resultLoc = [geo objectForKey:@"location"];
-                if (resultLoc) {
-                    location.latitude = [[resultLoc objectForKey:@"lat"] doubleValue];
-                    location.longitude  = [[resultLoc objectForKey:@"lng"] doubleValue];
-                }
-            }
-        }
-        callback();
-    }];
-}
+//- (void)fetchLatLngFor:(STASDKMDestinationLocation*)location onFinished:(void(^)()) callback {
+//    [STASDKApiMisc googleFetchPlace:location._googlePlaceId onFinished:^(NSDictionary *result, NSURLSessionDataTask *task, NSError *error) {
+//        if (result) {
+//            NSDictionary *geo = [result objectForKey:@"geometry"];
+//            if (geo) {
+//                NSDictionary *resultLoc = [geo objectForKey:@"location"];
+//                if (resultLoc) {
+//                    location.latitude = [[resultLoc objectForKey:@"lat"] doubleValue];
+//                    location.longitude  = [[resultLoc objectForKey:@"lng"] doubleValue];
+//                }
+//            }
+//        }
+//        callback();
+//    }];
+//}
 
 - (void)dropMapPinFor:(STASDKMDestinationLocation*)location {
     STASDKUITripLocationAnnotation *ann = [[STASDKUITripLocationAnnotation alloc] initWith:location];
