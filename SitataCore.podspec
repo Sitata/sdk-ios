@@ -119,7 +119,8 @@ An iOS library to embed Sitata services into your own mobile application. API ac
   s.requires_arc          = true
   
   s.resource_bundles = {
-    'SitataCore' => ['SitataCore/Assets/**/*']
+    'SitataCore' => ['SitataCore/Assets/**/*'],
+    'GooglePlaces' => ['Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle/*']
   }
 
   s.dependency 'Realm', '~>2.6'

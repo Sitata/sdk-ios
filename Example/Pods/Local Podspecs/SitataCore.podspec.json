@@ -101,13 +101,15 @@
     "SitataCore/**/STASDKUITBSuccessViewController.h",
     "SitataCore/**/STASDKUIItineraryCountryHeaderView.h",
     "SitataCore/**/STASDKUIItineraryCityHeaderView.h",
-    "SitataCore/**/STASDKUILocationSearchTableViewController.h",
     "SitataCore/**/STASDKUICardTableViewCell.h"
   ],
   "requires_arc": true,
   "resource_bundles": {
     "SitataCore": [
       "SitataCore/Assets/**/*"
+    ],
+    "GooglePlaces": [
+      "Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle/*"
     ]
   },
   "dependencies": {
