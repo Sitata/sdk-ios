@@ -30,7 +30,7 @@
 
 @property (nonatomic, strong) RLMArray<STASDKMAlert*> *alerts;
 @property (nonatomic, strong) RLMArray<STASDKMAdvisory*> *advisories;
-@property (nonatomic, strong) RLMNotificationToken *notification;
+
 
 @property STASDKMTrip *trip;
 @property STASDKUINullStateHandler *nullView;
@@ -75,13 +75,15 @@
     [STASDKUIUtility applyStylesheetToNavigationController:self.navigationController];
 
     [self loadData];
-}
 
--(void)viewWillDisappear:(BOOL)animated {
-    if (self.notification != NULL) {
-        [self.notification stop];
+    if (self.mode == Alerts) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDataChange:) name:NotifyTripAlertsSaved object:NULL];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDataChange:) name:NotifyTripAdvisoriesSaved object:NULL];
     }
 }
+
+
 
 -(void)viewDidAppear:(BOOL)animated {
     [STASDKMEvent trackEvent:TrackPageOpen name:[self eventPageType]];
@@ -201,42 +203,24 @@
 
 - (void)loadAlerts {
     self.alerts = [self.trip alerts];
-    [self addRealmNotifications:self.alerts];
 }
 
 - (void)loadAdvisories {
     self.advisories = [self.trip advisories];
-    [self addRealmNotifications:self.advisories];
 }
 
+
 // This is to update the table on changes to our result set
-- (void)addRealmNotifications:(RLMArray*)realmObjs {
-    __weak typeof(self) weakSelf = self;
-    self.notification = [realmObjs addNotificationBlock:^(RLMArray *data, RLMCollectionChange *changes, NSError *error) {
-        if (error) {
-            NSLog(@"Failed to open Realm on background worker: %@", error);
-            return;
+- (void)handleDataChange:(NSNotification*)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *tripId = [userInfo valueForKey:NotifyTripId];
+    if ([self.trip.identifier isEqualToString:tripId]) {
+        [self loadData];
+        [self.tableView reloadData];
+        if (self.nullView) {
+            [self.nullView dismiss];
         }
-
-        UITableView *tv = weakSelf.tableView;
-        if (!changes) {
-            [tv reloadData];
-            return;
-        } else {
-            [weakSelf setNotificationIcon];
-            if (weakSelf.nullView != NULL) {
-                [weakSelf.nullView dismiss];
-            }
-        }
-
-        // changes is non-nil, so we just need to update the tableview
-        
-        [tv beginUpdates];
-        [tv deleteRowsAtIndexPaths:[changes deletionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tv insertRowsAtIndexPaths:[changes insertionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tv reloadRowsAtIndexPaths:[changes modificationsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tv endUpdates];
-    }];
+    }
 }
 
 

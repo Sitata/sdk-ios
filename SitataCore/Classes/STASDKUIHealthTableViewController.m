@@ -31,7 +31,6 @@
 
 @property STASDKMTrip *trip;
 @property STASDKUINullStateHandler *nullView;
-@property (nonatomic, strong) RLMNotificationToken *notification;
 
 @end
 
@@ -77,13 +76,10 @@
         [STASDKUI showTripBuilder:self.trip.identifier];
     }
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTripChange:) name:NotifyTripSaved object:NULL];
+
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    if (self.notification != NULL) {
-        [self.notification stop];
-    }
-}
 
 - (void)close:(id)sender
 {
@@ -112,7 +108,6 @@
             [self dismissViewControllerAnimated:YES completion:NULL];
             break;
     }
-    [self addRealmNotifications:self.allDataObjects];
 }
 
 - (NSString*)stringForNoData {
@@ -178,35 +173,22 @@
 }
 
 
+
 // This is to update the table on changes to our result set
-- (void)addRealmNotifications:(RLMResults*)realmObjs {
-    __weak typeof(self) weakSelf = self;
-
-    self.notification = [realmObjs addNotificationBlock:^(RLMResults *data, RLMCollectionChange *changes, NSError *error) {
-        if (error) {
-            NSLog(@"Failed to open Realm on background worker: %@", error);
-            return;
+- (void)handleTripChange:(NSNotification*)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *tripId = [userInfo valueForKey:NotifyTripId];
+    if ([self.trip.identifier isEqualToString:tripId]) {
+        [self loadData];
+        [self.tableView reloadData];
+        if (self.nullView) {
+            [self.nullView dismiss];
         }
-
-        UITableView *tv = weakSelf.tableView;
-        if (!changes) {
-            [tv reloadData];
-            return;
-        } else {
-            [weakSelf loadData];
-            if (weakSelf.nullView != NULL) {
-                [weakSelf.nullView dismiss];
-            }
-        }
-
-        // changes are non-nil, so we just need to update the tableview
-        [tv beginUpdates];
-        [tv deleteRowsAtIndexPaths:[changes deletionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tv insertRowsAtIndexPaths:[changes insertionsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tv reloadRowsAtIndexPaths:[changes modificationsInSection:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tv endUpdates];
-    }];
+    }
 }
+
+
+
 
 
 // [{comment:"", vaccinationId: "", vaccinationName: "", countryId: ""}]

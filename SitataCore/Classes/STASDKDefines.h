@@ -115,6 +115,13 @@ typedef NS_ENUM(int, AnalyticsEventName) {
     EventTripBuilderTripSuccess = 20
 };
 
+extern NSNotificationName const NotifyTripSaved;
+extern NSNotificationName const NotifyTripHospitalsSaved;
+extern NSNotificationName const NotifyTripAlertsSaved;
+extern NSNotificationName const NotifyTripAdvisoriesSaved;
+extern NSString * const NotifyTripId;
+
+
 
 #endif /* STASDKDefines_h */
 

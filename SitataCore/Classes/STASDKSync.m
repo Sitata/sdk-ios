@@ -8,6 +8,7 @@
 
 #import "STASDKSync.h"
 #import "STASDKJobs.h"
+#import "STASDKDefines.h"
 #import "STASDKDataController.h"
 #import "STASDKApiUtils.h"
 #import "STASDKApiTrip.h"
@@ -293,6 +294,10 @@ NSString *const NotifyKeyAlertId = @"alertId";
 //         which means we will have to depend on iOS's caching layer to do its job to prevent
 //         unnecessary fetch requests on repeated jobs. e.g. if a specific disease is fetched twice
 + (void) syncExtrasFor:(STASDKMTrip*)trip {
+
+    // fire sync trip notification
+    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:trip.identifier, NotifyTripId, nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotifyTripSaved object:self userInfo:userInfo];
 
     // for each destination, sync the country
     RLMArray<STASDKMDestination*> *destinations = [trip destinations];
@@ -613,6 +618,11 @@ NSString *const NotifyKeyAlertId = @"alertId";
             callback(NULL);
         }
 
+
+        // fire notification
+        NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:tripId, NotifyTripId, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotifyTripAlertsSaved object:self userInfo:userInfo];
+
         
     }];
 }
@@ -661,6 +671,10 @@ NSString *const NotifyKeyAlertId = @"alertId";
             NSLog(@"Finshed saving trip advisories.");
             callback(NULL);
         }
+
+        // fire notification
+        NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:tripId, NotifyTripId, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotifyTripAdvisoriesSaved object:self userInfo:userInfo];
     }];
 
 }
@@ -701,6 +715,10 @@ NSString *const NotifyKeyAlertId = @"alertId";
             NSLog(@"Finshed saving trip hospitals.");
             callback(NULL);
         }
+
+        // fire notification
+        NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:tripId, NotifyTripId, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotifyTripHospitalsSaved object:self userInfo:userInfo];
 
     }];
 }
