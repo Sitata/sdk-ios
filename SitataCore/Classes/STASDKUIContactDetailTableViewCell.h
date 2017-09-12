@@ -25,5 +25,7 @@
 
 - (void)setForContactDetail:(STASDKMContactDetail*)detail;
 - (void)setForAddress:(NSString*)addressStr;
+- (void)doAction;
+
 
 @end

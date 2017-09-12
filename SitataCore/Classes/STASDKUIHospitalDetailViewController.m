@@ -96,7 +96,7 @@ static CGFloat kContactDetailRowHeight;
     self.tableView.delegate = self;
     self.tableView.rowHeight = kContactDetailRowHeight;
     self.tableView.estimatedRowHeight = 55.0;
-    self.tableView.allowsSelection = NO;
+    self.tableView.allowsSelection = YES; // must allow to enable events in contact details
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
@@ -210,6 +210,14 @@ static CGFloat kContactDetailRowHeight;
     [STASDKUIUtility applyZebraStripeToTableCell:cell indexPath:indexPath];
 
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSInteger section = [indexPath section];
+    if (section == 1) {
+        STASDKUIContactDetailTableViewCell *contactCell = (STASDKUIContactDetailTableViewCell*) [tableView cellForRowAtIndexPath:indexPath];
+        [contactCell doAction];
+    }
 }
 
 

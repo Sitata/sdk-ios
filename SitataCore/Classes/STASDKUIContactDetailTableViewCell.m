@@ -148,9 +148,7 @@
 }
 
 
-
-
-- (IBAction)onActionTouch:(id)sender {
+- (void)doAction {
     if (self.contactDetail == NULL) {
         // address so we need to open up directions to hospital
         [self handleDirections];
@@ -162,7 +160,7 @@
             ContactDetailType cType = self.contactDetail.typ;
             switch (cType) {
 
-                // fall through all phone numbers
+                    // fall through all phone numbers
                 case OfficePhone:
                 case Fax:
                 case HomePhone:
@@ -187,6 +185,11 @@
             }
         }
     }
+}
+
+
+- (IBAction)onActionTouch:(id)sender {
+    [self doAction];
 }
 
 - (void)handleDirections {

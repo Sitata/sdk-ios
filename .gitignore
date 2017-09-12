@@ -25,6 +25,8 @@ DerivedData
 # Universal framework build
 Example/Output
 
+# temp
+/temp
 
 Carthage
 # We recommend against adding the Pods directory to your .gitignore. However

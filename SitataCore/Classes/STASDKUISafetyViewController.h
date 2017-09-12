@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-
+@class STASDKMTrip;
 
 @interface STASDKUISafetyViewController : UIViewController
 
+@property STASDKMTrip *trip;
 
 @end

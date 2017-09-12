@@ -22,27 +22,44 @@ typedef NS_ENUM(int, InfoType) {
 @interface STASDKUI : NSObject
 
 
-// Present the Alerts user interface
+// Present the Alerts user interface for the current trip
 + (void)showAlerts;
+
+// Present the Alerts user interface for the given tripId
++ (void)showAlerts:(NSString*_Nonnull)tripId;
+
 
 // Present the Advisories user interface
 + (void)showAdvisories;
 
+// Present the Advisories user interface for the given tripId
++ (void)showAdvisories:(NSString*_Nonnull)tripId;
 
-// Present the Trip Vaccinations user interface
+
+// Present the Trip Vaccinations user interface for the current trip
 + (void)showTripVaccinations;
+// Present the Trip Vaccinations user interfac for the given tripId
++ (void)showTripVaccinations:(NSString*_Nonnull)tripId;
 
-// Present the Trip Medications user interface
+// Present the Trip Medications user interface for the current trip
 + (void)showTripMedications;
+// Present the Trip Medications user interface for the given tripId
++ (void)showTripMedications:(NSString*_Nonnull)tripId;
 
-// Present the Trip Diseases user interface
+// Present the Trip Diseases user interface for the current trip
 + (void)showTripDiseases;
+// Present the Trip Diseases user interface for the given tripId
++ (void)showTripDiseases:(NSString*_Nonnull)tripId;
 
-// Present the Trip Safety user interface
+// Present the Trip Safety user interface for the current trip
 + (void)showTripSafety;
+// Present the Trip Safety user interface for the given tripId
++ (void)showTripSafety:(NSString*_Nonnull)tripId;
 
-// Present the Trip Hospitals user interface
+// Present the Trip Hospitals user interface for the current trip
 + (void)showTripHospitals;
+// Present the Trip Hospitals user interface for the given tripId
++ (void)showTripHospitals:(NSString*_Nonnull)tripId;
 
 // Peresent the Emergency Numbers user interface
 + (void)showEmergencyNumbers;

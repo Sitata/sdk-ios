@@ -22,7 +22,6 @@
 
 @interface STASDKUIHospitalsViewController ()
 
-@property STASDKMTrip *currentTrip;
 @property RLMResults *destinations;
 @property NSMutableArray *countries;
 @property int pageIndex;
@@ -55,11 +54,11 @@
     self.pageCount = 0;
 
     // setup for trip is called first by embed controllers
-    if (self.currentTrip != NULL) {
+    if (self.trip != NULL) {
         [self setupForTrip];
 
-        if ([self.currentTrip isEmpty]) {
-            [STASDKUI showTripBuilder:self.currentTrip.identifier];
+        if ([self.trip isEmpty]) {
+            [STASDKUI showTripBuilder:self.trip.identifier];
         }
 
     } else {
@@ -94,10 +93,6 @@
 // embedded country switcher which is loaded before viewDidLoad above.
 - (void)setupForTrip {
 
-    if (self.currentTrip == NULL) {
-        self.currentTrip = [STASDKMTrip currentTrip];
-    }
-    
     if (self.countries != NULL) {
         return;
     } else {
@@ -109,7 +104,7 @@
 
 - (void)setCountries {
     self.countries = [[NSMutableArray alloc] init]; // must stay here
-    self.destinations = [self.currentTrip sortedDestinations];
+    self.destinations = [self.trip sortedDestinations];
     for (STASDKMDestination *dest in self.destinations) {
         STASDKMCountry *country = [STASDKMCountry findBy:[dest countryId]];
         if (country != NULL) {

@@ -36,6 +36,11 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 // allows unit to be set for distance
 @property (assign) DistanceUnitsType distanceUnits;
 
+// ensures that start and finish dates can not be changed during the trip builder process
+// useful if you want full control and set a fixed time period over when sitata's services may be used
+// by the end user.
+@property (assign) bool fixedTripDates;
+
 
 
 

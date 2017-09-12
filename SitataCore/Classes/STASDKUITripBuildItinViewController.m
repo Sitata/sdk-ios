@@ -17,6 +17,7 @@
 #import "STASDKUITBDestPickerPageViewController.h"
 #import "STASDKApiMisc.h"
 #import "STASDKUITripLocationAnnotation.h"
+#import "STASDKController.h"
 
 #import "STASDKDefines.h"
 #import "STASDKMEvent.h"
@@ -503,6 +504,11 @@ didFailAutocompleteWithError:(NSError *)error {
             vc.preferredContentSize = CGSizeMake(300.0, 300.0);
         }
         vc.destPickerDelegate = self;
+        if ([[STASDKController sharedInstance] fixedTripDates] && self.trip != NULL) {
+            // set minimum and maximum trip dates based on trip
+            vc.fixedEntryDate = self.trip.start;
+            vc.fixedExitDate = self.trip.finish;
+        }
     }
     
     

@@ -24,4 +24,8 @@
 
 @property (weak, nonatomic) id <STASDKUITBDestinationPickerDelegate> destPickerDelegate;
 
+@property NSDate* fixedEntryDate;
+@property NSDate* fixedExitDate;
+
+
 @end

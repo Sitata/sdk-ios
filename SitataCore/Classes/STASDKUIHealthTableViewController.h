@@ -10,8 +10,11 @@
 
 #import "STASDKUI.h"
 
+@class STASDKMTrip;
+
 @interface STASDKUIHealthTableViewController : UITableViewController
 
 @property (assign) HealthType healthMode;
+@property STASDKMTrip *trip;
 
 @end

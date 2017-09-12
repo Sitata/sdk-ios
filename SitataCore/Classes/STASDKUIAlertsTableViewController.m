@@ -31,8 +31,6 @@
 @property (nonatomic, strong) RLMArray<STASDKMAlert*> *alerts;
 @property (nonatomic, strong) RLMArray<STASDKMAdvisory*> *advisories;
 
-
-@property STASDKMTrip *trip;
 @property STASDKUINullStateHandler *nullView;
 
 @end
@@ -111,7 +109,6 @@
 
 
 - (void)loadData {
-    self.trip = [STASDKMTrip currentTrip];
 
     if (self.trip != NULL) {
         if (self.mode == Alerts) {

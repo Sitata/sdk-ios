@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "STASDKUI.h"
 
+@class STASDKMTrip;
+
 @interface STASDKUIAlertsTableViewController : UITableViewController 
 
 @property (assign) InfoType mode;
-
+@property STASDKMTrip *trip;
 
 
 @end

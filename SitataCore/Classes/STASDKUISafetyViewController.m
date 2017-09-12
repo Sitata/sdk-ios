@@ -23,7 +23,6 @@
 @interface STASDKUISafetyViewController ()
 
 @property STASDKMCountry *country;
-@property STASDKMTrip *currentTrip;
 @property RLMResults *destinations;
 @property NSMutableArray *countries;
 @property int pageIndex;
@@ -57,11 +56,11 @@ STASDKUINullStateHandler *nullStateView;
     [STASDKUIUtility applyStylesheetToNavigationController:self.navigationController];
 
 
-    if (self.currentTrip != NULL) {
+    if (self.trip != NULL) {
         [self setupForTrip];
 
-        if ([self.currentTrip isEmpty]) {
-            [STASDKUI showTripBuilder:self.currentTrip.identifier];
+        if ([self.trip isEmpty]) {
+            [STASDKUI showTripBuilder:self.trip.identifier];
         }
     } else {
         // NO Trip, no safety info
@@ -95,10 +94,8 @@ STASDKUINullStateHandler *nullStateView;
         self.countries = [[NSMutableArray alloc] init];
     }
 
-    if (self.currentTrip == NULL) {
-        self.currentTrip = [STASDKMTrip currentTrip];
-
-        self.destinations = [self.currentTrip sortedDestinations];
+    if (self.trip != NULL) {
+        self.destinations = [self.trip sortedDestinations];
         for (STASDKMDestination *dest in self.destinations) {
             STASDKMCountry *country = [STASDKMCountry findBy:[dest countryId]];
             if (country != NULL) {

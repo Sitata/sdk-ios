@@ -60,8 +60,8 @@ BOOL didFirstSync;
 
         // default values
         _distanceUnits = Metric;
-
         _apiEndpoint = @"https://www.sitata.com";
+        _fixedTripDates = NO;
 
 
         // Google Places

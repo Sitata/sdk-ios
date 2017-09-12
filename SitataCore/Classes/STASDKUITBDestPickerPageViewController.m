@@ -41,8 +41,7 @@ const int destPageCount = 3;
     // Do any additional setup after loading the view.
     self.currentIndex = 0;
 
-    self.entryDate = [[NSDate alloc] init];
-    self.exitDate = [[NSDate alloc] init];
+    [self setStartingDates];
 
     self.delegate = self;
 
@@ -57,6 +56,13 @@ const int destPageCount = 3;
 - (void)nextPage {
     self.currentIndex++;
     [self setViewControllers:@[[self viewControllerAtIndex:self.currentIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+}
+
+
+// Set to today's date, or the absolute minimum if dates are fixed.
+- (void)setStartingDates {
+    self.entryDate = self.fixedEntryDate == NULL ? [[NSDate alloc] init] : self.fixedEntryDate;
+    self.exitDate = self.fixedExitDate == NULL ? [[NSDate alloc] init] : self.fixedExitDate;
 }
 
 
@@ -102,6 +108,9 @@ const int destPageCount = 3;
             STASDKUITBDatePickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tbDatePicker"];
 
             vc.minDate = self.entryDate;
+            if (self.fixedExitDate) {
+                vc.maxDate = self.fixedExitDate;
+            }
             vc.titleBarLblText = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ARRIVAL_TITLE"];
             vc.delegate = self;
             page = vc;
@@ -113,6 +122,9 @@ const int destPageCount = 3;
             STASDKUITBDatePickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tbDatePicker"];
 
             vc.minDate = self.entryDate;
+            if (self.fixedExitDate) {
+                vc.maxDate = self.fixedExitDate;
+            }
             vc.titleBarLblText = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_LEAVE_TITLE"];
             vc.delegate = self;
             page = vc;
@@ -146,7 +158,7 @@ const int destPageCount = 3;
         [self nextPage];
     } else {
         // picking exit date
-        self.exitDate = date;
+        self.exitDate = [self cappedExitDate:date];
 
         // Callback result to parent view controller
         STASDKMDestination *dest = [[STASDKMDestination alloc] init];
@@ -157,6 +169,22 @@ const int destPageCount = 3;
         [self.destPickerDelegate onPickedDestination:dest];
 
         [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (NSDate*)cappedExitDate:(NSDate*)wantedDate {
+    if (self.fixedExitDate == NULL) {
+        return wantedDate;
+    } else {
+        // return wanted date if less than fixed Exit date
+        NSComparisonResult result = [wantedDate compare:self.fixedExitDate];
+        if (result == NSOrderedSame || result == NSOrderedAscending) {
+            // wanted date is earlier than fixed exit date
+            return wantedDate;
+        } else {
+            // can't let user go past fixed exit date
+            return self.fixedExitDate;
+        }
     }
 }
 

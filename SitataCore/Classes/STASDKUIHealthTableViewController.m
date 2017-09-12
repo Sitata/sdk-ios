@@ -29,7 +29,6 @@
 // To store an array for display such as [ [medicationId, medicationName], etc... ]
 @property NSArray *uniqueDataObjects;
 
-@property STASDKMTrip *trip;
 @property STASDKUINullStateHandler *nullView;
 
 @end
@@ -63,7 +62,6 @@
     // Colors
     [STASDKUIUtility applyStylesheetToNavigationController:self.navigationController];
 
-    self.trip = [STASDKMTrip currentTrip];
     [self loadData];
 
     if ([self.uniqueDataObjects count] <= 0) {

@@ -17,8 +17,11 @@
 #import "STASDKUIAlertsTableViewController.h"
 #import "STASDKUIAlertViewController.h"
 #import "STASDKUITripBuilderBaseViewController.h"
+#import "STASDKUISafetyViewController.h"
+#import "STASDKUIHospitalsViewController.h"
 
 #import "STASDKMAlert.h"
+#import "STASDKMTrip.h"
 
 
 
@@ -49,17 +52,30 @@
 
 + (void)showAlerts {
     enum InfoType mode = Alerts;
-    [self showInfoType:mode];
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [self showInfoType:mode trip:trip];
+}
++ (void)showAlerts:(NSString*)tripId {
+    enum InfoType mode = Alerts;
+    STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+    [self showInfoType:mode trip:trip];
 }
 
 + (void)showAdvisories {
     enum InfoType mode = Advisories;
-    [self showInfoType:mode];
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [self showInfoType:mode trip:trip];
+}
+
++ (void)showAdvisories:(NSString*)tripId {
+    enum InfoType mode = Advisories;
+    STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+    [self showInfoType:mode trip:trip];
 }
 
 
 // Reusing alerts nav controller for both alerts and advisories
-+ (void)showInfoType:(InfoType)mode {
++ (void)showInfoType:(InfoType)mode trip:(STASDKMTrip*)trip {
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SitataMain" bundle:bundle];
 
@@ -68,27 +84,48 @@
     NSArray *viewControllers = [nc viewControllers];
     STASDKUIAlertsTableViewController *vc = (STASDKUIAlertsTableViewController*) [viewControllers objectAtIndex:0];
     vc.mode = mode;
+    vc.trip = trip;
 
     UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
     [parentCtrl presentViewController:nc animated:YES completion:NULL];
 }
 
+
+
 + (void)showTripVaccinations {
     enum HealthType healthMode = Vaccinations;
-    [self showHealthComments:healthMode];
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [self showHealthComments:healthMode trip:trip];
+}
++ (void)showTripVaccinations:(NSString*)tripId {
+    enum HealthType healthMode = Vaccinations;
+    STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+    [self showHealthComments:healthMode trip:trip];
 }
 
 + (void)showTripMedications {
     enum HealthType healthMode = Medications;
-    [self showHealthComments:healthMode];
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [self showHealthComments:healthMode trip:trip];
+}
++ (void)showTripMedications:(NSString*)tripId {
+    enum HealthType healthMode = Medications;
+    STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+    [self showHealthComments:healthMode trip:trip];
 }
 
 + (void)showTripDiseases {
     enum HealthType healthMode = Diseases;
-    [self showHealthComments:healthMode];
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [self showHealthComments:healthMode trip:trip];
+}
++ (void)showTripDiseases:(NSString*)tripId {
+    enum HealthType healthMode = Diseases;
+    STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+    [self showHealthComments:healthMode trip:trip];
 }
 
-+ (void)showHealthComments:(HealthType)healthMode {
++ (void)showHealthComments:(HealthType)healthMode trip:(STASDKMTrip*)trip {
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SitataMain" bundle:bundle];
 
@@ -97,26 +134,51 @@
     NSArray *viewControllers = [nc viewControllers];
     STASDKUIHealthTableViewController *vc = (STASDKUIHealthTableViewController*) [viewControllers objectAtIndex:0];
     vc.healthMode = healthMode;
+    vc.trip = trip;
 
     UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
     [parentCtrl presentViewController:nc animated:YES completion:NULL];
 }
 
 + (void)showTripSafety {
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [self doShowTripSafety:trip];
+}
++ (void)showTripSafety:(NSString*)tripId {
+    STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+    [self doShowTripSafety:trip];
+}
++ (void)doShowTripSafety:(STASDKMTrip*)trip {
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SitataMain" bundle:bundle];
 
     UINavigationController *nc = [mainStoryboard instantiateViewControllerWithIdentifier:@"SafetyNavCtrl"];
+    NSArray *viewControllers = [nc viewControllers];
+    STASDKUISafetyViewController *vc = (STASDKUISafetyViewController*) [viewControllers objectAtIndex:0];
+    vc.trip = trip;
+
     UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
     [parentCtrl presentViewController:nc animated:YES completion:NULL];
 }
 
+
 + (void)showTripHospitals {
+    STASDKMTrip *trip = [STASDKMTrip currentTrip];
+    [self doShowTripHospitals:trip];
+}
++ (void)showTripHospitals:(NSString*)tripId {
+    STASDKMTrip *trip = [STASDKMTrip findBy:tripId];
+    [self doShowTripHospitals:trip];
+}
++ (void)doShowTripHospitals:(STASDKMTrip*)trip {
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SitataMain" bundle:bundle];
 
-
     UINavigationController *nc = [mainStoryboard instantiateViewControllerWithIdentifier:@"HospitalsNavCtrl"];
+    NSArray *viewControllers = [nc viewControllers];
+    STASDKUIHospitalsViewController *vc = (STASDKUIHospitalsViewController*) [viewControllers objectAtIndex:0];
+    vc.trip = trip;
+
     UIViewController *parentCtrl = [[STASDKController sharedInstance] parentRootViewController];
     [parentCtrl presentViewController:nc animated:YES completion:NULL];
 }
@@ -177,6 +239,8 @@
     vc.tripId = tripId;
     [parentCtrl presentViewController:nc animated:YES completion:NULL];
 }
+
+
 
 
 
