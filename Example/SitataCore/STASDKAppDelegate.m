@@ -27,6 +27,8 @@
     STASDKController *ctrl = [STASDKController sharedInstance];
     [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
     ctrl.fixedTripDates = YES;
+    ctrl.skipTBTypes = YES;
+    ctrl.skipTBActivities = YES;
 
 
 //    [[STASDKController sharedInstance] setDistanceUnitsToImperial];

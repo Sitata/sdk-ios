@@ -41,6 +41,12 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 // by the end user.
 @property (assign) bool fixedTripDates;
 
+// When true, trip builder will skip the screen which allows a user to select the trip type.
+@property (assign) bool skipTBTypes;
+
+// When true, trip builder will skip the screen which allows a user to select trip activities.
+@property (assign) bool skipTBActivities;
+
 
 
 

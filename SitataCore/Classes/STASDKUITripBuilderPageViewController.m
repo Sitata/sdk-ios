@@ -8,6 +8,7 @@
 
 #import "STASDKUITripBuilderPageViewController.h"
 
+#import "STASDKController.h"
 #import "STASDKDataController.h"
 #import "STASDKMTrip.h"
 #import "STASDKUITripBuildItinViewController.h"
@@ -27,6 +28,7 @@
 @property int currentIndex;
 @property RLMRealm *theRealm;
 @property STASDKMTrip *trip;
+@property int pageCount;
 
 @end
 
@@ -34,14 +36,21 @@
 
 @implementation STASDKUITripBuilderPageViewController
 
-const int pageCount = 5;
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
     self.currentIndex = 0;
+
+    self.pageCount = 5;
+    STASDKController *ctrl = [STASDKController sharedInstance];
+    if (ctrl.skipTBTypes) {
+        self.pageCount--;
+    }
+    if (ctrl.skipTBActivities) {
+        self.pageCount--;
+    }
 
     [self loadTrip];
 
@@ -99,11 +108,11 @@ const int pageCount = 5;
         // first page
         [self setCloseButton];
         [self setNextButton];
-    } else if (self.currentIndex == pageCount-2) {
+    } else if (self.currentIndex == self.pageCount-2) {
         // second last page
         [self setPreviousButton];
         [self setSaveButton];
-    } else if (self.currentIndex == pageCount-1) {
+    } else if (self.currentIndex == self.pageCount-1) {
         // last page - only close button
         [self setFinishButton];
     } else {
@@ -228,7 +237,7 @@ const int pageCount = 5;
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
 
     int index = self.currentIndex;
-    if (index == pageCount-1) {
+    if (index == self.pageCount-1) {
         return NULL;
     }
     index++;
@@ -259,36 +268,63 @@ const int pageCount = 5;
         }
         case 2:
         {
-            // tripBuilderType
-            STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
-            enum TripMetaType mode = TripPurpose;
-            vc.trip = self.trip;
-            vc.mode = mode;
-            vc.theRealm = self.theRealm;
-            page = vc;
+            STASDKController *ctrl = [STASDKController sharedInstance];
+            if (!ctrl.skipTBTypes) {
+                // tripBuilderType
+                page = [self pageForTripBuilderType];
+            } else {
+                if (!ctrl.skipTBActivities) {
+                    page = [self pageForTripBuilderActivities];
+                } else {
+                    page = [self pageForTripBuilderSuccess];
+                }
+            }
             break;
         }
         case 3:
         {
-            // tripBuilderAct
-            STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
-            enum TripMetaType mode = TripActivities;
-            vc.trip = self.trip;
-            vc.mode = mode;
-            vc.theRealm = self.theRealm;
-            page = vc;
+            STASDKController *ctrl = [STASDKController sharedInstance];
+            if (!ctrl.skipTBTypes && !ctrl.skipTBActivities) {
+                // tripBuilderAct
+                page = [self pageForTripBuilderActivities];
+            } else {
+                page = [self pageForTripBuilderSuccess];
+                
+            }
             break;
         }
         case 4:
         {
             // success page - can't navigate backwards, just close button
-            STASDKUITBSuccessViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderSuccess"];
-            page = vc;
+            page = [self pageForTripBuilderSuccess];
             break;
         }
     }
 
     return page;
+}
+
+- (UIViewController*) pageForTripBuilderType {
+    STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
+    enum TripMetaType mode = TripPurpose;
+    vc.trip = self.trip;
+    vc.mode = mode;
+    vc.theRealm = self.theRealm;
+    return vc;
+}
+
+- (UIViewController*) pageForTripBuilderActivities {
+    STASDKUITripMetaCollectionViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderMeta"];
+    enum TripMetaType mode = TripActivities;
+    vc.trip = self.trip;
+    vc.mode = mode;
+    vc.theRealm = self.theRealm;
+    return vc;
+}
+
+- (UIViewController*) pageForTripBuilderSuccess {
+    STASDKUITBSuccessViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"tripBuilderSuccess"];
+    return vc;
 }
 
 
