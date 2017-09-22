@@ -38,6 +38,10 @@
 
 @synthesize distanceUnits = _distanceUnits;
 @synthesize apiEndpoint = _apiEndpoint;
+@synthesize fixedTripDates = _fixedTripDates;
+@synthesize skipTBTypes = _skipTBTypes;
+@synthesize skipTBActivities = _skipTBActivities;
+
 BOOL didFirstSync;
 
 
@@ -62,6 +66,8 @@ BOOL didFirstSync;
         _distanceUnits = Metric;
         _apiEndpoint = @"https://www.sitata.com";
         _fixedTripDates = NO;
+        _skipTBActivities = NO;
+        _skipTBTypes = NO;
 
 
         // Google Places
