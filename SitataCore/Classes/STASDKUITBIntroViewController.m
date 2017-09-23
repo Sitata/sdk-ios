@@ -10,6 +10,7 @@
 
 #import "STASDKMEvent.h"
 #import "STASDKDefines.h"
+#import "STASDKUIStylesheet.h"
 
 @interface STASDKUITBIntroViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *headerLbl;
@@ -23,7 +24,9 @@
     // Do any additional setup after loading the view.
 
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.headerLbl.textColor = [UIColor darkGrayColor];
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+    self.headerLbl.textColor = styles.bodyTextColor;
+    self.headerLbl.font = styles.titleFont;
 }
 
 -(void)viewDidAppear:(BOOL)animated {

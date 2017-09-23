@@ -20,7 +20,6 @@
 @property (strong, nonatomic) NSArray *props;
 @property (strong, nonatomic) NSMutableArray *availableProps;
 @property (strong, nonatomic) NSDictionary *propTitles;
-@property (strong, nonatomic) NSMutableSet *expandedIndexPaths;
 
 @end
 
@@ -39,8 +38,6 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
 
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
-    self.expandedIndexPaths = [NSMutableSet set];
 
     self.props = @[@"secPersonal", @"secExtViol", @"secPolUnr", @"secAreas"];
 
@@ -181,7 +178,9 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     cell.backgroundColor = styles.countrySafetyPageBackgroundColor;
     cell.titleLbl.textColor = styles.countrySafetyPageSectionHeaderLblColor;
+    cell.titleLbl.font = styles.titleFont;
     cell.bodyLbl.textColor = styles.countrySafetyPageSectionContentLblColor;
+    cell.bodyLbl.font = styles.bodyFont;
     cell.containerView.backgroundColor = styles.countrySafetyPageSectionCardBackgroundColor;
 
     return cell;

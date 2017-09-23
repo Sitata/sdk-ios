@@ -19,6 +19,25 @@
 //@property (nonatomic, assign) UIStatusBarStyle preferredStatusBarStyle;
 
 
+#pragma mark - General
+
+// Page specific styles and customizations will take precedence over
+// the general ones.
+@property (nonatomic, retain) UIFont *headingFont;
+@property (nonatomic, retain) UIFont *subHeadingFont;
+@property (nonatomic, retain) UIFont *titleFont;
+@property (nonatomic, retain) UIFont *rowTextFont;
+@property (nonatomic, retain) UIFont *rowSecondaryTextFont;
+@property (nonatomic, retain) UIFont *bodyFont;
+@property (nonatomic, retain) UIFont *buttonFont;
+
+@property (nonatomic, retain) UIColor *headingTextColor;
+@property (nonatomic, retain) UIColor *subheadingTextColor;
+@property (nonatomic, retain) UIColor *titleTextColor;
+@property (nonatomic, retain) UIColor *bodyTextColor;
+
+
+
 #pragma mark - Navigation Bar
 
 @property (nonatomic, retain) UIColor *navigationBarBackgroundColor;
@@ -99,5 +118,8 @@
 @property (nonatomic, retain) UIColor *tripTypeIconColor;
 @property (nonatomic, retain) UIColor *tripMetaCardActiveColor;
 @property (nonatomic, retain) UIColor *tripSuccessIconColor;
+@property (nonatomic, retain) UIColor *tripTimelineColor;
+@property (nonatomic, retain) UIColor *tripBuilderRemoveColor;
+@property (nonatomic, retain) UIColor *tripBuilderAddColor;
 
 @end

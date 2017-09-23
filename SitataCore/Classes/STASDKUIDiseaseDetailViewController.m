@@ -44,6 +44,7 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
 
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -51,6 +52,9 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
     self.expandedIndexPaths = [NSMutableSet set];
 
     self.diseaseLbl.text = self.disease.name;
+    [self.diseaseLbl setFont:styles.headingFont];
+    [self.diseaseLbl setTextColor:styles.headingTextColor];
+
 
     self.diseaseProps = @[@"description", @"transmission", @"susceptibility", @"symptoms", @"prevention", @"treatment", @"occursWhere"];
 
@@ -81,8 +85,9 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
 
     self.tableView.estimatedRowHeight = kDiseaseDefaultRowHeight;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
     self.view.backgroundColor = styles.diseaseAboutPageBackgroundColor;
 
 
@@ -195,7 +200,9 @@ static CGFloat const kSectionSeparatorDistance = 20.f;
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     cell.backgroundColor = styles.diseaseAboutPageBackgroundColor;
     cell.titleLbl.textColor = styles.diseaseAboutPageSectionHeaderLblColor;
+    cell.titleLbl.font = styles.titleFont;
     cell.bodyLbl.textColor = styles.diseaseAboutPageSectionContentLblColor;
+    cell.bodyLbl.font = styles.bodyFont;
     cell.containerView.backgroundColor = styles.diseaseAboutPageSectionCardBackgroundColor;
 
     return cell;

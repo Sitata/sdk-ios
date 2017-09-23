@@ -10,6 +10,7 @@
 #import <SitataCore/STASDKController.h>
 
 #import <SitataCore/STASDKGeo.h>
+#import <SitataCore/STASDKUIStylesheet.h>
 
 
 
@@ -23,12 +24,45 @@
 {
 
     // LOCAL
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkxOTAzNDNiODdkOTEyYzg3NTBlNTQ2fHRDeS00WXNfLW94ZFZ5S3VNNjE4";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTljNTA0Mjk4NWRiOWUxNmQwZjJjMjlkfGJIM1RvMjFFSFA4MUNScXZneENn";
     STASDKController *ctrl = [STASDKController sharedInstance];
-    [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
+    [ctrl setConfig:token apiEndpoint:@"http://localhost:3000"];
     ctrl.fixedTripDates = YES;
-    ctrl.skipTBTypes = YES;
-    ctrl.skipTBActivities = YES;
+    ctrl.skipTBTypes = NO;
+    ctrl.skipTBActivities = NO;
+
+    // style tests
+//    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+//    styles.headingFont = [UIFont systemFontOfSize:28 weight:700];
+//    styles.subHeadingFont = [UIFont systemFontOfSize:26 weight:700];
+//    styles.bodyFont = [UIFont systemFontOfSize:14 weight:100];
+//    styles.rowTextFont = [UIFont systemFontOfSize:16 weight:10];
+//    styles.titleFont = [UIFont italicSystemFontOfSize:14];
+//
+//    styles.headingTextColor = [UIColor blueColor];
+//    styles.subheadingTextColor = [UIColor yellowColor];
+//    styles.titleTextColor = [UIColor redColor];
+//    styles.bodyTextColor = [UIColor purpleColor];
+//    styles.tripTimelineColor = [UIColor yellowColor];
+
+
+
+
+
+    //    @property (nonatomic, retain) UIFont *titleFont;
+    //    @property (nonatomic, retain) UIFont *rowTextFont;
+    //    @property (nonatomic, retain) UIFont *bodyFont;
+    //    @property (nonatomic, retain) UIFont *buttonFont;
+
+    //    @property (nonatomic, retain) UIColor *headingTextColor;
+    //    @property (nonatomic, retain) UIColor *subheadingTextColor;
+    //    @property (nonatomic, retain) UIColor *bodyTextColor;
+
+    //    @property (nonatomic, retain) UIColor *navigationBarTextShadowColor;
+    //    @property (nonatomic, retain) UIImage *navigationBarBackgroundImage;
+    //    @property (nonatomic, retain) UIFont  *navigationBarFont;
+    //    @property (nonatomic, assign) BOOL navigationBarTranslucency;
+
 
 
 //    [[STASDKController sharedInstance] setDistanceUnitsToImperial];

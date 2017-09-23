@@ -78,7 +78,10 @@ static CGFloat kContactDetailRowHeight;
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.emergNumbersPageBackgroundColor;
     self.tableView.backgroundColor = styles.emergNumbersPageBackgroundColor;
+    self.countryNameLbl.font = styles.headingFont;
     self.countryNameLbl.textColor = styles.emergNumbersPageTitleColor;
+
+
     self.changeBtn.tintColor = styles.emergNumbersPageChangeBtnColor;
 
     // if there is no trip available, we still want the user to be able
@@ -216,7 +219,10 @@ static CGFloat kContactDetailRowHeight;
         [contactCell setForContactDetail:detail];
 
         contactCell.valueLbl.textColor = styles.emergNumberContactLblColor;
+        contactCell.valueLbl.font = styles.rowTextFont;
+        contactCell.noteLbl.font = styles.rowSecondaryTextFont;
         contactCell.noteLbl.textColor = styles.emergNumberContactNoteLblColor;
+
         contactCell.actionBtn.tintColor = styles.emergNumberContactBtnLblColor;
 
         cell = contactCell;

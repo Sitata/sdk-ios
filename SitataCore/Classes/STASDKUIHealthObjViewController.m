@@ -62,6 +62,10 @@
         }
     }
 
+
+    [self.healthObjTitle setFont:styles.headingFont];
+    [self.healthObjTitle setTextColor:styles.headingTextColor];
+
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     [self.tableView registerNib:[UINib nibWithNibName:@"HealthCommentCell" bundle:bundle] forCellReuseIdentifier:@"commentCell"];
     self.tableView.delegate = self;
@@ -167,9 +171,13 @@
     STASDKMCountry *country = [STASDKMCountry findBy:countryId];
     if (country != NULL) {
         [cell.countryNameLbl setText:[country name]];
+        [cell.countryNameLbl setFont:styles.titleFont];
+        [cell.countryNameLbl setTextColor:styles.titleTextColor];
     }
 
+    [cell.commentLbl setFont:styles.bodyFont];
     [cell.commentLbl setText:comment];
+    [cell.commentLbl setTextColor:styles.bodyTextColor];
 
     return cell;
 }

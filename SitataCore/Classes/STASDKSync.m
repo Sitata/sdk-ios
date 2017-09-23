@@ -52,18 +52,18 @@ NSString *const NotifyKeyAlertId = @"alertId";
 
 
     // if not connected, reject with error
-    if (![[STASDKDataController sharedInstance] isConnected]) {
-        NSDictionary *userInfo = @{
-                                   NSLocalizedDescriptionKey: NSLocalizedString(@"Sync was unsuccessful.", nil),
-                                   NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Sync requires an internet conncetion.", nil),
-                                   NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Establish connection.", nil)
-                                   };
-        NSError *error = [NSError errorWithDomain:@"com.sitata"
-                                             code:-57
-                                         userInfo:userInfo];
-        syncCompleted(error);
-        return;
-    }
+//    if (![[STASDKDataController sharedInstance] isConnected]) {
+//        NSDictionary *userInfo = @{
+//                                   NSLocalizedDescriptionKey: NSLocalizedString(@"Sync was unsuccessful.", nil),
+//                                   NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Sync requires an internet conncetion.", nil),
+//                                   NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Establish connection.", nil)
+//                                   };
+//        NSError *error = [NSError errorWithDomain:@"com.sitata"
+//                                             code:-57
+//                                         userInfo:userInfo];
+//        syncCompleted(error);
+//        return;
+//    }
 
 
     // Using a dispatch group here to be notified when all tasks have completed.

@@ -9,6 +9,7 @@
 #import "STASDKUINullStateHandler.h"
 
 #import "STASDKDataController.h"
+#import "STASDKUIStylesheet.h"
 
 @interface STASDKUINullStateHandler()
 
@@ -35,6 +36,7 @@
 }
 
 - (UIView*)buildNullStateView {
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     UIView *parentView = self.parent.view;
 
     CGFloat width = CGRectGetWidth(parentView.bounds);
@@ -48,7 +50,8 @@
     lbl.numberOfLines = 0;
     lbl.textAlignment = NSTextAlignmentCenter;
     lbl.text = self.message;
-    lbl.textColor = [UIColor darkGrayColor];
+    lbl.font = styles.bodyFont;
+    lbl.textColor = styles.bodyTextColor;
     lbl.translatesAutoresizingMaskIntoConstraints = NO;
 
     [containerView addSubview:lbl];

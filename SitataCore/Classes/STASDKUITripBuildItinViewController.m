@@ -18,6 +18,7 @@
 #import "STASDKApiMisc.h"
 #import "STASDKUITripLocationAnnotation.h"
 #import "STASDKController.h"
+#import "STASDKUIStylesheet.h"
 
 #import "STASDKDefines.h"
 #import "STASDKMEvent.h"
@@ -246,6 +247,8 @@ static CGFloat const kCityRowHeight = 35.0f;
 
 
 - (UIView*)itineraryTitleHeaderView {
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
     CGRect frame = self.tableView.frame;
     frame.size.height = kHeaderFooterHeight;
     UIView *base = [[UIView alloc] initWithFrame:frame];
@@ -257,7 +260,7 @@ static CGFloat const kCityRowHeight = 35.0f;
     CGFloat imgSize = 45.0;
     imgView.frame = CGRectMake(0, 0, imgSize, imgSize);
     [base addSubview:imgView];
-    imgView.tintColor = [UIColor darkGrayColor];
+    imgView.tintColor = styles.tripTimelineColor;
     imgView.translatesAutoresizingMaskIntoConstraints = NO;
     [imgView.leftAnchor constraintEqualToAnchor:base.leftAnchor constant:10.0].active = true;
     [imgView.centerYAnchor constraintEqualToAnchor:base.centerYAnchor].active = true;
@@ -273,15 +276,15 @@ static CGFloat const kCityRowHeight = 35.0f;
     CGFloat barStart = imageBottom - imageSpace;
     CGFloat barHeight = 35.0; // kHeaderFooterHeight - barStart;
     UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, barStart, 3.0, barHeight)];
-    bar.backgroundColor = [UIColor darkGrayColor];
+    bar.backgroundColor = styles.tripTimelineColor;
     [base addSubview:bar];
 
     // Title
     CGRect rect = CGRectMake(0, 0, 0, 0);
     UILabel *title = [[UILabel alloc] initWithFrame:rect];
     title.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_ITINERARY"];
-    title.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle2];
-    title.textColor = [UIColor darkGrayColor];
+    title.font = styles.subHeadingFont;
+    title.textColor = styles.subheadingTextColor;
     title.numberOfLines = 1;
     [title sizeToFit];
 
@@ -337,10 +340,6 @@ static CGFloat const kCityRowHeight = 35.0f;
     acController.autocompleteFilter = filter;
     [self presentViewController:acController animated:YES completion:nil];
 
-//    STASDKUILocationSearchTableViewController *searchTable = (STASDKUILocationSearchTableViewController*) self.searchController.searchResultsUpdater;
-//    searchTable.currentDestination = destination;
-//    [self.mapView addSubview:self.searchController.searchBar];
-//    [self.searchController setActive:YES];
 }
 
 - (void) onRemoveCity:(id)sender removed:(STASDKMDestinationLocation *)location {
@@ -432,37 +431,6 @@ didFailAutocompleteWithError:(NSError *)error {
 
 #pragma mark - STASDKUILocationSearchDelegate
 
-//- (void)onSelectedLocation:(STASDKMDestinationLocation *)location forDestination:(STASDKMDestination *)destination {
-//    [self fetchLatLngFor:location onFinished:^{
-//        [self.theRealm transactionWithBlock:^{
-//            location.identifier = [[NSUUID UUID] UUIDString]; // temporary id
-//            [destination.destinationLocations addObject:location];
-//            [self dropMapPinFor:location];
-//        }];
-//
-//        [self.searchController dismissViewControllerAnimated:YES completion:^{
-//            [self.searchController setActive:NO];
-//            [self.searchController.searchBar removeFromSuperview];
-//            [self.tableView reloadData];
-//        }];
-//    }];
-//}
-
-//- (void)fetchLatLngFor:(STASDKMDestinationLocation*)location onFinished:(void(^)()) callback {
-//    [STASDKApiMisc googleFetchPlace:location._googlePlaceId onFinished:^(NSDictionary *result, NSURLSessionDataTask *task, NSError *error) {
-//        if (result) {
-//            NSDictionary *geo = [result objectForKey:@"geometry"];
-//            if (geo) {
-//                NSDictionary *resultLoc = [geo objectForKey:@"location"];
-//                if (resultLoc) {
-//                    location.latitude = [[resultLoc objectForKey:@"lat"] doubleValue];
-//                    location.longitude  = [[resultLoc objectForKey:@"lng"] doubleValue];
-//                }
-//            }
-//        }
-//        callback();
-//    }];
-//}
 
 - (void)dropMapPinFor:(STASDKMDestinationLocation*)location {
     STASDKUITripLocationAnnotation *ann = [[STASDKUITripLocationAnnotation alloc] initWith:location];

@@ -166,6 +166,8 @@ static NSString* const kCellIdentifier = @"hospitalCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
     UITableViewCell *cell;
 
     if ([self.hospitals count] > 0) {
@@ -189,6 +191,8 @@ static NSString* const kCellIdentifier = @"hospitalCell";
         cell.textLabel.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"NO_HOSPITALS"];
         cell.textLabel.numberOfLines = 0;
     }
+    [cell.textLabel setFont:styles.rowTextFont];
+    [cell.textLabel setTextColor:styles.bodyTextColor];
 
     [STASDKUIUtility applyZebraStripeToTableCell:cell indexPath:indexPath];
 

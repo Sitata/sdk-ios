@@ -20,6 +20,7 @@
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.hospitalNameLbl.textColor = styles.hospitalRowHosptialNameLblColor;
+    self.hospitalNameLbl.font = styles.rowTextFont;
     self.distanceLbl.textColor = styles.hospitalRowHosptialDistanceLblColor;
 }
 

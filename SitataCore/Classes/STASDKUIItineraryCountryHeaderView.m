@@ -12,6 +12,7 @@
 #import "STASDKMDestination.h"
 #import "STASDKMCountry.h"
 #import "STASDKUI.h"
+#import "STASDKUIStylesheet.h"
 
 
 @interface STASDKUIItineraryCountryHeaderView()
@@ -63,6 +64,8 @@
 - (id) initWithDestination:(STASDKMDestination*)destination {
     self = [super init];
     if (self) {
+        STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
         // grab destination country
         self.destination = destination;
         STASDKMCountry *country = [STASDKMCountry findBy:destination.countryId];
@@ -72,13 +75,13 @@
             // Draw circular node
             CAShapeLayer *circleLayer = [CAShapeLayer layer];
             [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(23, 15, 20, 20)] CGPath]];
-            [circleLayer setStrokeColor:[[UIColor darkGrayColor] CGColor]];
-            [circleLayer setFillColor:[[UIColor darkGrayColor] CGColor]];
+            [circleLayer setStrokeColor:[styles.tripTimelineColor CGColor]];
+            [circleLayer setFillColor:[styles.tripTimelineColor CGColor]];
             [[self layer] addSublayer:circleLayer];
 
             // Draw timeline
             UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, 50.0)];
-            bar.backgroundColor = [UIColor darkGrayColor];
+            bar.backgroundColor = styles.tripTimelineColor;
             [self addSubview:bar];
 
             // date
@@ -97,21 +100,25 @@
 
 
 - (void) commonInit {
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
     self.titleLbl.alpha = 0.0; // hide country title label
     self.addCountryBtn.alpha = 1.0;
     self.addCountryImg.alpha = 1.0;
+    self.addCountryImg.tintColor = styles.tripTimelineColor;
 
     // draw timeline bar
     CGFloat imageTop = self.addCountryBtn.frame.origin.y;
     CGFloat imageSpace = 7.0;
 
     UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, imageTop+imageSpace)];
-    bar.backgroundColor = [UIColor darkGrayColor];
+    bar.backgroundColor = styles.tripTimelineColor;
     [self addSubview:bar];
 
-    self.addCountryImg.tintColor = [UIColor darkGrayColor];
-    self.removeCountryImg.tintColor = [UIColor darkGrayColor];
-    self.titleLbl.textColor = [UIColor darkGrayColor];
+    self.addCountryImg.tintColor = styles.tripBuilderAddColor;
+    self.removeCountryImg.tintColor = styles.tripBuilderRemoveColor;
+    self.titleLbl.textColor = styles.titleTextColor;
+    self.titleLbl.font = styles.titleFont;
 }
 
 

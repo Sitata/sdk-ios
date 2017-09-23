@@ -62,6 +62,7 @@ static CGFloat kContactDetailRowHeight;
     self.nameLbl.text = self.hospital.name;
 
 
+
     [self.distanceLbl setAlpha:0.0]; // has to be hidden until location shows up
     [STASDKLocationHandler requestPermissionsWhenNecessary];
     [self setupLocationManager];
@@ -73,7 +74,9 @@ static CGFloat kContactDetailRowHeight;
     self.view.backgroundColor = styles.hospitalPageBackgroundColor;
     self.tableView.backgroundColor = styles.hospitalPageBackgroundColor;
     self.nameLbl.textColor = styles.hospitalNameLblColor;
+    self.nameLbl.font = styles.headingFont;
     self.distanceLbl.textColor = styles.hospitalDistanceLblColor;
+    self.distanceLbl.font = styles.subHeadingFont;
 
 }
 
@@ -199,8 +202,11 @@ static CGFloat kContactDetailRowHeight;
 
         STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
         contactCell.valueLbl.textColor = styles.hospitalContactLblColor;
+        contactCell.valueLbl.font = styles.rowTextFont;
         contactCell.noteLbl.textColor = styles.hospitalContactNoteLblColor;
+        contactCell.noteLbl.font = styles.rowSecondaryTextFont;
         contactCell.actionBtn.tintColor = styles.hospitalContactBtnLblColor;
+
 
         cell = contactCell;
 

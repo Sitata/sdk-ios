@@ -10,6 +10,7 @@
 
 #import "STASDKDataController.h"
 #import "STASDKMDestinationLocation.h"
+#import "STASDKUIStylesheet.h"
 
 
 @interface STASDKUIItineraryCityHeaderView()
@@ -62,26 +63,29 @@
 - (id) initWithLocation:(STASDKMDestinationLocation*)location {
     self = [super init];
     if (self) {
+        STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
         self.location = location;
         self.titleLbl.alpha = 1.0;
 
         // Draw circular node
         CAShapeLayer *circleLayer = [CAShapeLayer layer];
         [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(66, 9, 17, 17)] CGPath]];
-        [circleLayer setStrokeColor:[[UIColor darkGrayColor] CGColor]];
-        [circleLayer setFillColor:[[UIColor darkGrayColor] CGColor]];
+        [circleLayer setStrokeColor: [styles.tripTimelineColor CGColor]];
+        [circleLayer setFillColor:[styles.tripTimelineColor CGColor]];
         [[self layer] addSublayer:circleLayer];
 
         // Draw timeline
         UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, 50.0)];
-        bar.backgroundColor = [UIColor darkGrayColor];
+        bar.backgroundColor = [styles tripTimelineColor];
         [self addSubview:bar];
 
         self.addCityBtn.alpha = 0.0;
         self.addCityImg.alpha = 0.0;
         self.titleLbl.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
         self.titleLbl.text = location.friendlyName;
-        self.removeCityImg.tintColor = [UIColor darkGrayColor];
+        self.titleLbl.textColor = styles.bodyTextColor;
+        self.removeCityImg.tintColor = styles.tripBuilderRemoveColor;
 
     }
     return self;
@@ -89,17 +93,18 @@
 
 
 - (void) commonInit {
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.titleLbl.alpha = 0.0; // hide city title label
     self.addCityBtn.alpha = 1.0;
     self.addCityImg.alpha = 1.0;
 
     // draw timeline bar
     UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(31.0, 0, 3.0, 50.0)];
-    bar.backgroundColor = [UIColor darkGrayColor];
+    bar.backgroundColor = styles.tripTimelineColor;
     [self addSubview:bar];
 
-    self.addCityImg.tintColor = [UIColor darkGrayColor];
-    self.titleLbl.textColor = [UIColor darkGrayColor];
+    self.addCityImg.tintColor = styles.tripBuilderAddColor;
+    self.titleLbl.textColor = styles.bodyTextColor;
 }
 
 - (void) removeRemoveBtn {

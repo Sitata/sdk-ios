@@ -258,6 +258,7 @@
     if ([self.uniqueDataObjects count] > 0) {
         NSString *name = [self nameForIndex:(int)[indexPath row]];
         [cell.textLabel setText:name];
+        [cell.textLabel setFont:styles.rowTextFont];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     } else {
@@ -275,7 +276,12 @@
         }
         [cell.textLabel setText:str];
         [cell.textLabel setNumberOfLines:0];
-        [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+        [cell.textLabel setTextColor:styles.bodyTextColor];
+        if (styles.rowTextFont) {
+            [cell.textLabel setFont:styles.rowTextFont];
+        } else {
+            [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
+        }
         
     }
 
