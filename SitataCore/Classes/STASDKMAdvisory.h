@@ -24,6 +24,7 @@
 @property (retain) NSString *countryRegions;
 @property (retain) NSString *countryDivisionIds;
 @property (retain) NSString *countryRegionIds;
+@property (retain) NSString *topoJson;
 
 @property BOOL _read;
 
@@ -40,6 +41,9 @@
 -(NSArray*)countryRegionsArr;
 
 -(void)setRead;
+
+// Return a dictionary representation of the topo_json
+-(NSDictionary*)topoJsonObj;
 
 
 @end

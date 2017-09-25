@@ -198,7 +198,8 @@
              @"countryDivisions": @"country_divisions",
              @"countryRegions": @"country_regions",
              @"countryDivisionIds": @"country_division_ids",
-             @"countryRegionIds": @"country_region_ids"
+             @"countryRegionIds": @"country_region_ids",
+             @"topoJson": @"topo_json"
 
 
              };
@@ -333,6 +334,19 @@
     }
     
     return YES;
+}
+
+// Return a dictionary representation of the topo_json
+-(NSDictionary*)topoJsonObj {
+    NSError *error;
+
+    if (self.topoJson != NULL) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:self.topoJson options:0 error:&error];
+        if (data != nil) {
+            return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        }
+    }
+    return NULL;
 }
 
 

@@ -24,48 +24,17 @@
 {
 
     // LOCAL
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTljNTA0Mjk4NWRiOWUxNmQwZjJjMjlkfGJIM1RvMjFFSFA4MUNScXZneENn";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkxOTAzNDNiODdkOTEyYzg3NTBlNTQ2fHRDeS00WXNfLW94ZFZ5S3VNNjE4";
     STASDKController *ctrl = [STASDKController sharedInstance];
-    [ctrl setConfig:token apiEndpoint:@"http://localhost:3000"];
+    [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
     ctrl.fixedTripDates = YES;
     ctrl.skipTBTypes = NO;
     ctrl.skipTBActivities = NO;
 
-    // style tests
-//    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
-//    styles.headingFont = [UIFont systemFontOfSize:28 weight:700];
-//    styles.subHeadingFont = [UIFont systemFontOfSize:26 weight:700];
-//    styles.bodyFont = [UIFont systemFontOfSize:14 weight:100];
-//    styles.rowTextFont = [UIFont systemFontOfSize:16 weight:10];
-//    styles.titleFont = [UIFont italicSystemFontOfSize:14];
-//
-//    styles.headingTextColor = [UIColor blueColor];
-//    styles.subheadingTextColor = [UIColor yellowColor];
-//    styles.titleTextColor = [UIColor redColor];
-//    styles.bodyTextColor = [UIColor purpleColor];
-//    styles.tripTimelineColor = [UIColor yellowColor];
 
+    [self testStyles];
+    [self testUnits];
 
-
-
-
-    //    @property (nonatomic, retain) UIFont *titleFont;
-    //    @property (nonatomic, retain) UIFont *rowTextFont;
-    //    @property (nonatomic, retain) UIFont *bodyFont;
-    //    @property (nonatomic, retain) UIFont *buttonFont;
-
-    //    @property (nonatomic, retain) UIColor *headingTextColor;
-    //    @property (nonatomic, retain) UIColor *subheadingTextColor;
-    //    @property (nonatomic, retain) UIColor *bodyTextColor;
-
-    //    @property (nonatomic, retain) UIColor *navigationBarTextShadowColor;
-    //    @property (nonatomic, retain) UIImage *navigationBarBackgroundImage;
-    //    @property (nonatomic, retain) UIFont  *navigationBarFont;
-    //    @property (nonatomic, assign) BOOL navigationBarTranslucency;
-
-
-
-//    [[STASDKController sharedInstance] setDistanceUnitsToImperial];
 
 
     // app launched from a notification
@@ -186,6 +155,33 @@
 
 
 
+}
+
+
+
+
+#pragma mark - SDK Functionality Tests
+- (void) testStyles {
+    // style tests
+//    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+//    styles.navigationBarFont = [UIFont systemFontOfSize:14 weight:5];
+//    styles.headingFont = [UIFont systemFontOfSize:28 weight:700];
+//    styles.subHeadingFont = [UIFont systemFontOfSize:26 weight:700];
+//    styles.bodyFont = [UIFont systemFontOfSize:14 weight:100];
+//    styles.rowTextFont = [UIFont systemFontOfSize:16 weight:10];
+//    styles.titleFont = [UIFont italicSystemFontOfSize:14];
+//    styles.rowSecondaryTextFont = [UIFont italicSystemFontOfSize:12];
+//
+//    styles.headingTextColor = [UIColor blueColor];
+//    styles.subheadingTextColor = [UIColor yellowColor];
+//    styles.titleTextColor = [UIColor redColor];
+//    styles.bodyTextColor = [UIColor purpleColor];
+//    styles.tripTimelineColor = [UIColor yellowColor];
+
+}
+
+- (void) testUnits {
+//    [[STASDKController sharedInstance] setDistanceUnitsToImperial];
 }
 
 

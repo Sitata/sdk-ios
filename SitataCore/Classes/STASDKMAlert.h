@@ -30,6 +30,7 @@
 @property (retain) NSString *countryRegions;
 @property (retain) NSString *countryDivisionIds;
 @property (retain) NSString *countryRegionIds;
+@property (retain) NSString *topoJson;
 
 @property BOOL _read;
 
@@ -62,6 +63,9 @@
 // If the read property is false, set to true and create a background job to
 // inform server that alert was read.
 -(void)setRead;
+
+// Return a dictionary representation of the topo_json
+-(NSDictionary*)topoJsonObj;
 
 
 @end

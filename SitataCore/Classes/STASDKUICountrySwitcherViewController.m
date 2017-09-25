@@ -32,6 +32,7 @@ NSString *const NotifyKeyCountriesIndex = @"countriesIndex";
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.countrySwitcherBackgroundColor;
+    self.countryNameLbl.font = styles.navigationBarFont;
     self.nextPageBtn.tintColor = styles.countrySwitcherButtonColor;
     self.previousPageBtn.tintColor = styles.countrySwitcherButtonColor;
     self.countryNameLbl.textColor = styles.countrySwitcherTitleColor;

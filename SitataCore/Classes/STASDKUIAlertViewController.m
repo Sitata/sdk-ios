@@ -343,6 +343,26 @@
         }
     }
 
+    // Custom topojson
+    NSDictionary *topoObj;
+    if (self.alert != NULL) {
+        topoObj = [self.alert topoJsonObj];
+    } else {
+        topoObj = [self.advisory topoJsonObj];
+    }
+    if (topoObj) {
+        [STASDKGeo handleTopoJSON:topoObj mapView:self.mapView];
+        hasPolygons = YES;
+        // expanding total bounds by polygon bounds
+        MKMapRect regionBounds = [STASDKGeo regionFromTopoBBox:topoObj];
+        if (MKMapRectIsNull(bounds)) {
+            bounds = regionBounds;
+        } else {
+            bounds = MKMapRectUnion(bounds, regionBounds);
+        }
+    }
+
+
     // set map to bounds
     [self.mapView setVisibleMapRect:bounds edgePadding:UIEdgeInsetsMake(50, 50, 50, 50) animated:YES];
     if (self.alert != NULL && alertLocations.count <= 1 && !hasPolygons) {
