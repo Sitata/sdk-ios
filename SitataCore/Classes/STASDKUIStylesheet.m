@@ -70,7 +70,8 @@
     self.alertAdvisoryRowHeadlineLblColor = [UIColor darkGrayColor];
     self.alertsAdvisoriesListPageBackgroundColor = lightestGrayColor;
     self.alertPageBackgroundColor = lightestGrayColor;
-
+//    self.alertsRowNormalFont
+//    self.alertsRowUnreadFont
 
     // Health objects
     self.diseaseRowNameLblColor = [UIColor darkGrayColor];
@@ -93,7 +94,9 @@
     self.hospitalNameLblColor = self.headingTextColor;
     self.hospitalDistanceLblColor = self.bodyTextColor;
     self.hospitalEmergencyLblColor = self.subheadingTextColor;
+//    self.hospitalEmergencyLblFont
     self.hospitalAccredationLblColor = self.subheadingTextColor;
+//    self.hospitalAccredationLblFont
 
     self.hospitalContactLblColor = self.bodyTextColor;
     self.hospitalContactNoteLblColor = [UIColor lightGrayColor];

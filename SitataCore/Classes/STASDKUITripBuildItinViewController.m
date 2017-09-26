@@ -33,7 +33,6 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property UISearchController *searchController;
 @property STASDKMDestination *cityPickDestination; // keeps track of which country we're trying to add a city for
 
 
@@ -50,8 +49,6 @@ static CGFloat const kCityRowHeight = 35.0f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
-    //[self loadSearchController];
 
     self.mapView.delegate = self;
     self.tableView.dataSource = self;
@@ -97,25 +94,6 @@ static CGFloat const kCityRowHeight = 35.0f;
     return [UIColor groupTableViewBackgroundColor];
 }
 
-
-//# pragma mark - Search Controller
-//
-//- (void) loadSearchController {
-//    STASDKUILocationSearchTableViewController *searchTable = [self.storyboard instantiateViewControllerWithIdentifier:@"locationSearchTable"];
-//    searchTable.delegate = self;
-//    self.searchController = [[UISearchController alloc] initWithSearchResultsController: searchTable];
-//    self.searchController.searchResultsUpdater = searchTable;
-//    self.searchController.hidesNavigationBarDuringPresentation = NO;
-//    self.searchController.dimsBackgroundDuringPresentation = YES;
-//    self.searchController.delegate = self;
-//    // ensure that search bar does not remain on screen if user navigates to another view controller
-//    self.definesPresentationContext = YES;
-//}
-//
-//
-//- (void)didDismissSearchController:(UISearchController *)searchController {
-//    [self.searchController.searchBar removeFromSuperview];
-//}
 
 
 

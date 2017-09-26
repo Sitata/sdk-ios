@@ -25,7 +25,7 @@
 
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
-    self.headerLbl.textColor = styles.bodyTextColor;
+    self.headerLbl.textColor = styles.titleTextColor;
     self.headerLbl.font = styles.titleFont;
 }
 

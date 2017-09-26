@@ -20,7 +20,9 @@
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.accreditedLbl.textColor = styles.hospitalAccredationLblColor;
+    self.accreditedLbl.font = styles.hospitalAccredationLblFont;
     self.emergLbl.textColor = styles.hospitalEmergencyLblColor;
+    self.emergLbl.font = styles.hospitalEmergencyLblFont;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

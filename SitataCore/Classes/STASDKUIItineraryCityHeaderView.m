@@ -105,6 +105,7 @@
 
     self.addCityImg.tintColor = styles.tripBuilderAddColor;
     self.titleLbl.textColor = styles.bodyTextColor;
+    self.addCityBtn.titleLabel.font = styles.buttonFont;
 }
 
 - (void) removeRemoveBtn {

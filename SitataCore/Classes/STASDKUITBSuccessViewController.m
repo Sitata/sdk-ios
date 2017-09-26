@@ -34,6 +34,8 @@
 
 
     self.headerLbl.text = [[STASDKDataController sharedInstance] localizedStringForKey:@"TB_SUCCESS"];
+    self.headerLbl.font = styles.headingFont;
+    self.headerLbl.textColor = styles.headingTextColor;
     
 }
 

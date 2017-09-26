@@ -119,6 +119,7 @@
     self.removeCountryImg.tintColor = styles.tripBuilderRemoveColor;
     self.titleLbl.textColor = styles.titleTextColor;
     self.titleLbl.font = styles.titleFont;
+    self.addCountryBtn.titleLabel.font = styles.buttonFont;
 }
 
 

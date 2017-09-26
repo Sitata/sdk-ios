@@ -60,6 +60,9 @@
 @property (nonatomic, retain) UIColor *alertAdvisoryRowHeadlineLblColor;
 @property (nonatomic, retain) UIColor *alertsAdvisoriesListPageBackgroundColor;
 @property (nonatomic, retain) UIColor *alertPageBackgroundColor;
+@property (nonatomic, retain) UIFont *alertsRowNormalFont;
+@property (nonatomic, retain) UIFont *alertsRowUnreadFont;
+
 
 #pragma mark - Diseases
 @property (nonatomic, retain) UIColor *diseaseRowNameLblColor;
@@ -94,6 +97,9 @@
 @property (nonatomic, retain) UIColor *hospitalContactLblColor;
 @property (nonatomic, retain) UIColor *hospitalContactNoteLblColor;
 @property (nonatomic, retain) UIColor *hospitalContactBtnLblColor;
+@property (nonatomic, retain) UIFont  *hospitalEmergencyLblFont;
+@property (nonatomic, retain) UIFont  *hospitalAccredationLblFont;
+
 
 #pragma mark - Country Safety
 @property (nonatomic, retain) UIColor *countrySafetyPageBackgroundColor;

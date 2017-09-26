@@ -65,6 +65,16 @@
 
     STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
     self.view.backgroundColor = styles.alertPageBackgroundColor;
+    self.headlineLbl.font = styles.headingFont;
+    self.headlineLbl.textColor = styles.headingTextColor;
+    self.dateLbl.font = styles.subHeadingFont;
+    self.dateLbl.textColor = styles.subheadingTextColor;
+    self.bodyLbl.font = styles.bodyFont;
+    self.bodyLbl.textColor = styles.bodyTextColor;
+    self.adviceBodyLbl.font = styles.bodyFont;
+    self.adviceBodyLbl.textColor = styles.bodyTextColor;
+    self.adviceHeaderLbl.font = styles.titleFont;
+    self.adviceHeaderLbl.textColor = styles.titleTextColor;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -128,6 +138,8 @@
 }
 
 - (void)setupForAdvisory {
+    [self.advisory setRead];
+    
     self.headlineLbl.text = self.advisory.headline;
     self.bodyLbl.text = self.advisory.body;
     self.dateLbl.text = [STASDKUI dateDisplayString:self.advisory.updatedAt];

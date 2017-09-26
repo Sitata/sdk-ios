@@ -69,24 +69,39 @@
 
     self.dateLbl.textColor = styles.alertAdvisoryRowDateLblColor;
     self.headlineLbl.textColor = styles.alertAdvisoryRowHeadlineLblColor;
+    if (styles.rowTextFont) {
+        self.headlineLbl.font = styles.rowTextFont;
+    }
+    if (styles.rowSecondaryTextFont) {
+        self.dateLbl.font = styles.rowSecondaryTextFont;
+    }
+    if (styles.alertsRowNormalFont) {
+        self.headlineLbl.font = styles.alertsRowNormalFont;
+    }
 }
 
 - (void)setUnread {
     // make bold
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
     UIFontDescriptor *headDesc = [[[self.headlineLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
     [self.headlineLbl setFont:[UIFont fontWithDescriptor:headDesc size:0]];
 
-    UIFontDescriptor *dateDesc = [[[self.dateLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
-    [self.dateLbl setFont:[UIFont fontWithDescriptor:dateDesc size:0]];
+    if (styles.alertsRowUnreadFont) {
+        self.headlineLbl.font = styles.alertsRowUnreadFont;
+    }
 }
 
 - (void)setRead {
     // make regular ( not bold )
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+
     UIFontDescriptor *headDesc = [[[self.headlineLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:0];
     [self.headlineLbl setFont:[UIFont fontWithDescriptor:headDesc size:0]];
 
-    UIFontDescriptor *dateDesc = [[[self.dateLbl font] fontDescriptor] fontDescriptorWithSymbolicTraits:0];
-    [self.dateLbl setFont:[UIFont fontWithDescriptor:dateDesc size:0]];
+    if (styles.alertsRowNormalFont) {
+        self.headlineLbl.font = styles.alertsRowNormalFont;
+    }
 }
 
 
