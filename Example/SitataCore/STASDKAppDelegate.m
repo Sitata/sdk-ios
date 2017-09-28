@@ -58,8 +58,10 @@
          {
              if( !error )
              {
-                 [[UIApplication sharedApplication] registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
-                 NSLog( @"Push registration success." );
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [[UIApplication sharedApplication] registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
+                     NSLog( @"Push registration success." );
+                 });
              }
              else
              {
@@ -163,31 +165,31 @@
 #pragma mark - SDK Functionality Tests
 - (void) testStyles {
     // style tests
-//    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
-//    styles.navigationBarFont = [UIFont systemFontOfSize:14 weight:5];
-//    styles.headingFont = [UIFont systemFontOfSize:28 weight:700];
-//    styles.subHeadingFont = [UIFont systemFontOfSize:26 weight:700];
-//    styles.bodyFont = [UIFont systemFontOfSize:14 weight:100];
-//    styles.rowTextFont = [UIFont systemFontOfSize:16 weight:10];
-//    styles.titleFont = [UIFont italicSystemFontOfSize:14];
-//    styles.rowSecondaryTextFont = [UIFont italicSystemFontOfSize:12];
-//    styles.buttonFont = [UIFont italicSystemFontOfSize:14];
-//
-//    styles.alertsRowNormalFont = [UIFont systemFontOfSize:12];
-//    styles.alertsRowUnreadFont = [UIFont italicSystemFontOfSize:12];
-//
-//    styles.headingTextColor = [UIColor blueColor];
-//    styles.subheadingTextColor = [UIColor yellowColor];
-//    styles.titleTextColor = [UIColor redColor];
-//    styles.bodyTextColor = [UIColor purpleColor];
-//    styles.tripTimelineColor = [UIColor greenColor];
-//
-//
-//    styles.hospitalAccredationLblColor = [UIColor greenColor];
-//    styles.hospitalEmergencyLblColor = [UIColor blueColor];
-//    styles.hospitalEmergencyLblFont = [UIFont italicSystemFontOfSize:15];
-//    styles.hospitalAccredationLblFont = [UIFont italicSystemFontOfSize:10];
-//    
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
+    styles.navigationBarFont = [UIFont systemFontOfSize:14 weight:5];
+    styles.headingFont = [UIFont systemFontOfSize:28 weight:700];
+    styles.subHeadingFont = [UIFont systemFontOfSize:26 weight:700];
+    styles.bodyFont = [UIFont systemFontOfSize:14 weight:100];
+    styles.rowTextFont = [UIFont systemFontOfSize:16 weight:10];
+    styles.titleFont = [UIFont italicSystemFontOfSize:14];
+    styles.rowSecondaryTextFont = [UIFont italicSystemFontOfSize:12];
+    styles.buttonFont = [UIFont italicSystemFontOfSize:14];
+
+    styles.alertsRowNormalFont = [UIFont systemFontOfSize:12];
+    styles.alertsRowUnreadFont = [UIFont italicSystemFontOfSize:12];
+
+    styles.headingTextColor = [UIColor blueColor];
+    styles.subheadingTextColor = [UIColor yellowColor];
+    styles.titleTextColor = [UIColor redColor];
+    styles.bodyTextColor = [UIColor purpleColor];
+    styles.tripTimelineColor = [UIColor greenColor];
+
+
+    styles.hospitalAccredationLblColor = [UIColor greenColor];
+    styles.hospitalEmergencyLblColor = [UIColor blueColor];
+    styles.hospitalEmergencyLblFont = [UIFont italicSystemFontOfSize:15];
+    styles.hospitalAccredationLblFont = [UIFont italicSystemFontOfSize:10];
+
 
 }
 

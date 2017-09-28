@@ -53,7 +53,6 @@
     self.titleTextColor = [UIColor darkGrayColor];
 
 
-
     self.navigationBarBackgroundColor = deepBlueColor;
     self.navigationBarTextColor = [UIColor whiteColor];
     self.navigationBarTintColor = [UIColor whiteColor];
