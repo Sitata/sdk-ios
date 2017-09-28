@@ -65,6 +65,8 @@
 
     [self.healthObjTitle setFont:styles.headingFont];
     [self.healthObjTitle setTextColor:styles.headingTextColor];
+    self.readMoreBtn.titleLabel.font = styles.buttonFont;
+    
 
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     [self.tableView registerNib:[UINib nibWithNibName:@"HealthCommentCell" bundle:bundle] forCellReuseIdentifier:@"commentCell"];

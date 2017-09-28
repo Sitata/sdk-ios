@@ -19,7 +19,7 @@
 @property (nonatomic) UILabel *title;
 @property (nonatomic) UILabel *subTitle;
 @property (nonatomic) UIButton *closeBtn;
-@property (nonatomic) void (^closeCallback)();
+@property (nonatomic) void (^closeCallback)(void);
 
 @end
 

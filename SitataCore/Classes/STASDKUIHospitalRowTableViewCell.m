@@ -22,6 +22,7 @@
     self.hospitalNameLbl.textColor = styles.hospitalRowHosptialNameLblColor;
     self.hospitalNameLbl.font = styles.rowTextFont;
     self.distanceLbl.textColor = styles.hospitalRowHosptialDistanceLblColor;
+    self.distanceLbl.font = styles.rowSecondaryTextFont;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

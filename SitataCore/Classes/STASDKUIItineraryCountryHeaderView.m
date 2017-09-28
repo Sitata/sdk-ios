@@ -85,8 +85,9 @@
             [self addSubview:bar];
 
             // date
-            self.dateLbl.textColor = [UIColor darkGrayColor];
+            self.dateLbl.textColor = styles.titleTextColor;
             self.dateLbl.text = [STASDKUI dateDisplayShort:[destination departureDate]];
+            self.dateLbl.font = styles.rowSecondaryTextFont;
 
             self.addCountryBtn.alpha = 0.0;
             self.addCountryImg.alpha = 0.0;

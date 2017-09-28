@@ -18,6 +18,7 @@
 #import "STASDKUIStylesheet.h"
 #import "Haneke.h"
 #import "STASDKLocationHandler.h"
+#import "STASDKDefines.h"
 
 #import "STASDKMEvent.h"
 #import "STASDKDefines.h"
@@ -53,14 +54,17 @@ static CGFloat kContactDetailRowHeight;
     self.contacts = [[NSMutableArray alloc] init];
 
 
-    kContactDetailRowHeight = UITableViewAutomaticDimension;
+    kContactDetailRowHeight = 55.0; // hack for iOS11, see below
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = kContactDetailRowHeight;
-    self.tableView.estimatedRowHeight = 55.0;
+
+    self.tableView.estimatedRowHeight = kContactDetailRowHeight;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
     self.tableView.allowsSelection = NO;
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
 
     NSBundle *bundle = [[STASDKDataController sharedInstance] sdkBundle];
     [self.tableView registerNib:[UINib nibWithNibName:@"ContactDetailRowCell" bundle:bundle] forCellReuseIdentifier:kCellIdentifier];
@@ -81,7 +85,7 @@ static CGFloat kContactDetailRowHeight;
     self.countryNameLbl.font = styles.headingFont;
     self.countryNameLbl.textColor = styles.emergNumbersPageTitleColor;
 
-
+    self.changeBtn.titleLabel.font = styles.buttonFont;
     self.changeBtn.tintColor = styles.emergNumbersPageChangeBtnColor;
 
     // if there is no trip available, we still want the user to be able
@@ -132,6 +136,7 @@ static CGFloat kContactDetailRowHeight;
 }
 
 - (void)setUIForCountry {
+
     if (self.country == NULL) {
         [self.countryNameLbl setAlpha:0.0];
         [self.changeBtn setTitle:[[STASDKDataController sharedInstance] localizedStringForKey:@"PICK_COUNTRY"] forState:UIControlStateNormal];
@@ -201,7 +206,15 @@ static CGFloat kContactDetailRowHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kContactDetailRowHeight;
+
+    // On iOS 11, just having Automatic Dimensions was breaking contraints for some reason.
+    // When the constraints broke, either the table height would be 100%, or the country
+    // image height would be removed or both. This forces a row height on iOS 11+.
+    if (SYSTEM_VERSION_LESS_THAN(@"11.0")) {
+        return UITableViewAutomaticDimension;
+    } else {
+        return kContactDetailRowHeight;
+    }
 }
 
 

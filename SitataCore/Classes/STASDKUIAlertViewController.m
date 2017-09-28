@@ -75,6 +75,7 @@
     self.adviceBodyLbl.textColor = styles.bodyTextColor;
     self.adviceHeaderLbl.font = styles.titleFont;
     self.adviceHeaderLbl.textColor = styles.titleTextColor;
+    self.readMoreBtn.titleLabel.font = styles.buttonFont;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -227,6 +228,7 @@
 
 // add each alert source as a label to parent of the given view and return the newly created one
 - (UIView*)addAlertSourceToView:(STASDKMAlertSource*)source lastView:(UIView*)lastView {
+    STASDKUIStylesheet *styles = [STASDKUIStylesheet sharedInstance];
 
     UIView *parent = [lastView superview];
 
@@ -234,7 +236,7 @@
     [btn setTitle:source.url forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(openAlertSource:) forControlEvents:UIControlEventTouchUpInside];
     [[btn titleLabel] setTextAlignment:NSTextAlignmentLeft];
-    btn.titleLabel.font = [UIFont systemFontOfSize:12.0];
+    btn.titleLabel.font = styles.buttonFont;
     [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [btn sizeToFit];
     btn.translatesAutoresizingMaskIntoConstraints = NO;
