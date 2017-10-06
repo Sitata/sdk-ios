@@ -82,7 +82,7 @@
 
     // SELECT DATES WITH FINISH DAY GREATER OR EQUAL TO TODAY SORTED BY START DATE ASCENDING
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"finish >= %@", equalizedToday];
-    return [STASDKMTrip objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred];
+    return [[STASDKMTrip objectsInRealm:[[STASDKDataController sharedInstance] theRealm] withPredicate:pred] sortedResultsUsingKeyPath:@"start" ascending:YES];
 }
 
 +(void)destroy:(NSString*)identifier {

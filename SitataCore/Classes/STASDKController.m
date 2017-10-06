@@ -111,26 +111,6 @@ BOOL didFirstSync;
     [[EDQueue sharedInstance] setRetryLimit:99];
     [[EDQueue sharedInstance] start];
 
-
-    // Full sync if we havne't queued already and we have an apiToken. Necessary
-    // because this start method could be called multiple times during the app's
-    // running lifetime.
-    if (!didFirstSync && self.apiToken && [self.apiToken length] > 0) {
-        didFirstSync = true;
-
-        // HACK ALERT! => It was necessary to wait a set amount of time to allow the queue manager stuff
-        //                from EDQueue to start running. Otherwise, the delegate method was called more
-        //                that once. This is a known bug that has been open since 2013.
-        //                https://github.com/thisandagain/queue/issues/10
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-
-            [[EDQueue sharedInstance] enqueueWithData:nil forTask:JOB_FULL_SYNC];
-
-        });
-
-
-    }
-
     [STASDKMEvent trackEvent:TrackAppStart name:EventAppStart];
 }
 
@@ -149,6 +129,16 @@ BOOL didFirstSync;
 - (void)setConfig:(NSString*)token apiEndpoint:(NSString*)apiEndpoint {
     self.apiToken = token;
     self.apiEndpoint = apiEndpoint;
+}
+
+- (void)setConfig:(NSString*)token apiEndpoint:(NSString*)apiEndpoint pushNotificationToken:(NSString*)pushNotificationToken {
+
+    [self setConfig:token apiEndpoint:apiEndpoint];
+
+    if (pushNotificationToken != NULL && [pushNotificationToken length] > 0) {
+        [self setPushNotificationToken:pushNotificationToken];
+    }
+
 }
 
 - (void)setDistanceUnitsToImperial {
@@ -194,7 +184,7 @@ BOOL didFirstSync;
     return (error != NULL);
 }
 
-- (void)resync {
+- (void)sync {
     [[EDQueue sharedInstance] enqueueWithData:nil forTask:JOB_FULL_SYNC];
 }
 

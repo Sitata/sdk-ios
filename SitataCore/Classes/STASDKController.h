@@ -64,11 +64,14 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 // Performs startup process for the SDK. This must be called from the Application Delegate in 'applicationDidBecomeActive'.
 - (void)start;
 
-// Configure the SDK with the end user's token. This must be called from the Application Delegate in 'didFinishLaunchingWithOptions'.
+// Configure the SDK with the end user's token.
 - (void)setConfig:(NSString*)token;
 
-// Configure the SDK with the end user's token and the api endpoint to use. This must be called from the Application Delegate in 'didFinishLaunchingWithOptions'.
+// Configure the SDK with the end user's token and the api endpoint to use.
 - (void)setConfig:(NSString*)token apiEndpoint:(NSString*)apiEndpoint;
+
+// Configure the SDK with the end user's token, the api endpoint to use, and the apple push notification token.
+- (void)setConfig:(NSString*)token apiEndpoint:(NSString*)apiEndpoint pushNotificationToken:(NSString*)pushNotificationToken;
 
 // Perform shutdown actions for the SDK. This must be called from the Application Delegate in 'applicationWillResignActive'.
 - (void)stop;
@@ -92,8 +95,8 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 // Remove all data from the device.
 - (BOOL)destroyAllData;
 
-// Resync all data from server.
-- (void)resync;
+// Sync all data from server.
+- (void)sync;
 
 // Convenience method to access the SDK's Realm
 - (RLMRealm*)theRealm;

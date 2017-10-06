@@ -30,6 +30,7 @@
     ctrl.fixedTripDates = YES;
     ctrl.skipTBTypes = NO;
     ctrl.skipTBActivities = NO;
+    [ctrl sync];
 
 
     [self testStyles];
