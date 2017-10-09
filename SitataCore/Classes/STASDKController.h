@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <EDQueue/EDQueue.h>
 
 
 
@@ -24,7 +23,7 @@ typedef NS_ENUM(int, DistanceUnitsType) {
 };
 
 
-@interface STASDKController : NSObject <EDQueueDelegate>
+@interface STASDKController : NSObject 
 
 
 // For traveller to access Sitata API

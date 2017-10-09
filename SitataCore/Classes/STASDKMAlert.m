@@ -14,8 +14,8 @@
 #import "STASDKMTrip.h"
 #import "STASDKDataController.h"
 
+#import "STASDKDefines.h"
 #import "STASDKJobs.h"
-#import <EDQueue/EDQueue.h>
 
 @implementation STASDKMAlert
 
@@ -159,7 +159,7 @@
         [realm beginWriteTransaction];
         self._read = YES;
         [realm commitWriteTransaction];
-        [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_AID: [self identifier]} forTask:JOB_ALERT_MARK_READ];
+        [[STASDKJobs sharedInstance] addJob:JOB_ALERT_MARK_READ jobArgs:@{JOB_PARAM_AID: [self identifier]}];
     }
 }
 

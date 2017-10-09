@@ -34,7 +34,6 @@
 
 
 #import <Realm/Realm.h>
-#import <EDQueue/EDQueue.h>
 
 
 
@@ -303,15 +302,15 @@ NSString *const NotifyKeyAlertId = @"alertId";
     RLMArray<STASDKMDestination*> *destinations = [trip destinations];
 
     for (STASDKMDestination* dest in destinations) {
-        [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_CID: [dest countryId]} forTask:JOB_SYNC_COUNTRY];
+
+        [[STASDKJobs sharedInstance] addJob:JOB_SYNC_COUNTRY jobArgs:@{JOB_PARAM_CID: [dest countryId]}];
 
         // TODO: SYNC COUNTRY MAP DURING COUNTRY SYNC JOB
     }
 
-    [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [trip identifier]} forTask:JOB_SYNC_TRIP_ALERTS];
-    [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [trip identifier]} forTask:JOB_SYNC_TRIP_ADVISORIES];
-    [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [trip identifier]} forTask:JOB_SYNC_TRIP_HOSPITALS];
-
+    [[STASDKJobs sharedInstance] addJob:JOB_SYNC_TRIP_ALERTS jobArgs:@{JOB_PARAM_TRIPID: [trip identifier]}];
+    [[STASDKJobs sharedInstance] addJob:JOB_SYNC_TRIP_ADVISORIES jobArgs:@{JOB_PARAM_TRIPID: [trip identifier]}];
+    [[STASDKJobs sharedInstance] addJob:JOB_SYNC_TRIP_HOSPITALS jobArgs:@{JOB_PARAM_TRIPID: [trip identifier]}];
 }
 
 + (void) syncExtrasSynchronousFor:(STASDKMTrip *)trip onFinished:(void (^)(NSError*))callback {

@@ -24,12 +24,17 @@
 {
 
     // LOCAL
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkxOTAzNDNiODdkOTEyYzg3NTBlNTQ2fHRDeS00WXNfLW94ZFZ5S3VNNjE4";
+//    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkxOTAzNDNiODdkOTEyYzg3NTBlNTQ2fHRDeS00WXNfLW94ZFZ5S3VNNjE4";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTlkNjc1MmQ0MDY3Mzg2MmZjNGYxMjI5fFpMdmJhZ2U1b2l1Rlg4SjRGczZa";
     STASDKController *ctrl = [STASDKController sharedInstance];
     [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
     ctrl.fixedTripDates = YES;
     ctrl.skipTBTypes = NO;
     ctrl.skipTBActivities = NO;
+
+    // for testing purposes
+    [ctrl destroyAllData];
+
     [ctrl sync];
 
 

@@ -7,24 +7,34 @@
 //
 
 
-extern NSString* const JOB_FULL_SYNC;
-extern NSString* const JOB_SYNC_COUNTRY;
-extern NSString* const JOB_SYNC_DISEASE;
-extern NSString* const JOB_SYNC_TRIP_ALERTS;
-extern NSString* const JOB_SYNC_TRIP_ADVISORIES;
-extern NSString* const JOB_SYNC_TRIP_HOSPITALS;
-extern NSString* const JOB_SYNC_PUSH_TOKEN;
-extern NSString* const JOB_ALERT_MARK_READ;
-extern NSString* const JOB_SYNC_ALERT;
-extern NSString* const JOB_CHANGE_TRIP_SETTINGS;
-extern NSString* const JOB_UPDATE_USER_SETTINGS;
-extern NSString* const JOB_SEND_EVENT;
 
 
-extern NSString* const JOB_PARAM_CID;
-extern NSString* const JOB_PARAM_DID;
-extern NSString* const JOB_PARAM_TRIPID;
-extern NSString* const JOB_PARAM_PTOKEN;
-extern NSString* const JOB_PARAM_AID;
-extern NSString* const JOB_PARAM_SETTINGS;
-extern NSString* const JOB_PARAM_EID;
+
+
+@interface STASDKJobs : NSObject
+
+@property bool stopped;
+@property int runCount;
+
+
+/**
+ Shared instance singleton
+
+ @return Shared instance
+ */
++ (STASDKJobs*)sharedInstance;
+
+-(void)processJobs;
+-(void)start;
+-(void)stop;
+
+-(void)addJob:(NSString*)jobName;
+-(void)addJob:(NSString*)jobName jobArgs:(NSDictionary*)jobArgs;
+-(void)addJob:(NSString*)jobName jobArgs:(NSDictionary*)jobArgs maxRetries:(int)maxRetries;
+
+@end
+
+
+
+
+

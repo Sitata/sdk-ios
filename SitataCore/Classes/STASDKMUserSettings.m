@@ -9,8 +9,8 @@
 #import "STASDKMUserSettings.h"
 #import "STASDKMTraveller.h"
 #import "STASDKDataController.h"
+#import "STASDKDefines.h"
 #import "STASDKJobs.h"
-#import <EDQueue/EDQueue.h>
 
 
 
@@ -55,7 +55,7 @@
 
     if (*error == NULL) {
         // spin up background job to save settings on server
-        [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_SETTINGS: self.identifier} forTask:JOB_UPDATE_USER_SETTINGS];
+        [[STASDKJobs sharedInstance] addJob:JOB_UPDATE_USER_SETTINGS jobArgs:@{JOB_PARAM_SETTINGS: self.identifier}];
     }
 }
 

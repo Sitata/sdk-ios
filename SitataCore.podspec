@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SitataCore'
-  s.version          = '1.4.0'
+  s.version          = '1.5.0'
   s.summary          = 'An iOS library to embed Sitata services into your own mobile application.'
 
 # This description is used to generate tags and improve search results.
@@ -67,6 +67,7 @@ An iOS library to embed Sitata services into your own mobile application. API ac
                             'SitataCore/**/STASDKApiUtils.h',
                             'SitataCore/**/STASDKDefines.h',
                             'SitataCore/**/STASDKJobs.h',
+                            'SitataCore/**/STASDKMJob.h',
                             'SitataCore/**/STASDKLocationHandler.h',
                             'SitataCore/**/STASDKMEvent.h',
                             'SitataCore/**/STASDKUIAlertPin.h',
@@ -126,7 +127,6 @@ An iOS library to embed Sitata services into your own mobile application. API ac
   s.dependency 'Realm', '~>2.6'
   s.dependency 'AFNetworking', '~> 3.1'
   s.dependency 'YYModel', '1.0.4'
-  s.dependency 'EDQueue', '0.7.1'
   s.dependency 'CCHMapClusterController', '1.7.0'
   s.dependency 'Haneke', '~> 1.0'
 

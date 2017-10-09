@@ -9,7 +9,7 @@
 #import "STASDKMEvent.h"
 
 #import "STASDKDataController.h"
-#import <EDQueue/EDQueue.h>
+#import "STASDKDefines.h"
 #import "STASDKJobs.h"
 
 #import "STASDKController.h"
@@ -72,7 +72,7 @@
     }];
 
     // Do background job
-    [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_EID: event.identifier} forTask:JOB_SEND_EVENT];
+    [[STASDKJobs sharedInstance] addJob:JOB_SEND_EVENT jobArgs:@{JOB_PARAM_EID: event.identifier}];
 }
 
 +(void)destroy:(NSString*)identifier {

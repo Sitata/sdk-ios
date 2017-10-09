@@ -23,7 +23,6 @@
 #import "STASDKMEvent.h"
 
 #import <Realm/Realm.h>
-#import <EDQueue/EDQueue.h>
 
 
 @interface STASDKUIAlertsTableViewController ()
@@ -188,7 +187,7 @@
     if (self.trip != NULL) {
         // Make request using background job
         NSMutableDictionary *settings = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:!self.trip.muted], @"muted", nil];
-        [[EDQueue sharedInstance] enqueueWithData:@{JOB_PARAM_TRIPID: [self.trip identifier], JOB_PARAM_SETTINGS: settings} forTask:JOB_CHANGE_TRIP_SETTINGS];
+        [[STASDKJobs sharedInstance] addJob:JOB_CHANGE_TRIP_SETTINGS jobArgs:@{JOB_PARAM_TRIPID: [self.trip identifier], JOB_PARAM_SETTINGS: settings}];
 
         RLMRealm *realm = [[STASDKDataController sharedInstance] theRealm];
         [realm transactionWithBlock:^{
