@@ -119,11 +119,16 @@ BOOL didFirstSync;
 }
 
 - (void)setConfig:(NSString*)token {
+    // Check if TKN prefix, if not, add it.
+    if (token.length > 0 && ![token hasPrefix:@"TKN"]) {
+        token = [NSString stringWithFormat:@"TKN %@", token];
+    }
+
     self.apiToken = token;
 }
 
 - (void)setConfig:(NSString*)token apiEndpoint:(NSString*)apiEndpoint {
-    self.apiToken = token;
+    [self setConfig:token];
     self.apiEndpoint = apiEndpoint;
 }
 

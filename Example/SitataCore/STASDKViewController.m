@@ -89,15 +89,17 @@ NSArray *cellNames;
         // TODO: DO TEST STUFF HERE AND THEN REMOVE
 //
 //        
-        STASDKMTraveller *trav = [STASDKMTraveller findFirst];
-        STASDKMUserSettings *settings = trav.settings;
-        RLMRealm *realm = [[STASDKController sharedInstance] theRealm];
-        [realm transactionWithBlock:^{
-            settings.sendAllGoodPush = YES;
-            settings.sendAllGoodEmail = true;
-        }];
-        NSError *error;
-        [settings backgroundUpdate:&error];
+//        STASDKMTraveller *trav = [STASDKMTraveller findFirst];
+//        STASDKMUserSettings *settings = trav.settings;
+//        RLMRealm *realm = [[STASDKController sharedInstance] theRealm];
+//        [realm transactionWithBlock:^{
+//            settings.sendAllGoodPush = YES;
+//            settings.sendAllGoodEmail = true;
+//        }];
+//        NSError *error;
+//        [settings backgroundUpdate:&error];
+
+        [STASDKUI showTripBuilder:@"ABC123"];
     }
 }
 
