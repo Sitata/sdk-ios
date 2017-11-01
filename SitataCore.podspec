@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SitataCore'
-  s.version          = '1.5.0'
+  s.version          = '1.5.1'
   s.summary          = 'An iOS library to embed Sitata services into your own mobile application.'
 
 # This description is used to generate tags and improve search results.
@@ -24,7 +24,7 @@ An iOS library to embed Sitata services into your own mobile application. API ac
   s.homepage              = 'https://github.com/sitata/sdk-ios'
   # s.screenshots         = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license               = { :type => 'MIT', :file => 'LICENSE' }
-  s.author                = { 'Adam St. John' => 'astjohn@sitata.com' }
+  s.author                = { 'Sitata' => 'support@sitata.com' }
   s.source                = { :git => 'https://github.com/sitata/sdk-ios.git', :tag => s.version.to_s }
   s.social_media_url      = 'https://twitter.com/_sitata_'
 
