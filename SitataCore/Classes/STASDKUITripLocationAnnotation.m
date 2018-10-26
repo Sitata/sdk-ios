@@ -27,4 +27,8 @@
     return self.titleStr;
 }
 
+- (NSString *)subtitle {
+    return @"";
+}
+
 @end

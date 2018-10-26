@@ -25,7 +25,7 @@
 
     // LOCAL
 //    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTkxOTAzNDNiODdkOTEyYzg3NTBlNTQ2fHRDeS00WXNfLW94ZFZ5S3VNNjE4";
-    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTlkNjc1MmQ0MDY3Mzg2MmZjNGYxMjI5fFpMdmJhZ2U1b2l1Rlg4SjRGczZa";
+    NSString *token = @"TKN UGFydG5lcjo6RXh0ZXJuYWxUcmF2ZWxsZXJ8NTlmOGFkODZjNDI2ZDkxMDhmNmJkYmQ0fG5ETS1TU3lad254eVN3cW5iMlBq";
     STASDKController *ctrl = [STASDKController sharedInstance];
     [ctrl setConfig:token apiEndpoint:@"https://staging.sitata.com"];
     ctrl.fixedTripDates = YES;

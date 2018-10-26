@@ -26,5 +26,6 @@
 - (id)initWith:(STASDKMDestinationLocation*)location;
 
 - (NSString *)title;
+- (NSString *)subtitle;
 
 @end
